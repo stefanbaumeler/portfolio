@@ -35,7 +35,7 @@
     transition: width .25s;
     cursor: pointer;
     overflow: hidden;
-    background-color: #1F1F1F;
+    background-color: $color-almost-black;
     pointer-events: none;
     aspect-ratio: 16/9;
 
@@ -182,7 +182,7 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: #1F1F1F;
+        background-color: $color-almost-black;
         opacity: .1;
         pointer-events: none;
         transition: opacity .25s;
@@ -222,7 +222,7 @@
     pointer-events: none;
     position: absolute;
     top: 0;
-    background-color: #1F1F1F;
+    background-color: $color-almost-black;
 
     @at-root .project__slider--active & {
         max-width: 100vw;
