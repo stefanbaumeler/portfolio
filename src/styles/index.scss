@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;700;800&display=swap');
+
+@import 'util/reset';
+@import 'util/vars';
+@import 'util/mixins';
+
+@import 'blocks/body';
+@import 'blocks/brand';
+@import 'blocks/contact';
+@import 'blocks/experience';
+@import 'blocks/home';
+@import 'blocks/main';
+@import 'blocks/skills';
+@import 'blocks/socials';
+@import 'blocks/project';
+@import 'blocks/projects';
+
+
+.pin-spacer {
+    pointer-events: none;
+
+    > * {
+        pointer-events: initial;
+    }
+
+    > .pin-spacer {
+        pointer-events: none;
+    }
+}

@@ -1,0 +1,19 @@
+@mixin title {
+    font-size: 7.8vw;
+    padding-left: 50px;
+    padding-bottom: 75px;
+    letter-spacing: .04em;
+
+    @media screen and (min-width: 1600px) {
+        padding-bottom: 150px;
+    }
+}
+
+@mixin subtitle {
+    font-size: 32px;
+    letter-spacing: .05em;
+
+    @media screen and (min-width: 1600px) {
+        font-size: 2.6vw;
+    }
+}

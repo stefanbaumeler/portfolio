@@ -1,0 +1,277 @@
+@mixin skills-root {
+    z-index: 2;
+    position: relative;
+    padding: 100px 0;
+
+    @media screen and (min-width: 768px) {
+        padding: 200px 0;
+
+    }
+}
+
+@mixin skills-container {
+    &:before {
+        border-top: 10px solid $color-red;
+        pointer-events: none;
+        position: absolute;
+        content: '';
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        box-shadow: inset 50px 0 #1F1F1F,
+            inset 51px 0 $color-black,
+            inset calc(33.33vw + 16.66px) 0 #1F1F1F,
+            inset calc(33.33vw + 17.66px) 0 $color-black,
+            inset calc(66.66vw - 17.66px) 0 #1F1F1F,
+            inset calc(66.66vw - 16.66px) 0 $color-black,
+            inset calc(100vw - 50px) 0 #1F1F1F,
+            inset calc(100vw - 49px) 0 $color-black,
+            inset 100vw 0 #1F1F1F;
+
+        @media screen and (min-width: 1200px) {
+            box-shadow: inset 50px 0 #1F1F1F,
+                inset 51px 0 $color-black,
+                inset calc(25vw + 25px) 0 #1F1F1F,
+                inset calc(25vw + 26px) 0 $color-black,
+                inset 50vw 0 #1F1F1F,
+                inset calc(50vw + 1px) 0 $color-black,
+                inset calc(75vw - 25px) 0 #1F1F1F,
+                inset calc(75vw - 24px) 0 $color-black,
+                inset calc(100vw - 50px) 0 #1F1F1F,
+                inset calc(100vw - 49px) 0 $color-black,
+                inset 100vw 0 #1F1F1F;
+        }
+    }
+}
+
+@mixin skills-title {
+    font-size: 75px;
+    letter-spacing: .05em;
+    padding-left: 50px;
+    opacity: 0;
+    transform: translateX(-25px);
+    padding-bottom: 50px;
+
+    @media screen and (min-width: 1600px) {
+        font-size: 7.8vw;
+        transform: translateX(-50px);
+    }
+}
+
+@mixin skills-skills {
+    display: flex;
+    width: calc(100vw - 100px);
+    gap: 40px 0;
+    box-sizing: border-box;
+    margin: 0 50px;
+
+    @media screen and (min-width: 1024px) {
+        margin: 0 50px;
+        width: calc(100vw - 100px);
+    }
+
+    @media screen and (min-width: 1200px) {
+        width: calc(75vw - 75px);
+        margin: 0 0 0 calc(25vw + 25px);
+    }
+}
+
+@mixin skills-column {
+    position: relative;
+    width: auto;
+}
+
+@mixin skills-skill {
+    padding-left: 25px;
+    box-sizing: border-box;
+    position: relative;
+    margin-bottom: 20px;
+
+    &:last-of-type {
+        margin-bottom: 0;
+    }
+
+    @at-root .skills__column > & {
+        margin-bottom: 50px;
+        position: relative;
+
+        @media screen and (min-width: 768px) {
+            margin-bottom: 100px;
+        }
+    }
+
+    @at-root .skills__children & {
+        width: 100%;
+    }
+
+    @at-root .skills__children .skills__children & {
+        margin-bottom: 10px;
+
+        &:last-of-type {
+            padding-bottom: 0;
+        }
+    }
+}
+
+@mixin skills-children {
+    padding-top: 20px;
+
+    &:empty {
+        display: none;
+    }
+}
+
+@mixin skills-label-container {
+    font-size: 32px;
+    letter-spacing: .05em;
+    flex-grow: 1;
+    font-weight: bold;
+    padding-bottom: 10px;
+    box-sizing: border-box;
+
+    @at-root .skills__children & {
+        font-size: 16px;
+        line-height: 22px;
+        font-weight: normal;
+        padding-bottom: 0;
+        position: relative;
+
+        @media screen and (min-width: 1024px) {
+            font-size: 18px;
+            line-height: 24px;
+        }
+    }
+
+    @at-root .skills__children .skills__children & {
+        font-size: 14px;
+        line-height: 16px;
+        font-weight: normal;
+
+        @media screen and (min-width: 1024px) {
+            font-size: 16px;
+            line-height: 18px;
+        }
+    }
+}
+
+@mixin skills-line {
+    position: absolute;
+    transform-origin: top left;
+    opacity: .5;
+    width: 1px;
+    background-color: $color-red;
+    height: calc(100% - 50px);
+    left: 0;
+    bottom: 1000px;
+    top: 20px;
+    transform: scaleY(0);
+
+    @at-root .skills__children & {
+        display: block;
+        left: -40px;
+        width: 30px;
+        height: 2px;
+        top: 0.5em;
+        transform: translate(0, -50%) scaleX(0);
+        background-color: $color-red;
+    }
+
+    @at-root .skills__children .skills__children & {
+        left: -65px;
+        width: 55px;
+        height: 1px;
+    }
+}
+
+@mixin skills-dot {
+    position: absolute;
+    left: 1px;
+    width: 20px;
+    height: 20px;
+    background-color: $color-red;
+    border-radius: 50%;
+    top: .5em;
+    border: 4px solid #1F1F1F;
+
+    transform: translate(-50%, -50%) scale(0);
+
+    @at-root .skills__children & {
+        left: -50px;
+        width: 10px;
+        height: 10px;
+    }
+
+    @at-root .skills__children .skills__children & {
+        left: -75px;
+    }
+}
+
+@mixin skills-label {
+    display: block;
+    opacity: 0;
+    transform: translateX(-10px);
+}
+
+@mixin skills-hint {
+    font-size: 14px;
+    color: rgba($color-white, .5);
+    font-style: italic;
+    font-weight: normal;
+    display: block;
+    opacity: 0;
+    transform: translateX(-7.5px);
+}
+
+@mixin skills {
+    .skills {
+        @include skills-root;
+
+        &__container {
+            @include skills-container;
+        }
+
+        &__title {
+            @include skills-title;
+        }
+
+        &__skills {
+            @include skills-skills;
+        }
+
+        &__column {
+            @include skills-column;
+        }
+
+        &__skill {
+            @include skills-skill;
+        }
+
+        &__children {
+            @include skills-children;
+        }
+
+        &__label-container {
+            @include skills-label-container;
+        }
+
+        &__dot {
+            @include skills-dot;
+        }
+
+        &__line {
+            @include skills-line;
+        }
+
+        &__label {
+            @include skills-label;
+        }
+
+        &__hint {
+            @include skills-hint;
+        }
+    }
+}
+
+@include skills;

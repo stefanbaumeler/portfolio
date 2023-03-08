@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@400;700;900&display=swap');
+
+@mixin body-root {
+    font-family: 'Heebo', sans-serif;
+    color: $color-white;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+@mixin body {
+    .body {
+        @include body-root;
+    }
+}
+
+@include body;

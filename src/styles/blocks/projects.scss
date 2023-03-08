@@ -1,0 +1,50 @@
+@mixin projects-root {
+    position: relative;
+    z-index: 2;
+    border-top: 5px solid $color-red;
+    width: 100%;
+    overflow: hidden;
+    padding-bottom: 300px;
+    padding-top: 50px;
+    background-color: $color-white;
+
+    @media screen and (min-width: 1024px) {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+}
+
+@mixin projects-list {
+    margin: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    width: 100vw;
+    gap: 100px;
+
+    @media screen and (min-width: 1024px) {
+        gap: 0;
+    }
+}
+
+@mixin projects-letter {
+    transform: translateX(-100px);
+    display: inline-block;
+}
+
+@mixin projects {
+    .projects {
+        @include projects-root;
+
+        &__list {
+            @include projects-list;
+        }
+
+        &__letter {
+            @include projects-letter;
+        }
+    }
+}
+
+@include projects;

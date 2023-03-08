@@ -1,0 +1,138 @@
+@mixin home-root {
+    overflow: hidden;
+}
+
+@mixin home-content {
+    height: 100svh;
+    position: relative;
+    background-color: #E8E0D3;
+}
+
+@mixin home-image-container {
+    position: absolute;
+    right: -5vw;
+    z-index: 1;
+    mix-blend-mode: normal;
+    object-fit: contain;
+    max-height: 100svh;
+    width: 100vw;
+    bottom: 0;
+    height: 100%;
+
+    @media screen and (min-width: 768px) {
+        width: 80vw;
+    }
+
+    @media screen and (min-width: 1024px) {
+        width: 60vw;
+    }
+}
+
+@mixin home-image {
+    object-fit: contain;
+    object-position: bottom;
+}
+
+@mixin home-background {
+    top: -100px;
+    width: 100%;
+    height: calc(100svh + 100px);
+    position: absolute;
+    left: 0;
+    box-shadow: inset 50px 0 #E8E0D3,
+    inset 51px 0 #DCB,
+    inset calc(25vw + 25px) 0 #E8E0D3,
+    inset calc(25vw + 26px) 0 #DCB,
+    inset 50vw 0 #E8E0D3,
+    inset calc(50vw + 1px) 0 #DCB,
+    inset calc(75vw - 25px) 0 #E8E0D3,
+    inset calc(75vw - 24px) 0 #DCB,
+    inset calc(100vw - 50px) 0 #E8E0D3,
+    inset calc(100vw - 49px) 0 #DCB,
+    inset 100vw 0 #E8E0D3;
+}
+
+@mixin home-blur {
+    position: absolute;
+    top: -100px;
+    left: 0;
+    width: 100%;
+    height: calc(100svh + 100px);
+    z-index: 1;
+    opacity: 0;
+    backdrop-filter: grayscale(.75);
+    pointer-events: none;
+    background-color: rgba($color-blur, .75);
+
+    @at-root .main--safari & {
+        display: none;
+    }
+}
+
+@mixin home-title {
+    color: $color-black;
+    font-size: 20vw;
+    line-height: 20vw;
+    letter-spacing: .042em;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 50px;
+    left: 42px;
+    overflow: hidden;
+    z-index: 1;
+
+    @media screen and (min-width: 768px) {
+        font-size: 10vw;
+        line-height: 10vw;
+        left: auto;
+        right: 50%;
+        top: 50vh;
+        transform: translateY(-50%);
+    }
+}
+
+@mixin home-line {
+    display: block;
+
+    &:first-child:after {
+        content: '.';
+        color: $color-red;
+    }
+}
+
+@mixin home {
+    .home {
+        @include home-root;
+
+        &__image-container {
+            @include home-image-container;
+        }
+
+        &__image {
+            @include home-image;
+        }
+
+        &__content {
+            @include home-content;
+        }
+
+        &__background {
+            @include home-background;
+        }
+
+        &__blur {
+            @include home-blur;
+        }
+
+        &__title {
+            @include home-title;
+        }
+
+        &__line {
+            @include home-line;
+        }
+    }
+}
+
+@include home;

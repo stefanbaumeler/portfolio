@@ -1,0 +1,13 @@
+@mixin main-root {
+    background-color: $color-white;
+    position: relative;
+    z-index: 1;
+}
+
+@mixin main {
+    .main {
+        @include main-root;
+    }
+}
+
+@include main;
