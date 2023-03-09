@@ -212,7 +212,7 @@ export default [
         name: 'Languages',
         children: [
             {
-                name: 'Swiss German',
+                name: 'German',
                 hint: 'native'
             },
             {

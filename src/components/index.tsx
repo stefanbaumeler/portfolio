@@ -1,5 +1,4 @@
 export * from './Contact'
 export * from './Home'
 export * from './Skills'
-export * from './Socials'
 export * from './Work'
