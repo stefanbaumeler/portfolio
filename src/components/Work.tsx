@@ -220,9 +220,9 @@ export const Work = () => {
                                 }}
                                 rel="noreferrer"
                             >
-                                {project.github ? <>
-                                    <Icon path={Icons.mdiGithub} />
-                                    View on GitHub
+                                {project.private ? <>
+                                    <Icon path={Icons.mdiInformationOutline} />
+                                    Contact me for more infos
                                 </> : <>
                                     <Icon path={Icons.mdiOpenInNew} />
                                     View Project

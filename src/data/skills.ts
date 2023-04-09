@@ -36,20 +36,20 @@ export default [
                 ]
             },
             {
-                name: 'node.js',
+                name: 'Node.js',
                 color: '#84CE24',
                 hint: 'preferred backend',
                 children: [
                     {
-                        name: 'express',
+                        name: 'Express',
                         hint: 'framework'
                     },
                     {
-                        name: 'knex.js',
+                        name: 'Knex.js',
                         hint: 'orm'
                     },
                     {
-                        name: 'prisma',
+                        name: 'Prisma',
                         hint: 'orm'
                     }
                 ]
@@ -100,15 +100,15 @@ export default [
         color: '#1E8D22',
         children: [
             {
-                name: 'jest',
+                name: 'Jest',
                 hint: 'unit & integration'
             },
             {
-                name: 'playwright',
+                name: 'Playwright',
                 hint: 'e2e'
             },
             {
-                name: 'cypress',
+                name: 'Cypress',
                 hint: 'e2e'
             }
         ]
@@ -122,7 +122,7 @@ export default [
             },
             {
                 name: 'PostgreSQL',
-                hint: 'with node.js'
+                hint: 'with Node.js'
             }
         ]
     },
@@ -185,7 +185,7 @@ export default [
         name: 'CMS',
         children: [
             {
-                name: 'directus',
+                name: 'Directus',
                 hint: 'headless'
             },
             {

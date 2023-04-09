@@ -2,9 +2,9 @@ export default [
     {
         name: 'Photon App',
         color: '#546119',
-        url: 'https://github.com/stefanbaumeler/photon',
+        url: 'mailto:stefan.baumeler@hotmail.com',
         description: 'A web-based photo management app with facial recognition and elastic search capabilities, this personal project\'s primary purpose is to challenge me in every way conceivable.',
-        github: true,
+        private: true,
         images: [
             {
                 url: 'photon-1.webp',

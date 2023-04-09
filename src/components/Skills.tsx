@@ -1,6 +1,7 @@
 import skills from '../data/skills'
 import { ScrollTrigger, Tween } from 'react-gsap'
 import Masonry from 'react-masonry-css'
+import { ReactNode } from 'react'
 
 type TSkill = {
     name: string
@@ -13,10 +14,24 @@ export const Skills = () => {
     const Skill = ({
         skill, color, child
     }: { skill: TSkill, color: string, child: boolean } ) => {
-        return <div
-            className="skills__skill"
-        >
-            <h2 className="skills__label-container">
+        const LiOrDiv = ({ children }: { children: ReactNode }) => {
+            return child ? <li className="skills__skill">
+                {children}
+            </li> : <div className="skills__skill">
+                {children}
+            </div>
+        }
+
+        const H3OrH4 = ({ children }: { children: ReactNode }) => {
+            return child ? <h4 className="skills__label-container">
+                {children}
+            </h4> : <h3 className="skills__label-container">
+                {children}
+            </h3>
+        }
+
+        return <LiOrDiv>
+            <H3OrH4>
                 <ScrollTrigger
                     start={'bottom 97.5%'}
                     end={'bottom 92.5%'}
@@ -61,7 +76,7 @@ export const Skills = () => {
                         </span>
                     </Tween>
                 </ScrollTrigger>
-            </h2>
+            </H3OrH4>
             <ScrollTrigger
                 start={'bottom 95%'}
                 end={'bottom 85%'}
@@ -79,15 +94,15 @@ export const Skills = () => {
                 </Tween>
             </ScrollTrigger>
 
-            <div className="skills__children">
+            <ul className="skills__children">
                 {skill.children?.map((skill, k) => <Skill
                     child={true}
                     skill={skill}
                     color={skill.color || color}
                     key={k}
                 />)}
-            </div>
-        </div>
+            </ul>
+        </LiOrDiv>
     }
 
     return <ScrollTrigger

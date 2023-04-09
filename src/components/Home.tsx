@@ -18,6 +18,7 @@ export const Home = () => {
                             alt="Stefan Baumeler"
                             fill={true}
                             sizes="100vw"
+                            loading={'eager'}
                         />
                     </div>
                     <ScrollTrigger

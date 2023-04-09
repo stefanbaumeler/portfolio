@@ -16,11 +16,27 @@ const HomePage = () => {
     return <>
         <Head>
             <title>
-                    Stefan Baumeler - Portfolio
+                    Stefan Baumeler - Web Developer - Official Portfolio
             </title>
             <meta
+                name="googlebot"
+                content="notranslate"
+            />
+            <meta
                 name="description"
-                content="The official website of Stefan Baumeler"
+                content="The official portfolio of Stefan Baumeler, a location independent web developer based in Switzerland, developing, high quality web applications for Swiss companies."
+            />
+            <meta
+                name="robots"
+                content="index,follow"
+            />
+            <meta
+                name="keywords"
+                content="Stefan Baumeler, Web Developer, Web Dev, Web Designer, Full Stack, Portfolio, React, TypeScript, GraphQL, Node.js"
+            />
+            <meta
+                name="author"
+                content="Stefan Baumeler"
             />
             <meta
                 name="theme-color"
@@ -50,6 +66,10 @@ const HomePage = () => {
                 type="image/png"
                 sizes="16x16"
                 href="/images/favicon.png"
+            />
+            <link
+                rel="canonical"
+                href="https://stefan-baumeler.com/"
             />
         </Head>
         <main
