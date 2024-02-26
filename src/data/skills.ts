@@ -9,11 +9,6 @@ export default [
                 hint: 'JS superset'
             },
             {
-                name: 'GSAP',
-                color: '#89CE03',
-                hint: 'Animations'
-            },
-            {
                 name: 'React',
                 color: '#61DBFB',
                 hint: 'framework',
@@ -21,11 +16,15 @@ export default [
                     {
                         name: 'Next.js',
                         hint: 'meta-framework'
+                    },
+                    {
+                        name: 'Redux Toolkit',
+                        hint: 'state management'
                     }
                 ]
             },
             {
-                name: 'Vue',
+                name: 'Vue.js',
                 hint: 'framework',
                 color: '#3FBA84',
                 children: [
@@ -45,14 +44,23 @@ export default [
                         hint: 'framework'
                     },
                     {
-                        name: 'Knex.js',
-                        hint: 'orm'
+                        name: 'NestJS',
+                        hint: 'framework'
                     },
                     {
                         name: 'Prisma',
                         hint: 'orm'
+                    },
+                    {
+                        name: 'Knex.js',
+                        hint: 'orm'
                     }
                 ]
+            },
+            {
+                name: 'GSAP',
+                color: '#89CE03',
+                hint: 'animations'
             }
         ]
     },
@@ -67,6 +75,10 @@ export default [
                     {
                         name: 'Apollo',
                         hint: 'framework'
+                    },
+                    {
+                        name: 'urql',
+                        hint: 'GraphQL client'
                     },
                     {
                         name: 'graphql-codegen',
@@ -118,11 +130,11 @@ export default [
         children: [
             {
                 name: 'MySQL',
-                hint: 'with PHP'
+                hint: 'RDBMS'
             },
             {
                 name: 'PostgreSQL',
-                hint: 'with Node.js'
+                hint: 'RDBMS'
             }
         ]
     },
@@ -160,7 +172,7 @@ export default [
         children: [
             {
                 name: 'Laravel',
-                hint: 'Framework'
+                hint: 'framework'
             },
             {
                 name: 'Twig',
@@ -205,6 +217,10 @@ export default [
                         hint: 'plugin'
                     }
                 ]
+            },
+            {
+                name: 'Hygraph',
+                hint: 'headless'
             }
         ]
     },

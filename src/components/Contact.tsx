@@ -2,7 +2,7 @@ import Icon from '@mdi/react'
 import * as Icons from '@mdi/js'
 
 export const Contact = () => {
-    return <div className="contact">
+    return <footer className="contact">
         <h2 className="contact__title">
             Work with me
         </h2>
@@ -35,5 +35,5 @@ export const Contact = () => {
                 </a>
             </li>
         </ul>
-    </div>
+    </footer>
 }

@@ -235,7 +235,7 @@ export const Work = () => {
         </li>
     })
 
-    return <div className="projects">
+    return <section className="projects">
         <ScrollTrigger
             start={'bottom bottom'}
             scrub={0.5}
@@ -248,5 +248,5 @@ export const Work = () => {
                 </ul>
             </Tween>
         </ScrollTrigger>
-    </div>
+    </section>
 }

@@ -112,7 +112,7 @@ export const Skills = () => {
         pinSpacing={false}
     >
         <Tween>
-            <div className="skills">
+            <section className="skills">
                 <div className="skills__container">
                     <ScrollTrigger
                         start={'center 90%'}
@@ -148,7 +148,7 @@ export const Skills = () => {
                         )}
                     </Masonry>
                 </div>
-            </div>
+            </section>
         </Tween>
     </ScrollTrigger>
 }
