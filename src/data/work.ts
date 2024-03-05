@@ -3,7 +3,7 @@ export default [
         name: 'Photon App',
         color: '#546119',
         url: 'mailto:stefan.baumeler@hotmail.com',
-        description: 'A web-based photo management app with facial recognition and elastic search capabilities, this personal project\'s primary purpose is to challenge me in every way conceivable.',
+        description: 'A web-based photo management app with image recognition and elastic search capabilities, this personal project\'s primary purpose is to challenge me in every way conceivable.',
         private: true,
         images: [
             {
@@ -28,7 +28,7 @@ export default [
             'Computer vision with AWS Rekognition',
             'An end-user GraphQL API for outside access to media',
             'Gallery, list and map view, albums, favorites, etc.',
-            'Android, iOS and desktop apps with tauri (soon)'
+            'Android, iOS and desktop apps (soon)'
         ],
         tech: [
             {
@@ -54,9 +54,6 @@ export default [
             },
             {
                 label: 'PostgreSQL'
-            },
-            {
-                label: 'Tauri'
             },
             {
                 label: 'Lerna'
@@ -105,7 +102,7 @@ export default [
         description: 'A knowledge hub for asbestos prevention, this project hosts a lot of information, and thus focuses on search and filter functionalities and approachability.',
         features: [
             'Implementation frontend, animations and user interactions',
-            'Instant Search and Geolocation with Algolia and Google Maps API',
+            'Instant search and geolocating with Algolia and Google Maps API',
             'Working with changing client expectations and design requirements'
         ],
         tech: [
@@ -126,6 +123,64 @@ export default [
             },
             {
                 label: 'Twig'
+            },
+            {
+                label: 'Contao',
+                secondary: true
+            },
+            {
+                label: 'PHP',
+                secondary: true
+            },
+            {
+                label: 'Symfony',
+                secondary: true
+            },
+            {
+                label: 'Figma',
+                secondary: true
+            }
+        ]
+    },
+    {
+        name: 'educamint',
+        url: 'https://educamint.ch/',
+        color: '#006482',
+        images: [
+            {
+                url: 'educamint-1.webp',
+                alt: 'educamint Screenshot 1'
+            },
+            {
+                url: 'educamint-2.webp',
+                alt: 'educamint Screenshot 2'
+            },
+            {
+                url: 'educamint-3.webp',
+                alt: 'educamint Screenshot 3'
+            }
+        ],
+        description: 'A hub for teachers to find teaching material and activities for schools on topics like mathematics, IT, science and technology.',
+        features: [
+            'Implementation frontend, animations and user interactions',
+            'Instant search and filtering with Algolia',
+            'Custom backend user interface for clients to create their own events and activities'
+        ],
+        tech: [
+            {
+                label: 'TypeScript'
+            },
+            {
+                label: 'Algolia'
+            },
+            {
+                label: 'SCSS'
+            },
+            {
+                label: 'BEM'
+            },
+            {
+                label: 'Webpack'
             },
             {
                 label: 'Contao',
