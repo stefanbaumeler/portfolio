@@ -1,11 +1,13 @@
 @mixin home-root {
     overflow: hidden;
+    height: 100svh;
+    position: relative;
 }
 
 @mixin home-content {
-    height: 100svh;
-    position: relative;
     background-color: #E8E0D3;
+    position: fixed;
+    inset: 0;
 }
 
 @mixin home-image-container {

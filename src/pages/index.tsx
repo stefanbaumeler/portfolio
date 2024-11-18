@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { Home, Skills, Work, Contact } from '../components'
+import { Home, Projects, Skills, Contact } from '../components'
 import UAParser from 'ua-parser-js'
 import { useEffect, useState } from 'react'
 
@@ -76,7 +76,7 @@ const HomePage = () => {
             className={`main main--${browser}`}
         >
             <Home />
-            <Work />
+            <Projects />
             <Skills />
         </main>
         <Contact />

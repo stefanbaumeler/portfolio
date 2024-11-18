@@ -1,12 +1,6 @@
 @mixin skills-root {
     z-index: 2;
     position: relative;
-    padding: 100px 0;
-
-    @media screen and (min-width: 768px) {
-        padding: 200px 0;
-
-    }
 }
 
 @mixin skills-container {
@@ -43,6 +37,14 @@
                 inset calc(100vw - 49px) 0 $color-black,
                 inset 100vw 0 $color-almost-black;
         }
+    }
+}
+
+@mixin skills-content {
+    padding: 100px 0;
+
+    @media screen and (min-width: 768px) {
+        padding: 200px 0;
     }
 }
 
@@ -230,6 +232,10 @@
 
         &__container {
             @include skills-container;
+        }
+        
+        &__content {
+            @include skills-content;
         }
 
         &__title {
