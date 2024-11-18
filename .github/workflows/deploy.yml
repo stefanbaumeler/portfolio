@@ -31,6 +31,9 @@ jobs:
                   key: ${{ secrets.SSH_KEY }}
                   known_hosts: unnecessary
 
+            - name: Debug
+              run: cat ~/.ssh/known_hosts
+              
             - name: Adding Known Hosts
               run: ssh-keyscan -H ${{ secrets.HOST }} >> ~/.ssh/known_hosts
 
