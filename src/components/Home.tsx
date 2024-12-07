@@ -44,7 +44,7 @@ export const Home = () => {
             <div className="home__background" />
             <h1 className="home__title">
                 <span className="home__line">
-				Hello
+				Hellow
                 </span>
                 <span className="home__line">
 				I am
