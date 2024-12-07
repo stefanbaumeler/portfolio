@@ -28,10 +28,10 @@ jobs:
             - name: Deploy
               uses: contention/rsync-deployments@v2.0.0
               with:
-                  flags: -avzr --delete --vvv
-                  excludes: --excludes .htaccess
-                  user: ${{ secrets.USERNAME }}
-                  host: ${{ secrets.HOST }}
-                  localpath: /.next/
-                  remotepath: /var/www/portfolio/
-                  deploy_key: ${{ secrets.DEPLOY_KEY }}
+                  FLAGS: -avzr --delete --vvv
+                  EXCLUDES: --excludes .htaccess
+                  USER: ${{ secrets.USERNAME }}
+                  HOST: ${{ secrets.HOST }}
+                  LOCALPATH: /.next/
+                  REMOTEPATH: /var/www/portfolio/
+                  DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
