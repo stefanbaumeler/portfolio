@@ -29,7 +29,7 @@ jobs:
               uses: contention/rsync-deployments@v2.0.0
               with:
                   flags: -avzr --delete
-                  excludes: --excludes .htaccess
+                  excludes: --exclude .htaccess
                   user: ${{ secrets.USERNAME }}
                   host: ${{ secrets.HOST }}
                   localpath: /.next/
