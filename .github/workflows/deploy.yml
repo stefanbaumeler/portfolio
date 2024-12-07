@@ -25,13 +25,20 @@ jobs:
             - name: Build Website
               run: npm run build
 
-            - name: Deploy
-              uses: contention/rsync-deployments@v2.0.0
+            - name: Install SSH Key
+              uses: shimataro/ssh-key-action@v2
               with:
-                  flags: -avzr --delete
-                  excludes: --exclude .htaccess
-                  user: ${{ secrets.USERNAME }}
-                  host: ${{ secrets.HOST }}
-                  localpath: /.next/
-                  remotepath: /var/www/portfolio/
-                  deploy_key: ${{ secrets.DEPLOY_KEY }}
+                  key: ${{ secrets.DEPLOY_KEY }}
+                  known_hosts: unnecessary
+
+            - name: Debug
+              run: cat ~/.ssh/known_hosts
+
+            - name: Adding Known Hosts
+              run: ssh-keyscan -H ${{ secrets.HOST }} >> ~/.ssh/known_hosts
+
+            - name: Debug
+              run: cat ~/.ssh/known_hosts
+
+            - name: Deploy with rsync
+              run: rsync -vvv -avz --delete .next public node_modules ${{ secrets.USERNAME }}@${{ secrets.HOST }}:${{ secrets.TARGET_DIRECTORY }}
