@@ -3,6 +3,7 @@
 @mixin body-root {
     font-family: 'Heebo', sans-serif;
     color: $color-white;
+    background-color: $color-bg;
 
     &::-webkit-scrollbar {
         display: none;

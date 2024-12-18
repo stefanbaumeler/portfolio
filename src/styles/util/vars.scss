@@ -2,10 +2,13 @@ $color-almost-white: #FAFAFA;
 $color-almost-black: #1F1F1F;
 
 $color-white: #FFFFFF;
+$color-bg: #111111;
 $color-black: #000000;
 
 $color-red: #EE5522;
 
 $color-blur: #332211;
 
-$transition: cubic-bezier(0.65, 0, 0.35, 1)
+$transition: cubic-bezier(0.65, 0, 0.35, 1);
+
+$breakpoint-ultrawide: 2560px;

@@ -2,6 +2,9 @@
     background-color: $color-white;
     position: relative;
     z-index: 1;
+    max-width: $breakpoint-ultrawide;
+    margin: 0 auto;
+    overflow: hidden;
 }
 
 @mixin main {

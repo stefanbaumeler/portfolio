@@ -37,26 +37,35 @@ export const Skills = () => {
         ref={container}
     >
         <div className="skills__container">
-            <h2 className="skills__title">
+            <div className="skills__deco-lines">
+                <div className="skills__deco-line"></div>
+                <div className="skills__deco-line"></div>
+                <div className="skills__deco-line"></div>
+                <div className="skills__deco-line"></div>
+                <div className="skills__deco-line"></div>
+            </div>
+            <div className="skills__content">
+                <h2 className="skills__title">
 				Skills
-            </h2>
-            <Masonry
-                breakpointCols={{
-                    default: 3,
-                    767: 1
-                }}
-                className={'skills__skills'}
-                columnClassName={'skills__column'}
-            >
-                {skills.map((skill, k) =>
-                    <Skill
-                        key={k}
-                        skill={skill as TSkill}
-                        color={skill.color || ''}
-                        child={false}
-                    />
-                )}
-            </Masonry>
+                </h2>
+                <Masonry
+                    breakpointCols={{
+                        default: 3,
+                        767: 1
+                    }}
+                    className={'skills__skills'}
+                    columnClassName={'skills__column'}
+                >
+                    {skills.map((skill, k) =>
+                        <Skill
+                            key={k}
+                            skill={skill as TSkill}
+                            color={skill.color || ''}
+                            child={false}
+                        />
+                    )}
+                </Masonry>
+            </div>
         </div>
     </section>
 }

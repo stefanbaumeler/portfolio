@@ -14,7 +14,7 @@ export const Home = () => {
             end: 'bottom -100%',
             scrub: 0.5
         }
-        gsap.to('.home__background', {
+        gsap.to('.home__deco-lines', {
             scale: 1.15,
             scrollTrigger: trigger
         })
@@ -25,7 +25,13 @@ export const Home = () => {
         gsap.to('.home__title', {
             y: '-25%',
             scale: 0.85,
+            scrollTrigger: trigger,
+            filter: 'blur(10px)'
+        })
+        gsap.to('.home__image', {
+            y: '-25%',
             scrollTrigger: trigger
+            // filter: 'blur(5px)'
         })
     })
     return <section className="home">
@@ -41,7 +47,13 @@ export const Home = () => {
                 />
             </div>
             <div className="home__blur" />
-            <div className="home__background" />
+            <div className="home__deco-lines">
+                <div className="home__deco-line"></div>
+                <div className="home__deco-line"></div>
+                <div className="home__deco-line"></div>
+                <div className="home__deco-line"></div>
+                <div className="home__deco-line"></div>
+            </div>
             <h1 className="home__title">
                 <span className="home__line">
 				Hello

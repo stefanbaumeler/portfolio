@@ -22,6 +22,7 @@
     box-sizing: border-box;
     width: 100vw;
     gap: 100px;
+    max-width: $breakpoint-ultrawide;
 
     @media screen and (min-width: 1024px) {
         gap: 0;

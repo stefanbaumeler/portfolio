@@ -37,7 +37,7 @@
     overflow: hidden;
     background-color: $color-almost-black;
     pointer-events: none;
-    aspect-ratio: 16/9;
+    aspect-ratio: 16 / 9;
 
     @media screen and (min-width: 1024px) {
         height: 100%;
@@ -52,12 +52,21 @@
         margin-right: -12.5vw;
     }
 
+    @media screen and (min-width: $breakpoint-ultrawide) {
+        width: calc(50% + #{$breakpoint-ultrawide / 100 * 12.5});
+        margin-right: $breakpoint-ultrawide / 100 * -12.5;
+    }
+
     @at-root .project:nth-child(2n) & {
         margin-left: -6.25vw;
         margin-right: 0;
 
         @media screen and (min-width: 1200px) {
             margin-left: -12.5vw;
+        }
+
+        @media screen and (min-width: $breakpoint-ultrawide) {
+            margin-left: $breakpoint-ultrawide / 100 * -12.5;
         }
     }
 
@@ -171,9 +180,14 @@
     background-color: $color-black;
     position: absolute;
     right: 50%;
-    aspect-ratio: 16/9;
-    transform: translateX(50%);
+    aspect-ratio: 16 / 9;
+    translate: 50%;
     max-width: 100vw;
+
+    @media screen and (min-width: $breakpoint-ultrawide) {
+        max-width: $breakpoint-ultrawide;
+        min-width: $breakpoint-ultrawide * .625;
+    }
 
     &:before {
         content: '';
@@ -196,7 +210,7 @@
     @at-root .project:nth-child(2n) & {
         right: auto;
         left: 50%;
-        transform: translateX(-50%);
+        translate: -50%;
     }
 
     @at-root .main:not(.main--safari) .project__slider:not(.project__slider--active):hover & {
@@ -223,9 +237,19 @@
     position: absolute;
     top: 0;
     background-color: $color-almost-black;
+    left: 50%;
+    translate: -50%;
+
+    @media screen and (min-width: $breakpoint-ultrawide) {
+        max-width: $breakpoint-ultrawide * 1.5;
+    }
 
     @at-root .project__slider--active & {
         max-width: 100vw;
+
+        @media screen and (min-width: $breakpoint-ultrawide) {
+            max-width: $breakpoint-ultrawide;
+        }
     }
 
     &--active {
@@ -278,6 +302,11 @@
         padding: 0 100px 0 0;
     }
 
+    @media screen and (min-width: $breakpoint-ultrawide) {
+        margin-left: $breakpoint-ultrawide / 100 * 12.5;
+        width: calc(50% - #{$breakpoint-ultrawide / 100 * 12.5});
+    }
+
     @at-root .project:nth-child(2n) & {
         @media screen and (min-width: 1024px) {
             padding: 0 0 0 25px;
@@ -292,6 +321,10 @@
 
         @media screen and (min-width: 1800px) {
             padding: 0 0 0 100px;
+        }
+
+        @media screen and (min-width: $breakpoint-ultrawide) {
+            margin-right: $breakpoint-ultrawide / 100 * 12.5;
         }
     }
 
@@ -315,6 +348,10 @@
         @media screen and (min-width: 1200px) {
             border-right: 25vw solid $color-white;
         }
+
+        @media screen and (min-width: $breakpoint-ultrawide) {
+            border-right: #{$breakpoint-ultrawide * .25} solid $color-white;
+        }
     }
 
     @at-root .project:nth-child(4n-2) &:before {
@@ -327,6 +364,10 @@
         @media screen and (min-width: 1200px) {
             border-left: 25vw solid $color-white;
         }
+
+        @media screen and (min-width: $breakpoint-ultrawide) {
+            border-left: #{$breakpoint-ultrawide * .25} solid $color-white;
+        }
     }
 
     @at-root .project:nth-child(4n-1) &:before {
@@ -337,6 +378,9 @@
             left: -25vw;
         }
 
+        @media screen and (min-width: $breakpoint-ultrawide) {
+            left: $breakpoint-ultrawide * -.25
+        }
     }
 
     @at-root .project:nth-child(4n) &:before {
@@ -348,6 +392,11 @@
         @media screen and (min-width: 1200px) {
             right: -25vw;
             border-left: 25vw solid $color-white;
+        }
+
+        @media screen and (min-width: $breakpoint-ultrawide) {
+            right: $breakpoint-ultrawide * -.25;
+            border-left: #{$breakpoint-ultrawide * .25} solid $color-white;
         }
     }
 
@@ -366,6 +415,10 @@
         @media screen and (min-width: 1200px) {
             right: 25vw;
         }
+
+        @media screen and (min-width: $breakpoint-ultrawide) {
+            right: $breakpoint-ultrawide * .25;
+        }
     }
 
     @at-root .project:nth-child(4n-1) .project__slider--active + &:before {
@@ -373,6 +426,10 @@
 
         @media screen and (min-width: 1200px) {
             left: 25vw;
+        }
+
+        @media screen and (min-width: $breakpoint-ultrawide) {
+            left: $breakpoint-ultrawide * .25;
         }
     }
 }

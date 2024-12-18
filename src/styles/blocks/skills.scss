@@ -4,38 +4,55 @@
 }
 
 @mixin skills-container {
-    &:before {
-        border-top: 10px solid $color-red;
-        pointer-events: none;
-        position: absolute;
-        content: '';
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: -1;
-        box-shadow: inset 50px 0 $color-almost-black,
-            inset 51px 0 $color-black,
-            inset calc(33.33vw + 16.66px) 0 $color-almost-black,
-            inset calc(33.33vw + 17.66px) 0 $color-black,
-            inset calc(66.66vw - 17.66px) 0 $color-almost-black,
-            inset calc(66.66vw - 16.66px) 0 $color-black,
-            inset calc(100vw - 50px) 0 $color-almost-black,
-            inset calc(100vw - 49px) 0 $color-black,
-            inset 100vw 0 $color-almost-black;
+    background-color: $color-almost-black;
+}
+
+@mixin skills-deco-lines {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+@mixin skills-deco-line {
+    width: 1px;
+    position: absolute;
+    height: 100%;
+    background-color: $color-black;
+
+    &:nth-of-type(1) {
+        left: 50px;
+    }
+
+    &:nth-of-type(2) {
+        left: calc(33.33% + 16.66px);
 
         @media screen and (min-width: 1200px) {
-            box-shadow: inset 50px 0 $color-almost-black,
-                inset 51px 0 $color-black,
-                inset calc(25vw + 25px) 0 $color-almost-black,
-                inset calc(25vw + 26px) 0 $color-black,
-                inset 50vw 0 $color-almost-black,
-                inset calc(50vw + 1px) 0 $color-black,
-                inset calc(75vw - 25px) 0 $color-almost-black,
-                inset calc(75vw - 24px) 0 $color-black,
-                inset calc(100vw - 50px) 0 $color-almost-black,
-                inset calc(100vw - 49px) 0 $color-black,
-                inset 100vw 0 $color-almost-black;
+            left: calc(25% + 24px);
+        }
+    }
+
+    &:nth-of-type(3) {
+        left: calc(66.66% - 17.66px);
+
+        @media screen and (min-width: 1200px) {
+            left: calc(50% - 1px);
+        }
+    }
+
+    &:nth-of-type(4) {
+        display: none;
+
+        @media screen and (min-width: 1200px) {
+            display: block;
+            left: calc(75% - 26px);
+        }
+    }
+
+    &:nth-of-type(5) {
+        left: calc(100% - 50px);
+
+        @media screen and (min-width: 1200px) {
+
         }
     }
 }
@@ -60,11 +77,16 @@
         font-size: 7.8vw;
         transform: translateX(-50px);
     }
+
+    @media screen and (min-width: $breakpoint-ultrawide) {
+        font-size: #{$breakpoint-ultrawide / 100 * 7.8};
+    }
 }
 
 @mixin skills-skills {
     display: flex;
     width: calc(100vw - 100px);
+    max-width: 1845px;
     gap: 40px 0;
     box-sizing: border-box;
     margin: 0 50px;
@@ -77,6 +99,10 @@
     @media screen and (min-width: 1200px) {
         width: calc(75vw - 75px);
         margin: 0 0 0 calc(25vw + 25px);
+    }
+
+    @media screen and (min-width: $breakpoint-ultrawide) {
+        margin: 0 0 0 #{$breakpoint-ultrawide * .25 + 25px};
     }
 }
 
@@ -233,7 +259,15 @@
         &__container {
             @include skills-container;
         }
-        
+
+        &__deco-lines {
+            @include skills-deco-lines;
+        }
+
+        &__deco-line {
+            @include skills-deco-line;
+        }
+
         &__content {
             @include skills-content;
         }
