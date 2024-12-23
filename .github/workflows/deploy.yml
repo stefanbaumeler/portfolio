@@ -40,4 +40,6 @@ jobs:
                   host: ${{ secrets.HOST }}
                   username: ${{ secrets.USERNAME }}
                   key: ${{ secrets.SSH_PRIVATE_KEY }}
-                  script: pm2 restart stefan-baumeler
+                  script: |
+                      nvm use 20
+                      pm2 restart stefan-baumeler
