@@ -33,3 +33,11 @@ jobs:
 
             - name: Deploy with rsync
               run: rsync -vvv -avz --delete .next public node_modules ${{ secrets.USERNAME }}@${{ secrets.HOST }}:${{ secrets.TARGET_DIRECTORY }}
+
+            - name: Restart PM2
+              uses: appleboy/ssh-action@v1.2.0
+              with:
+                  host: ${{ secrets.HOST }}
+                  username: ${{ secrets.USERNAME }}
+                  key: ${{ secrets.SSH_PRIVATE_KEY }}
+                  script: pm2 restart stefan-baumeler
