@@ -1,6 +1,4 @@
-import { useGSAP } from '@gsap/react'
-import gsap from 'gsap'
-import { ReactNode, useRef } from 'react'
+import { useRef } from 'react'
 
 export type TSkill = {
 	name: string
@@ -13,87 +11,21 @@ type Props = {
 	skill: TSkill
 	color: string
 	child: boolean
+	delay?: number
 }
 export const Skill = ({
-    skill, color, child
+    skill, color, child, delay = 0
 }: Props) => {
     const container = useRef<HTMLDivElement>(null)
 
-    useGSAP(() => {
-        gsap.to('.skills__dot', {
-            scrollTrigger: {
-                trigger: '.skills__dot',
-                start: 'bottom 97.5%',
-                end: 'bottom 92.5%',
-                scrub: 0.5
-            },
-            scale: 1
-        })
+    const LiOrDiv = child ? 'li' : 'div'
+    const H3OrH4 = child ? 'h4' : 'h3'
+    let childCount = 0
+    const delayPerItem = 0.025
 
-        const lineTrigger = {
-            scrollTrigger: {
-                trigger: '.skills__line',
-                start: `bottom ${child ? '95%' : '60%'}`,
-                end: `bottom ${child ? '85%' : '50%'}`,
-                scrub: 0.5
-            }
-        }
-
-        const lineScale = child ? {
-            scaleX: 1
-        } : {
-            scaleY: 1
-        }
-
-        gsap.to('.skills__line', {
-            ...lineTrigger,
-            ...lineScale
-        })
-
-        gsap.to('.skills__label', {
-            scrollTrigger: {
-                trigger: '.skills__label',
-                start: 'bottom 95%',
-                end: 'bottom 85%',
-                scrub: 0.5
-            },
-            opacity: 1,
-            x: 0
-        })
-
-        gsap.to('.skills__hint', {
-            scrollTrigger: {
-                trigger: '.skills__hint',
-                start: 'bottom 95%',
-                end: 'bottom 85%',
-                scrub: 0.5
-            },
-            opacity: 1,
-            x: 0
-        })
-    }, {
-        scope: container,
-        dependencies: [child]
-    })
-    const LiOrDiv = ({ children }: { children: ReactNode }) => {
-        return child ? <li className="skills__skill">
-            {children}
-        </li> : <div className="skills__skill">
-            {children}
-        </div>
-    }
-
-    const H3OrH4 = ({ children }: { children: ReactNode }) => {
-        return child ? <h4 className="skills__label-container">
-            {children}
-        </h4> : <h3 className="skills__label-container">
-            {children}
-        </h3>
-    }
-
-    return <LiOrDiv>
+    return <LiOrDiv className="skills__skill">
         <div ref={container}>
-            <H3OrH4>
+            <H3OrH4 className="skills__label-container">
                 <span className="skills__dot" />
                 <span className="skills__line" />
                 <span className="skills__label">
@@ -105,12 +37,16 @@ export const Skill = ({
             </span>
         </div>
         <ul className="skills__children">
-            {skill.children?.map((skill, k) => <Skill
-                child={true}
-                skill={skill}
-                color={skill.color || color}
-                key={k}
-            />)}
+            {skill.children?.map((child, k) => {
+                childCount += child.children?.length ?? 0
+
+                return <Skill
+                    delay={delay + (k + 1) * delayPerItem + (childCount - (child.children?.length ?? 0)) * delayPerItem}
+                    child={true}
+                    skill={child}
+                    color={child.color || color}
+                    key={k}
+                />})}
         </ul>
     </LiOrDiv>
 }

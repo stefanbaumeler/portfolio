@@ -157,12 +157,12 @@ export default [
                 hint: 'virtualization'
             },
             {
-                name: 'Webpack',
+                name: 'Webpack / Rspack',
                 hint: 'module bundler'
             },
             {
-                name: 'Lerna',
-                hint: 'monorepo manager'
+                name: 'Github Actions',
+                hint: 'workflow automation'
             }
         ]
     },
@@ -221,6 +221,10 @@ export default [
             {
                 name: 'Hygraph',
                 hint: 'headless'
+            },
+            {
+                name: 'Framer',
+                hint: 'low-code'
             }
         ]
     },

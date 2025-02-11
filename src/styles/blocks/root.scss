@@ -1,0 +1,12 @@
+@mixin root-root {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+}
+
+@mixin root {
+    .root {
+        @include root-root;
+    }
+}
+
+@include root;

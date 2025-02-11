@@ -1,12 +1,8 @@
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
-
 import Image from 'next/image'
-import { useRef } from 'react'
 
 export const Home = () => {
-    const container = useRef<HTMLDivElement>(null)
-
     useGSAP(() => {
         const trigger = {
             trigger: '.home__content',
@@ -39,11 +35,13 @@ export const Home = () => {
             <div className="home__image-container">
                 <Image
                     className="home__image"
+                    decoding="sync"
                     src="/images/stefan-baumeler.webp"
                     alt="Stefan Baumeler"
                     fill={true}
                     sizes="100vw"
                     loading={'eager'}
+                    quality={75}
                 />
             </div>
             <div className="home__blur" />

@@ -1,14 +1,23 @@
-$color-almost-white: #FAFAFA;
-$color-almost-black: #1F1F1F;
+$transition: cubic-bezier(.65, 0, .35, 1);
 
 $color-white: #FFFFFF;
-$color-bg: #111111;
+$color-gray-lightest: #FAFAFA;
+$color-gray-lighter: #F0F0F0;
+$color-gray-light: #D2D2D2;
+$color-gray: #9A9A9A;
+$color-gray-dark: #2D2D2D;
+$color-gray-darker: #1F1F1F;
+$color-gray-darkest: #111111;
 $color-black: #000000;
 
-$color-red: #EE5522;
+$color-main: #0099FF;
+$color-main-dark: #332211;
 
-$color-blur: #332211;
-
-$transition: cubic-bezier(0.65, 0, 0.35, 1);
-
-$breakpoint-ultrawide: 2560px;
+$breakpoints: (
+    xs: 768px,
+    sm: 1024px,
+    md: 1200px,
+    lg: 1600px,
+    xl: 1800px,
+    uw: 2560px
+);

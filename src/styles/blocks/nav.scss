@@ -1,0 +1,147 @@
+@mixin nav-root {
+    position: relative;
+    z-index: 2;
+}
+
+@mixin nav-container {
+    position: fixed;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: #0F0F0F;
+}
+
+@mixin nav-logo {
+    color: $color-white;
+    font-size: 30px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    height: 80px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color .25s;
+    border-bottom: 1px solid color-mix(in srgb, $color-gray 25%, transparent);
+    font-family: 'Heebo', sans-serif;
+
+    &:hover {
+        background-color: var(--c-main);
+    }
+}
+
+@mixin nav-lists {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+@mixin nav-list {
+    display: flex;
+    flex-direction: column;
+    width: 80px;
+    align-items: center;
+}
+
+@mixin nav-item {
+    width: 100%;
+    height: 70px;
+    position: relative;
+
+    &--line {
+        border-bottom: 1px solid color-mix(in srgb, $color-gray 25%, transparent);
+    }
+}
+
+@mixin nav-link {
+    color: $color-gray;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    height: 100%;
+    position: relative;
+    transition: color .25s;
+
+    &:before {
+        content: '';
+        position: absolute;
+        inset: 8px;
+        background: $color-gray-dark;
+        z-index: -1;
+        border-radius: 4px;
+        opacity: 0;
+        transition: opacity .25s;
+    }
+
+    &:hover {
+        color: $color-white;
+
+        &:before {
+            opacity: 1;
+        }
+    }
+
+    &--active {
+        color: $color-white;
+
+        &:before {
+            opacity: 1;
+        }
+    }
+}
+
+@mixin nav-icon {
+    width: 28px;
+}
+
+@mixin nav-tooltip {
+    color: $color-white;
+    background-color: $color-gray-darkest;
+    padding: 6px 12px;
+    margin-left: 8px;
+    font-size: 14px;
+    border-radius: 4px;
+    text-wrap: nowrap;
+}
+
+@mixin nav {
+    .nav {
+        @include nav-root;
+
+        &__logo {
+            @include nav-logo;
+        }
+
+        &__lists {
+            @include nav-lists;
+        }
+
+        &__container {
+            @include nav-container;
+        }
+
+        &__list {
+            @include nav-list;
+        }
+
+        &__item {
+            @include nav-item;
+        }
+
+        &__link {
+            @include nav-link;
+        }
+
+        &__icon {
+            @include nav-icon;
+        }
+
+        &__tooltip {
+            @include nav-tooltip;
+        }
+    }
+}
+
+@include nav;

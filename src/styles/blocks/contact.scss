@@ -1,17 +1,19 @@
+@use 'sass:map';
+
 @mixin contact-root {
     position: relative;
     z-index: 3;
-    background-color: #111;
+    background-color: #111111;
     box-sizing: border-box;
     padding: 50px 25px;
     display: flex;
     flex-wrap: wrap;
     gap: 25px;
     justify-content: center;
-    max-width: $breakpoint-ultrawide;
+    max-width: map.get($breakpoints, uw);
     margin: 0 auto;
 
-    @media screen and (min-width: 768px) {
+    @include breakpoint(xs) {
         padding: 50px;
         justify-content: space-between;
     }
@@ -24,12 +26,12 @@
 
     &:after {
         content: '.';
-        color: $color-red;
+        color: var(--c-main);
         display: inline-block;
-        transform: translate(4px, 2px)
+        transform: translate(4px, 2px);
     }
 
-    @media screen and (min-width: 768px) {
+    @include breakpoint(xs) {
         width: auto;
     }
 }
@@ -40,7 +42,7 @@
 }
 
 @mixin contact-link {
-    color: $color-white;
+    color: var(--c-black);
     width: 100px;
     display: flex;
     justify-content: center;

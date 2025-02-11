@@ -1,12 +1,28 @@
+@use 'sass:map';
+@use 'vars' as *;
+
+@mixin breakpoint($size) {
+    @media screen and (min-width: map.get($breakpoints, $size)) {
+        @content;
+    }
+}
+
+@mixin title {
+    font-size: 75px;
+    font-family: 'Heebo', sans-serif;
+
+
+    @include breakpoint(lg) {
+        font-size: 125px;
+    }
+}
+
 @mixin subtitle {
+    font-family: 'Heebo', sans-serif;
     font-size: 32px;
     letter-spacing: .05em;
 
-    @media screen and (min-width: 1600px) {
-        font-size: 2.6vw;
-    }
-
-    @media screen and (min-width: $breakpoint-ultrawide) {
-        font-size: $breakpoint-ultrawide / 100 * 2.6;
+    @include breakpoint(lg) {
+        font-size: 48px;
     }
 }

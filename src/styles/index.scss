@@ -1,18 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;700;800&display=swap');
-
-@import 'util/reset';
-@import 'util/vars';
-@import 'util/mixins';
-
-@import 'blocks/body';
-@import 'blocks/brand';
-@import 'blocks/contact';
-@import 'blocks/home';
-@import 'blocks/main';
-@import 'blocks/skills';
-@import 'blocks/project';
-@import 'blocks/projects';
-
+@use 'util/reset';
 
 .pin-spacer {
     pointer-events: none;

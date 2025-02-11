@@ -1,5 +1,5 @@
 import projects from '../data/work'
-import { useEffect, useRef, useState } from 'react'
+import { CSSProperties, useEffect, useRef, useState } from 'react'
 import Icon from '@mdi/react'
 import * as Icons from '@mdi/js'
 import Image from 'next/image'
@@ -72,13 +72,22 @@ export const Project = ({ project }: Props) => {
     })
 
     return <li
-        className="project"
+        className={`project${sliderActive ? ' project--active' : ''}`}
         ref={container}
+        style={{
+            '--c-project': project.color
+        } as CSSProperties}
     >
         <div
-            className={`project__slider${sliderActive ? ' project__slider--active' : ''}`}
+            className="project__slider"
             onClick={() => setSliderActive(true)}
         >
+            <div className="project__slider-hint">
+                <Icon
+                    path={Icons.mdiCameraOutline}
+                    className="project__icon"
+                />
+            </div>
             <div className="project__images">
                 {project.images?.map((image, k) => <div
                     className={`project__image-container ${activeImage === k ? 'project__image-container--active' : ''}`}
@@ -90,46 +99,46 @@ export const Project = ({ project }: Props) => {
                         sizes="100vw"
                         src={`/images/${image.url}`}
                         alt={image.alt}
+                        loading={k === 0 ? 'eager' : undefined}
+                        priority={k === 0}
                     />
                 </div>)}
             </div>
             <div className="project__controls">
                 <button
-                    className="project__slide project__slide--prev"
+                    className="project__control project__control--prev"
                     aria-label="Slide to previous image"
                     onClick={(event) => {
                         prevImage(event as unknown as Event)
                     }}
-                    style={{
-                        background: `${project.color}`
-                    }}
                 >
-                    <Icon path={Icons.mdiChevronLeft} />
+                    <Icon
+                        className="project__icon"
+                        path={Icons.mdiArrowLeft}
+                    />
                 </button>
                 <button
-                    className="project__slide project__slide--next"
-                    aria-label="Slide to next image"
-                    onClick={(event) => {
-                        nextImage(event as unknown as Event)
-                    }}
-                    style={{
-                        background: `${project.color}`
-                    }}
-                >
-                    <Icon path={Icons.mdiChevronRight} />
-                </button>
-                <button
-                    className="project__back"
+                    className="project__control"
                     aria-label="Close slider"
                     onClick={(event) => {
                         closeSlider(event as unknown as Event)
                     }}
-                    style={{
-                        background: `${project.color}`
+                >
+                    <Icon
+                        className="project__icon"
+                        path={Icons.mdiClose}
+                    />
+                </button>
+                <button
+                    className="project__control project__control--next"
+                    aria-label="Slide to next image"
+                    onClick={(event) => {
+                        nextImage(event as unknown as Event)
                     }}
                 >
                     <Icon
-                        path={Icons.mdiClose}
+                        className="project__icon"
+                        path={Icons.mdiArrowRight}
                     />
                 </button>
             </div>
@@ -163,9 +172,6 @@ export const Project = ({ project }: Props) => {
                     target="_blank"
                     href={project.url}
                     className="project__button"
-                    style={{
-                        background: Array.isArray(project.color) ? `linear-gradient(-45deg, ${project.color[0]}, ${project.color[1]})` : project.color
-                    }}
                     rel="noreferrer"
                 >
                     {project.private ? <>

@@ -218,7 +218,7 @@ export default [
                 alt: 'USZ Screenshot 3'
             }
         ],
-        description: 'One of my biggest projects to date, this complete redesign of the main website of the university hospital Züirch took several months to complete.',
+        description: 'One of my biggest projects to date, this complete redesign of the main website of the university hospital Zürich took several months to complete.',
         features: [
             'Modular implementation of frontend portion to allow the backend team to work with maximum flexibility',
             'Working with external web agency responsible for the backend',
@@ -374,7 +374,7 @@ export default [
     {
         name: 'Wirz',
         url: 'https://wirz.ch',
-        color: '#000000',
+        color: 'var(--c-gray-dark)',
         images: [
             {
                 url: 'wirz-1.webp',
@@ -427,7 +427,7 @@ export default [
     },
     {
         name: '1up.io',
-        color: '#000000',
+        color: 'var(--c-gray-dark)',
         url: 'https://1up.io',
         images: [
             {

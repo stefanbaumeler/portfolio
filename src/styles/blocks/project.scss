@@ -1,3 +1,5 @@
+@use 'sass:map';
+
 @keyframes pulse {
     0% {
         transform: none;
@@ -16,11 +18,18 @@
 @mixin project-root {
     display: flex;
     position: relative;
-    flex-wrap: wrap;
+    box-sizing: border-box;
+    overflow: hidden;
+    background-color: var(--c-gray-lightest);
+    box-shadow: 0 2px 2px rgba($color-black, .025),
+        0 4px 4px rgba($color-black, .025),
+        0 8px 8px rgba($color-black, .025),
+        0 16px 16px rgba($color-black, .025),
+        0 32px 32px rgba($color-black, .025);
 
-    @media screen and (min-width: 1024px) {
+    @include breakpoint(sm) {
         flex-wrap: nowrap;
-        height: 100vh;
+        aspect-ratio: 16 / 9;
     }
 
     &:nth-child(2n) {
@@ -35,11 +44,11 @@
     transition: width .25s;
     cursor: pointer;
     overflow: hidden;
-    background-color: $color-almost-black;
+    background-color: var(--c-gray-lighter);
     pointer-events: none;
     aspect-ratio: 16 / 9;
 
-    @media screen and (min-width: 1024px) {
+    @include breakpoint(sm) {
         height: 100%;
         width: calc(50% + 6.25vw);
         margin-right: -6.25vw;
@@ -47,147 +56,151 @@
         aspect-ratio: unset;
     }
 
-    @media screen and (min-width: 1200px) {
-        width: calc(50% + 12.5vw);
+    @include breakpoint(md) {
+        width: calc(50% + clamp(0px, 12.5vw, map.get($breakpoints, lg) * .125));
         margin-right: -12.5vw;
     }
 
-    @media screen and (min-width: $breakpoint-ultrawide) {
-        width: calc(50% + #{$breakpoint-ultrawide / 100 * 12.5});
-        margin-right: $breakpoint-ultrawide / 100 * -12.5;
+    @include breakpoint(lg) {
+        margin-right: map.get($breakpoints, lg) / 100 * -12.5;
     }
 
     @at-root .project:nth-child(2n) & {
         margin-left: -6.25vw;
         margin-right: 0;
 
-        @media screen and (min-width: 1200px) {
+        @include breakpoint(md) {
             margin-left: -12.5vw;
         }
 
-        @media screen and (min-width: $breakpoint-ultrawide) {
-            margin-left: $breakpoint-ultrawide / 100 * -12.5;
+        @include breakpoint(lg) {
+            margin-left: map.get($breakpoints, lg) / 100 * -12.5;
         }
     }
 
-    &--active {
+    @at-root .project--active & {
         width: 100%;
         cursor: default;
     }
 }
 
+@mixin project-slider-hint {
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    z-index: 1;
+    left: calc(50% - clamp(0px, 6.25vw, 100px));
+    top: 50%;
+    translate: -50% -50%;
+    background-color: $color-gray-darkest;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    transition: opacity .25s;
+    opacity: 0;
+    color: $color-white;
+
+    @at-root .project__slider:hover & {
+        opacity: 1;
+    }
+
+    @at-root .project--active .project__slider:hover & {
+        opacity: 0;
+    }
+
+    @at-root .project:nth-child(2n) & {
+        left: calc(50% + clamp(0px, 6.25vw, 100px));
+    }
+}
+
 @mixin project-controls {
-    bottom: 10px;
+    background-color: $color-gray-darkest;
     display: flex;
     z-index: 1;
     transition: opacity .25s;
     position: absolute;
-    gap: 10px;
-    justify-content: center;
-    width: 100%;
-    left: 0;
+    left: 50%;
+    translate: -50%;
+    height: 50px;
+    border-radius: 4px;
+    padding: 0 4px;
+    bottom: 4px;
 
-    @media screen and (min-width: 768px) {
-        bottom: 25px;
-    }
-
-    @media screen and (min-width: 1024px) {
+    @include breakpoint(sm) {
         opacity: 0;
         pointer-events: none;
-        width: 50px;
-        flex-direction: column;
-        right: 25px;
-        left: auto;
-        bottom: auto;
-        top: 50%;
-        transform: translateY(-50%);
     }
 
-    @at-root .project:nth-child(2n) & {
-        @media screen and (min-width: 1024px) {
-            right: auto;
-            left: 25px;
-        }
-    }
-
-    @at-root .project__slider--active & {
+    @at-root .project--active & {
         opacity: 1;
         pointer-events: all;
     }
 }
 
-@mixin project-slide {
-    bottom: 10px;
-    color: $color-white;
-    width: 30px;
-    height: 30px;
+@mixin project-control {
+    color: $color-gray;
+    width: 28px;
+    height: 28px;
     z-index: 1;
     cursor: pointer;
-    border-radius: 50%;
-    translate: none;
     pointer-events: all;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-    @at-root .project__slider--active & {
-        @media screen and (min-width: 1024px) {
-            pointer-events: all;
+    &:before {
+        content: '';
+        position: absolute;
+        inset: 8px 4px;
+        background: $color-gray-dark;
+        z-index: -1;
+        border-radius: 4px;
+        opacity: 0;
+        transition: opacity .25s;
+    }
+
+    &:hover {
+        color: $color-white;
+
+        &:before {
+            opacity: 1;
         }
     }
 
-    @media screen and (min-width: 768px) {
-        width: 50px;
-        height: 50px;
+    @include breakpoint(xs) {
+        width: 60px;
+        height: 100%;
     }
 
-    @media screen and (min-width: 1024px) {
+    @include breakpoint(sm) {
         pointer-events: none;
+    }
+
+    @at-root .project--active & {
+        @include breakpoint(sm) {
+            pointer-events: all;
+        }
     }
 }
 
-@mixin project-back {
-    justify-content: center;
-    align-items: center;
-    bottom: 10px;
-    background-color: $color-red;
-    color: $color-white;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    z-index: 1;
-    cursor: pointer;
-    display: none;
-
-    > svg {
-        transform: scale(.75);
-    }
-
-    @media screen and (min-width: 1024px) {
-        display: flex;
-    }
-
-    @at-root .project:nth-child(2n-1) & {
-        left: auto;
-        right: 10px;
-        transform: rotate(180deg);
-    }
+@mixin project-icon {
+    width: 28px;
 }
 
 @mixin project-images {
     height: 100%;
-    min-width: 62.5vw;
+    min-width: clamp(0px, 62.5vw, map.get($breakpoints, lg) * .625);
     width: auto;
     margin: 0 auto;
     transition: scale .25s, filter .25s;
-    background-color: $color-black;
+    background-color: var(--c-white);
     position: absolute;
     right: 50%;
     aspect-ratio: 16 / 9;
     translate: 50%;
-    max-width: 100vw;
-
-    @media screen and (min-width: $breakpoint-ultrawide) {
-        max-width: $breakpoint-ultrawide;
-        min-width: $breakpoint-ultrawide * .625;
-    }
+    max-width: clamp(0px, 100vw, map.get($breakpoints, lg));
 
     &:before {
         content: '';
@@ -196,13 +209,13 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: $color-almost-black;
+        background-color: var(--c-gray-lighter);
         opacity: .1;
         pointer-events: none;
         transition: opacity .25s;
         z-index: 1;
 
-        @at-root .project__slider--active & {
+        @at-root .project--active & {
             opacity: 0;
         }
     }
@@ -213,15 +226,15 @@
         translate: -50%;
     }
 
-    @at-root .main:not(.main--safari) .project__slider:not(.project__slider--active):hover & {
-        @media screen and (min-width: 1024px) {
+    @at-root .main:not(.main--safari) .project:not(.project--active) .project__slider:hover & {
+        @include breakpoint(sm) {
             scale: 1.025;
             filter: saturate(1.5);
         }
     }
 
-    @at-root .main--safari .project__slider:not(.project__slider--active):hover & {
-        @media screen and (min-width: 1024px) {
+    @at-root .main--safari .project:not(.project--active) .project__slider:hover & {
+        @include breakpoint(sm) {
             filter: saturate(1.5);
         }
     }
@@ -231,31 +244,23 @@
     height: 100%;
     aspect-ratio: 16 / 9;
     transition: opacity .25s, max-width .25s;
-    max-width: 150vw;
+    max-width: clamp(0px, 150vw, map.get($breakpoints, lg) * 1.5);
     opacity: 0;
     pointer-events: none;
     position: absolute;
     top: 0;
-    background-color: $color-almost-black;
+    background-color: var(--c-gray-lighter);
     left: 50%;
     translate: -50%;
 
-    @media screen and (min-width: $breakpoint-ultrawide) {
-        max-width: $breakpoint-ultrawide * 1.5;
-    }
-
-    @at-root .project__slider--active & {
-        max-width: 100vw;
-
-        @media screen and (min-width: $breakpoint-ultrawide) {
-            max-width: $breakpoint-ultrawide;
-        }
+    @at-root .project--active & {
+        max-width: clamp(0px, 100vw, map.get($breakpoints, lg));
     }
 
     &--active {
         opacity: 1;
 
-        @media screen and (min-width: 1024px) {
+        @include breakpoint(sm) {
             pointer-events: all;
         }
     }
@@ -280,7 +285,7 @@
     transition: transform .25s;
     justify-content: center;
 
-    @media screen and (min-width: 1024px) {
+    @include breakpoint(sm) {
         gap: 10px;
         padding: 0 25px 0 0;
         margin-left: 6.25vw;
@@ -288,150 +293,116 @@
         max-width: none;
     }
 
-    @media screen and (min-width: 1200px) {
+    @include breakpoint(md) {
         padding: 0 50px 0 0;
-        margin-left: 12.5vw;
-        width: calc(50% - 12.5vw);
+        margin-left: clamp(0px, 12.5vw, map.get($breakpoints, lg) * .125);
+        width: calc(50% - clamp(0px, 12.5vw, map.get($breakpoints, lg) * .125));
     }
 
-    @media screen and (min-width: 1600px) {
+    @include breakpoint(lg) {
         gap: 25px;
     }
 
-    @media screen and (min-width: 1800px) {
+    @include breakpoint(xl) {
         padding: 0 100px 0 0;
     }
 
-    @media screen and (min-width: $breakpoint-ultrawide) {
-        margin-left: $breakpoint-ultrawide / 100 * 12.5;
-        width: calc(50% - #{$breakpoint-ultrawide / 100 * 12.5});
-    }
-
     @at-root .project:nth-child(2n) & {
-        @media screen and (min-width: 1024px) {
+        @include breakpoint(sm) {
             padding: 0 0 0 25px;
             margin-left: 0;
             margin-right: 6.25vw;
         }
 
-        @media screen and (min-width: 1200px) {
+        @include breakpoint(md) {
             padding: 0 0 0 50px;
-            margin-right: 12.5vw;
+            margin-right: clamp(0px, 12.5vw, map.get($breakpoints, lg) * .125);
         }
 
-        @media screen and (min-width: 1800px) {
+        @include breakpoint(xl) {
             padding: 0 0 0 100px;
         }
+    }
 
-        @media screen and (min-width: $breakpoint-ultrawide) {
-            margin-right: $breakpoint-ultrawide / 100 * 12.5;
-        }
+    @at-root .project--active:nth-child(2n-1) & {
+        transform: translateX(60px);
     }
 
     &:before {
         content: '';
         position: absolute;
         top: 0;
-        right: 100%;
-        background-color: $color-white;
+        right: calc(100% - 1px);
+        background-color: var(--c-gray-lightest);
         transition: border-width .25s, left .25s, right .25s;
-        border-bottom: 100vh solid transparent;
-        border-right: 12.5vw solid $color-white;
-        z-index: 1;
+        height: 100%;
+        border-width: 0 12.5vw 0 0;
+        border-color: var(--c-gray-lightest);
+        border-style: solid;
         clip-path: polygon(evenodd, 0 0, 100% 0, 100% 100%, 0 0);
         display: none;
 
-        @media screen and (min-width: 1024px) {
+        @include breakpoint(sm) {
             display: block;
         }
 
-        @media screen and (min-width: 1200px) {
-            border-right: 25vw solid $color-white;
+        @include breakpoint(md) {
+            border-right-width: clamp(0px, 25vw, map.get($breakpoints, lg) * .25);
         }
 
-        @media screen and (min-width: $breakpoint-ultrawide) {
-            border-right: #{$breakpoint-ultrawide * .25} solid $color-white;
-        }
-    }
+        @at-root .project:nth-child(4n-2) & {
+            clip-path: polygon(evenodd, 0 0, 100% 0, 0 100%, 0 0);
+            right: auto;
+            border-right-width: 0;
+            border-left-width: 12.5vw;
+            left: calc(100% - 1px);
 
-    @at-root .project:nth-child(4n-2) &:before {
-        right: auto;
-        left: 100%;
-        clip-path: polygon(evenodd, 0 0, 100% 0, 0 100%, 0 0);
-        border-right: unset;
-        border-left: 12.5vw solid $color-white;
-
-        @media screen and (min-width: 1200px) {
-            border-left: 25vw solid $color-white;
+            @include breakpoint(md) {
+                border-left-width: clamp(0px, 25vw, map.get($breakpoints, lg) * .25);
+            }
         }
 
-        @media screen and (min-width: $breakpoint-ultrawide) {
-            border-left: #{$breakpoint-ultrawide * .25} solid $color-white;
-        }
-    }
+        @at-root .project:nth-child(4n-1) & {
+            left: -12.5vw;
 
-    @at-root .project:nth-child(4n-1) &:before {
-        left: -12.5vw;
-        clip-path: polygon(evenodd, 0 0, 100% 0, 100% 100%, 0 0);
-
-        @media screen and (min-width: 1200px) {
-            left: -25vw;
+            @include breakpoint(md) {
+                left: clamp(calc(-25vw + 1px), map.get($breakpoints, lg) * -.25, 0px);
+            }
         }
 
-        @media screen and (min-width: $breakpoint-ultrawide) {
-            left: $breakpoint-ultrawide * -.25
-        }
-    }
+        @at-root .project:nth-child(4n) & {
+            clip-path: polygon(evenodd, 0 0, 100% 0, 0 100%, 0 0);
+            right: calc(-12.5vw + 1px);
+            border-right-width: 0;
+            border-left-width: 12.5vw;
 
-    @at-root .project:nth-child(4n) &:before {
-        clip-path: polygon(evenodd, 0 0, 100% 0, 0 100%, 0 0);
-        border-right: unset;
-        right: -12.5vw;
-        border-left: 12.5vw solid $color-white;
-
-        @media screen and (min-width: 1200px) {
-            right: -25vw;
-            border-left: 25vw solid $color-white;
+            @include breakpoint(md) {
+                right: clamp(calc(-25vw + 1px), map.get($breakpoints, lg) * -.25, 0px);
+                border-left-width: clamp(0px, 25vw, map.get($breakpoints, lg) * .25);
+            }
         }
 
-        @media screen and (min-width: $breakpoint-ultrawide) {
-            right: $breakpoint-ultrawide * -.25;
-            border-left: #{$breakpoint-ultrawide * .25} solid $color-white;
-        }
-    }
+        @at-root .project--active:nth-child(4n-1) & {
+            left: 12.5vw;
 
-    @at-root .project:nth-child(2n-1) .project__slider--active + & {
-        transform: translateX(60px);
-    }
-
-    @at-root .project__slider--active:nth-child(1n) + &:before {
-        border-left-width: 0;
-        border-right-width: 0;
-    }
-
-    @at-root .project:nth-child(4n) .project__slider--active + &:before {
-        right: 12.5vw;
-
-        @media screen and (min-width: 1200px) {
-            right: 25vw;
+            @include breakpoint(md) {
+                left: clamp(0px, 25vw, map.get($breakpoints, lg) * .25 + 1px);
+            }
         }
 
-        @media screen and (min-width: $breakpoint-ultrawide) {
-            right: $breakpoint-ultrawide * .25;
+        @at-root .project--active:nth-child(4n) & {
+            right: 12.5vw;
+
+            @include breakpoint(md) {
+                right: clamp(0px, 25vw, map.get($breakpoints, lg) * .25 + 1px);
+            }
+        }
+
+        @at-root .project--active:nth-child(1n) & {
+            border-width: 0;
         }
     }
 
-    @at-root .project:nth-child(4n-1) .project__slider--active + &:before {
-        left: 12.5vw;
-
-        @media screen and (min-width: 1200px) {
-            left: 25vw;
-        }
-
-        @media screen and (min-width: $breakpoint-ultrawide) {
-            left: $breakpoint-ultrawide * .25;
-        }
-    }
 }
 
 @mixin project-title {
@@ -439,23 +410,23 @@
 
     opacity: 0;
     transform: translateX(-25px);
-    color: $color-black;
+    color: var(--c-black);
     position: relative;
     z-index: 1;
 
     @at-root .project:nth-child(2n-1) & {
-        @media screen and (min-width: 1024px) {
+        @include breakpoint(sm) {
             margin-left: -38px;
         }
 
-        @media screen and (min-width: 1200px) {
+        @include breakpoint(md) {
             margin-left: 0;
         }
     }
 }
 
 @mixin project-description {
-    color: $color-black;
+    color: var(--c-gray);
     font-size: 18px;
     line-height: 24px;
     position: relative;
@@ -464,16 +435,16 @@
     transform: translateX(-25px);
 
     @at-root .project:nth-child(2n-1) & {
-        @media screen and (min-width: 1024px) {
+        @include breakpoint(sm) {
             margin-left: -30px;
         }
 
-        @media screen and (min-width: 1200px) {
+        @include breakpoint(md) {
             margin-left: 0;
         }
     }
 
-    @media screen and (min-width: 1600px) {
+    @include breakpoint(lg) {
         font-size: 20px;
         line-height: 32px;
     }
@@ -486,11 +457,11 @@
     line-height: 22px;
     padding-left: 30px;
     display: block;
-    color: $color-black;
+    color: var(--c-gray);
     opacity: 0;
     transform: translateX(-25px);
 
-    @media screen and (min-width: 1600px) {
+    @include breakpoint(lg) {
         font-size: 18px;
         line-height: 28px;
     }
@@ -501,16 +472,16 @@
         top: 13.5px;
         height: 1px;
         width: 20px;
-        background-color: $color-black;
+        background-color: var(--c-gray);
         left: 0;
     }
 
     @at-root .project:nth-child(2n-1) & {
-        @media screen and (min-width: 1024px) {
+        @include breakpoint(sm) {
             margin-left: calc((var(--featureId)) * 6px - 30px);
         }
 
-        @media screen and (min-width: 1200px) {
+        @include breakpoint(md) {
             margin-left: 0;
         }
     }
@@ -518,7 +489,7 @@
 
 @mixin project-technologies {
     display: flex;
-    gap: 5px;
+    gap: 8px;
     list-style: none;
     flex-wrap: wrap;
     width: 100%;
@@ -531,18 +502,24 @@
 
 @mixin project-technology {
     font-size: 12px;
-    background-color: #F8F0E3;
-    color: $color-white;
     padding: 6px 16px;
-    font-weight: bold;
+    border-radius: 20px;
+    border: 1px solid var(--c-project);
+    background-color: color-mix(in srgb, var(--c-project) 12.5%, transparent);
+    color: var(--c-project);
 
-    @media screen and (min-width: 1600px) {
+    @at-root .body--dark & {
+        border-color: color-mix(in srgb, var(--c-project) 85%, $color-white);
+        color: color-mix(in srgb, var(--c-project) 85%, $color-white);
+    }
+
+    @include breakpoint(lg) {
         font-size: 14px;
-        padding: 8px 20px;
+        padding: 4px 16px;
     }
 
     &--secondary {
-        opacity: .5;
+        border-style: dashed;
     }
 }
 
@@ -554,11 +531,10 @@
 }
 
 @mixin project-button {
-    background-color: $color-red;
+    background-color: var(--c-project);
     color: $color-white;
     padding: 15px 25px;
     font-size: 16px;
-    font-weight: bold;
     letter-spacing: .05em;
     transition: transform .25s;
     margin: 25px auto 0;
@@ -568,26 +544,33 @@
     white-space: nowrap;
     align-items: center;
     gap: 10px;
+    border-radius: 4px;
+    font-weight: 200;
 
     > svg {
         flex-shrink: 0;
-        width: 30px;
+        width: 20px;
     }
 
-    @media screen and (min-width: 1024px) {
+    @include breakpoint(sm) {
         margin-top: 15px;
     }
 
-    @media screen and (min-width: 1200px) {
+    @include breakpoint(md) {
         margin-top: 25px;
     }
 
-    @media screen and (min-width: 1600px) {
+    @include breakpoint(lg) {
         position: relative;
         bottom: auto;
         right: auto;
-        font-size: 18px;
-        padding: 20px 40px;
+        font-size: 16px;
+        padding: 15px 20px;
+    }
+
+    @at-root .body--dark & {
+        background-color: var(--c-gray-light);
+        color: var(--c-gray-darker);
     }
 
     &:before,
@@ -637,16 +620,20 @@
             @include project-slider;
         }
 
+        &__slider-hint {
+            @include project-slider-hint;
+        }
+
         &__controls {
             @include project-controls;
         }
 
-        &__slide {
-            @include project-slide;
+        &__control {
+            @include project-control;
         }
 
-        &__back {
-            @include project-back;
+        &__icon {
+            @include project-icon;
         }
 
         &__images {

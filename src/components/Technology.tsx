@@ -17,8 +17,7 @@ export const Technology = ({
     return <li
         className={classes.join(' ')}
         style={{
-            '--technologyId': `${k}`,
-            background: Array.isArray(color) ? `linear-gradient(-45deg, ${color[0]}, ${color[1]})` : color
+            '--technologyId': `${k}`
         } as CSSProperties}
     >
         {technology.label}
