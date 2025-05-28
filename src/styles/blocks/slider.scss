@@ -1,0 +1,300 @@
+@use 'sass:map';
+
+@mixin slider-root {
+    width: 100%;
+    flex-shrink: 0;
+    position: relative;
+    transition: width .25s;
+    background-color: var(--c-gray-lighter);
+    pointer-events: none;
+    aspect-ratio: 16 / 9;
+
+    @include breakpoint(md) {
+        aspect-ratio: unset;
+        width: calc(50% + 6.25vw);
+        margin-right: -6.25vw;
+        pointer-events: all;
+        height: 100%;
+        cursor: pointer;
+        overflow: hidden;
+    }
+
+    @include breakpoint(lg) {
+        width: calc(50% + clamp(0px, 12.5vw, map.get($breakpoints, lg) * .125));
+        margin-right: map.get($breakpoints, lg) / 100 * -12.5;
+    }
+
+    @at-root .project:nth-child(2n) & {
+        @include breakpoint(md) {
+            margin-left: -6.25vw;
+            margin-right: 0;
+        }
+
+        @include breakpoint(lg) {
+            margin-left: map.get($breakpoints, lg) / 100 * -12.5;
+        }
+    }
+
+    @at-root .project--active & {
+        @include breakpoint(md) {
+            width: 100%;
+            cursor: default;
+        }
+    }
+}
+
+@mixin slider-hint {
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    z-index: 1;
+    left: calc(50% - clamp(0px, 6.25vw, 100px));
+    top: 50%;
+    translate: -50% -50%;
+    background-color: rgba($color-white, .25);
+    color: $color-black;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    transition: opacity .25s;
+    opacity: 0;
+    border: 2px solid $color-black;
+    display: none;
+    box-shadow: 0 20px 48px 0 rgba($color-black, .1);
+
+    @include breakpoint(md) {
+        display: flex;
+    }
+
+    @at-root .slider:hover & {
+        opacity: 1;
+    }
+
+    @at-root .project--active .slider:hover & {
+        opacity: 0;
+    }
+
+    @at-root .project:nth-child(2n) & {
+        left: calc(50% + clamp(0px, 6.25vw, 100px));
+    }
+}
+
+@mixin slider-controls {
+    background-color: var(--c-project);
+    display: flex;
+    z-index: 1;
+    transition: opacity .25s;
+    position: absolute;
+    height: 40px;
+    padding: 0 4px;
+    top: 100%;
+    right: 0;
+
+    @include breakpoint(xs) {
+        height: 50px;
+    }
+
+    @include breakpoint(md) {
+        opacity: 0;
+        pointer-events: none;
+        left: 50%;
+        bottom: 4px;
+        right: auto;
+        top: auto;
+        translate: -50%;
+        background-color: $color-gray-darkest;
+        border-radius: 4px;
+    }
+
+    @at-root .project--active & {
+        @include breakpoint(md) {
+            opacity: 1;
+            pointer-events: all;
+        }
+    }
+}
+
+@mixin slider-control {
+    color: $color-white;
+    width: 40px;
+    height: 100%;
+    z-index: 1;
+    cursor: pointer;
+    pointer-events: all;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @include breakpoint(xs) {
+        width: 60px;
+    }
+
+    @include breakpoint(md) {
+        color: $color-gray;
+    }
+
+    &:before {
+        content: '';
+        position: absolute;
+        inset: 8px 4px;
+        background: $color-gray-dark;
+        z-index: -1;
+        border-radius: 4px;
+        opacity: 0;
+        transition: opacity .25s;
+    }
+
+    &:hover {
+        color: $color-white;
+
+        &:before {
+            @include breakpoint(md) {
+                opacity: 1;
+            }
+        }
+    }
+
+    &--close {
+        display: none;
+
+        @include breakpoint(md) {
+            display: flex;
+        }
+    }
+}
+
+@mixin slider-icon {
+    width: 20px;
+
+    @include breakpoint(xs) {
+        width: 28px;
+    }
+}
+
+@mixin slider-images {
+    height: calc(100% + 1px);
+    min-width: clamp(0px, 62.5vw, map.get($breakpoints, lg) * .625);
+    width: auto;
+    margin: 0 auto;
+    transition: scale .25s, filter .25s;
+    background-color: var(--c-white);
+    position: absolute;
+    right: 50%;
+    aspect-ratio: 16 / 9;
+    translate: 50%;
+    max-width: clamp(0px, 100vw, map.get($breakpoints, lg));
+
+    &:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: var(--c-gray-lighter);
+        opacity: .1;
+        pointer-events: none;
+        transition: opacity .25s;
+        z-index: 1;
+
+        @at-root .project--active & {
+            @include breakpoint(md) {
+                opacity: 0;
+            }
+        }
+    }
+
+    @at-root .project:nth-child(2n) & {
+        right: auto;
+        left: 50%;
+        translate: -50%;
+    }
+
+    @at-root .body:not(.body--safari) .project:not(.project--active) .slider:hover & {
+        @include breakpoint(md) {
+            scale: 1.025;
+            filter: saturate(1.5);
+        }
+    }
+
+    @at-root .body--safari .project:not(.project--active) .slider:hover & {
+        @include breakpoint(md) {
+            filter: saturate(1.5);
+        }
+    }
+}
+
+@mixin slider-image-container {
+    height: 100%;
+    aspect-ratio: 16 / 9;
+    transition: opacity .25s, max-width .25s;
+    max-width: clamp(0px, 150vw, map.get($breakpoints, lg) * 1.5);
+    width: auto;
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    background-color: $color-gray-lighter;
+    left: 50%;
+    translate: -50%;
+
+    @at-root .body--dark & {
+        background-color: $color-black;
+    }
+
+    @at-root .project--active & {
+        @include breakpoint(md) {
+            max-width: clamp(0px, 100vw, map.get($breakpoints, lg));
+        }
+    }
+
+    &--active {
+        opacity: 1;
+
+        @include breakpoint(sm) {
+            pointer-events: all;
+        }
+    }
+}
+
+@mixin slider-image {
+    object-position: center;
+    object-fit: contain;
+}
+
+@mixin slider {
+    .slider {
+        @include slider-root;
+
+        &__hint {
+            @include slider-hint;
+        }
+
+        &__controls {
+            @include slider-controls;
+        }
+
+        &__control {
+            @include slider-control;
+        }
+
+        &__icon {
+            @include slider-icon;
+        }
+
+        &__images {
+            @include slider-images;
+        }
+
+        &__image-container {
+            @include slider-image-container;
+        }
+
+        &__image {
+            @include slider-image;
+        }
+    }
+}
+
+@include slider;

@@ -1,0 +1,41 @@
+query QTimePerPlace {
+    timePerCountryAndPlace: transportation(limit: -1) {
+        arrival
+        departure
+        from {
+            id
+            country {
+                id
+            }
+        }
+        to {
+            id
+            country {
+                id
+            }
+        }
+    }
+    country {
+        id
+        translations {
+            id
+            name
+            languages_code {
+                abbreviation
+            }
+        }
+    }
+    place(limit: -1) {
+        id
+        country {
+            id
+        }
+        translations {
+            id
+            name
+            languages_code {
+                abbreviation
+            }
+        }
+    }
+}

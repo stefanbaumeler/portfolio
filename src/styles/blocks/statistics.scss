@@ -1,0 +1,75 @@
+@mixin statistics-root {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    padding: 10px;
+    box-sizing: border-box;
+    max-width: 1840px;
+    margin: 0 auto;
+
+    @include breakpoint(sm) {
+        padding: 25px;
+    }
+}
+
+@mixin statistics-title {
+    @include h1;
+
+    color: var(--c-black);
+    padding-bottom: 100px;
+}
+
+@mixin statistics-grid {
+    display: flex;
+    flex-wrap: wrap;
+    grid-template-columns: repeat(24, 1fr);
+    grid-auto-rows: 1fr;
+    gap: 10px;
+    align-items: stretch;
+
+    @include breakpoint(sm) {
+        gap: 25px;
+    }
+
+    @include breakpoint(lg) {
+        display: grid;
+    }
+}
+
+@mixin statistics-group {
+    grid-column: auto / span 12;
+    grid-row: auto / span 1;
+    gap: 25px;
+    display: contents;
+    width: auto;
+
+    @include breakpoint(lg) {
+        display: flex;
+    }
+
+    @include breakpoint(xl) {
+        grid-column: auto / span 4;
+        grid-row: auto / span 3;
+        flex-direction: column;
+    }
+}
+
+@mixin statistics {
+    .statistics {
+        @include statistics-root;
+
+        &__title {
+            @include statistics-title;
+        }
+
+        &__grid {
+            @include statistics-grid;
+        }
+
+        &__group {
+            @include statistics-group;
+        }
+    }
+}
+
+@include statistics;

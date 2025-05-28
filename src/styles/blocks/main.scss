@@ -3,12 +3,18 @@
 @mixin main-root {
     background-color: var(--c-gray-lighter);
     position: relative;
-    z-index: 1;
     width: 100%;
-    max-width: map.get($breakpoints, uw);
     margin: 0 auto;
-    overflow: hidden;
-    min-height: 100vh;
+    overflow: clip;
+    box-sizing: border-box;
+
+    @include breakpoint(xs) {
+        padding-left: 80px;
+    }
+
+    @include breakpoint(xl) {
+        max-width: map.get($breakpoints, uw);
+    }
 }
 
 @mixin main-transition {

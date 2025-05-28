@@ -1,0 +1,39 @@
+query QTravelArticles {
+    secret_blog(sort: "-date_created", filter: { status: { _eq: "published" } }) {
+        id
+        status
+        title
+        date_created
+        slug
+        image {
+            id
+            filename_disk
+            filename_download
+        }
+        place {
+            id
+            place_id {
+                id
+                country {
+                    id
+                    translations {
+                        id
+                        name
+                        languages_code {
+                            abbreviation
+                        }
+                    }
+                }
+            }
+        }
+        elements(filter: { collection: { _eq: "blog_text" } }) {
+            item {
+                ... on blog_text {
+                    text
+                    id
+                }
+            }
+            collection
+        }
+    }
+}

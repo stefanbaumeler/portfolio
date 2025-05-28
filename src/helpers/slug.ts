@@ -1,0 +1,10 @@
+export const slugify = (str: string) => str
+    .toLowerCase()
+    .trim()
+    .replace(/ä/, 'ae')
+    .replace(/ö/, 'oe')
+    .replace(/ü/, 'ue')
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^\w\s-]/g, '')
+    .replace(/[\s_-]+/g, '-')
+    .replace(/^-+|-+$/g, '')

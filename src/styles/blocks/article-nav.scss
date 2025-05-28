@@ -1,0 +1,139 @@
+@mixin article-nav-root {
+    padding-left: 25px;
+}
+
+@mixin article-nav-title {
+    padding-bottom: 8px;
+    display: block;
+    font-weight: bold;
+}
+
+@mixin article-nav-list {
+    margin-left: -8px;
+}
+
+@mixin article-nav-link {
+    @include text-small;
+
+    font-weight: 300;
+    color: var(--c-gray);
+    padding: 8px;
+    display: block;
+    transition: color .25s;
+    position: relative;
+
+    &--current,
+    &:hover {
+        color: var(--c-main-dark);
+    }
+
+    &--level-3 {
+        padding-left: 16px;
+    }
+
+    &--level-4 {
+        padding-left: 32px;
+    }
+}
+
+@mixin article-nav-progress {
+    position: absolute;
+    left: -1px;
+    width: 2px;
+    height: 10px;
+    background: var(--c-main);
+    top: 0;
+    transition: translate .25s, height .25s;
+}
+
+@mixin article-nav-toplink-container {
+    border-top: 1px solid var(--c-gray-light);
+    transition: opacity .25s;
+    margin-top: 8px;
+    padding-top: 8px;
+
+    &:first-child {
+        margin-top: -8px;
+        padding-top: 0;
+        border-top-width: 0;
+    }
+}
+
+@mixin article-nav-toplink {
+    @include text-small;
+
+    padding: 8px 0;
+    color: var(--c-gray);
+    display: inline-flex;
+    position: relative;
+    white-space: nowrap;
+    gap: 6px;
+    align-items: center;
+    cursor: pointer;
+    transition: color .25s;
+    font-weight: 300;
+
+    &:before {
+        content: '';
+        width: 4px;
+        height: 4px;
+        rotate: -45deg;
+        border-style: solid;
+        border-width: 1px 1px 0 0;
+        border-color: var(--c-gray);
+        position: absolute;
+        right: 6px;
+        top: 19px;
+        transition: border-color .25s;
+    }
+
+    &:after {
+        content: '';
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        border: 1px solid var(--c-gray);
+        transition: border-color .25s;
+    }
+
+    &:hover {
+        color: var(--c-main-dark);
+
+        &:before,
+        &:after {
+            border-color: var(--c-main-dark);
+        }
+    }
+}
+
+@mixin article-nav {
+    .article-nav {
+        @include article-nav-root;
+
+        &__title {
+            @include article-nav-title;
+        }
+
+        &__list {
+            @include article-nav-list;
+        }
+
+        &__link {
+            @include article-nav-link;
+        }
+
+        &__progress {
+            @include article-nav-progress;
+        }
+
+        &__toplink-container {
+            @include article-nav-toplink-container;
+        }
+
+        &__toplink {
+            @include article-nav-toplink;
+        }
+    }
+}
+
+@include article-nav;

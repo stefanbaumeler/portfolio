@@ -1,0 +1,173 @@
+@mixin teaser-root {
+    display: flex;
+    position: relative;
+    flex-direction: column-reverse;
+
+    @include breakpoint(xs) {
+        flex-direction: row;
+    }
+}
+
+@mixin teaser-content {
+    z-index: 2;
+    padding: 25px;
+    background-color: var(--c-gray-lightest);
+    box-shadow: 0 20px 48px 0 rgba($color-black, .1);
+    width: 100%;
+    box-sizing: border-box;
+
+    @include breakpoint(xs) {
+        margin-top: 0;
+        left: 0;
+        bottom: 0;
+    }
+
+    @include breakpoint(md) {
+        padding: 50px 25px;
+    }
+
+    @at-root .teaser:has(.teaser__image) & {
+        margin-top: -25px;
+        max-width: 400px;
+        width: 100%;
+
+        @include breakpoint(xs) {
+            position: absolute;
+            max-width: 575px;
+            background-color: transparent;
+        }
+
+        @include breakpoint(md) {
+            max-width: 850px;
+            padding: 50px;
+        }
+    }
+}
+
+@mixin teaser-tags {
+    display: flex;
+    gap: 8px 16px;
+    justify-content: flex-start;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+}
+
+@mixin teaser-tag {
+    color: var(--c-main);
+}
+
+@mixin teaser-title {
+    @include h3;
+
+    color: var(--c-black);
+    padding-bottom: 15px;
+
+    @include breakpoint(xs) {
+        padding-bottom: 25px;
+    }
+
+    @at-root .teaser:has(.teaser__image) & {
+        @include h2;
+
+        @include breakpoint(xs) {
+            color: $color-white;
+        }
+    }
+}
+
+@mixin teaser-text {
+    @include text-small;
+
+    color: var(--c-black);
+    padding-bottom: 25px;
+
+    &:empty {
+        display: none;
+    }
+}
+
+@mixin teaser-image {
+    width: calc(100% + 20px);
+    margin-left: -10px;
+    aspect-ratio: 16 / 9;
+    position: relative;
+    box-shadow: 0 20px 48px 0 rgba($color-black, .1);
+    transition: margin .25s, width .25s, filter .25s;
+
+    @include breakpoint(xs) {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    &:before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, .5) 80%);
+        z-index: 1;
+    }
+
+    @at-root .teaser:hover & {
+        @include breakpoint(md) {
+            margin: calc(-50px / 16 * 9) -50px;
+            width: calc(100% + 100px);
+            filter: saturate(1.5);
+        }
+    }
+}
+
+@mixin teaser-meta {
+    display: flex;
+    gap: 8px;
+    color: var(--c-gray);
+    opacity: .75;
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    @include breakpoint(xs) {
+        gap: 16px;
+    }
+
+    @at-root .teaser:has(.teaser__image) & {
+        @include breakpoint(xs) {
+            color: $color-white;
+        }
+    }
+}
+
+@mixin teaser {
+    .teaser {
+        @include teaser-root;
+
+        &__content {
+            @include teaser-content;
+        }
+
+        &__tags {
+            @include teaser-tags;
+        }
+
+        &__tag {
+            @include teaser-tag;
+        }
+
+        &__title {
+            @include teaser-title;
+        }
+
+        &__text {
+            @include teaser-text;
+        }
+
+        &__image {
+            @include teaser-image;
+        }
+
+        &__meta {
+            @include teaser-meta;
+        }
+    }
+}
+
+@include teaser;

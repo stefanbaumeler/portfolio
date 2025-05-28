@@ -1,0 +1,8 @@
+query QAccommodationType {
+    accommodationType: booking_aggregated(groupBy: "type", sort: "-count.id") {
+        group
+        count {
+            id
+        }
+    }
+}

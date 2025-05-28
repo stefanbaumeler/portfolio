@@ -7,7 +7,16 @@
     box-sizing: border-box;
     padding-right: 10px;
     position: absolute;
-    z-index: 3;
+    z-index: 4;
+
+    @include breakpoint(xs) {
+        position: static;
+        z-index: 3;
+    }
+
+    &:has(+ .article) {
+        position: static;
+    }
 
     &:has(.top-nav__title) {
         position: relative;
@@ -21,12 +30,38 @@
     padding-left: 20px;
     font-weight: normal;
     color: $color-gray;
-    font-family: 'Heebo', sans-serif;
     font-size: 24px;
 }
 
 @mixin top-nav-nav {
     display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+@mixin top-nav-section {
+    display: flex;
+
+    &:only-child {
+        margin-left: auto;
+    }
+
+    &:last-child {
+        position: fixed;
+        bottom: -5px;
+        right: 10px;
+        display: none;
+        z-index: 10;
+
+        @include breakpoint(xs) {
+            position: static;
+            display: flex;
+        }
+
+        @at-root .nav--active + .main & {
+            display: flex;
+        }
+    }
 }
 
 @mixin top-nav-item {
@@ -44,6 +79,16 @@
     cursor: pointer;
     color: $color-gray;
 
+    @at-root .top-nav--force-white & {
+        @include breakpoint(md) {
+            color: $color-white;
+        }
+
+        @at-root .body:has(.blogs) & {
+            color: $color-white;
+        }
+    }
+
     &:before {
         content: '';
         position: absolute;
@@ -58,6 +103,10 @@
     &:hover {
         color: var(--c-black);
 
+        @at-root .top-nav--force-white & {
+            color: $color-white;
+        }
+
         &:before {
             opacity: 1;
         }
@@ -69,13 +118,9 @@
 }
 
 @mixin top-nav-tooltip {
-    color: $color-white;
-    background-color: $color-gray-darkest;
-    padding: 6px 12px;
+    @include tooltip;
+
     margin-top: -10px;
-    font-size: 14px;
-    border-radius: 4px;
-    text-wrap: nowrap;
 }
 
 @mixin top-nav {
@@ -88,6 +133,10 @@
 
         &__nav {
             @include top-nav-nav;
+        }
+
+        &__section {
+            @include top-nav-section;
         }
 
         &__item {

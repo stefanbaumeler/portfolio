@@ -1,0 +1,21 @@
+@mixin image-root {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+@mixin image-image {
+    object-fit: cover;
+}
+
+@mixin image {
+    .image {
+        @include image-root;
+
+        &__image {
+            @include image-image;
+        }
+    }
+}
+
+@include image;

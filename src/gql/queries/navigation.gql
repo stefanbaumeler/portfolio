@@ -1,0 +1,33 @@
+query QNavigation {
+    navigation {
+        id
+        main_navigation_items(sort: "sort", filter: { active: { _eq: true } }) {
+            id
+            url
+            icon
+            line
+            translations {
+                id
+                label
+                title
+                languages_code {
+                    abbreviation
+                }
+            }
+        }
+        misc_navigation_items(sort: "sort", filter: { active: { _eq: true } }) {
+            id
+            url
+            icon
+            line
+            translations {
+                id
+                label
+                title
+                languages_code {
+                    abbreviation
+                }
+            }
+        }
+    }
+}

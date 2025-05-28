@@ -1,0 +1,11 @@
+query QProjects {
+    work {
+        id
+        projects {
+            id
+            project_id {
+                ...FProject
+            }
+        }
+    }
+}

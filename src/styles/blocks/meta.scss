@@ -1,0 +1,78 @@
+@mixin meta-root {
+    @include text-small;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+
+    @include breakpoint(xs) {
+        width: auto;
+        flex-direction: row;
+    }
+
+    @include breakpoint(md) {
+        gap: 16px;
+    }
+
+    @at-root .teaser__meta & {
+        flex-direction: column-reverse;
+
+        @include breakpoint(xs) {
+            flex-direction: row;
+        }
+    }
+}
+
+@mixin meta-item {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    white-space: nowrap;
+}
+
+@mixin meta-icon {
+    width: 16px;
+    height: 16px;
+
+    @include breakpoint(sm) {
+        display: none;
+    }
+
+    @include breakpoint(md) {
+        display: block;
+    }
+}
+
+@mixin meta-separator {
+    display: none;
+
+    @include breakpoint(xs) {
+        display: block;
+    }
+
+    &:before {
+        content: '|';
+        opacity: .25;
+    }
+}
+
+@mixin meta {
+    .meta {
+        @include meta-root;
+
+        &__item {
+            @include meta-item;
+        }
+
+        &__icon {
+            @include meta-icon;
+        }
+
+        &__separator {
+            @include meta-separator;
+        }
+    }
+}
+
+@include meta;

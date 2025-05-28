@@ -1,0 +1,27 @@
+fragment FProject on project {
+    id
+    url
+    color
+    title
+    translations {
+        id
+        description
+        languages_code {
+            abbreviation
+        }
+    }
+    technologies {
+        id
+        secondary
+        technology_id {
+            ...FTechnology
+        }
+    }
+    gallery {
+        id
+        directus_files_id {
+            filename_disk
+            description
+        }
+    }
+}

@@ -1,0 +1,44 @@
+@mixin articles-root {
+    display: flex;
+    gap: 25px;
+    flex-direction: column;
+    flex-wrap: nowrap;
+
+    @include breakpoint(md) {
+        gap: 50px;
+    }
+
+    @include breakpoint(lg) {
+        gap: 100px;
+    }
+
+    &--dev {
+        flex-direction: row;
+
+        @include breakpoint(lg) {
+            gap: 50px;
+        }
+    }
+}
+
+@mixin articles-column {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+
+    @include breakpoint(xs) {
+        gap: 50px;
+    }
+}
+
+@mixin articles {
+    .articles {
+        @include articles-root;
+
+        &__column {
+            @include articles-column;
+        }
+    }
+}
+
+@include articles;

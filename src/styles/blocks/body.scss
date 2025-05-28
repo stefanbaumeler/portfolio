@@ -1,17 +1,9 @@
 @use '../util/vars' as *;
 
-@import url('https://fonts.googleapis.com/css2?family=Yantramanav:wght@200;400;700;900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@200;400;700;900&display=swap');
-
-
 @mixin body-root {
-    font-family: 'Yantramanav', sans-serif;
+    font-family: 'Mulish', sans-serif;
     color: var(--c-black);
     background-color: var(--c-gray-lighter);
-
-    &::-webkit-scrollbar {
-        display: none;
-    }
 
     --c-white: #{$color-white};
     --c-gray-lightest: #{$color-gray-lightest};
@@ -21,6 +13,7 @@
     --c-gray-dark: #{$color-gray-dark};
     --c-gray-darker: #{$color-gray-darker};
     --c-gray-darkest: #{$color-gray-darkest};
+    --c-nav: #{$color-nav-light};
     --c-black: #{$color-black};
 
     --c-main: #{$color-main};
@@ -35,7 +28,12 @@
         --c-gray-dark: #{$color-gray-light};
         --c-gray-darker: #{$color-gray-lighter};
         --c-gray-darkest: #{$color-gray-lightest};
+        --c-nav: #{$color-nav};
         --c-black: #{$color-white};
+    }
+
+    &--fixed {
+        overflow: hidden;
     }
 }
 

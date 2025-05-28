@@ -1,0 +1,22 @@
+query QTotals {
+    totalCountries: country_aggregated {
+        count {
+            id
+        }
+    }
+    totalPlaces: place_aggregated {
+        count {
+            id
+        }
+    }
+    totalAccommodations: accommodation_aggregated {
+        count {
+            id
+        }
+    }
+    totalBookings: booking_aggregated {
+        count {
+            id
+        }
+    }
+}
