@@ -1,6 +1,7 @@
 'use client'
 
-import { createContext, Dispatch, ReactNode, SetStateAction, useContext, useState } from 'react'
+import { createContext, Dispatch, ReactNode, SetStateAction, useContext, useEffect, useState } from 'react'
+import { usePathname } from 'next/navigation'
 
 type Props = {
     children?: ReactNode
@@ -14,7 +15,12 @@ interface BodyContext {
 const BodyContext = createContext<BodyContext | null>(null)
 
 const BodyProvider = ({ children }: Props) => {
+    const pathname = usePathname()
     const [fixed, setFixed] = useState(false)
+
+    useEffect(() => {
+        setFixed(false)
+    }, [pathname])
 
     return <BodyContext.Provider value={{
         fixed,

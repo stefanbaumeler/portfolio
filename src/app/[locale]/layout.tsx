@@ -71,10 +71,7 @@ export const metadata: Metadata = {
             name: 'Stefan Baumeler',
             url: 'https://stefan-baumeler.com'
         }
-    ],
-    alternates: {
-        canonical: 'https://stefan-baumeler.com/'
-    }
+    ]
 }
 
 export const generateStaticParams = () => {

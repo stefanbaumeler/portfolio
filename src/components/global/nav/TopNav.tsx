@@ -47,6 +47,7 @@ export const TopNav = () => {
                         href={topNavContext.back}
                         skipLanguage
                         className="top-nav__button top-nav__button--back"
+                        aria-label={t('Back')}
                     >
                         <Icon
                             path={Icons.mdiArrowLeft}
@@ -64,6 +65,7 @@ export const TopNav = () => {
                 >
                     <button
                         className="top-nav__button"
+                        aria-label={t('Dark mode')}
                         onClick={() => dark.setState(dark.state === DarkMode.Dark ? DarkMode.Light : DarkMode.Dark)}
                     >
                         <Icon
@@ -80,6 +82,7 @@ export const TopNav = () => {
                 >
                     <Link
                         prefetch={!pathname.endsWith('/stats')}
+                        aria-label={t('Language')}
                         skipLanguage
                         className="top-nav__button"
                         href={`/${locale === 'de' ? 'en' : 'de'}${pathname}`}
