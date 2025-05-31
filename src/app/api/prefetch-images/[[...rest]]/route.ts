@@ -15,7 +15,6 @@ export const GET = async (
     _: NextRequest,
     { params }: { params: Promise<{ rest: string[] }> }
 ) => {
-    const schema = process.env.NODE_ENV === 'development' ? 'http' : 'http'
     const host = getHostname()
     if (!host) {
         return new Response('Failed to get hostname from env', {

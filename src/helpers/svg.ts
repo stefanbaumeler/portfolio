@@ -3,7 +3,6 @@
 import { DOMParser } from 'linkedom'
 
 export const getAspectRatioOfSVG = async (url: string) => {
-    console.log(url)
     const response = await fetch(url)
     const text = await response.text()
 
