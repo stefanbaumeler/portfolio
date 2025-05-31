@@ -51,4 +51,4 @@ const nextConfig: NextConfig = {
     }
 }
 
-module.exports = withNextIntl(nextConfig)
+export default withNextIntl(nextConfig)
