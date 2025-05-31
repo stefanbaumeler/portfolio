@@ -1,6 +1,7 @@
 'use client'
 
-import { createContext, Dispatch, ReactNode, SetStateAction, useContext, useState } from 'react'
+import { createContext, ReactNode, useContext, useState } from 'react'
+import { useBodyContext } from '@/context/body'
 
 type Props = {
 	children?: ReactNode
@@ -8,17 +9,21 @@ type Props = {
 
 interface NavContext {
 	active: boolean
-	setActive: Dispatch<SetStateAction<boolean>>
+	setActive: (state: boolean) => void
 }
 
 const NavContext = createContext<NavContext | null>(null)
 
 const NavProvider = ({ children }: Props) => {
     const [active, setActive] = useState(false)
+    const { setFixed } = useBodyContext()
 
     return <NavContext.Provider value={{
         active,
-        setActive
+        setActive: (state) => {
+            setActive(state)
+            setFixed(state)
+        }
     }}
     >
         {children}

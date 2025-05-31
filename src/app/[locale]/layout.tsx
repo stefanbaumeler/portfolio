@@ -4,11 +4,12 @@ import '@/styles/util/reset.scss'
 import '@/styles/lib/shiki.scss'
 import '@/styles/lib/map.scss'
 
+import '@/styles/blocks/html.scss'
+import '@/styles/blocks/body.scss'
 import '@/styles/blocks/home.scss'
 import '@/styles/blocks/article.scss'
 import '@/styles/blocks/article-nav.scss'
 import '@/styles/blocks/articles.scss'
-import '@/styles/blocks/body.scss'
 import '@/styles/blocks/blog.scss'
 import '@/styles/blocks/blogs.scss'
 import '@/styles/blocks/brand.scss'
@@ -48,9 +49,9 @@ import { TopNavProvider } from '@/context/top-nav'
 import { headers } from 'next/headers'
 import { Body } from '@/components/Body'
 import { Nav } from '@/components/global/nav/Nav'
+import { BodyProvider } from '@/context/body'
 
 export const viewport: Viewport = {
-    themeColor: '#EE5522',
     width: 'device-width',
     initialScale: 1
 }
@@ -58,13 +59,13 @@ export const viewport: Viewport = {
 export const ppr = true
 
 export const metadata: Metadata = {
-    title: 'Stefan Baumeler - Web Developer - Official Portfolio',
-    description: 'The official portfolio of Stefan Baumeler, a location independent web developer based in Switzerland, developing high quality web applications for Swiss companies.',
+    title: 'Stefan Baumeler — Web Developer — Official Portfolio',
+    description: 'The official portfolio of Stefan Baumeler, a location independent senior web developer based in Switzerland developing high quality web applications for Swiss companies.',
     robots: {
         index: true,
         follow: true
     },
-    keywords: ['Stefan Baumeler', 'Web Developer', 'Web Dev', 'Webentwickler', 'Luzern', 'Schweiz', 'Portfolio', 'React', 'Node.js', 'Next.js'],
+    keywords: ['Stefan Baumeler', 'Web Developer', 'Web Dev', 'Webentwicklung', 'Programmierung', 'Luzern', 'Schweiz', 'React', 'Next.js', 'Node.js'],
     authors: [
         {
             name: 'Stefan Baumeler',
@@ -99,48 +100,53 @@ const RootLayout = async ({
 
     const theme = headersList.get('Sec-CH-Prefers-Color-Scheme')
 
-    return <html lang={locale}>
+    return <html
+        lang={locale}
+        className="html"
+    >
         <TopNavProvider>
             <DarkProvider initialTheme={theme as DarkMode}>
                 <UAProvider>
-                    <NavProvider>
-                        <NextIntlClientProvider messages={messages}>
-                            <Body>
-                                <meta
-                                    name="googlebot"
-                                    content="notranslate"
-                                />
-                                <link
-                                    rel="shortcut icon"
-                                    href="/images/favicon.ico"
-                                />
-                                <link
-                                    rel="apple-touch-icon"
-                                    sizes="180x180"
-                                    href="/images/favicon.png"
-                                />
-                                <link
-                                    rel="icon"
-                                    type="image/png"
-                                    sizes="32x32"
-                                    href="/images/favicon.png"
-                                />
-                                <link
-                                    rel="icon"
-                                    type="image/png"
-                                    sizes="16x16"
-                                    href="/images/favicon.png"
-                                />
-                                <Nav>
-                                    <NavLists />
-                                </Nav>
-                                <main className="main">
-                                    <TopNav />
-                                    {children}
-                                </main>
-                            </Body>
-                        </NextIntlClientProvider>
-                    </NavProvider>
+                    <BodyProvider>
+                        <NavProvider>
+                            <NextIntlClientProvider messages={messages}>
+                                <Body>
+                                    <meta
+                                        name="googlebot"
+                                        content="notranslate"
+                                    />
+                                    <link
+                                        rel="shortcut icon"
+                                        href="/images/favicon.ico"
+                                    />
+                                    <link
+                                        rel="apple-touch-icon"
+                                        sizes="180x180"
+                                        href="/images/favicon.png"
+                                    />
+                                    <link
+                                        rel="icon"
+                                        type="image/png"
+                                        sizes="32x32"
+                                        href="/images/favicon.png"
+                                    />
+                                    <link
+                                        rel="icon"
+                                        type="image/png"
+                                        sizes="16x16"
+                                        href="/images/favicon.png"
+                                    />
+                                    <Nav>
+                                        <NavLists />
+                                    </Nav>
+                                    <main className="main">
+                                        <TopNav />
+                                        {children}
+                                    </main>
+                                </Body>
+                            </NextIntlClientProvider>
+                        </NavProvider>
+                    </BodyProvider>
                 </UAProvider>
             </DarkProvider>
         </TopNavProvider>

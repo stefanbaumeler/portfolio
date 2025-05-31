@@ -6,6 +6,7 @@ import { Teaser } from '@/components/blog/Teaser'
 import Icon from '@mdi/react'
 import { mdiClose } from '@mdi/js'
 import { recursivelyCleanDaytrips } from '@/helpers/clean-daytrips'
+import { useBodyContext } from '@/context/body'
 
 type Props = {
     transportation: TQMap['transportation']
@@ -27,6 +28,7 @@ export const PlaceDrawer = ({
     const [isMobile, setIsMobile] = useState(false)
     const drawerEl = useRef<HTMLDivElement>(null)
     const [drawerActiveHeight, setDrawerActiveHeight] = useState(0)
+    const { setFixed } = useBodyContext()
 
     const arrivals = transportation.filter((transport) => {
         return transport.to.id === activePlace?.id
@@ -52,6 +54,10 @@ export const PlaceDrawer = ({
 
     useEffect(() => {
         if (activePlace) {
+            if (isMobile) {
+                setFixed(true)
+            }
+
             setTimeout(() => {
                 setAnimated(true)
                 setActive(true)
@@ -87,6 +93,10 @@ export const PlaceDrawer = ({
         setActive(false)
         setBig(false)
         setAnimated(true)
+
+        if (isMobile) {
+            setFixed(false)
+        }
 
         setTimeout(() => {
             setAnimated(false)

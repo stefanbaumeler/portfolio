@@ -7,27 +7,18 @@ type Props = {
 }
 
 interface BodyContext {
-    images: string[]
-    active: string
-    prev: () => void
-    next: () => void
-    setActive: Dispatch<SetStateAction<string>>
-    addImage: (image: string) => void
+    fixed: boolean
+    setFixed: Dispatch<SetStateAction<boolean>>
 }
 
 const BodyContext = createContext<BodyContext | null>(null)
 
 const BodyProvider = ({ children }: Props) => {
-    const [images, setImages] = useState<string[]>([])
-    const [active, setActive] = useState('')
+    const [fixed, setFixed] = useState(false)
 
     return <BodyContext.Provider value={{
-        images,
-        active,
-        setActive,
-        prev,
-        next,
-        addImage
+        fixed,
+        setFixed
     }}
     >
         {children}

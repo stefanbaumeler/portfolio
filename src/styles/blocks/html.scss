@@ -1,0 +1,43 @@
+@mixin html-root {
+    scrollbar-gutter: stable;
+    background-color: $color-gray-darker;
+
+    --c-white: #{$color-white};
+    --c-gray-lightest: #{$color-gray-lightest};
+    --c-gray-lighter: #{$color-gray-lighter};
+    --c-gray-light: #{$color-gray-light};
+    --c-gray: #656565;
+    --c-gray-dark: #{$color-gray-dark};
+    --c-gray-darker: #{$color-gray-darker};
+    --c-gray-darkest: #{$color-gray-darkest};
+    --c-nav: #{$color-nav-light};
+    --c-black: #{$color-black};
+
+    --c-main: #{$color-main};
+    --c-main-dark: #{$color-main-dark};
+
+    &:has(.body--dark) {
+        --c-white: #{$color-black};
+        --c-gray-lightest: #{$color-gray-darkest};
+        --c-gray-lighter: #{$color-gray-darker};
+        --c-gray-light: #{$color-gray-dark};
+        --c-gray: #{$color-gray};
+        --c-gray-dark: #{$color-gray-light};
+        --c-gray-darker: #{$color-gray-lighter};
+        --c-gray-darkest: #{$color-gray-lightest};
+        --c-nav: #{$color-nav};
+        --c-black: #{$color-white};
+    }
+
+    &:has(.body--fixed) {
+        overflow: hidden;
+    }
+}
+
+@mixin html {
+    .html {
+        @include html-root;
+    }
+}
+
+@include html;

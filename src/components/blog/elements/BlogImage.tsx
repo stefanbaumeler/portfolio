@@ -5,6 +5,7 @@ import { TBlogImage } from '~/schema'
 import { SliderControls } from '@/components/SliderControls'
 import { useSliderContext } from '@/context/slider'
 import { useEffect } from 'react'
+import { useBodyContext } from '@/context/body'
 
 type Props = {
 	item: TBlogImage
@@ -18,14 +19,14 @@ export const BlogImage = ({
         prev, next, setActive, active, addImage
     } = useSliderContext()
 
-    useEffect(() => {
-        addImage(item.id)
-    }, [])
+    const { setFixed } = useBodyContext()
 
     useEffect(() => {
+        addImage(item.id)
+
         const keydown = (event: KeyboardEvent) => {
             if (event.key === 'Escape') {
-                setActive('')
+                closePopup()
             }
         }
 
@@ -35,6 +36,17 @@ export const BlogImage = ({
             window.removeEventListener('keydown', keydown)
         }
     }, [])
+
+    useEffect(() => {
+        if (active !== '') {
+            setFixed(true)
+        }
+    }, [active])
+
+    const closePopup = () => {
+        setFixed(false)
+        setActive('')
+    }
 
     return <>
         <figure onClick={() => setActive(item.id)}>
@@ -63,7 +75,7 @@ export const BlogImage = ({
             />
             <SliderControls
                 onPrev={prev}
-                onClose={() => setActive('')}
+                onClose={closePopup}
                 onNext={next}
             />
         </div>
