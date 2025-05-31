@@ -32,7 +32,7 @@ jobs:
                   known_hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
 
             - name: Deploy with rsync
-              run: rsync -vvv -avz --delete .next public node_modules ${{ secrets.USERNAME }}@${{ secrets.HOST }}:${{ secrets.TARGET_DIRECTORY }}
+              run: rsync -q -vvv -avz --delete .next public node_modules ${{ secrets.USERNAME }}@${{ secrets.HOST }}:${{ secrets.TARGET_DIRECTORY }}
 
             - name: Restart PM2
               uses: appleboy/ssh-action@v1.2.0
