@@ -6,7 +6,7 @@ type Props = {
     aspect?: number
 } & ComponentProps<typeof NextImage>
 
-export const Image: typeof NextImage = (({
+export const Image = ({
     className, invert, aspect, ...props
 }: Props) => {
     return <div
@@ -23,4 +23,4 @@ export const Image: typeof NextImage = (({
             />
         </div>
     </div>
-}) as typeof NextImage
+}
