@@ -1,7 +1,7 @@
-import { cacheExchange, fetchExchange, createClient, Client } from 'urql'
+import { cacheExchange, fetchExchange, createClient, Client, ssrExchange } from 'urql'
 import { cache } from 'react'
 
-function registerUrql (makeClient: () => Client) {
+const registerUrql = (makeClient: () => Client) => {
     const getClient = cache(makeClient)
 
     return {
@@ -16,6 +16,15 @@ const makeClient = () => {
     })
 }
 
-const { getClient } = registerUrql(makeClient)
+export const makeFrontendClient = () => {
+    const ssr = ssrExchange()
+    return {
+        client: createClient({
+            url: `${process.env.NEXT_PUBLIC_API}/graphql`,
+            exchanges: [cacheExchange, ssr, fetchExchange]
+        }),
+        ssr
+    }
+}
 
-export { getClient }
+export const { getClient } = registerUrql(makeClient)

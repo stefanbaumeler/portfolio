@@ -11011,6 +11011,54 @@ export type TQDevArticles = (
   )> }
 );
 
+export type TQMapVariables = Exact<{ [key: string]: never; }>;
+
+
+export type TQMap = (
+  { __typename?: 'Query' }
+  & { place: Array<(
+    { __typename?: 'place' }
+    & Pick<TPlace, 'id' | 'location'>
+    & { translations: Maybe<Array<Maybe<(
+      { __typename?: 'place_translations' }
+      & Pick<TPlaceTranslations, 'id' | 'name'>
+      & { languages_code: Maybe<(
+        { __typename?: 'languages' }
+        & Pick<TLanguages, 'abbreviation'>
+      )> }
+    )>>>, country: Maybe<(
+      { __typename?: 'country' }
+      & Pick<TCountry, 'id' | 'currency_code' | 'alpha3'>
+      & { translations: Maybe<Array<Maybe<(
+        { __typename?: 'country_translations' }
+        & Pick<TCountryTranslations, 'id' | 'name' | 'currency'>
+        & { languages_code: Maybe<(
+          { __typename?: 'languages' }
+          & Pick<TLanguages, 'abbreviation'>
+        )> }
+      )>>> }
+    )> }
+  )>, transportation: Array<(
+    { __typename?: 'transportation' }
+    & Pick<TTransportation, 'id' | 'type' | 'company' | 'number' | 'vessel' | 'departure_airport_code' | 'arrival_airport_code' | 'departure' | 'arrival' | 'crosspacific' | 'show_time'>
+    & { from: Maybe<(
+      { __typename?: 'place' }
+      & Pick<TPlace, 'id' | 'location'>
+      & { translations: Maybe<Array<Maybe<(
+        { __typename?: 'place_translations' }
+        & Pick<TPlaceTranslations, 'id' | 'name'>
+      )>>> }
+    )>, to: Maybe<(
+      { __typename?: 'place' }
+      & Pick<TPlace, 'id' | 'location'>
+      & { translations: Maybe<Array<Maybe<(
+        { __typename?: 'place_translations' }
+        & Pick<TPlaceTranslations, 'id' | 'name'>
+      )>>> }
+    )> }
+  )> }
+);
+
 export type TQNavigationVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -11418,6 +11466,47 @@ export type TQTravelArticle = (
   )> }
 );
 
+export type TQTravelArticlesOfPlaceVariables = Exact<{ [key: string]: never; }>;
+
+
+export type TQTravelArticlesOfPlace = (
+  { __typename?: 'Query' }
+  & { secret_blog: Array<(
+    { __typename?: 'secret_blog' }
+    & Pick<TSecretBlog, 'id' | 'status' | 'title' | 'date_created' | 'slug'>
+    & { image: Maybe<(
+      { __typename?: 'directus_files' }
+      & Pick<TDirectusFiles, 'id' | 'filename_disk' | 'filename_download'>
+    )>, place: Maybe<Array<Maybe<(
+      { __typename?: 'secret_blog_place' }
+      & Pick<TSecretBlogPlace, 'id'>
+      & { place_id: Maybe<(
+        { __typename?: 'place' }
+        & Pick<TPlace, 'id'>
+        & { country: Maybe<(
+          { __typename?: 'country' }
+          & Pick<TCountry, 'id'>
+          & { translations: Maybe<Array<Maybe<(
+            { __typename?: 'country_translations' }
+            & Pick<TCountryTranslations, 'id' | 'name'>
+            & { languages_code: Maybe<(
+              { __typename?: 'languages' }
+              & Pick<TLanguages, 'abbreviation'>
+            )> }
+          )>>> }
+        )> }
+      )> }
+    )>>>, elements: Maybe<Array<Maybe<(
+      { __typename?: 'secret_blog_elements' }
+      & Pick<TSecretBlogElements, 'collection'>
+      & { item: Maybe<{ __typename?: 'blog_image' } | { __typename?: 'blog_map' } | { __typename?: 'blog_quote' } | (
+        { __typename?: 'blog_text' }
+        & Pick<TBlogText, 'text' | 'id'>
+      ) | { __typename?: 'blog_title' } | { __typename?: 'blog_video' }> }
+    )>>> }
+  )> }
+);
+
 export type TQTravelArticlesVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -11584,6 +11673,63 @@ export const QDevArticlesDocument = gql`
   }
 }
     ${FTechnology}`;
+export const QMapDocument = gql`
+    query QMap {
+  place(limit: -1) {
+    id
+    location
+    translations {
+      id
+      name
+      languages_code {
+        abbreviation
+      }
+    }
+    country {
+      id
+      currency_code
+      alpha3
+      translations {
+        id
+        name
+        currency
+        languages_code {
+          abbreviation
+        }
+      }
+    }
+  }
+  transportation(limit: -1) {
+    id
+    type
+    company
+    number
+    vessel
+    departure_airport_code
+    arrival_airport_code
+    departure
+    arrival
+    crosspacific
+    show_time
+    from {
+      id
+      location
+      translations {
+        id
+        name
+      }
+    }
+    to {
+      id
+      location
+      translations {
+        id
+        name
+      }
+    }
+  }
+}
+    `;
 export const QNavigationDocument = gql`
     query QNavigation {
   navigation {
@@ -11913,6 +12059,47 @@ export const QTravelArticleDocument = gql`
         ... on blog_video {
           id
           url
+        }
+      }
+      collection
+    }
+  }
+}
+    `;
+export const QTravelArticlesOfPlaceDocument = gql`
+    query QTravelArticlesOfPlace {
+  secret_blog(sort: "-date_created", filter: {status: {_eq: "published"}}) {
+    id
+    status
+    title
+    date_created
+    slug
+    image {
+      id
+      filename_disk
+      filename_download
+    }
+    place {
+      id
+      place_id {
+        id
+        country {
+          id
+          translations {
+            id
+            name
+            languages_code {
+              abbreviation
+            }
+          }
+        }
+      }
+    }
+    elements(filter: {collection: {_eq: "blog_text"}}) {
+      item {
+        ... on blog_text {
+          text
+          id
         }
       }
       collection

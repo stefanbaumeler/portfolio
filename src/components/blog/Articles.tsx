@@ -2,14 +2,17 @@ import { TQDevArticles, TQTravelArticles } from '~/schema'
 import { Teaser } from '@/components/blog/Teaser'
 import { isTravelArticle } from '@/helpers/article-type'
 import { Masonry } from '@/components/global/Masonry'
+import { getLocale, getTranslations } from 'next-intl/server'
 
 type Props = {
 	articles?: TQTravelArticles['secret_blog'] | TQDevArticles['blog']
 }
-export const Articles = ({ articles = [] }: Props) => {
+export const Articles = async ({ articles = [] }: Props) => {
     const type = articles[0] && isTravelArticle(articles[0]) ? 'travel' : 'dev'
     const Tag = type === 'dev' ? Masonry : 'ul'
     const ChildTag = type === 'dev' ? 'div' : 'li'
+    const locale = await getLocale()
+    const t = await getTranslations()
 
     return <Tag
         className={`articles articles--${type}`}
@@ -27,6 +30,8 @@ export const Articles = ({ articles = [] }: Props) => {
             <Teaser
                 article={article}
                 index={key}
+                locale={locale}
+                t={t}
             />
         </ChildTag>)}
     </Tag>

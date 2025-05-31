@@ -74,8 +74,6 @@ export const ArticleNav = ({ titles = [] }: Props) => {
     useEffect(() => {
         const winner = scrollContext.bids[0]?.id
 
-        console.log(winner, scrollContext.bids)
-
         if (winner) {
             setWinningBid(winner)
             setActiveAnchor(winner)

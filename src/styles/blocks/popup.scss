@@ -1,0 +1,68 @@
+@mixin popup-root {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $color-gray-darker;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity .25s .25s;
+
+    @include breakpoint(xs) {
+        width: calc(100% - 80px);
+        left: 80px;
+    }
+
+    &--active {
+        pointer-events: all;
+        opacity: 1;
+        transition: opacity .25s;
+    }
+}
+
+@mixin popup-image {
+    width: calc(100vw - 40px);
+    height: calc(100vh - 100px);
+    margin-top: -50px;
+
+    @include breakpoint(xs) {
+        width: calc(100vw - 180px);
+    }
+}
+
+@mixin popup-button {
+    position: absolute;
+    bottom: 10px;
+    width: 30px;
+    height: 30px;
+    left: 50%;
+
+    &--prev {
+        translate: calc(-150% - 10px);
+    }
+
+    &--next {
+        translate: calc(-50% + 10px);
+    }
+}
+
+@mixin popup {
+    .popup {
+        @include popup-root;
+
+        &__image {
+            @include popup-image;
+        }
+
+        &__button {
+            @include popup-button;
+        }
+    }
+}
+
+@include popup;

@@ -17,7 +17,7 @@
 
     font-weight: 300;
     color: var(--c-gray);
-    padding: 8px;
+    padding: 6px 8px;
     display: block;
     transition: color .25s;
     position: relative;
@@ -25,6 +25,10 @@
     &--current,
     &:hover {
         color: var(--c-main-dark);
+
+        @at-root .body--dark & {
+            color: var(--c-main);
+        }
     }
 
     &--level-3 {

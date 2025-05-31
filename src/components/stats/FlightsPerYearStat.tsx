@@ -32,7 +32,7 @@ export const FlightsPerYearStat = async ({ order }: Props) => {
         labels: Object.keys(data ?? {}).map((key) => key.substring(1)),
         datasets: [
             {
-                data: Object.values(data ?? {}).map((value: any) => value.length)
+                data: Object.values(data ?? {}).map((value) => value.length)
             }
         ]
     }

@@ -4,7 +4,7 @@ import { QTravelArticleDocument, QTravelArticlesDocument, TQTravelArticle, TQTra
 
 export const revalidate = 60
 
-export async function generateStaticParams () {
+export const generateStaticParams = async () => {
     const { data } = await getClient().query<TQTravelArticles>(QTravelArticlesDocument, {})
 
     return data?.secret_blog.map((article) => {

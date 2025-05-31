@@ -3,13 +3,17 @@ import { Link } from '@/components/global/Link'
 import { TQDevArticles, TQTravelArticles } from '~/schema'
 import { ArticleMeta } from '@/components/blog/ArticleMeta'
 import { isTravelArticle } from '@/helpers/article-type'
+import type { getTranslations } from 'next-intl/server'
+import type { useTranslations } from 'next-intl'
 
 type Props = {
 	article: TQTravelArticles['secret_blog'][number] | TQDevArticles['blog'][number]
 	index: number
+    locale: string
+    t: Awaited<ReturnType<typeof getTranslations>> | ReturnType<typeof useTranslations>
 }
 export const Teaser = ({
-    article, index
+    article, index, locale, t
 }: Props) => {
     const type = isTravelArticle(article) ? 'travel' : 'dev'
 
@@ -40,6 +44,8 @@ export const Teaser = ({
             <ArticleMeta
                 className="teaser__meta"
                 article={article}
+                locale={locale}
+                t={t}
             />
         </div>
         {isTravelArticle(article) && article.image ? <Image

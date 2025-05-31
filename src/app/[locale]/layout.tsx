@@ -2,7 +2,9 @@ import '@/styles/util/fonts.scss'
 import '@/styles/util/reset.scss'
 
 import '@/styles/lib/shiki.scss'
+import '@/styles/lib/map.scss'
 
+import '@/styles/blocks/home.scss'
 import '@/styles/blocks/article.scss'
 import '@/styles/blocks/article-nav.scss'
 import '@/styles/blocks/articles.scss'
@@ -11,7 +13,6 @@ import '@/styles/blocks/blog.scss'
 import '@/styles/blocks/blogs.scss'
 import '@/styles/blocks/brand.scss'
 import '@/styles/blocks/contact.scss'
-import '@/styles/blocks/home.scss'
 import '@/styles/blocks/hover-link.scss'
 import '@/styles/blocks/image.scss'
 import '@/styles/blocks/main.scss'
@@ -22,11 +23,16 @@ import '@/styles/blocks/projects.scss'
 import '@/styles/blocks/root.scss'
 import '@/styles/blocks/skills.scss'
 import '@/styles/blocks/slider.scss'
+import '@/styles/blocks/slider-controls.scss'
 import '@/styles/blocks/stat.scss'
 import '@/styles/blocks/statistics.scss'
 import '@/styles/blocks/teaser.scss'
 import '@/styles/blocks/top-nav.scss'
 import '@/styles/blocks/not-found.scss'
+import '@/styles/blocks/map.scss'
+import '@/styles/blocks/drawer.scss'
+import '@/styles/blocks/quote.scss'
+import '@/styles/blocks/popup.scss'
 
 import { ReactNode } from 'react'
 import { Metadata, Viewport } from 'next'
@@ -70,7 +76,7 @@ export const metadata: Metadata = {
     }
 }
 
-export function generateStaticParams () {
+export const generateStaticParams = () => {
     return routing.locales.map((locale) => ({
         locale
     }))
@@ -81,9 +87,9 @@ type Props = {
 	params: Promise<{ locale: string }>
 }
 
-export default async function RootLayout ({
+const RootLayout = async ({
     children, params
-}: Props) {
+}: Props) => {
     const { locale } = await params
 
     setRequestLocale(locale)
@@ -140,3 +146,5 @@ export default async function RootLayout ({
         </TopNavProvider>
     </html>
 }
+
+export default RootLayout

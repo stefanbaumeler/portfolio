@@ -1,0 +1,39 @@
+@mixin quote-root {
+    background-color: var(--c-gray-lightest);
+    padding: 40px;
+}
+
+@mixin quote-text {
+    @include h3;
+
+    text-align: center;
+    color: var(--c-gray-dark);
+    font-weight: 200;
+}
+
+@mixin quote-author {
+    @include text;
+
+    text-align: center;
+    padding-top: 20px;
+
+    &:before {
+        content: '— ';
+    }
+}
+
+@mixin quote {
+    .quote {
+        @include quote-root;
+
+        &__text {
+            @include quote-text;
+        }
+
+        &__author {
+            @include quote-author;
+        }
+    }
+}
+
+@include quote;

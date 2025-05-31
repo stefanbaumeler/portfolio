@@ -1,21 +1,16 @@
-'use client'
+import { Map } from '@/components/map/Map'
+import { getClient } from '@/gql/urql'
+import { QMapDocument, QTravelArticlesDocument, TQMap, TQTravelArticles } from '~/schema'
 
-import { Map } from '@/components/Map'
-import { useTopNavContext } from '@/context/top-nav'
-import { useEffect } from 'react'
+const MapPage = async () => {
+    const { data } = await getClient().query<TQMap>(QMapDocument, {})
+    const { data: articlesData } = await getClient().query<TQTravelArticles>(QTravelArticlesDocument, {})
 
-const MapPage = () => {
-    const topNavContext = useTopNavContext()
-
-    useEffect(() => {
-        topNavContext.setTitle('Map')
-
-        return () => {
-            topNavContext.setTitle('')
-        }
-    }, [topNavContext])
-
-    return <Map />
+    return <Map
+        places={data?.place ?? []}
+        transportation={data?.transportation ?? []}
+        articles={articlesData?.secret_blog ?? []}
+    />
 }
 
 export default MapPage

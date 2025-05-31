@@ -64,6 +64,10 @@
     @include breakpoint(md) {
         padding-bottom: 100px;
     }
+
+    &:has(+ .article__content-container) {
+        padding-bottom: 50px;
+    }
 }
 
 @mixin article-image {
@@ -126,6 +130,12 @@
 
 @mixin article-content-image {
     aspect-ratio: 3 / 2;
+    cursor: pointer;
+    transition: scale .25s;
+
+    &:hover {
+        scale: 1.01;
+    }
 }
 
 @mixin article-caption {

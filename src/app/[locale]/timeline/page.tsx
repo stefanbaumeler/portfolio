@@ -1,7 +1,5 @@
-import { Map } from '@/components/Map'
-
 const Timeline = () => {
-    return <Map />
+    return <div />
 }
 
 export default Timeline

@@ -1,7 +1,5 @@
 import { QDevArticlesDocument, TQDevArticles } from '~/schema'
 import { getClient } from '@/gql/urql'
-import Icon from '@mdi/react'
-import * as Icons from '@mdi/js'
 import { Articles } from '@/components/blog/Articles'
 import { getTranslations } from 'next-intl/server'
 import { BlogMeta } from '@/components/blog/BlogMeta'

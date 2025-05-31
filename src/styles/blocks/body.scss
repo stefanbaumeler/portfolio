@@ -4,6 +4,7 @@
     font-family: 'Mulish', sans-serif;
     color: var(--c-black);
     background-color: var(--c-gray-lighter);
+    container: meta-container teaser-container / inline-size;
 
     --c-white: #{$color-white};
     --c-gray-lightest: #{$color-gray-lightest};

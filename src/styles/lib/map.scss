@@ -1,0 +1,10 @@
+.mapboxgl-marker {
+    &:has(.map__marker--active) {
+        z-index: 1;
+    }
+
+
+    &:hover {
+        z-index: 2;
+    }
+}

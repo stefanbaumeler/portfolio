@@ -32,6 +32,10 @@
     &--hidden {
         translate: -50% calc(100% + 10px);
     }
+
+    @at-root .nav:has(+ .main .popup--active) & {
+        translate: -50% calc(100% + 10px);
+    }
 }
 
 @mixin nav-container {

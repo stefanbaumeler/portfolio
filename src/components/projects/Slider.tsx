@@ -3,7 +3,7 @@ import * as Icons from '@mdi/js'
 import Image from 'next/image'
 import { MouseEvent, useEffect, useState } from 'react'
 import { TFProject } from '~/schema'
-import { useTranslations } from 'next-intl'
+import { SliderControls } from '@/components/SliderControls'
 
 type Props = {
     onSliderActiveChange: (active: boolean) => void
@@ -14,7 +14,6 @@ export const Slider = ({
     onSliderActiveChange, gallery
 }: Props ) => {
     const [activeImage, setActiveImage] = useState(0)
-    const t = useTranslations()
 
     useEffect(() => {
         const keydown = (event: KeyboardEvent) => {
@@ -75,43 +74,10 @@ export const Slider = ({
                 />
             </div>)}
         </div>
-        <div className="slider__controls">
-            <button
-                className="slider__control slider__control--prev"
-                aria-label={t('Slide to previous image')}
-                onClick={(event) => {
-                    prevImage(event)
-                }}
-            >
-                <Icon
-                    className="slider__icon"
-                    path={Icons.mdiArrowLeft}
-                />
-            </button>
-            <button
-                className="slider__control slider__control--close"
-                aria-label={t('Close slider')}
-                onClick={(event) => {
-                    closeSlider(event)
-                }}
-            >
-                <Icon
-                    className="slider__icon"
-                    path={Icons.mdiClose}
-                />
-            </button>
-            <button
-                className="slider__control slider__control--next"
-                aria-label={t('Slide to next image')}
-                onClick={(event) => {
-                    nextImage(event)
-                }}
-            >
-                <Icon
-                    className="slider__icon"
-                    path={Icons.mdiArrowRight}
-                />
-            </button>
-        </div>
+        <SliderControls
+            onPrev={prevImage}
+            onClose={closeSlider}
+            onNext={nextImage}
+        />
     </div>
 }

@@ -1,9 +1,12 @@
 @mixin home-root {
     display: flex;
     flex-direction: column-reverse;
+    min-height: 100svh;
+    justify-content: flex-end;
 
     @include breakpoint(md) {
         flex-direction: row;
+        justify-content: flex-start;
     }
 }
 

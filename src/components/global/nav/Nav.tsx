@@ -18,7 +18,7 @@ export const Nav = ({ children }: Props) => {
     } = useNavContext()
 
     useOnScroll(() => {
-        setToggleHidden(window.scrollY > scrollPos)
+        setToggleHidden(window.scrollY > scrollPos && window.scrollY > 0)
         setScrollPos(window.scrollY)
     })
 

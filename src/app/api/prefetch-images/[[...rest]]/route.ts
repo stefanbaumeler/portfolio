@@ -3,7 +3,7 @@ import { parseHTML } from 'linkedom'
 
 export const dynamic = 'force-static'
 
-function getHostname () {
+const getHostname = () => {
     if (process.env.NODE_ENV === 'development') {
         return 'localhost:3000'
     }
@@ -11,10 +11,10 @@ function getHostname () {
     return 'localhost:3000'
 }
 
-export async function GET (
+export const GET = async (
     _: NextRequest,
     { params }: any
-) {
+) => {
     const schema = process.env.NODE_ENV === 'development' ? 'http' : 'http'
     const host = getHostname()
     if (!host) {

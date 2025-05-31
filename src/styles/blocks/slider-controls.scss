@@ -1,0 +1,135 @@
+@mixin slider-controls-root {
+    background-color: var(--c-project);
+    display: flex;
+    z-index: 1;
+    transition: opacity .25s;
+    position: absolute;
+    height: 40px;
+    padding: 0 4px;
+    top: 100%;
+    right: 0;
+
+    @include breakpoint(xs) {
+        height: 50px;
+    }
+
+    @include breakpoint(md) {
+        opacity: 0;
+        pointer-events: none;
+        left: 50%;
+        bottom: 4px;
+        right: auto;
+        top: auto;
+        translate: -50%;
+        background-color: $color-gray-darkest;
+        border-radius: 4px;
+    }
+
+    @at-root .popup & {
+        pointer-events: none;
+        bottom: 10px;
+        right: auto;
+        top: auto;
+        transition: none;
+    }
+
+    @at-root .popup--active & {
+        opacity: 1;
+        pointer-events: all;
+        transition: none;
+    }
+
+    @at-root .project--active & {
+        @include breakpoint(md) {
+            opacity: 1;
+            pointer-events: all;
+        }
+    }
+}
+
+@mixin slider-controls-control {
+    color: $color-white;
+    width: 40px;
+    height: 100%;
+    z-index: 1;
+    cursor: pointer;
+    pointer-events: all;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @at-root .popup & {
+        pointer-events: none;
+    }
+
+    @at-root .popup--active & {
+        opacity: 1;
+        pointer-events: all;
+    }
+
+    @include breakpoint(xs) {
+        width: 60px;
+    }
+
+    @include breakpoint(md) {
+        color: $color-gray;
+    }
+
+    &:before {
+        content: '';
+        position: absolute;
+        inset: 8px 4px;
+        background: $color-gray-dark;
+        z-index: -1;
+        border-radius: 4px;
+        opacity: 0;
+        transition: opacity .25s;
+    }
+
+    &:hover {
+        color: $color-white;
+
+        &:before {
+            @include breakpoint(md) {
+                opacity: 1;
+            }
+        }
+    }
+
+    &--close {
+        display: none;
+
+        @include breakpoint(md) {
+            display: flex;
+        }
+
+        @at-root .popup & {
+            display: flex;
+        }
+    }
+}
+
+@mixin slider-controls-icon {
+    width: 20px;
+
+    @include breakpoint(xs) {
+        width: 28px;
+    }
+}
+
+@mixin slider-controls {
+    .slider-controls {
+        @include slider-controls-root;
+
+        &__control {
+            @include slider-controls-control;
+        }
+
+        &__icon {
+            @include slider-controls-icon;
+        }
+    }
+}
+
+@include slider-controls;

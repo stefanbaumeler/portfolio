@@ -8,6 +8,7 @@
     padding-right: 10px;
     position: absolute;
     z-index: 4;
+    pointer-events: none;
 
     @include breakpoint(xs) {
         position: static;
@@ -21,8 +22,16 @@
     &:has(.top-nav__title) {
         position: relative;
         justify-content: space-between;
-        background-color: $color-gray-darkest;
-        border-left: 1px solid color-mix(in srgb, $color-gray 25%, transparent);
+
+        @include breakpoint(xs) {
+            background-color: $color-gray-darkest;
+            border-left: 1px solid color-mix(in srgb, $color-gray 25%, transparent);
+        }
+    }
+
+    &--force-white {
+        position: absolute;
+        right: 0;
     }
 }
 
@@ -31,6 +40,12 @@
     font-weight: normal;
     color: $color-gray;
     font-size: 24px;
+    display: none;
+    pointer-events: all;
+
+    @include breakpoint(xs) {
+        display: block;
+    }
 }
 
 @mixin top-nav-nav {
@@ -41,6 +56,7 @@
 
 @mixin top-nav-section {
     display: flex;
+    pointer-events: all;
 
     &:only-child {
         margin-left: auto;
@@ -120,7 +136,16 @@
 @mixin top-nav-tooltip {
     @include tooltip;
 
-    margin-top: -10px;
+    margin-bottom: -10px;
+
+    @include breakpoint(xs) {
+        margin-top: -10px;
+    }
+
+    @at-root .top-nav__button--back + & {
+        margin-top: -10px;
+        margin-bottom: 0;
+    }
 }
 
 @mixin top-nav {

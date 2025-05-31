@@ -39,7 +39,7 @@ export const NavItem = ({ item }: Props) => {
         content={item.label}
         placement={tooltipPlacement}
         className={`nav__item${item.line ? ' nav__item--line' : ''}`}
-        tagName='li'
+        tagName="li"
         tooltipClass="nav__tooltip"
     >
         {isHome ? <Link

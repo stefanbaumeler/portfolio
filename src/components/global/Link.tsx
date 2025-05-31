@@ -14,11 +14,11 @@ type PrefetchImage = {
 	loading: string
 }
 
-function sleep (ms: number) {
+const sleep = (ms: number) => {
     return new Promise((resolve) => setTimeout(resolve, ms))
 }
 
-async function prefetchImages (href: string) {
+const prefetchImages = async (href: string) => {
     if (!href.startsWith('/')) {
         return []
     }
@@ -138,7 +138,7 @@ export const Link = ({
     </Tag>
 }
 
-function prefetchImage (image: PrefetchImage) {
+const prefetchImage = (image: PrefetchImage) => {
     if (image.loading === 'lazy' || seen.has(image.srcset)) {
         return
     }

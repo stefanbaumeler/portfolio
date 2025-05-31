@@ -79,91 +79,6 @@
     }
 }
 
-@mixin slider-controls {
-    background-color: var(--c-project);
-    display: flex;
-    z-index: 1;
-    transition: opacity .25s;
-    position: absolute;
-    height: 40px;
-    padding: 0 4px;
-    top: 100%;
-    right: 0;
-
-    @include breakpoint(xs) {
-        height: 50px;
-    }
-
-    @include breakpoint(md) {
-        opacity: 0;
-        pointer-events: none;
-        left: 50%;
-        bottom: 4px;
-        right: auto;
-        top: auto;
-        translate: -50%;
-        background-color: $color-gray-darkest;
-        border-radius: 4px;
-    }
-
-    @at-root .project--active & {
-        @include breakpoint(md) {
-            opacity: 1;
-            pointer-events: all;
-        }
-    }
-}
-
-@mixin slider-control {
-    color: $color-white;
-    width: 40px;
-    height: 100%;
-    z-index: 1;
-    cursor: pointer;
-    pointer-events: all;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    @include breakpoint(xs) {
-        width: 60px;
-    }
-
-    @include breakpoint(md) {
-        color: $color-gray;
-    }
-
-    &:before {
-        content: '';
-        position: absolute;
-        inset: 8px 4px;
-        background: $color-gray-dark;
-        z-index: -1;
-        border-radius: 4px;
-        opacity: 0;
-        transition: opacity .25s;
-    }
-
-    &:hover {
-        color: $color-white;
-
-        &:before {
-            @include breakpoint(md) {
-                opacity: 1;
-            }
-        }
-    }
-
-    &--close {
-        display: none;
-
-        @include breakpoint(md) {
-            display: flex;
-        }
-    }
-}
-
 @mixin slider-icon {
     width: 20px;
 
@@ -269,14 +184,6 @@
 
         &__hint {
             @include slider-hint;
-        }
-
-        &__controls {
-            @include slider-controls;
-        }
-
-        &__control {
-            @include slider-control;
         }
 
         &__icon {

@@ -10,9 +10,10 @@ type Props = {
 	className?: string
 	tooltipClass?: string
 	tagName?: string
+    forceOpen?: boolean
 }
 export const Tooltip = ({
-    children, content, placement, className, tagName = 'div', tooltipClass = 'tooltip'
+    children, content, placement, className, tagName = 'div', tooltipClass = 'tooltip', forceOpen = false
 }: Props) => {
     const [isOpen, setIsOpen] = useState(false)
 
@@ -20,7 +21,7 @@ export const Tooltip = ({
         refs, floatingStyles, context
     } = useFloating({
         placement,
-        open: isOpen,
+        open: isOpen || forceOpen,
         onOpenChange: setIsOpen,
         middleware: [shift({
             padding: 18
@@ -43,7 +44,7 @@ export const Tooltip = ({
         className={className}
     >
         {children}
-        {isOpen && <div
+        {(isOpen || forceOpen) && <div
             className={tooltipClass}
             ref={refs.setFloating}
             style={floatingStyles}
