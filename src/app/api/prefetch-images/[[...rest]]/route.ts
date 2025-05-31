@@ -5,7 +5,7 @@ export const dynamic = 'force-static'
 
 const getHostname = () => {
     if (process.env.NODE_ENV === 'development') {
-        return 'localhost:3000'
+        return 'http://localhost:3000'
     }
 
     return process.env.NEXT_PUBLIC_PROD_URL
@@ -24,7 +24,7 @@ export const GET = async (
     }
     const href = (await params).rest?.join('/') ?? ''
 
-    const url = `${schema}://${host}/${href}`
+    const url = `${host}/${href}`
     const response = await fetch(url)
     if (!response.ok) {
         return new Response('Failed to fetch', {

@@ -21,7 +21,7 @@
 
     @include breakpoint(lg) {
         width: calc(50% + clamp(0px, 12.5vw, map.get($breakpoints, lg) * .125));
-        margin-right: map.get($breakpoints, lg) / 100 * -12.5;
+        margin-right: map.get($breakpoints, lg) * .01 * -12.5;
     }
 
     @at-root .project:nth-child(2n) & {
@@ -31,7 +31,7 @@
         }
 
         @include breakpoint(lg) {
-            margin-left: map.get($breakpoints, lg) / 100 * -12.5;
+            margin-left: map.get($breakpoints, lg) * .01 * -12.5;
         }
     }
 
