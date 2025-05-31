@@ -1,0 +1,20 @@
+fragment FTechnology on technology {
+    label
+    translations {
+        id
+        description
+        languages_code {
+            abbreviation
+        }
+    }
+    category {
+        id
+        translations {
+            id
+            title
+            languages_code {
+                abbreviation
+            }
+        }
+    }
+}

@@ -1,0 +1,72 @@
+query QTravelArticle($slug: String!) {
+    secret_blog(filter: { slug: { _eq: $slug } }) {
+        id
+        status
+        title
+        date_created
+        slug
+        image {
+            id
+            filename_disk
+        }
+        place {
+            id
+            place_id {
+                id
+                translations {
+                    id
+                    name
+                    languages_code {
+                        abbreviation
+                    }
+                }
+                country {
+                    id
+                    translations {
+                        id
+                        name
+                        languages_code {
+                            abbreviation
+                        }
+                    }
+                }
+            }
+        }
+        elements {
+            item {
+                ... on blog_image {
+                    id
+                    caption
+                    image {
+                        id
+                        filename_disk
+                    }
+                }
+                ... on blog_text {
+                    text
+                    id
+                }
+                ... on blog_title {
+                    title
+                    level
+                    tag
+                    id
+                }
+                ... on blog_quote {
+                    id
+                    text
+                    author
+                    url
+                }
+                ... on blog_map {
+                    id
+                }
+                ... on blog_video {
+                    id
+                    url
+                }
+            }
+            collection
+        }
+    }
+}

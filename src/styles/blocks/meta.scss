@@ -1,0 +1,80 @@
+@use 'sass:map';
+
+@mixin meta-root {
+    @include text-small;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+
+    @container meta-container (min-width: #{map.get($breakpoints, xs)}) {
+        width: auto;
+        flex-direction: row;
+    }
+
+    @container meta-container (min-width: #{map.get($breakpoints, md)}) {
+        gap: 16px;
+    }
+
+    @at-root .teaser__meta & {
+        flex-direction: column-reverse;
+
+        @container meta-container (min-width: #{map.get($breakpoints, xs)}) {
+            flex-direction: row;
+        }
+    }
+}
+
+@mixin meta-item {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    white-space: nowrap;
+}
+
+@mixin meta-icon {
+    width: 16px;
+    height: 16px;
+
+    @container meta-container (min-width: #{map.get($breakpoints, sm)}) {
+        display: none;
+    }
+
+    @container meta-container (min-width: #{map.get($breakpoints, md)}) {
+        display: block;
+    }
+}
+
+@mixin meta-separator {
+    display: none;
+
+    @container meta-container (min-width: #{map.get($breakpoints, xs)}) {
+        display: block;
+    }
+
+    &:before {
+        content: '|';
+        opacity: .25;
+    }
+}
+
+@mixin meta {
+    .meta {
+        @include meta-root;
+
+        &__item {
+            @include meta-item;
+        }
+
+        &__icon {
+            @include meta-icon;
+        }
+
+        &__separator {
+            @include meta-separator;
+        }
+    }
+}
+
+@include meta;

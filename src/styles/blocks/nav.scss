@@ -1,0 +1,298 @@
+@mixin nav-root {
+    position: fixed;
+    height: 100%;
+    z-index: 4;
+    width: 100%;
+    pointer-events: none;
+
+    @include breakpoint(xs) {
+        pointer-events: all;
+        width: 80px;
+    }
+}
+
+@mixin nav-toggle {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    background: var(--c-black);
+    bottom: 10px;
+    left: 50%;
+    translate: -50%;
+    border: 1px solid color-mix(in srgb, $color-gray 25%, transparent);
+    pointer-events: all;
+    color: var(--c-white);
+    transition: translate .25s;
+
+    @include breakpoint(xs) {
+        display: none;
+    }
+
+    &--hidden {
+        translate: -50% calc(100% + 10px);
+    }
+
+    @at-root .nav:has(+ .main .popup--active) & {
+        translate: -50% calc(100% + 10px);
+    }
+}
+
+@mixin nav-container {
+    flex-direction: column;
+    background-color: var(--c-nav);
+    width: 100%;
+    height: 100%;
+    display: none;
+    padding-bottom: 70px;
+    box-sizing: border-box;
+    pointer-events: all;
+    transition: background-color .25s;
+
+    @include breakpoint(xs) {
+        background-color: $color-nav;
+    }
+
+    @at-root .nav--active & {
+        display: flex;
+    }
+
+    @include breakpoint(xs) {
+        display: flex;
+        height: 100svh;
+        width: 80px;
+        padding-bottom: 0;
+    }
+}
+
+@mixin nav-logo {
+    color: var(--c-black);
+    font-size: 30px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color .25s;
+    border-bottom: 1px solid color-mix(in srgb, $color-gray 25%, transparent);
+
+    @include breakpoint(xs) {
+        color: $color-white;
+    }
+
+    &:hover {
+        background-color: var(--c-main);
+    }
+}
+
+@mixin nav-lists {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 100%;
+    box-sizing: border-box;
+
+    @include breakpoint(xs) {
+        justify-content: space-between;
+    }
+}
+
+@mixin nav-list {
+    display: contents;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+
+    @include breakpoint(xs) {
+        display: flex;
+    }
+
+    &--socials {
+        display: flex;
+        flex-direction: row;
+        order: 1;
+        border-bottom: 1px solid color-mix(in srgb, $color-gray 25%, transparent);
+        background-color: var(--c-black);
+        margin-bottom: 10px;
+
+        @include breakpoint(xs) {
+            flex-direction: column;
+            border-width: 0;
+        }
+        background-color: transparent;
+    }
+}
+
+@mixin nav-item {
+    width: 100%;
+    height: 60px;
+    position: relative;
+
+    &:first-of-type {
+        order: 0;
+    }
+
+    &:not(:first-of-type) {
+        order: 2;
+    }
+
+    @include breakpoint(xs) {
+        height: 70px;
+    }
+
+    @at-root .nav__list--socials & {
+        height: 70px;
+    }
+
+    &--line {
+        border-bottom: 1px solid color-mix(in srgb, $color-gray 25%, transparent);
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+
+        @include breakpoint(xs) {
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+    }
+
+    &:has(.nav__logo) {
+        height: 70px;
+
+        @include breakpoint(xs) {
+            height: 80px;
+        }
+    }
+}
+
+@mixin nav-link {
+    color: var(--c-gray);
+    display: flex;
+    justify-content: flex-start;
+    align-content: center;
+    height: 100%;
+    position: relative;
+    transition: color .25s;
+    align-items: center;
+    gap: 20px;
+    padding: 0 25px;
+
+    @include breakpoint(xs) {
+        color: $color-gray;
+        padding: 0;
+        justify-content: center;
+    }
+
+    &:before {
+        content: '';
+        position: absolute;
+        inset: 8px;
+        background: $color-gray-dark;
+        z-index: -1;
+        border-radius: 4px;
+        opacity: 0;
+        transition: opacity .25s;
+    }
+
+    &:hover {
+        color: $color-white;
+
+        &:before {
+            opacity: 1;
+        }
+    }
+
+    &--active {
+        color: $color-white;
+
+        &:before {
+            opacity: 1;
+        }
+    }
+
+    @at-root .nav__list--socials & {
+        justify-content: center;
+        padding: 0;
+    }
+}
+
+@mixin nav-icon {
+    width: 28px;
+}
+
+@mixin nav-label {
+    font-size: 20px;
+    font-weight: 300;
+
+    @at-root .nav__list--socials & {
+        display: none;
+    }
+
+    @include breakpoint(xs) {
+        display: none;
+    }
+}
+
+@mixin nav-tooltip {
+    @include tooltip;
+
+    margin-left: 8px;
+    display: none;
+
+    @include breakpoint(xs) {
+        display: block;
+    }
+
+    @at-root .nav__list--socials & {
+        display: block;
+    }
+}
+
+@mixin nav {
+    .nav {
+        @include nav-root;
+
+        &__toggle {
+            @include nav-toggle;
+        }
+
+        &__logo {
+            @include nav-logo;
+        }
+
+        &__lists {
+            @include nav-lists;
+        }
+
+        &__container {
+            @include nav-container;
+        }
+
+        &__list {
+            @include nav-list;
+        }
+
+        &__item {
+            @include nav-item;
+        }
+
+        &__link {
+            @include nav-link;
+        }
+
+        &__icon {
+            @include nav-icon;
+        }
+
+        &__label {
+            @include nav-label;
+        }
+
+        &__tooltip {
+            @include nav-tooltip;
+        }
+    }
+}
+
+@include nav;

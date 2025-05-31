@@ -1,0 +1,15 @@
+@mixin root-root {
+    display: block;
+
+    @include breakpoint(xs) {
+        display: flex;
+    }
+}
+
+@mixin root {
+    .root {
+        @include root-root;
+    }
+}
+
+@include root;

@@ -1,0 +1,78 @@
+@mixin map-root {
+    width: 100%;
+    margin-top: -80px;
+    position: relative;
+    height: 100svh;
+
+    @include breakpoint(xs) {
+        height: calc(100svh - 80px);
+        margin-top: 0;
+    }
+}
+
+@mixin map-marker {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+
+    &:hover:before {
+        scale: 2.5;
+    }
+
+    &:before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        translate: -50% -50%;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: $color-main;
+        box-shadow: inset 0 0 0 1px $color-white;
+        transition: scale .25s;
+
+        @at-root .body--dark & {
+            background-color: $color-main-dark;
+            box-shadow: inset 0 0 0 1px $color-gray-light;
+        }
+    }
+
+    &--active:before {
+        background-color: #FF0000;
+        scale: 2.5;
+
+        @at-root .body--dark & {
+            background-color: #FF0000;
+        }
+    }
+}
+
+@mixin map-tooltip {
+    @include tooltip;
+
+    pointer-events: none;
+    margin-top: -5px;
+
+    &--force {
+        @media screen and (pointer:coarse) {
+            display: block;
+        }
+    }
+}
+
+@mixin map {
+    .map {
+        @include map-root;
+
+        &__marker {
+            @include map-marker;
+        }
+
+        &__tooltip {
+            @include map-tooltip;
+        }
+    }
+}
+
+@include map;

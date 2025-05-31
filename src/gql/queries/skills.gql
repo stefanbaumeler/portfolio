@@ -1,0 +1,39 @@
+query QSkills {
+    technology_category {
+        id
+        label
+        translations {
+            id
+            title
+            languages_code {
+                abbreviation
+            }
+        }
+        technologies {
+            id
+            list
+            translations {
+                id
+                description
+                languages_code {
+                    abbreviation
+                }
+            }
+            label
+            preferred
+            children {
+                id
+                list
+                translations {
+                    id
+                    description
+                    languages_code {
+                        abbreviation
+                    }
+                }
+                label
+                preferred
+            }
+        }
+    }
+}

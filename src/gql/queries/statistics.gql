@@ -1,0 +1,27 @@
+query QStatistics {
+    perCountry: country {
+        translations {
+            name
+        }
+        places: place_func {
+            count
+        }
+    }
+    perPlace: place {
+        translations {
+            name
+        }
+        accommodations: accommodation_func {
+            count
+        }
+    }
+    timesToPlace: transportation_aggregated(groupBy: "to") {
+        group
+        count {
+            id
+        }
+    }
+    furthestLat: place {
+        location
+    }
+}

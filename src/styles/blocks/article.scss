@@ -1,0 +1,242 @@
+@mixin article-root {
+    @include container;
+
+    max-width: 638px;
+
+    @include breakpoint(xs) {
+        max-width: 900px;
+    }
+
+    @include breakpoint(md) {
+        max-width: 1300px;
+    }
+}
+
+@mixin article-title {
+    scroll-margin-top: 50px;
+    color: var(--c-black);
+    max-width: 850px;
+    margin: 0 auto;
+    position: relative;
+
+    @include breakpoint(md) {
+        max-width: 1300px;
+    }
+
+    &--level-1 {
+        @include h1;
+
+        padding-bottom: 25px;
+
+        @include breakpoint(xs) {
+            text-align: center;
+        }
+    }
+
+    &--level-2 {
+        @include h2;
+
+        margin-top: 25px;
+        margin-bottom: -25px;
+    }
+
+    &--level-3 {
+        @include h3;
+
+        margin-bottom: -30px;
+    }
+
+    &--level-4 {
+        font-size: 20px;
+
+        @include breakpoint(lg) {
+            font-size: 24px;
+        }
+    }
+}
+
+@mixin article-meta {
+    padding-bottom: 50px;
+    display: flex;
+    justify-content: center;
+    color: var(--c-gray);
+
+    @include breakpoint(md) {
+        padding-bottom: 100px;
+    }
+
+    &:has(+ .article__content-container) {
+        padding-bottom: 50px;
+    }
+}
+
+@mixin article-image {
+    width: 100%;
+    aspect-ratio: 2 / 1;
+    position: relative;
+}
+
+@mixin article-content-container {
+    display: flex;
+    gap: 50px;
+    padding-top: 50px;
+    flex-direction: column-reverse;
+
+    @include breakpoint(md) {
+        flex-direction: row;
+    }
+}
+
+@mixin article-sidebar {
+    width: 300px;
+    flex-shrink: 0;
+    position: relative;
+    display: none;
+    border-left: 1px solid var(--c-gray-light);
+
+    @include breakpoint(md) {
+        display: block;
+    }
+}
+
+@mixin article-sidebar-content {
+    position: sticky;
+    padding-top: 25px;
+    top: 0;
+}
+
+@mixin article-content {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    width: 100%;
+    margin: 0 auto;
+
+    @include breakpoint(md) {
+        width: calc(100% - 350px);
+        padding-top: 25px;
+        padding-bottom: 50px;
+    }
+}
+
+@mixin article-text {
+    @include text;
+    @include wysiwyg;
+}
+
+@mixin article-code {
+    @include code;
+}
+
+@mixin article-content-image {
+    aspect-ratio: 3 / 2;
+    cursor: pointer;
+    transition: scale .25s;
+
+    &:hover {
+        scale: 1.01;
+    }
+}
+
+@mixin article-caption {
+    font-size: 14px;
+    line-height: 22.4px;
+    color: var(--c-gray);
+    text-align: center;
+    padding-top: 8px;
+}
+
+@mixin article-footer {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding-top: 50px;
+    border-top: 1px solid var(--c-gray-light);
+
+    @include breakpoint(xs) {
+        margin-top: 50px;
+    }
+
+    &:has(> .article__footer-link--next:only-child) {
+        justify-content: flex-end;
+    }
+}
+
+@mixin article-hash {
+    width: 20px;
+    position: absolute;
+    right: 100%;
+    top: 50%;
+    translate: 0 -50%;
+    padding-right: 10px;
+    color: var(--c-gray);
+    transition: opacity .25s;
+    height: 100%;
+    opacity: 0;
+    display: flex;
+    align-items: center;
+
+    @at-root .article__title:hover & {
+        opacity: 1;
+    }
+}
+
+@mixin article {
+    .article {
+        @include article-root;
+
+        &__title {
+            @include article-title;
+        }
+
+        &__meta {
+            @include article-meta;
+        }
+
+        &__image {
+            @include article-image;
+        }
+
+        &__content-container {
+            @include article-content-container;
+        }
+
+        &__sidebar {
+            @include article-sidebar;
+        }
+
+        &__sidebar-content {
+            @include article-sidebar-content;
+        }
+
+        &__content {
+            @include article-content;
+        }
+
+        &__text {
+            @include article-text;
+        }
+
+        &__code {
+            @include article-code;
+        }
+
+        &__content-image {
+            @include article-content-image;
+        }
+
+        &__caption {
+            @include article-caption;
+        }
+
+        &__footer {
+            @include article-footer;
+        }
+
+        &__hash {
+            @include article-hash;
+        }
+    }
+}
+
+@include article;

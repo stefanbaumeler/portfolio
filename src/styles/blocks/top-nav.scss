@@ -1,0 +1,186 @@
+@mixin top-nav-root {
+    height: 80px;
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    align-items: center;
+    box-sizing: border-box;
+    padding-right: 10px;
+    position: absolute;
+    z-index: 4;
+    pointer-events: none;
+
+    @include breakpoint(xs) {
+        position: static;
+        z-index: 3;
+    }
+
+    &:has(+ .article) {
+        position: static;
+    }
+
+    &:has(.top-nav__title) {
+        position: relative;
+        justify-content: space-between;
+
+        @include breakpoint(xs) {
+            background-color: $color-gray-darkest;
+            border-left: 1px solid color-mix(in srgb, $color-gray 25%, transparent);
+        }
+    }
+
+    &--force-white {
+        position: absolute;
+        right: 0;
+    }
+}
+
+@mixin top-nav-title {
+    padding-left: 20px;
+    font-weight: normal;
+    color: $color-gray;
+    font-size: 24px;
+    display: none;
+    pointer-events: all;
+
+    @include breakpoint(xs) {
+        display: block;
+    }
+}
+
+@mixin top-nav-nav {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+@mixin top-nav-section {
+    display: flex;
+    pointer-events: all;
+
+    &:only-child {
+        margin-left: auto;
+    }
+
+    &:last-child {
+        position: fixed;
+        bottom: -5px;
+        right: 10px;
+        display: none;
+        z-index: 10;
+
+        @include breakpoint(xs) {
+            position: static;
+            display: flex;
+        }
+
+        @at-root .nav--active + .main & {
+            display: flex;
+        }
+    }
+}
+
+@mixin top-nav-item {
+    display: flex;
+}
+
+@mixin top-nav-button {
+    aspect-ratio: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70px;
+    position: relative;
+    transition: color .25s;
+    cursor: pointer;
+    color: $color-gray;
+
+    @at-root .top-nav--force-white & {
+        @include breakpoint(md) {
+            color: $color-white;
+        }
+
+        @at-root .body:has(.blogs) & {
+            color: $color-white;
+        }
+    }
+
+    &:before {
+        content: '';
+        position: absolute;
+        inset: 18px 8px;
+        background: color-mix(in srgb, var(--c-black) 12.5%, transparent);
+        z-index: -1;
+        border-radius: 4px;
+        opacity: 0;
+        transition: opacity .25s;
+    }
+
+    &:hover {
+        color: var(--c-black);
+
+        @at-root .top-nav--force-white & {
+            color: $color-white;
+        }
+
+        &:before {
+            opacity: 1;
+        }
+    }
+}
+
+@mixin top-nav-icon {
+    width: 24px;
+}
+
+@mixin top-nav-tooltip {
+    @include tooltip;
+
+    margin-bottom: -10px;
+
+    @include breakpoint(xs) {
+        margin-top: -10px;
+    }
+
+    @at-root .top-nav__button--back + & {
+        margin-top: -10px;
+        margin-bottom: 0;
+    }
+}
+
+@mixin top-nav {
+    .top-nav {
+        @include top-nav-root;
+
+        &__title {
+            @include top-nav-title;
+        }
+
+        &__nav {
+            @include top-nav-nav;
+        }
+
+        &__section {
+            @include top-nav-section;
+        }
+
+        &__item {
+            @include top-nav-item;
+        }
+
+        &__button {
+            @include top-nav-button;
+        }
+
+        &__icon {
+            @include top-nav-icon;
+        }
+
+
+        &__tooltip {
+            @include top-nav-tooltip;
+        }
+    }
+}
+
+@include top-nav;

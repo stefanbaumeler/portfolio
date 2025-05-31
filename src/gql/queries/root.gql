@@ -1,0 +1,37 @@
+query QRoot {
+    website {
+        travel_blog_image {
+            id
+            filename_disk
+            filename_download
+        }
+        dev_blog_image {
+            id
+            filename_disk
+            filename_download
+        }
+        home_image {
+            id
+            filename_disk
+            filename_download
+        }
+        translations {
+            id
+            home_title
+            home_text
+            languages_code {
+                abbreviation
+            }
+        }
+    }
+    secret_blog_aggregated(filter: { status: { _eq: "published" } }) {
+        count {
+            id
+        }
+    }
+    blog_aggregated(filter: { status: { _eq: "published" } }) {
+        count {
+            id
+        }
+    }
+}

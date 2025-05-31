@@ -1,15 +1,43 @@
+@use 'sass:map';
+
 @mixin main-root {
-    background-color: $color-white;
+    background-color: var(--c-gray-lighter);
     position: relative;
-    z-index: 1;
-    max-width: $breakpoint-ultrawide;
+    width: 100%;
     margin: 0 auto;
-    overflow: hidden;
+    overflow: clip;
+    box-sizing: border-box;
+
+    @include breakpoint(xs) {
+        padding-left: 80px;
+    }
+
+    @include breakpoint(xl) {
+        max-width: map.get($breakpoints, uw);
+    }
+}
+
+@mixin main-transition {
+    width: 100%;
+    bottom: 0;
+    position: fixed;
+    background: $color-main;
+    z-index: 100;
+    display: none;
+
+    &:nth-of-type(2) {
+        display: block;
+        background: var(--c-gray-lightest);
+    }
 }
 
 @mixin main {
     .main {
         @include main-root;
+
+        &__transition {
+            @include main-transition;
+        }
     }
 }
 

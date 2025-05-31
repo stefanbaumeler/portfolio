@@ -1,0 +1,181 @@
+@mixin drawer-root {
+    position: fixed;
+    background: var(--c-gray-lightest);
+    box-sizing: border-box;
+    container: teaser-container / inline-size;
+    z-index: 4;
+    max-height: calc(100svh - 100px);
+    width: 100%;
+    top: 0;
+    left: 0;
+    translate: 0 100%;
+    scrollbar-width: none;
+    border-radius: 20px 20px 0 0;
+    overflow: hidden;
+
+    @include breakpoint(xs) {
+        transition: translate .25s;
+        overflow: auto;
+        z-index: 2;
+        inset: 90px 0 auto auto;
+        width: 450px;
+        translate: 100%;
+        border-radius: 0;
+    }
+
+    &--animated {
+        transition: translate .25s;
+    }
+
+    &--active {
+        translate: 0;
+
+        @include breakpoint(xs) {
+            translate: -10px;
+        }
+    }
+
+    &--big {
+        overflow: auto;
+        height: calc(100vh - 100px);
+    }
+}
+
+@mixin drawer-header {
+    position: sticky;
+    top: 0;
+    z-index: 3;
+    background-color: var(--c-gray-lightest);
+    padding: 40px 30px 20px;
+    overflow: hidden;
+
+    &:before {
+        content: '';
+        position: absolute;
+        top: 15px;
+        left: 50%;
+        translate: -50%;
+        height: 4px;
+        background-color: var(--c-gray-light);
+        border-radius: 2px;
+        width: 100px;
+
+        @include breakpoint(xs) {
+            display: none;
+        }
+    }
+}
+
+@mixin drawer-close {
+    position: absolute;
+    right: 40px;
+    top: 42px;
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+    color: var(--c-black);
+}
+
+@mixin drawer-title {
+    @include h3;
+
+    color: var(--c-black);
+    padding-right: 80px;
+}
+
+@mixin drawer-country {
+    @include text;
+
+    opacity: .65;
+}
+
+@mixin drawer-content {
+    padding: 20px 30px 40px;
+}
+
+@mixin drawer-subtitle {
+    @include h4;
+
+    color: var(--c-black);
+    padding-bottom: 10px;
+}
+
+@mixin drawer-visits {
+    padding-bottom: 40px;
+
+    &:last-child {
+        padding-bottom: 0;
+    }
+}
+
+@mixin drawer-visit {
+    @include text;
+
+    display: flex;
+    justify-content: space-between;
+}
+
+@mixin drawer-visit-date {
+    display: block;
+    width: 50%;
+
+    &:last-child {
+        text-align: right;
+    }
+}
+
+@mixin drawer-stories {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding: 0 10px;
+}
+
+
+@mixin drawer {
+    .drawer {
+        @include drawer-root;
+
+        &__header {
+            @include drawer-header;
+        }
+
+        &__close {
+            @include drawer-close;
+        }
+
+        &__title {
+            @include drawer-title;
+        }
+
+        &__country {
+            @include drawer-country;
+        }
+
+        &__content {
+            @include drawer-content;
+        }
+
+        &__subtitle {
+            @include drawer-subtitle;
+        }
+
+        &__visits {
+            @include drawer-visits;
+        }
+
+        &__visit {
+            @include drawer-visit;
+        }
+
+        &__visit-date {
+            @include drawer-visit-date;
+        }
+
+        &__stories {
+            @include drawer-stories;
+        }
+    }
+}
+
+@include drawer;

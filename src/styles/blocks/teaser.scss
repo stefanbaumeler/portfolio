@@ -1,0 +1,198 @@
+@use 'sass:map';
+
+@mixin teaser-root {
+    display: flex;
+    position: relative;
+    flex-direction: column-reverse;
+    container: meta-container / inline-size;
+
+    @container teaser-container (min-width: #{map.get($breakpoints, xs)}) {
+        flex-direction: row;
+    }
+}
+
+@mixin teaser-content {
+    z-index: 2;
+    padding: 25px;
+    background-color: var(--c-gray-lightest);
+    box-shadow: 0 20px 48px 0 rgba($color-black, .1);
+    width: 100%;
+    box-sizing: border-box;
+
+    @at-root .drawer & {
+        background-color: var(--c-gray-lighter);
+    }
+
+    @container teaser-container (min-width: #{map.get($breakpoints, xs)}) {
+        margin-top: 0;
+        left: 0;
+        bottom: 0;
+    }
+
+    @container teaser-container (min-width: #{map.get($breakpoints, md)}) {
+        padding: 50px 25px;
+    }
+
+    @at-root .teaser:has(.teaser__image) & {
+        margin-top: -25px;
+        max-width: 400px;
+        width: 100%;
+
+        @container teaser-container (min-width: #{map.get($breakpoints, xs)}) {
+            position: absolute;
+            max-width: 575px;
+            background-color: transparent;
+        }
+
+        @container teaser-container (min-width: #{map.get($breakpoints, md)}) {
+            max-width: 850px;
+            padding: 50px;
+        }
+    }
+}
+
+@mixin teaser-tags {
+    display: flex;
+    gap: 8px 16px;
+    justify-content: flex-start;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+}
+
+@mixin teaser-tag {
+    color: var(--c-main);
+}
+
+@mixin teaser-title {
+    font-size: 20px;
+    line-height: 1.3;
+
+    @container teaser-container (min-width: #{map.get($breakpoints, xs)}) {
+        font-size: 26px;
+    }
+
+    @container teaser-container (min-width: #{map.get($breakpoints, md)}) {
+        font-size: 30px;
+    }
+
+    color: var(--c-black);
+    padding-bottom: 15px;
+
+    @container teaser-container (min-width: #{map.get($breakpoints, xs)}) {
+        padding-bottom: 25px;
+    }
+
+    @at-root .teaser:has(.teaser__image) & {
+        font-size: 24px;
+        line-height: 1.3;
+
+        @container teaser-container (min-width: #{map.get($breakpoints, xs)}) {
+            font-size: 32px;
+        }
+
+        @container teaser-container (min-width: #{map.get($breakpoints, md)}) {
+            font-size: 48px;
+        }
+
+        @container teaser-container (min-width: #{map.get($breakpoints, xs)}) {
+            color: $color-white;
+        }
+    }
+}
+
+@mixin teaser-text {
+    @include text-small;
+
+    color: var(--c-black);
+    padding-bottom: 25px;
+
+    &:empty {
+        display: none;
+    }
+}
+
+@mixin teaser-image {
+    width: calc(100% + 20px);
+    margin-left: -10px;
+    aspect-ratio: 16 / 9;
+    position: relative;
+    box-shadow: 0 20px 48px 0 rgba($color-black, .1);
+    transition: margin .25s, width .25s, filter .25s;
+
+    @container teaser-container (min-width: #{map.get($breakpoints, xs)}) {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    &:before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, .5) 80%);
+        z-index: 1;
+    }
+
+    @at-root .teaser:hover & {
+        @container teaser-container (min-width: #{map.get($breakpoints, md)}) {
+            margin: calc(-50px / 16 * 9) -50px;
+            width: calc(100% + 100px);
+            filter: saturate(1.5);
+        }
+    }
+}
+
+@mixin teaser-meta {
+    display: flex;
+    gap: 8px;
+    color: var(--c-gray);
+    opacity: .75;
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    @container teaser-container (min-width: #{map.get($breakpoints, xs)}) {
+        gap: 16px;
+    }
+
+    @at-root .teaser:has(.teaser__image) & {
+        @container teaser-container (min-width: #{map.get($breakpoints, xs)}) {
+            color: $color-white;
+        }
+    }
+}
+
+@mixin teaser {
+    .teaser {
+        @include teaser-root;
+
+        &__content {
+            @include teaser-content;
+        }
+
+        &__tags {
+            @include teaser-tags;
+        }
+
+        &__tag {
+            @include teaser-tag;
+        }
+
+        &__title {
+            @include teaser-title;
+        }
+
+        &__text {
+            @include teaser-text;
+        }
+
+        &__image {
+            @include teaser-image;
+        }
+
+        &__meta {
+            @include teaser-meta;
+        }
+    }
+}
+
+@include teaser;

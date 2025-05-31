@@ -12,7 +12,8 @@
     },
     "plugins": [
         "@next/eslint-plugin-next",
-        "react"
+        "react",
+        "react-compiler"
     ],
     "extends": [
         "eslint:recommended",
@@ -98,7 +99,8 @@
         "react/jsx-one-expression-per-line": "error",
         "react/jsx-tag-spacing":["error", {
             "beforeSelfClosing": "always"
-        }]
+        }],
+        "react-compiler/react-compiler": "error"
     },
     "ignorePatterns": ["packages/app/src/api/schema.ts"]
 }

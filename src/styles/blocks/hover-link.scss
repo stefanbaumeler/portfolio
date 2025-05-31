@@ -1,0 +1,103 @@
+@mixin hover-link-root {
+    display: inline-block;
+}
+
+@mixin hover-link-tooltip {
+    @include tooltip;
+
+    border-radius: 8px;
+    padding: 0;
+    opacity: 0;
+    pointer-events: none;
+    transition: translate .125s;
+    overflow: hidden;
+    z-index: 1;
+
+    @at-root .hover-link--active & {
+        opacity: 1;
+        translate: 0 -12px;
+    }
+}
+
+@mixin hover-link-image {
+    width: 300px;
+    aspect-ratio: 3 / 2;
+}
+
+@mixin hover-link-title {
+    padding: 12px;
+    display: block;
+    font-weight: bold;
+    text-align: center;
+    max-width: 300px;
+    white-space: wrap;
+    box-sizing: border-box;
+    font-size: 16px;
+    line-height: 25.6px;
+}
+
+@mixin hover-link-link {
+    @include text;
+
+    position: relative;
+    background-color: transparent;
+    display: flex;
+    gap: 4px;
+    align-items: center;
+
+    &:before {
+        content: '';
+        position: absolute;
+        inset: -8px;
+        background: color-mix(in srgb, var(--c-black) 12.5%, transparent);
+        z-index: -1;
+        border-radius: 4px;
+        opacity: 0;
+        transition: opacity .25s;
+    }
+
+    &:hover:before {
+        opacity: 1;
+    }
+
+    &:hover {
+        color: var(--c-black);
+    }
+}
+
+@mixin hover-link-icon {
+    width: 20px;
+    height: 20px;
+
+    &--after {
+        order: 1;
+    }
+}
+
+@mixin hover-link {
+    .hover-link {
+        @include hover-link-root;
+
+        &__tooltip {
+            @include hover-link-tooltip;
+        }
+
+        &__image {
+            @include hover-link-image;
+        }
+
+        &__title {
+            @include hover-link-title;
+        }
+
+        &__link {
+            @include hover-link-link;
+        }
+
+        &__icon {
+            @include hover-link-icon;
+        }
+    }
+}
+
+@include hover-link;

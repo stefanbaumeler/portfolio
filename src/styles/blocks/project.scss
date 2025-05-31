@@ -1,3 +1,5 @@
+@use 'sass:map';
+
 @keyframes pulse {
     0% {
         transform: none;
@@ -15,255 +17,28 @@
 
 @mixin project-root {
     display: flex;
+    flex-direction: column;
     position: relative;
-    flex-wrap: wrap;
+    box-sizing: border-box;
+    overflow: hidden;
+    background-color: var(--c-gray-lightest);
+    box-shadow: 0 20px 48px 0 rgba($color-black, .1);
 
-    @media screen and (min-width: 1024px) {
+    @include breakpoint(md) {
+        aspect-ratio: 4 / 3;
+        flex-direction: row;
         flex-wrap: nowrap;
-        height: 100vh;
+    }
+
+    @media screen and (min-width: 1400px) {
+        aspect-ratio: 16 / 9;
     }
 
     &:nth-child(2n) {
-        flex-direction: row-reverse;
-    }
-}
-
-@mixin project-slider {
-    width: 100%;
-    flex-shrink: 0;
-    position: relative;
-    transition: width .25s;
-    cursor: pointer;
-    overflow: hidden;
-    background-color: $color-almost-black;
-    pointer-events: none;
-    aspect-ratio: 16 / 9;
-
-    @media screen and (min-width: 1024px) {
-        height: 100%;
-        width: calc(50% + 6.25vw);
-        margin-right: -6.25vw;
-        pointer-events: all;
-        aspect-ratio: unset;
-    }
-
-    @media screen and (min-width: 1200px) {
-        width: calc(50% + 12.5vw);
-        margin-right: -12.5vw;
-    }
-
-    @media screen and (min-width: $breakpoint-ultrawide) {
-        width: calc(50% + #{$breakpoint-ultrawide / 100 * 12.5});
-        margin-right: $breakpoint-ultrawide / 100 * -12.5;
-    }
-
-    @at-root .project:nth-child(2n) & {
-        margin-left: -6.25vw;
-        margin-right: 0;
-
-        @media screen and (min-width: 1200px) {
-            margin-left: -12.5vw;
-        }
-
-        @media screen and (min-width: $breakpoint-ultrawide) {
-            margin-left: $breakpoint-ultrawide / 100 * -12.5;
+        @include breakpoint(md) {
+            flex-direction: row-reverse;
         }
     }
-
-    &--active {
-        width: 100%;
-        cursor: default;
-    }
-}
-
-@mixin project-controls {
-    bottom: 10px;
-    display: flex;
-    z-index: 1;
-    transition: opacity .25s;
-    position: absolute;
-    gap: 10px;
-    justify-content: center;
-    width: 100%;
-    left: 0;
-
-    @media screen and (min-width: 768px) {
-        bottom: 25px;
-    }
-
-    @media screen and (min-width: 1024px) {
-        opacity: 0;
-        pointer-events: none;
-        width: 50px;
-        flex-direction: column;
-        right: 25px;
-        left: auto;
-        bottom: auto;
-        top: 50%;
-        transform: translateY(-50%);
-    }
-
-    @at-root .project:nth-child(2n) & {
-        @media screen and (min-width: 1024px) {
-            right: auto;
-            left: 25px;
-        }
-    }
-
-    @at-root .project__slider--active & {
-        opacity: 1;
-        pointer-events: all;
-    }
-}
-
-@mixin project-slide {
-    bottom: 10px;
-    color: $color-white;
-    width: 30px;
-    height: 30px;
-    z-index: 1;
-    cursor: pointer;
-    border-radius: 50%;
-    translate: none;
-    pointer-events: all;
-
-    @at-root .project__slider--active & {
-        @media screen and (min-width: 1024px) {
-            pointer-events: all;
-        }
-    }
-
-    @media screen and (min-width: 768px) {
-        width: 50px;
-        height: 50px;
-    }
-
-    @media screen and (min-width: 1024px) {
-        pointer-events: none;
-    }
-}
-
-@mixin project-back {
-    justify-content: center;
-    align-items: center;
-    bottom: 10px;
-    background-color: $color-red;
-    color: $color-white;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    z-index: 1;
-    cursor: pointer;
-    display: none;
-
-    > svg {
-        transform: scale(.75);
-    }
-
-    @media screen and (min-width: 1024px) {
-        display: flex;
-    }
-
-    @at-root .project:nth-child(2n-1) & {
-        left: auto;
-        right: 10px;
-        transform: rotate(180deg);
-    }
-}
-
-@mixin project-images {
-    height: 100%;
-    min-width: 62.5vw;
-    width: auto;
-    margin: 0 auto;
-    transition: scale .25s, filter .25s;
-    background-color: $color-black;
-    position: absolute;
-    right: 50%;
-    aspect-ratio: 16 / 9;
-    translate: 50%;
-    max-width: 100vw;
-
-    @media screen and (min-width: $breakpoint-ultrawide) {
-        max-width: $breakpoint-ultrawide;
-        min-width: $breakpoint-ultrawide * .625;
-    }
-
-    &:before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: $color-almost-black;
-        opacity: .1;
-        pointer-events: none;
-        transition: opacity .25s;
-        z-index: 1;
-
-        @at-root .project__slider--active & {
-            opacity: 0;
-        }
-    }
-
-    @at-root .project:nth-child(2n) & {
-        right: auto;
-        left: 50%;
-        translate: -50%;
-    }
-
-    @at-root .main:not(.main--safari) .project__slider:not(.project__slider--active):hover & {
-        @media screen and (min-width: 1024px) {
-            scale: 1.025;
-            filter: saturate(1.5);
-        }
-    }
-
-    @at-root .main--safari .project__slider:not(.project__slider--active):hover & {
-        @media screen and (min-width: 1024px) {
-            filter: saturate(1.5);
-        }
-    }
-}
-
-@mixin project-image-container {
-    height: 100%;
-    aspect-ratio: 16 / 9;
-    transition: opacity .25s, max-width .25s;
-    max-width: 150vw;
-    opacity: 0;
-    pointer-events: none;
-    position: absolute;
-    top: 0;
-    background-color: $color-almost-black;
-    left: 50%;
-    translate: -50%;
-
-    @media screen and (min-width: $breakpoint-ultrawide) {
-        max-width: $breakpoint-ultrawide * 1.5;
-    }
-
-    @at-root .project__slider--active & {
-        max-width: 100vw;
-
-        @media screen and (min-width: $breakpoint-ultrawide) {
-            max-width: $breakpoint-ultrawide;
-        }
-    }
-
-    &--active {
-        opacity: 1;
-
-        @media screen and (min-width: 1024px) {
-            pointer-events: all;
-        }
-    }
-}
-
-@mixin project-image {
-    object-position: center left;
-    object-fit: contain;
 }
 
 @mixin project-content {
@@ -280,237 +55,172 @@
     transition: transform .25s;
     justify-content: center;
 
-    @media screen and (min-width: 1024px) {
-        gap: 10px;
-        padding: 0 25px 0 0;
+    @include breakpoint(sm) {
+        padding: 50px;
+    }
+
+    @include breakpoint(md) {
+        padding: 0 50px 0 0;
         margin-left: 6.25vw;
+        gap: 20px;
         width: calc(50% - 6.25vw);
         max-width: none;
     }
 
-    @media screen and (min-width: 1200px) {
-        padding: 0 50px 0 0;
-        margin-left: 12.5vw;
-        width: calc(50% - 12.5vw);
-    }
-
-    @media screen and (min-width: 1600px) {
+    @include breakpoint(lg) {
         gap: 25px;
-    }
-
-    @media screen and (min-width: 1800px) {
         padding: 0 100px 0 0;
-    }
-
-    @media screen and (min-width: $breakpoint-ultrawide) {
-        margin-left: $breakpoint-ultrawide / 100 * 12.5;
-        width: calc(50% - #{$breakpoint-ultrawide / 100 * 12.5});
+        margin-left: clamp(0px, 12.5vw, map.get($breakpoints, lg) * .125);
+        width: calc(50% - clamp(0px, 12.5vw, map.get($breakpoints, lg) * .125));
     }
 
     @at-root .project:nth-child(2n) & {
-        @media screen and (min-width: 1024px) {
-            padding: 0 0 0 25px;
+        @include breakpoint(md) {
+            padding: 0 0 0 50px;
             margin-left: 0;
             margin-right: 6.25vw;
         }
 
-        @media screen and (min-width: 1200px) {
-            padding: 0 0 0 50px;
-            margin-right: 12.5vw;
+        @include breakpoint(lg) {
+            margin-right: clamp(0px, 12.5vw, map.get($breakpoints, lg) * .125);
         }
 
-        @media screen and (min-width: 1800px) {
+        @include breakpoint(xl) {
             padding: 0 0 0 100px;
         }
+    }
 
-        @media screen and (min-width: $breakpoint-ultrawide) {
-            margin-right: $breakpoint-ultrawide / 100 * 12.5;
-        }
+    @at-root .project--active:nth-child(2n-1) & {
+        transform: translateX(60px);
     }
 
     &:before {
         content: '';
         position: absolute;
-        top: 0;
-        right: 100%;
-        background-color: $color-white;
+        top: -1px;
+        right: calc(100% - 1px);
+        background-color: var(--c-gray-lightest);
         transition: border-width .25s, left .25s, right .25s;
-        border-bottom: 100vh solid transparent;
-        border-right: 12.5vw solid $color-white;
-        z-index: 1;
+        height: calc(100% + 1px);
+        border-width: 0 12.5vw 0 0;
+        border-color: var(--c-gray-lightest);
+        border-style: solid;
         clip-path: polygon(evenodd, 0 0, 100% 0, 100% 100%, 0 0);
         display: none;
 
-        @media screen and (min-width: 1024px) {
+        @include breakpoint(md) {
             display: block;
         }
 
-        @media screen and (min-width: 1200px) {
-            border-right: 25vw solid $color-white;
+        @include breakpoint(lg) {
+            border-right-width: clamp(0px, 25vw, map.get($breakpoints, lg) * .25);
         }
 
-        @media screen and (min-width: $breakpoint-ultrawide) {
-            border-right: #{$breakpoint-ultrawide * .25} solid $color-white;
-        }
-    }
+        @at-root .project:nth-child(4n-2) & {
+            clip-path: polygon(evenodd, 0 0, 100% 0, 0 100%, 0 0);
+            right: auto;
+            border-right-width: 0;
+            border-left-width: 12.5vw;
+            left: calc(100% - 1px);
 
-    @at-root .project:nth-child(4n-2) &:before {
-        right: auto;
-        left: 100%;
-        clip-path: polygon(evenodd, 0 0, 100% 0, 0 100%, 0 0);
-        border-right: unset;
-        border-left: 12.5vw solid $color-white;
-
-        @media screen and (min-width: 1200px) {
-            border-left: 25vw solid $color-white;
+            @include breakpoint(lg) {
+                border-left-width: clamp(0px, 25vw, map.get($breakpoints, lg) * .25);
+            }
         }
 
-        @media screen and (min-width: $breakpoint-ultrawide) {
-            border-left: #{$breakpoint-ultrawide * .25} solid $color-white;
-        }
-    }
+        @at-root .project:nth-child(4n-1) & {
+            left: -12.5vw;
 
-    @at-root .project:nth-child(4n-1) &:before {
-        left: -12.5vw;
-        clip-path: polygon(evenodd, 0 0, 100% 0, 100% 100%, 0 0);
-
-        @media screen and (min-width: 1200px) {
-            left: -25vw;
+            @include breakpoint(lg) {
+                left: clamp(calc(-25vw + 1px), map.get($breakpoints, lg) * -.25, 0px);
+            }
         }
 
-        @media screen and (min-width: $breakpoint-ultrawide) {
-            left: $breakpoint-ultrawide * -.25
-        }
-    }
+        @at-root .project:nth-child(4n) & {
+            clip-path: polygon(evenodd, 0 0, 100% 0, 0 100%, 0 0);
+            right: calc(-12.5vw + 1px);
+            border-right-width: 0;
+            border-left-width: 12.5vw;
 
-    @at-root .project:nth-child(4n) &:before {
-        clip-path: polygon(evenodd, 0 0, 100% 0, 0 100%, 0 0);
-        border-right: unset;
-        right: -12.5vw;
-        border-left: 12.5vw solid $color-white;
-
-        @media screen and (min-width: 1200px) {
-            right: -25vw;
-            border-left: 25vw solid $color-white;
+            @include breakpoint(lg) {
+                right: clamp(calc(-25vw + 1px), map.get($breakpoints, lg) * -.25, 0px);
+                border-left-width: clamp(0px, 25vw, map.get($breakpoints, lg) * .25);
+            }
         }
 
-        @media screen and (min-width: $breakpoint-ultrawide) {
-            right: $breakpoint-ultrawide * -.25;
-            border-left: #{$breakpoint-ultrawide * .25} solid $color-white;
-        }
-    }
+        @at-root .project--active:nth-child(4n-1) & {
+            left: 12.5vw;
 
-    @at-root .project:nth-child(2n-1) .project__slider--active + & {
-        transform: translateX(60px);
-    }
-
-    @at-root .project__slider--active:nth-child(1n) + &:before {
-        border-left-width: 0;
-        border-right-width: 0;
-    }
-
-    @at-root .project:nth-child(4n) .project__slider--active + &:before {
-        right: 12.5vw;
-
-        @media screen and (min-width: 1200px) {
-            right: 25vw;
+            @include breakpoint(lg) {
+                left: clamp(0px, 25vw, map.get($breakpoints, lg) * .25 + 1px);
+            }
         }
 
-        @media screen and (min-width: $breakpoint-ultrawide) {
-            right: $breakpoint-ultrawide * .25;
+        @at-root .project--active:nth-child(4n) & {
+            right: 12.5vw;
+
+            @include breakpoint(lg) {
+                right: clamp(0px, 25vw, map.get($breakpoints, lg) * .25 + 1px);
+            }
+        }
+
+        @at-root .project--active:nth-child(1n) & {
+            border-width: 0;
         }
     }
 
-    @at-root .project:nth-child(4n-1) .project__slider--active + &:before {
-        left: 12.5vw;
-
-        @media screen and (min-width: 1200px) {
-            left: 25vw;
-        }
-
-        @media screen and (min-width: $breakpoint-ultrawide) {
-            left: $breakpoint-ultrawide * .25;
-        }
-    }
 }
 
 @mixin project-title {
-    @include subtitle;
-
-    opacity: 0;
-    transform: translateX(-25px);
-    color: $color-black;
+    font-size: 24px;
+    color: var(--c-black);
     position: relative;
     z-index: 1;
 
+    @include breakpoint(xs) {
+        font-size: 32px;
+    }
+
+    @include breakpoint(lg) {
+        font-size: 48px;
+    }
+
     @at-root .project:nth-child(2n-1) & {
-        @media screen and (min-width: 1024px) {
-            margin-left: -38px;
+        @include breakpoint(md) {
+            margin-left: -30px;
         }
 
-        @media screen and (min-width: 1200px) {
+        @include breakpoint(lg) {
             margin-left: 0;
         }
+    }
+
+    p {
+        margin-bottom: 0;
     }
 }
 
 @mixin project-description {
-    color: $color-black;
-    font-size: 18px;
-    line-height: 24px;
-    position: relative;
-    z-index: 1;
-    opacity: 0;
-    transform: translateX(-25px);
+    @include wysiwyg;
 
-    @at-root .project:nth-child(2n-1) & {
-        @media screen and (min-width: 1024px) {
-            margin-left: -30px;
-        }
-
-        @media screen and (min-width: 1200px) {
-            margin-left: 0;
-        }
-    }
-
-    @media screen and (min-width: 1600px) {
-        font-size: 20px;
-        line-height: 32px;
-    }
-}
-
-@mixin project-feature {
+    color: var(--c-gray);
     position: relative;
     z-index: 1;
     font-size: 16px;
-    line-height: 22px;
-    padding-left: 30px;
-    display: block;
-    color: $color-black;
-    opacity: 0;
-    transform: translateX(-25px);
+    line-height: 27px;
+    font-weight: 300;
 
-    @media screen and (min-width: 1600px) {
+    @include breakpoint(lg) {
         font-size: 18px;
-        line-height: 28px;
-    }
-
-    &:before {
-        content: '';
-        position: absolute;
-        top: 13.5px;
-        height: 1px;
-        width: 20px;
-        background-color: $color-black;
-        left: 0;
+        line-height: 30px;
     }
 
     @at-root .project:nth-child(2n-1) & {
-        @media screen and (min-width: 1024px) {
-            margin-left: calc((var(--featureId)) * 6px - 30px);
+        @include breakpoint(md) {
+            margin-left: -30px;
         }
 
-        @media screen and (min-width: 1200px) {
+        @include breakpoint(lg) {
             margin-left: 0;
         }
     }
@@ -518,148 +228,57 @@
 
 @mixin project-technologies {
     display: flex;
-    gap: 5px;
+    gap: 8px;
     list-style: none;
     flex-wrap: wrap;
     width: 100%;
     max-width: 620px;
     position: relative;
     z-index: 1;
-    opacity: 0;
-    transform: translateX(-25px);
 }
 
 @mixin project-technology {
-    font-size: 12px;
-    background-color: #F8F0E3;
-    color: $color-white;
-    padding: 6px 16px;
-    font-weight: bold;
+    font-size: 14px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    border: 1px solid var(--c-project);
+    background-color: color-mix(in srgb, var(--c-project) 12.5%, transparent);
+    color: var(--c-project);
+    cursor: help;
 
-    @media screen and (min-width: 1600px) {
-        font-size: 14px;
-        padding: 8px 20px;
+    @at-root .body--dark & {
+        color: var(--c-project-lighter);
+        border-color: var(--c-project-lighter);
+    }
+
+    @include breakpoint(lg) {
+        font-size: 16px;
+        padding: 4px 16px;
     }
 
     &--secondary {
-        opacity: .5;
+        border-style: dashed;
     }
 }
 
 @mixin project-button-container {
-    transform: translateX(-25px);
-    opacity: 0;
     width: 100%;
     display: flex;
+    justify-content: center;
 }
 
 @mixin project-button {
-    background-color: $color-red;
-    color: $color-white;
-    padding: 15px 25px;
-    font-size: 16px;
-    font-weight: bold;
-    letter-spacing: .05em;
-    transition: transform .25s;
-    margin: 25px auto 0;
-    position: relative;
-    display: inline-flex;
-    flex-wrap: nowrap;
-    white-space: nowrap;
-    align-items: center;
-    gap: 10px;
+    @include button($color: var(--c-project), $color-hover: var(--c-project-light)); }
 
-    > svg {
-        flex-shrink: 0;
-        width: 30px;
-    }
+@mixin project-tooltip {
+    @include tooltip;
 
-    @media screen and (min-width: 1024px) {
-        margin-top: 15px;
-    }
-
-    @media screen and (min-width: 1200px) {
-        margin-top: 25px;
-    }
-
-    @media screen and (min-width: 1600px) {
-        position: relative;
-        bottom: auto;
-        right: auto;
-        font-size: 18px;
-        padding: 20px 40px;
-    }
-
-    &:before,
-    &:after {
-        content: '';
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-    }
-
-    &:after {
-        box-shadow: inset 0 0 0 1px $color-white;
-        transition-property: top, left, width, height, opacity;
-        transition-duration: .35s;
-        opacity: 0;
-    }
-
-    &:before {
-        background: inherit;
-        z-index: -1;
-    }
-
-    &:hover {
-        transform: scale(.9);
-
-        &:before {
-            animation: pulse .5s forwards;
-        }
-
-        &:after {
-            width: calc(100% - 8px);
-            height: calc(100% - 8px);
-            top: 4px;
-            left: 4px;
-            opacity: .5;
-        }
-    }
+    margin-top: -10px;
 }
 
 @mixin project {
     .project {
         @include project-root;
-
-        &__slider {
-            @include project-slider;
-        }
-
-        &__controls {
-            @include project-controls;
-        }
-
-        &__slide {
-            @include project-slide;
-        }
-
-        &__back {
-            @include project-back;
-        }
-
-        &__images {
-            @include project-images;
-        }
-
-        &__image-container {
-            @include project-image-container;
-        }
-
-        &__image {
-            @include project-image;
-        }
 
         &__content {
             @include project-content;
@@ -671,10 +290,6 @@
 
         &__description {
             @include project-description;
-        }
-
-        &__feature {
-            @include project-feature;
         }
 
         &__technologies {
@@ -691,6 +306,10 @@
 
         &__button {
             @include project-button;
+        }
+
+        &__tooltip {
+            @include project-tooltip;
         }
     }
 }

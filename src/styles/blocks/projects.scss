@@ -1,16 +1,19 @@
-@mixin projects-root {
-    position: relative;
-    z-index: 2;
-    border-top: 5px solid $color-red;
-    width: 100%;
-    overflow: hidden;
-    padding-bottom: 300px;
-    padding-top: 50px;
-    background-color: $color-white;
+@use 'sass:map';
 
-    @media screen and (min-width: 1024px) {
-        padding-top: 0;
-        padding-bottom: 0;
+@mixin projects-root {
+    @include container;
+
+    overflow: hidden;
+}
+
+@mixin projects-title {
+    @include h1;
+
+    color: var(--c-black);
+    padding-bottom: 50px;
+
+    @include breakpoint(md) {
+        padding-bottom: 100px;
     }
 }
 
@@ -20,12 +23,12 @@
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
-    width: 100vw;
-    gap: 100px;
-    max-width: $breakpoint-ultrawide;
+    width: 100%;
+    max-width: map.get($breakpoints, uw);
+    gap: 50px;
 
-    @media screen and (min-width: 1024px) {
-        gap: 0;
+    @include breakpoint(md) {
+        gap: 100px;
     }
 }
 
@@ -37,6 +40,10 @@
 @mixin projects {
     .projects {
         @include projects-root;
+
+        &__title {
+            @include projects-title;
+        }
 
         &__list {
             @include projects-list;

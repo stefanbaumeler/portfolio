@@ -1,0 +1,55 @@
+query QMap {
+    place(limit: -1) {
+        id
+        location
+        translations {
+            id
+            name
+            languages_code {
+                abbreviation
+            }
+        }
+        country {
+            id
+            currency_code
+            alpha3
+            translations {
+                id
+                name
+                currency
+                languages_code {
+                    abbreviation
+                }
+            }
+        }
+    }
+    transportation(limit: -1) {
+        id
+        type
+        company
+        number
+        vessel
+        departure_airport_code
+        arrival_airport_code
+        departure
+        arrival
+        crosspacific
+        show_time
+        from {
+            id
+            location
+            translations {
+                id
+                name
+            }
+        }
+        to {
+            id
+            location
+            translations {
+                id
+                name
+            }
+        }
+    }
+}

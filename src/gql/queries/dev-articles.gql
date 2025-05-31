@@ -1,0 +1,25 @@
+query QDevArticles {
+    blog(sort: "-date_created", filter: { status: { _eq: "published" } }) {
+        id
+        status
+        title
+        teaser_text
+        date_created
+        slug
+        technology {
+            id
+            technology_id {
+                ...FTechnology
+            }
+        }
+        elements(filter: { collection: { _eq: "blog_text" } }) {
+            item {
+                ... on blog_text {
+                    text
+                    id
+                }
+            }
+            collection
+        }
+    }
+}

@@ -1,0 +1,8 @@
+query QBookingMethod {
+    bookingMethod: booking_aggregated(groupBy: "booking", sort: "-count.id", filter: { booking: { _neq: null } }) {
+        group
+        count {
+            id
+        }
+    }
+}

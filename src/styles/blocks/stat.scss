@@ -1,0 +1,158 @@
+@mixin stat-root {
+    border: 1px solid var(--c-gray-light);
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 20px;
+
+    @include breakpoint(xl) {
+        width: 100%;
+    }
+
+    &--bar {
+        grid-column: auto / span 16;
+        width: calc((100% - 5 * 25px) / 3 * 2 + 25px * 3);
+
+        @include breakpoint(lg) {
+            width: auto;
+            grid-row: auto / span 3;
+        }
+
+        @include breakpoint(xl) {
+            grid-column: auto / span 13;
+        }
+    }
+
+    &--donut {
+        grid-column: auto / span 8;
+        width: calc((100% - 5 * 25px) / 3 + 25px);
+
+        @include breakpoint(lg) {
+            width: auto;
+            grid-row: auto / span 3;
+        }
+
+        @include breakpoint(xl) {
+            grid-column: auto / span 7;
+        }
+    }
+
+    &--count,
+    &--text {
+        grid-column: auto / span 4;
+        grid-row: auto / span 1;
+        width: calc(100% / 4 - 25px / 4 * 3);
+        gap: 10px;
+
+        @include breakpoint(lg) {
+            width: 100%;
+            gap: 0;
+        }
+
+        @include breakpoint(xl) {
+            width: auto;
+            height: 100%;
+        }
+    }
+
+    &--1 {
+        order: 1;
+    }
+
+    &--2 {
+        order: 2;
+    }
+
+    &--3 {
+        order: 3;
+    }
+
+    &--4 {
+        order: 4;
+    }
+
+    &--5 {
+        order: 5;
+    }
+
+    &--6 {
+        order: 6;
+    }
+
+    &--1,
+    &--2,
+    &--3,
+    &--4,
+    &--5,
+    &--6 {
+        @include breakpoint(lg) {
+            order: unset;
+        }
+    }
+
+}
+
+@mixin stat-title {
+    font-size: 20px;
+    color: var(--c-black);
+
+    @at-root {
+        .stat--count &,
+        .stat--text & {
+            text-align: center;
+        }
+    }
+}
+
+@mixin stat-chart {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+@mixin stat-value {
+    font-size: 60px;
+    font-weight: bold;
+    line-height: 1;
+
+    @include breakpoint(md) {
+        font-size: 70px;
+    }
+
+    &--small {
+        font-size: 30px;
+        line-height: 60px;
+
+        @include breakpoint(md) {
+            font-size: 35px;
+            line-height: 70px;
+        }
+
+        @include breakpoint(xl) {
+            font-size: 45px;
+        }
+    }
+}
+
+@mixin stat {
+    .stat {
+        @include stat-root;
+
+        &__title {
+            @include stat-title;
+        }
+
+        &__chart {
+            @include stat-chart;
+        }
+
+        &__value {
+            @include stat-value;
+        }
+    }
+}
+
+@include stat;

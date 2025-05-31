@@ -1,40 +1,79 @@
+@use 'sass:map';
+
 @mixin skills-root {
+    @include container;
+
     z-index: 2;
     position: relative;
-}
-
-@mixin skills-container {
-    background-color: $color-almost-black;
 }
 
 @mixin skills-deco-lines {
     position: absolute;
     width: 100%;
-    height: 100%;
+    left: 0;
+    margin-top: -100px;
+    height: calc(100% + 100px);
+    pointer-events: none;
+
+    @include breakpoint(md) {
+        margin-top: -200px;
+        height: calc(100% + 200px);
+    }
 }
 
 @mixin skills-deco-line {
     width: 1px;
     position: absolute;
     height: 100%;
-    background-color: $color-black;
+    background-color: var(--c-gray-light);
+    z-index: -1;
 
     &:nth-of-type(1) {
         left: 50px;
+
+        @include breakpoint(xs) {
+            left: 25px;
+        }
+
+        @include breakpoint(md) {
+            left: 50px;
+        }
     }
 
     &:nth-of-type(2) {
-        left: calc(33.33% + 16.66px);
+        display: none;
 
-        @media screen and (min-width: 1200px) {
+        @include breakpoint(xs) {
+            display: block;
+            left: 50%;
+        }
+
+        @include breakpoint(sm) {
+            left: calc(#{100% / 3 * 1} + #{25px / 3});
+        }
+
+        @include breakpoint(md) {
+            left: calc(#{100% / 3 * 1} + #{50px / 3});
+        }
+
+        @include breakpoint(lg) {
             left: calc(25% + 24px);
         }
     }
 
     &:nth-of-type(3) {
-        left: calc(66.66% - 17.66px);
+        display: none;
 
-        @media screen and (min-width: 1200px) {
+        @include breakpoint(sm) {
+            display: block;
+            left: calc(#{100% / 3 * 2} - #{25px / 3});
+        }
+
+        @include breakpoint(md) {
+            left: calc(#{100% / 3 * 2} - #{50px / 3});
+        }
+
+        @include breakpoint(lg) {
             left: calc(50% - 1px);
         }
     }
@@ -42,7 +81,7 @@
     &:nth-of-type(4) {
         display: none;
 
-        @media screen and (min-width: 1200px) {
+        @include breakpoint(lg) {
             display: block;
             left: calc(75% - 26px);
         }
@@ -51,64 +90,48 @@
     &:nth-of-type(5) {
         left: calc(100% - 50px);
 
-        @media screen and (min-width: 1200px) {
+        @include breakpoint(xs) {
+            left: calc(100% - 25px);
+        }
 
+        @include breakpoint(md) {
+            left: calc(100% - 50px);
         }
     }
 }
 
-@mixin skills-content {
-    padding: 100px 0;
-
-    @media screen and (min-width: 768px) {
-        padding: 200px 0;
-    }
-}
-
 @mixin skills-title {
-    font-size: 75px;
-    letter-spacing: .05em;
-    padding-left: 50px;
-    opacity: 0;
-    transform: translateX(-25px);
-    padding-bottom: 50px;
+    @include h1;
 
-    @media screen and (min-width: 1600px) {
-        font-size: 7.8vw;
-        transform: translateX(-50px);
-    }
+    padding-bottom: 100px;
+    padding-left: 40px;
 
-    @media screen and (min-width: $breakpoint-ultrawide) {
-        font-size: #{$breakpoint-ultrawide / 100 * 7.8};
+    @include breakpoint(xs) {
+        padding-left: 0;
     }
 }
 
 @mixin skills-skills {
     display: flex;
-    width: calc(100vw - 100px);
+    width: calc(100% - 70px);
     max-width: 1845px;
     gap: 40px 0;
     box-sizing: border-box;
-    margin: 0 50px;
+    margin-left: 41px;
 
-    @media screen and (min-width: 1024px) {
-        margin: 0 50px;
-        width: calc(100vw - 100px);
+    @include breakpoint(xs) {
+        margin-left: 1px;
+        width: 100%;
     }
 
-    @media screen and (min-width: 1200px) {
-        width: calc(75vw - 75px);
-        margin: 0 0 0 calc(25vw + 25px);
-    }
-
-    @media screen and (min-width: $breakpoint-ultrawide) {
-        margin: 0 0 0 #{$breakpoint-ultrawide * .25 + 25px};
+    @include breakpoint(lg) {
+        width: 75%;
+        margin: 0 0 0 25%;
     }
 }
 
 @mixin skills-column {
     position: relative;
-    width: auto;
 }
 
 @mixin skills-skill {
@@ -116,6 +139,10 @@
     box-sizing: border-box;
     position: relative;
     margin-bottom: 20px;
+
+    &:has(.skills__children) {
+        margin-bottom: 30px;
+    }
 
     &:last-of-type {
         margin-bottom: 0;
@@ -125,7 +152,7 @@
         margin-bottom: 50px;
         position: relative;
 
-        @media screen and (min-width: 768px) {
+        @include breakpoint(xs) {
             margin-bottom: 100px;
         }
     }
@@ -144,7 +171,7 @@
 }
 
 @mixin skills-children {
-    padding-top: 20px;
+    padding-top: 15px;
 
     &:empty {
         display: none;
@@ -153,11 +180,17 @@
 
 @mixin skills-label-container {
     font-size: 32px;
-    letter-spacing: .05em;
     flex-grow: 1;
     font-weight: bold;
     padding-bottom: 10px;
     box-sizing: border-box;
+    margin-left: -25px;
+    width: auto;
+    display: inline-block;
+
+    @include breakpoint(xs) {
+        margin-left: 0;
+    }
 
     @at-root .skills__children & {
         font-size: 16px;
@@ -165,8 +198,9 @@
         font-weight: normal;
         padding-bottom: 0;
         position: relative;
+        margin-left: 0;
 
-        @media screen and (min-width: 1024px) {
+        @include breakpoint(sm) {
             font-size: 18px;
             line-height: 24px;
         }
@@ -177,7 +211,7 @@
         line-height: 16px;
         font-weight: normal;
 
-        @media screen and (min-width: 1024px) {
+        @include breakpoint(sm) {
             font-size: 16px;
             line-height: 18px;
         }
@@ -189,21 +223,24 @@
     transform-origin: top left;
     opacity: .5;
     width: 1px;
-    background-color: $color-red;
+    background-color: var(--c-main);
     height: calc(100% - 50px);
     left: 0;
     bottom: 1000px;
     top: 20px;
-    transform: scaleY(0);
 
     @at-root .skills__children & {
         display: block;
         left: -40px;
         width: 30px;
         height: 2px;
-        top: 0.5em;
-        transform: translate(0, -50%) scaleX(0);
-        background-color: $color-red;
+        top: .5em;
+        transform: translate(0, -50%);
+        background-color: var(--c-main);
+    }
+
+    @at-root .skills__dot--preferred + & {
+        background-color: #FF7777;
     }
 
     @at-root .skills__children .skills__children & {
@@ -216,49 +253,54 @@
 @mixin skills-dot {
     position: absolute;
     left: 1px;
-    width: 20px;
-    height: 20px;
-    background-color: $color-red;
+    width: 10px;
+    height: 10px;
+    background-color: var(--c-main);
     border-radius: 50%;
     top: .5em;
-    border: 4px solid $color-almost-black;
+    border: 4px solid var(--c-gray-lighter);
+    z-index: 1;
 
-    transform: translate(-50%, -50%) scale(0);
+    transform: translate(-50%, -50%);
 
     @at-root .skills__children & {
         left: -50px;
-        width: 10px;
-        height: 10px;
     }
 
     @at-root .skills__children .skills__children & {
         left: -75px;
+        width: 7px;
+        height: 7px;
+    }
+
+    &--preferred {
+        width: 16px;
+        height: 16px;
+        background-color: transparent;
+        color: #FF7777;
+
+        @at-root .skills__children .skills__children & {
+            width: 10px;
+            height: 10px;
+        }
     }
 }
 
 @mixin skills-label {
-    display: block;
-    opacity: 0;
-    transform: translateX(-10px);
+    display: inline-block;
 }
 
 @mixin skills-hint {
     font-size: 14px;
-    color: rgba($color-white, .5);
+    color: color-mix(in srgb, var(--c-black) 50%, transparent);
     font-style: italic;
     font-weight: normal;
     display: block;
-    opacity: 0;
-    transform: translateX(-7.5px);
 }
 
 @mixin skills {
     .skills {
         @include skills-root;
-
-        &__container {
-            @include skills-container;
-        }
 
         &__deco-lines {
             @include skills-deco-lines;
@@ -266,10 +308,6 @@
 
         &__deco-line {
             @include skills-deco-line;
-        }
-
-        &__content {
-            @include skills-content;
         }
 
         &__title {

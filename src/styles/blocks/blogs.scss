@@ -1,0 +1,82 @@
+@mixin blogs-root {
+    display: flex;
+    flex-direction: column;
+
+    @include breakpoint(sm) {
+        flex-direction: row;
+    }
+}
+
+@mixin blogs-blog {
+    width: 100%;
+    height: 50svh;
+    position: relative;
+    overflow: hidden;
+
+    @include breakpoint(sm) {
+        height: 100svh;
+        width: 50%;
+    }
+}
+
+@mixin blogs-image {
+    object-fit: cover;
+    transition: scale .5s, filter .5s;
+    filter: saturate(1) brightness(.75);
+    scale: 1.1;
+
+    @at-root .blogs__blog:hover & {
+        scale: 1;
+        filter: saturate(1.5) brightness(.85);
+    }
+}
+
+@mixin blogs-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    z-index: 1;
+}
+
+@mixin blogs-title {
+    @include h1;
+
+    padding-bottom: 25px;
+    color: $color-white;
+    white-space: nowrap;
+}
+
+@mixin blogs-meta {
+    display: flex;
+    justify-content: center;
+    color: $color-white;
+}
+
+@mixin blogs {
+    .blogs {
+        @include blogs-root;
+
+        &__blog {
+            @include blogs-blog;
+        }
+
+        &__image {
+            @include blogs-image;
+        }
+
+        &__content {
+            @include blogs-content;
+        }
+
+        &__title {
+            @include blogs-title;
+        }
+
+        &__meta {
+            @include blogs-meta;
+        }
+    }
+}
+
+@include blogs;

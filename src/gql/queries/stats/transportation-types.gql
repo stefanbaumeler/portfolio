@@ -1,0 +1,8 @@
+query QTransportationTypes {
+    transportationTypes: transportation_aggregated(groupBy: "type", sort: "-count.id") {
+        group
+        count {
+            id
+        }
+    }
+}
