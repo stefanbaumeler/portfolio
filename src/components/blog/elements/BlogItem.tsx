@@ -13,7 +13,7 @@ export const BlogItem = async ({
     element,
     index
 }: Props) => {
-    let aspect: string | undefined = undefined
+    let aspect: number | undefined = undefined
 
     if (element?.collection === 'blog_image') {
         const e = element.item as TBlogImage
