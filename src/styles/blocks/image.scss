@@ -2,10 +2,19 @@
     position: relative;
     width: 100%;
     height: 100%;
+
+    &--invert {
+        filter: invert(1);
+    }
 }
 
 @mixin image-image {
     object-fit: cover;
+
+    @at-root .image--contain & {
+        object-fit: contain;
+        position: relative !important;
+    }
 
     @at-root .popup__image & {
         object-fit: contain;

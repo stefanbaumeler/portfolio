@@ -2427,8 +2427,11 @@ export type TBlogFilter = {
 export type TBlogImage = {
   __typename?: 'blog_image';
   caption: Maybe<Scalars['String']['output']>;
+  contain: Maybe<Scalars['Boolean']['output']>;
   id: Scalars['ID']['output'];
   image: Maybe<TDirectusFiles>;
+  invert: Maybe<Scalars['Boolean']['output']>;
+  invert_by_default: Maybe<Scalars['Boolean']['output']>;
 };
 
 
@@ -2458,8 +2461,11 @@ export type TBlogImageAggregated = {
 export type TBlogImageAggregatedCount = {
   __typename?: 'blog_image_aggregated_count';
   caption: Maybe<Scalars['Int']['output']>;
+  contain: Maybe<Scalars['Int']['output']>;
   id: Maybe<Scalars['Int']['output']>;
   image: Maybe<Scalars['Int']['output']>;
+  invert: Maybe<Scalars['Int']['output']>;
+  invert_by_default: Maybe<Scalars['Int']['output']>;
 };
 
 export type TBlogImageAggregatedFields = {
@@ -2471,8 +2477,11 @@ export type TBlogImageFilter = {
   _and: InputMaybe<Array<InputMaybe<TBlogImageFilter>>>;
   _or: InputMaybe<Array<InputMaybe<TBlogImageFilter>>>;
   caption: InputMaybe<TStringFilterOperators>;
+  contain: InputMaybe<TBooleanFilterOperators>;
   id: InputMaybe<TNumberFilterOperators>;
   image: InputMaybe<TDirectusFilesFilter>;
+  invert: InputMaybe<TBooleanFilterOperators>;
+  invert_by_default: InputMaybe<TBooleanFilterOperators>;
 };
 
 export type TBlogImageMutated = {
@@ -5947,8 +5956,11 @@ export type TVersionBlogElements = {
 export type TVersionBlogImage = {
   __typename?: 'version_blog_image';
   caption: Maybe<Scalars['String']['output']>;
+  contain: Maybe<Scalars['Boolean']['output']>;
   id: Scalars['ID']['output'];
   image: Maybe<Scalars['JSON']['output']>;
+  invert: Maybe<Scalars['Boolean']['output']>;
+  invert_by_default: Maybe<Scalars['Boolean']['output']>;
 };
 
 export type TVersionBlogMap = {
@@ -7967,8 +7979,11 @@ export type TBlogElementsMutatedResolvers<ContextType = any, ParentType extends 
 
 export type TBlogImageResolvers<ContextType = any, ParentType extends TResolversParentTypes['blog_image'] = TResolversParentTypes['blog_image']> = {
   caption: Resolver<Maybe<TResolversTypes['String']>, ParentType, ContextType>;
+  contain: Resolver<Maybe<TResolversTypes['Boolean']>, ParentType, ContextType>;
   id: Resolver<TResolversTypes['ID'], ParentType, ContextType>;
   image: Resolver<Maybe<TResolversTypes['directus_files']>, ParentType, ContextType, TBlogImageImageArgs>;
+  invert: Resolver<Maybe<TResolversTypes['Boolean']>, ParentType, ContextType>;
+  invert_by_default: Resolver<Maybe<TResolversTypes['Boolean']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -7988,8 +8003,11 @@ export type TBlogImageAggregatedResolvers<ContextType = any, ParentType extends 
 
 export type TBlogImageAggregatedCountResolvers<ContextType = any, ParentType extends TResolversParentTypes['blog_image_aggregated_count'] = TResolversParentTypes['blog_image_aggregated_count']> = {
   caption: Resolver<Maybe<TResolversTypes['Int']>, ParentType, ContextType>;
+  contain: Resolver<Maybe<TResolversTypes['Int']>, ParentType, ContextType>;
   id: Resolver<Maybe<TResolversTypes['Int']>, ParentType, ContextType>;
   image: Resolver<Maybe<TResolversTypes['Int']>, ParentType, ContextType>;
+  invert: Resolver<Maybe<TResolversTypes['Int']>, ParentType, ContextType>;
+  invert_by_default: Resolver<Maybe<TResolversTypes['Int']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -9970,8 +9988,11 @@ export type TVersionBlogElementsResolvers<ContextType = any, ParentType extends 
 
 export type TVersionBlogImageResolvers<ContextType = any, ParentType extends TResolversParentTypes['version_blog_image'] = TResolversParentTypes['version_blog_image']> = {
   caption: Resolver<Maybe<TResolversTypes['String']>, ParentType, ContextType>;
+  contain: Resolver<Maybe<TResolversTypes['Boolean']>, ParentType, ContextType>;
   id: Resolver<TResolversTypes['ID'], ParentType, ContextType>;
   image: Resolver<Maybe<TResolversTypes['JSON']>, ParentType, ContextType>;
+  invert: Resolver<Maybe<TResolversTypes['Boolean']>, ParentType, ContextType>;
+  invert_by_default: Resolver<Maybe<TResolversTypes['Boolean']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -10941,10 +10962,10 @@ export type TQDevArticle = (
       & Pick<TBlogElements, 'collection'>
       & { item: Maybe<(
         { __typename?: 'blog_image' }
-        & Pick<TBlogImage, 'id' | 'caption'>
+        & Pick<TBlogImage, 'id' | 'caption' | 'invert'>
         & { image: Maybe<(
           { __typename?: 'directus_files' }
-          & Pick<TDirectusFiles, 'id' | 'filename_disk'>
+          & Pick<TDirectusFiles, 'id' | 'filename_disk' | 'width' | 'height' | 'type'>
         )> }
       ) | (
         { __typename?: 'blog_map' }
@@ -11441,10 +11462,10 @@ export type TQTravelArticle = (
       & Pick<TSecretBlogElements, 'collection'>
       & { item: Maybe<(
         { __typename?: 'blog_image' }
-        & Pick<TBlogImage, 'id' | 'caption'>
+        & Pick<TBlogImage, 'id' | 'caption' | 'invert'>
         & { image: Maybe<(
           { __typename?: 'directus_files' }
-          & Pick<TDirectusFiles, 'id' | 'filename_disk'>
+          & Pick<TDirectusFiles, 'id' | 'filename_disk' | 'width' | 'height' | 'type'>
         )> }
       ) | (
         { __typename?: 'blog_map' }
@@ -11462,47 +11483,6 @@ export type TQTravelArticle = (
         { __typename?: 'blog_video' }
         & Pick<TBlogVideo, 'id' | 'url'>
       )> }
-    )>>> }
-  )> }
-);
-
-export type TQTravelArticlesOfPlaceVariables = Exact<{ [key: string]: never; }>;
-
-
-export type TQTravelArticlesOfPlace = (
-  { __typename?: 'Query' }
-  & { secret_blog: Array<(
-    { __typename?: 'secret_blog' }
-    & Pick<TSecretBlog, 'id' | 'status' | 'title' | 'date_created' | 'slug'>
-    & { image: Maybe<(
-      { __typename?: 'directus_files' }
-      & Pick<TDirectusFiles, 'id' | 'filename_disk' | 'filename_download'>
-    )>, place: Maybe<Array<Maybe<(
-      { __typename?: 'secret_blog_place' }
-      & Pick<TSecretBlogPlace, 'id'>
-      & { place_id: Maybe<(
-        { __typename?: 'place' }
-        & Pick<TPlace, 'id'>
-        & { country: Maybe<(
-          { __typename?: 'country' }
-          & Pick<TCountry, 'id'>
-          & { translations: Maybe<Array<Maybe<(
-            { __typename?: 'country_translations' }
-            & Pick<TCountryTranslations, 'id' | 'name'>
-            & { languages_code: Maybe<(
-              { __typename?: 'languages' }
-              & Pick<TLanguages, 'abbreviation'>
-            )> }
-          )>>> }
-        )> }
-      )> }
-    )>>>, elements: Maybe<Array<Maybe<(
-      { __typename?: 'secret_blog_elements' }
-      & Pick<TSecretBlogElements, 'collection'>
-      & { item: Maybe<{ __typename?: 'blog_image' } | { __typename?: 'blog_map' } | { __typename?: 'blog_quote' } | (
-        { __typename?: 'blog_text' }
-        & Pick<TBlogText, 'text' | 'id'>
-      ) | { __typename?: 'blog_title' } | { __typename?: 'blog_video' }> }
     )>>> }
   )> }
 );
@@ -11612,9 +11592,13 @@ export const QDevArticleDocument = gql`
         ... on blog_image {
           id
           caption
+          invert
           image {
             id
             filename_disk
+            width
+            height
+            type
           }
         }
         ... on blog_text {
@@ -12032,9 +12016,13 @@ export const QTravelArticleDocument = gql`
         ... on blog_image {
           id
           caption
+          invert
           image {
             id
             filename_disk
+            width
+            height
+            type
           }
         }
         ... on blog_text {
@@ -12059,47 +12047,6 @@ export const QTravelArticleDocument = gql`
         ... on blog_video {
           id
           url
-        }
-      }
-      collection
-    }
-  }
-}
-    `;
-export const QTravelArticlesOfPlaceDocument = gql`
-    query QTravelArticlesOfPlace {
-  secret_blog(sort: "-date_created", filter: {status: {_eq: "published"}}) {
-    id
-    status
-    title
-    date_created
-    slug
-    image {
-      id
-      filename_disk
-      filename_download
-    }
-    place {
-      id
-      place_id {
-        id
-        country {
-          id
-          translations {
-            id
-            name
-            languages_code {
-              abbreviation
-            }
-          }
-        }
-      }
-    }
-    elements(filter: {collection: {_eq: "blog_text"}}) {
-      item {
-        ... on blog_text {
-          text
-          id
         }
       }
       collection

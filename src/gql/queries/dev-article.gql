@@ -10,9 +10,13 @@ query QDevArticle($slug: String!) {
                 ... on blog_image {
                     id
                     caption
+                    invert
                     image {
                         id
                         filename_disk
+                        width
+                        height
+                        type
                     }
                 }
                 ... on blog_text {

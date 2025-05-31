@@ -6,19 +6,22 @@ import { SliderControls } from '@/components/SliderControls'
 import { useSliderContext } from '@/context/slider'
 import { useEffect } from 'react'
 import { useBodyContext } from '@/context/body'
+import { DarkMode, useDarkContext } from '@/context/dark'
 
 type Props = {
 	item: TBlogImage
 	index: number
+    aspect?: number
 }
 
 export const BlogImage = ({
-    item, index
+    item, index, aspect
 }: Props) => {
     const {
         prev, next, setActive, active, addImage
     } = useSliderContext()
 
+    const { state } = useDarkContext()
     const { setFixed } = useBodyContext()
 
     useEffect(() => {
@@ -51,6 +54,8 @@ export const BlogImage = ({
     return <>
         <figure onClick={() => setActive(item.id)}>
             <Image
+                aspect={aspect ?? item.image.width / item.image.height}
+                invert={item.invert && state === DarkMode.Dark}
                 className="article__content-image"
                 src={`${process.env.NEXT_PUBLIC_ASSETS}/${item.image?.filename_disk}`}
                 alt={item.caption ?? ''}
@@ -64,6 +69,7 @@ export const BlogImage = ({
         </figure>
         <div className={`popup${active === item.id ? ' popup--active' : ''}`}>
             <Image
+                invert={item.invert}
                 className="popup__image"
                 src={`${process.env.NEXT_PUBLIC_ASSETS}/${item.image?.filename_disk}`}
                 alt={item.caption ?? ''}

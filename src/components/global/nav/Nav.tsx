@@ -5,6 +5,7 @@ import { mdiMenu } from '@mdi/js'
 import { useNavContext } from '@/context/nav'
 import { ReactNode, useState } from 'react'
 import { useOnScroll } from '@/helpers/scroll'
+import { useTranslations } from 'next-intl'
 
 type Props = {
     children: ReactNode
@@ -12,6 +13,7 @@ type Props = {
 export const Nav = ({ children }: Props) => {
     const [toggleHidden, setToggleHidden] = useState(false)
     const [scrollPos, setScrollPos] = useState(0)
+    const t = useTranslations()
 
     const {
         active, setActive
@@ -25,6 +27,7 @@ export const Nav = ({ children }: Props) => {
     return <nav className={`nav${active ? ' nav--active' : ''}`}>
         <button
             className={`nav__toggle${toggleHidden ? ' nav__toggle--hidden' : ''}`}
+            aria-label={t('Open Navigation')}
             onClick={() => setActive(!active)}
         >
             <Icon path={mdiMenu} />

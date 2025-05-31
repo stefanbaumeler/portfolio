@@ -21,6 +21,7 @@ const nextConfig: NextConfig = {
         return config
     },
     images: {
+        dangerouslyAllowSVG: true,
         minimumCacheTTL: 31536000,
         remotePatterns: [{
             protocol: 'http',
