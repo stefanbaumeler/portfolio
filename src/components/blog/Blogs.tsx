@@ -19,7 +19,7 @@ export const Blogs = async ({ data }: Props) => {
             <Image
                 className="blogs__image"
                 fill
-                sizes="(max-width: 767px) 100vw, (max-width: 1023px) calc(100vw - 80px), (max-width: 1679px) calc(50vw - 80px), 1500px"
+                sizes="(max-width: 767px) 100vw, (max-width: 1023px) calc(100vw - 80px), (max-width: 1679px) 100vh, 1500px"
                 src={`${process.env.NEXT_PUBLIC_ASSETS}/${data?.website?.travel_blog_image.filename_disk}`}
                 alt=""
                 loading="eager"
@@ -47,7 +47,7 @@ export const Blogs = async ({ data }: Props) => {
             <Image
                 className="blogs__image"
                 fill
-                sizes="(max-width: 767px) 100vw, (max-width: 1023px) calc(100vw - 80px), (max-width: 1679px) calc(50vw - 80px), 1500px"
+                sizes="(max-width: 767px) 100vw, (max-width: 1023px) calc(100vw - 80px), (max-width: 1679px) 100vh, 1500px"
                 src={`${process.env.NEXT_PUBLIC_ASSETS}/${data?.website?.dev_blog_image.filename_disk}`}
                 alt=""
                 loading="eager"

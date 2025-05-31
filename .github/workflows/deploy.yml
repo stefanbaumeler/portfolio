@@ -22,9 +22,7 @@ jobs:
             - name: 'Create env file'
               run: |
                   touch .env
-                  echo NEXT_PUBLIC_API=http://159.65.125.156:8061 >> .env
-                  echo NEXT_PUBLIC_ASSETS=http://159.65.125.156:8061/assets >> .env
-                  echo NEXT_PUBLIC_PROD_URL=https://stefan-baumeler.com >> .env
+                  "${{ secrets.ENV_FILE }}" > .env
                   cat .env
 
             - name: Install Dependencies

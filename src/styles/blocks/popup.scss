@@ -5,13 +5,11 @@
     width: 100%;
     height: 100%;
     z-index: 4;
-    display: flex;
     justify-content: center;
     align-items: center;
     background-color: $color-gray-darker;
     pointer-events: none;
-    opacity: 0;
-    transition: opacity .25s .25s;
+    display: none;
 
     @include breakpoint(xs) {
         width: calc(100% - 80px);
@@ -19,8 +17,8 @@
     }
 
     &--active {
+        display: flex;
         pointer-events: all;
-        opacity: 1;
         transition: opacity .25s;
     }
 }

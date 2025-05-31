@@ -55,9 +55,8 @@ export const BlogImage = ({
                 src={`${process.env.NEXT_PUBLIC_ASSETS}/${item.image?.filename_disk}`}
                 alt={item.caption ?? ''}
                 fill
-                sizes="(max-width: 767px) calc(100vw - 20px), (max-width: 1023px) calc(100vw - 130px), (max-width: 1679px) calc(100vw - 180px), 1500px"
+                sizes="(max-width: 767px) calc(100vw - 20px), (max-width: 1023px) calc(100vw - 130px), (max-width: 1199px) calc(100vw - 180px), (max-width: 1375px) calc(100vw - 530px), 850px"
                 loading={index < 3 ? 'eager' : 'lazy'}
-                quality={75}
             />
             <figcaption className="article__caption">
                 {item.caption}
@@ -71,7 +70,6 @@ export const BlogImage = ({
                 fill
                 sizes="calc(100vw - 180px)"
                 loading="lazy"
-                quality={75}
             />
             <SliderControls
                 onPrev={prev}
