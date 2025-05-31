@@ -1,4 +1,4 @@
-import { TBlogQuote, TBlogText } from '~/schema'
+import { TBlogQuote } from '~/schema'
 import Link from 'next/link'
 
 type Props = {

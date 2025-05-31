@@ -13,7 +13,7 @@ const getHostname = () => {
 
 export const GET = async (
     _: NextRequest,
-    { params }: any
+    { params }: { params: Promise<{ rest: string[] }> }
 ) => {
     const schema = process.env.NODE_ENV === 'development' ? 'http' : 'http'
     const host = getHostname()

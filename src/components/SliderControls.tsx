@@ -1,6 +1,5 @@
 import Icon from '@mdi/react'
 import * as Icons from '@mdi/js'
-import { getTranslations } from 'next-intl/server'
 import { MouseEvent } from 'react'
 import { useTranslations } from 'next-intl'
 
