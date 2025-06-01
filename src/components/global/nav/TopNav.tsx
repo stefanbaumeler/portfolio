@@ -30,7 +30,7 @@ export const TopNav = () => {
         return () => window.removeEventListener('resize', callback)
     }, [])
 
-    return <div className={`top-nav${topNavContext.forceWhite ? ' top-nav--force-white' : ''}`}>
+    return <div className="top-nav">
         {topNavContext.title ? <h1 className="top-nav__title">
             {topNavContext.title}
         </h1> : null}
