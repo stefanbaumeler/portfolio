@@ -57,6 +57,7 @@ export const viewport: Viewport = {
 }
 
 export const ppr = true
+export const experimental_ppr = true
 
 export const metadata: Metadata = {
     title: 'Stefan Baumeler — Web Developer — Official Portfolio',
