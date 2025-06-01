@@ -54,7 +54,7 @@ export const BlogImage = ({
     return <>
         <figure onClick={() => setActive(item.id)}>
             <Image
-                aspect={aspect ?? item.image.width / item.image.height}
+                aspect={aspect ?? item.image?.width / item.image?.height ?? 1.5}
                 invert={item.invert && state === DarkMode.Dark}
                 className="article__content-image"
                 src={`${process.env.NEXT_PUBLIC_ASSETS}/${item.image?.filename_disk}`}

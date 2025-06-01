@@ -1,3 +1,5 @@
+'use client'
+
 import Icon from '@mdi/react'
 import * as Icons from '@mdi/js'
 import Image from 'next/image'
@@ -6,19 +8,17 @@ import { TFProject } from '~/schema'
 import { SliderControls } from '@/components/SliderControls'
 
 type Props = {
-    onSliderActiveChange: (active: boolean) => void
     gallery: TFProject['gallery']
 }
 
-export const Slider = ({
-    onSliderActiveChange, gallery
-}: Props ) => {
+export const Slider = ({ gallery }: Props ) => {
     const [activeImage, setActiveImage] = useState(0)
+    const [active, setActive] = useState(false)
 
     useEffect(() => {
         const keydown = (event: KeyboardEvent) => {
             if (event.key === 'Escape') {
-                onSliderActiveChange(false)
+                setActive(false)
             }
         }
 
@@ -42,14 +42,14 @@ export const Slider = ({
     }
 
     const closeSlider = (event: MouseEvent) => {
-        onSliderActiveChange(false)
+        setActive(false)
         event.preventDefault()
         event.stopPropagation()
     }
 
     return <div
-        className="slider"
-        onClick={() => onSliderActiveChange(true)}
+        className={`slider${active ? ' slider--active' : ''}`}
+        onClick={() => setActive(true)}
     >
         <div className="slider__hint">
             <Icon

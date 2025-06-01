@@ -11,10 +11,6 @@
     @include breakpoint(xs) {
         padding-left: 80px;
     }
-
-    @include breakpoint(xl) {
-        max-width: map.get($breakpoints, uw);
-    }
 }
 
 @mixin main-transition {

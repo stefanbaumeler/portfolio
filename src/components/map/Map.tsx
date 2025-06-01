@@ -43,11 +43,10 @@ export const Map = ({
                 zoom: 2
             }}
             projection="mercator"
-            interactiveLayerIds={['clusters']}
-            mapStyle={state === DarkMode.Dark ? 'mapbox://styles/mapbox/dark-v11' : 'mapbox://styles/mapbox/streets-v12'}
+            mapStyle={`mapbox://styles/mapbox/${state === DarkMode.Dark ? 'dark-v11' : 'streets-v12'}`}
             mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_KEY}
             attributionControl={false}
-            logoPosition={'top-right'}
+            logoPosition="top-right"
         >
             {places.map((place, key) => <MarkerEl
                 key={key}

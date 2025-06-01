@@ -1,19 +1,17 @@
 import { Image } from '@/components/global/Image'
 import { Link } from '@/components/global/Link'
 import { TQDevArticles, TQTravelArticles } from '~/schema'
-import { ArticleMeta } from '@/components/blog/ArticleMeta'
 import { isTravelArticle } from '@/helpers/article-type'
-import type { getTranslations } from 'next-intl/server'
-import type { useTranslations } from 'next-intl'
+import { ReactNode } from 'react'
 
 type Props = {
 	article: TQTravelArticles['secret_blog'][number] | TQDevArticles['blog'][number]
 	index: number
-    locale: string
-    t: Awaited<ReturnType<typeof getTranslations>> | ReturnType<typeof useTranslations>
+    children: ReactNode
+    sizes?: string
 }
 export const Teaser = ({
-    article, index, locale, t
+    article, index, children, sizes = '(max-width: 767px) 100vw, (max-width: 1023px) calc(100vw - 130px), (max-width: 1679px) calc(100vw - 180px), 1500px'
 }: Props) => {
     const type = isTravelArticle(article) ? 'travel' : 'dev'
 
@@ -41,17 +39,12 @@ export const Teaser = ({
             {isTravelArticle(article) ? null : <div className="teaser__text">
                 {article.teaser_text}
             </div>}
-            <ArticleMeta
-                className="teaser__meta"
-                article={article}
-                locale={locale}
-                t={t}
-            />
+            {children}
         </div>
         {isTravelArticle(article) && article.image ? <Image
             className="teaser__image"
             alt=""
-            sizes="(max-width: 767px) 100vw, (max-width: 1023px) calc(100vw - 130px), (max-width: 1679px) calc(100vw - 180px), 1500px"
+            sizes={sizes}
             fill
             src={`${process.env.NEXT_PUBLIC_ASSETS}/${article.image.filename_disk}`}
             loading={index < 10 ? 'eager' : undefined}

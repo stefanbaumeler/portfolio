@@ -23,9 +23,9 @@ export const Home = async ({ website }: Props) => {
             <Image
                 className="home__image"
                 fill
-                sizes="(max-width: 767px) calc(100vw - 20px), (max-width: 1023px) calc(100vw - 130px), (max-width: 1679px) calc(100vw - 180px), 1500px"
+                sizes="(max-width: 767px) calc(100vw - 20px), (max-width: 1023px) calc(100vw - 130px), 100vh"
                 src={`${process.env.NEXT_PUBLIC_ASSETS}/${website?.home_image.filename_disk}`}
-                alt=""
+                alt="Stefan Baumeler"
                 loading="eager"
                 priority
                 quality={75}

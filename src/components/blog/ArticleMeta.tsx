@@ -19,7 +19,7 @@ export const ArticleMeta = ({
 
     const wordCount = article.elements?.filter((el) => el?.collection === 'blog_text').reduce((acc, el) => {
         const blogText = el?.item as TBlogText
-        return acc + (blogText.text?.split(' ').length ?? 0)
+        return acc + parseInt(blogText.word_count ?? '0')
     }, 0) ?? 0
 
     const readingTime = Math.ceil(wordCount / wordsPerMinute)

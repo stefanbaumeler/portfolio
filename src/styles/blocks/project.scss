@@ -90,7 +90,7 @@
         }
     }
 
-    @at-root .project--active:nth-child(2n-1) & {
+    @at-root .project:has(.slider--active):nth-child(2n-1) & {
         transform: translateX(60px);
     }
 
@@ -148,7 +148,7 @@
             }
         }
 
-        @at-root .project--active:nth-child(4n-1) & {
+        @at-root .project:has(.slider--active):nth-child(4n-1) & {
             left: 12.5vw;
 
             @include breakpoint(lg) {
@@ -156,7 +156,7 @@
             }
         }
 
-        @at-root .project--active:nth-child(4n) & {
+        @at-root .project:has(.slider--active):nth-child(4n) & {
             right: 12.5vw;
 
             @include breakpoint(lg) {
@@ -164,7 +164,7 @@
             }
         }
 
-        @at-root .project--active:nth-child(1n) & {
+        @at-root .project:has(.slider--active):nth-child(1n) & {
             border-width: 0;
         }
     }

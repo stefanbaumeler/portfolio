@@ -3,6 +3,7 @@ import { Teaser } from '@/components/blog/Teaser'
 import { isTravelArticle } from '@/helpers/article-type'
 import { Masonry } from '@/components/global/Masonry'
 import { getLocale, getTranslations } from 'next-intl/server'
+import { ArticleMeta } from '@/components/blog/ArticleMeta'
 
 type Props = {
 	articles?: TQTravelArticles['secret_blog'] | TQDevArticles['blog']
@@ -13,14 +14,17 @@ export const Articles = async ({ articles = [] }: Props) => {
     const ChildTag = type === 'dev' ? 'div' : 'li'
     const locale = await getLocale()
     const t = await getTranslations()
-
-    return <Tag
-        className={`articles articles--${type}`}
-        breakpointCols={{
+    const breakpointCols = {
+        breakpointCols: {
             default: 3,
             1679: 2,
             1023: 1
-        }}
+        }
+    }
+
+    return <Tag
+        className={`articles articles--${type}`}
+        {...(type === 'dev' ? breakpointCols : {})}
         columnClassName="articles__column"
     >
         {articles.map((article, key) => <ChildTag
@@ -30,9 +34,14 @@ export const Articles = async ({ articles = [] }: Props) => {
             <Teaser
                 article={article}
                 index={key}
-                locale={locale}
-                t={t}
-            />
+            >
+                <ArticleMeta
+                    className="teaser__meta"
+                    article={article}
+                    locale={locale}
+                    t={t}
+                />
+            </Teaser>
         </ChildTag>)}
     </Tag>
 }

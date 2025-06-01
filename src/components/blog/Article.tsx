@@ -3,7 +3,11 @@ import { ArticleNav } from '@/components/blog/ArticleNav'
 import { HoverLink } from '@/components/global/HoverLink'
 import * as Icons from '@mdi/js'
 import { Image } from '@/components/global/Image'
-import { TBlogTitle, TQTravelArticle, TQDevArticle, TQDevArticles, TQTravelArticles, TSecretBlogElements } from '~/schema'
+import { TBlogTitle,
+    TQTravelArticle,
+    TQDevArticle,
+    TSecretBlogElements,
+    TQTravelPrevNextArticles, TQDevPrevNextArticles } from '~/schema'
 import { ArticleMeta } from '@/components/blog/ArticleMeta'
 import { getLocale, getTranslations } from 'next-intl/server'
 import { isTravelArticle } from '@/helpers/article-type'
@@ -11,8 +15,8 @@ import { SliderProvider } from '@/context/slider'
 
 type Props = {
 	article: TQTravelArticle['secret_blog'][number] | TQDevArticle['blog'][number]
-	prev?: TQTravelArticles['secret_blog'][number] | TQDevArticles['blog'][number]
-	next?: TQTravelArticles['secret_blog'][number] | TQDevArticles['blog'][number]
+	prev?: TQTravelPrevNextArticles['previous'][number] | TQDevPrevNextArticles['previous'][number]
+	next?: TQTravelPrevNextArticles['next'][number] | TQDevPrevNextArticles['next'][number]
 }
 
 export const Article = async ({

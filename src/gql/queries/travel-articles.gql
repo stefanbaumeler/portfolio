@@ -29,7 +29,7 @@ query QTravelArticles {
         elements(filter: { collection: { _eq: "blog_text" } }) {
             item {
                 ... on blog_text {
-                    text
+                    word_count
                     id
                 }
             }

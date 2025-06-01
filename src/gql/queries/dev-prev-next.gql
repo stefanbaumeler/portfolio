@@ -1,0 +1,13 @@
+query QDevPrevNextArticles($date: String!) {
+    previous: blog(filter: { _and: [ { date_created: { _lt: $date } }, { status: { _eq: "published" } } ] }, sort: ["date_created"], limit: 1) {
+        id
+        title
+        slug
+    }
+
+    next: blog(filter: { _and: [ { date_created: { _gt: $date } }, { status: { _eq: "published" } } ] }, sort: ["date_created"], limit: 1) {
+        id
+        title
+        slug
+    }
+}

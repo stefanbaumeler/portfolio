@@ -29,7 +29,8 @@
         }
     }
 
-    &--force-white {
+    &:has(+ .home),
+    &:has(+ .blogs) {
         position: absolute;
         right: 0;
     }
@@ -95,13 +96,16 @@
     cursor: pointer;
     color: $color-gray;
 
-    @at-root .top-nav--force-white & {
-        @include breakpoint(md) {
-            color: $color-white;
-        }
+    @at-root {
+        .top-nav:has(+ .home) &,
+        .top-nav:has(+ .blogs) & {
+            @include breakpoint(md) {
+                color: $color-white;
+            }
 
-        @at-root .body:has(.blogs) & {
-            color: $color-white;
+            @at-root .body:has(.blogs) & {
+                color: $color-white;
+            }
         }
     }
 
@@ -119,8 +123,11 @@
     &:hover {
         color: var(--c-black);
 
-        @at-root .top-nav--force-white & {
-            color: $color-white;
+        @at-root {
+            .top-nav:has(+ .home) &,
+            .top-nav:has(+ .blogs) & {
+                color: $color-white;
+            }
         }
 
         &:before {

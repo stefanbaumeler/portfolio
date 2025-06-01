@@ -7,6 +7,7 @@ import Icon from '@mdi/react'
 import { mdiClose } from '@mdi/js'
 import { recursivelyCleanDaytrips } from '@/helpers/clean-daytrips'
 import { useBodyContext } from '@/context/body'
+import { ArticleMeta } from '@/components/blog/ArticleMeta'
 
 type Props = {
     transportation: TQMap['transportation']
@@ -213,9 +214,15 @@ export const PlaceDrawer = ({
                         index={k}
                         article={article}
                         key={k}
-                        t={t}
-                        locale={locale}
-                    />)}
+                        sizes="(min-width: 0px) 400px"
+                    >
+                        <ArticleMeta
+                            className="teaser__meta"
+                            article={article}
+                            locale={locale}
+                            t={t}
+                        />
+                    </Teaser>)}
                 </div>
             </> : null}
         </div>

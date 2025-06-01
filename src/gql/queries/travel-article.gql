@@ -1,7 +1,6 @@
 query QTravelArticle($slug: String!) {
     secret_blog(filter: { slug: { _eq: $slug } }) {
         id
-        status
         title
         date_created
         slug
@@ -47,6 +46,7 @@ query QTravelArticle($slug: String!) {
                     }
                 }
                 ... on blog_text {
+                    word_count
                     text
                     id
                 }

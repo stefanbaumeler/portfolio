@@ -5,6 +5,7 @@ import { getTranslations } from 'next-intl/server'
 import { BlogMeta } from '@/components/blog/BlogMeta'
 
 export const revalidate = 60
+
 const DevBlogPage = async () => {
     const { data } = await getClient().query<TQDevArticles>(QDevArticlesDocument, {})
     const t = await getTranslations()

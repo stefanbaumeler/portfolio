@@ -30,6 +30,42 @@ export enum TEventEnum {
   Update = 'update'
 }
 
+export type TMutation = {
+  __typename?: 'Mutation';
+  update_blog_text_batch: Array<TBlogText>;
+  update_blog_text_item: Maybe<TBlogText>;
+  update_blog_text_items: Array<TBlogText>;
+};
+
+
+export type TMutationUpdateBlogTextBatchArgs = {
+  data: InputMaybe<Array<TUpdateBlogTextInput>>;
+  filter: InputMaybe<TBlogTextFilter>;
+  limit: InputMaybe<Scalars['Int']['input']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
+  page: InputMaybe<Scalars['Int']['input']>;
+  search: InputMaybe<Scalars['String']['input']>;
+  sort: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type TMutationUpdateBlogTextItemArgs = {
+  data: TUpdateBlogTextInput;
+  id: Scalars['ID']['input'];
+};
+
+
+export type TMutationUpdateBlogTextItemsArgs = {
+  data: TUpdateBlogTextInput;
+  filter: InputMaybe<TBlogTextFilter>;
+  ids: Array<InputMaybe<Scalars['ID']['input']>>;
+  limit: InputMaybe<Scalars['Int']['input']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
+  page: InputMaybe<Scalars['Int']['input']>;
+  search: InputMaybe<Scalars['String']['input']>;
+  sort: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
 export type TQuery = {
   __typename?: 'Query';
   accommodation: Array<TAccommodation>;
@@ -2427,11 +2463,9 @@ export type TBlogFilter = {
 export type TBlogImage = {
   __typename?: 'blog_image';
   caption: Maybe<Scalars['String']['output']>;
-  contain: Maybe<Scalars['Boolean']['output']>;
   id: Scalars['ID']['output'];
   image: Maybe<TDirectusFiles>;
   invert: Maybe<Scalars['Boolean']['output']>;
-  invert_by_default: Maybe<Scalars['Boolean']['output']>;
 };
 
 
@@ -2461,11 +2495,9 @@ export type TBlogImageAggregated = {
 export type TBlogImageAggregatedCount = {
   __typename?: 'blog_image_aggregated_count';
   caption: Maybe<Scalars['Int']['output']>;
-  contain: Maybe<Scalars['Int']['output']>;
   id: Maybe<Scalars['Int']['output']>;
   image: Maybe<Scalars['Int']['output']>;
   invert: Maybe<Scalars['Int']['output']>;
-  invert_by_default: Maybe<Scalars['Int']['output']>;
 };
 
 export type TBlogImageAggregatedFields = {
@@ -2477,11 +2509,9 @@ export type TBlogImageFilter = {
   _and: InputMaybe<Array<InputMaybe<TBlogImageFilter>>>;
   _or: InputMaybe<Array<InputMaybe<TBlogImageFilter>>>;
   caption: InputMaybe<TStringFilterOperators>;
-  contain: InputMaybe<TBooleanFilterOperators>;
   id: InputMaybe<TNumberFilterOperators>;
   image: InputMaybe<TDirectusFilesFilter>;
   invert: InputMaybe<TBooleanFilterOperators>;
-  invert_by_default: InputMaybe<TBooleanFilterOperators>;
 };
 
 export type TBlogImageMutated = {
@@ -2669,6 +2699,7 @@ export type TBlogText = {
   __typename?: 'blog_text';
   id: Scalars['ID']['output'];
   text: Maybe<Scalars['String']['output']>;
+  word_count: Maybe<Scalars['String']['output']>;
 };
 
 export type TBlogTextAggregated = {
@@ -2689,6 +2720,7 @@ export type TBlogTextAggregatedCount = {
   __typename?: 'blog_text_aggregated_count';
   id: Maybe<Scalars['Int']['output']>;
   text: Maybe<Scalars['Int']['output']>;
+  word_count: Maybe<Scalars['Int']['output']>;
 };
 
 export type TBlogTextAggregatedFields = {
@@ -2701,6 +2733,7 @@ export type TBlogTextFilter = {
   _or: InputMaybe<Array<InputMaybe<TBlogTextFilter>>>;
   id: InputMaybe<TNumberFilterOperators>;
   text: InputMaybe<TStringFilterOperators>;
+  word_count: InputMaybe<TStringFilterOperators>;
 };
 
 export type TBlogTextMutated = {
@@ -5905,6 +5938,12 @@ export type TTravelMutated = {
   key: Scalars['ID']['output'];
 };
 
+export type TUpdateBlogTextInput = {
+  id: InputMaybe<Scalars['ID']['input']>;
+  text: InputMaybe<Scalars['String']['input']>;
+  word_count: InputMaybe<Scalars['String']['input']>;
+};
+
 export type TVersionAccommodation = {
   __typename?: 'version_accommodation';
   bookings: Maybe<Scalars['JSON']['output']>;
@@ -5956,11 +5995,9 @@ export type TVersionBlogElements = {
 export type TVersionBlogImage = {
   __typename?: 'version_blog_image';
   caption: Maybe<Scalars['String']['output']>;
-  contain: Maybe<Scalars['Boolean']['output']>;
   id: Scalars['ID']['output'];
   image: Maybe<Scalars['JSON']['output']>;
   invert: Maybe<Scalars['Boolean']['output']>;
-  invert_by_default: Maybe<Scalars['Boolean']['output']>;
 };
 
 export type TVersionBlogMap = {
@@ -5986,8 +6023,9 @@ export type TVersionBlogTechnology = {
 
 export type TVersionBlogText = {
   __typename?: 'version_blog_text';
-  id: Scalars['ID']['output'];
+  id: Maybe<Scalars['ID']['output']>;
   text: Maybe<Scalars['String']['output']>;
+  word_count: Maybe<Scalars['String']['output']>;
 };
 
 export type TVersionBlogTitle = {
@@ -6754,6 +6792,7 @@ export type TResolversTypes = {
   ID: ResolverTypeWrapper<Scalars['ID']['output']>;
   Int: ResolverTypeWrapper<Scalars['Int']['output']>;
   JSON: ResolverTypeWrapper<Scalars['JSON']['output']>;
+  Mutation: ResolverTypeWrapper<{}>;
   Query: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars['String']['output']>;
   Subscription: ResolverTypeWrapper<{}>;
@@ -7041,6 +7080,7 @@ export type TResolversTypes = {
   transportation_mutated: ResolverTypeWrapper<Omit<TTransportationMutated, 'data'> & { data: Maybe<TResolversTypes['transportation']> }>;
   travel: ResolverTypeWrapper<TTravel>;
   travel_mutated: ResolverTypeWrapper<TTravelMutated>;
+  update_blog_text_input: TUpdateBlogTextInput;
   version_accommodation: ResolverTypeWrapper<Omit<TVersionAccommodation, 'bookings_func'> & { bookings_func: Maybe<TResolversTypes['count_functions']> }>;
   version_author: ResolverTypeWrapper<Omit<TVersionAuthor, 'books_func'> & { books_func: Maybe<TResolversTypes['count_functions']> }>;
   version_author_book: ResolverTypeWrapper<TVersionAuthorBook>;
@@ -7125,6 +7165,7 @@ export type TResolversParentTypes = {
   ID: Scalars['ID']['output'];
   Int: Scalars['Int']['output'];
   JSON: Scalars['JSON']['output'];
+  Mutation: {};
   Query: {};
   String: Scalars['String']['output'];
   Subscription: {};
@@ -7412,6 +7453,7 @@ export type TResolversParentTypes = {
   transportation_mutated: Omit<TTransportationMutated, 'data'> & { data: Maybe<TResolversParentTypes['transportation']> };
   travel: TTravel;
   travel_mutated: TTravelMutated;
+  update_blog_text_input: TUpdateBlogTextInput;
   version_accommodation: Omit<TVersionAccommodation, 'bookings_func'> & { bookings_func: Maybe<TResolversParentTypes['count_functions']> };
   version_author: Omit<TVersionAuthor, 'books_func'> & { books_func: Maybe<TResolversParentTypes['count_functions']> };
   version_author_book: TVersionAuthorBook;
@@ -7507,6 +7549,12 @@ export interface THashScalarConfig extends GraphQLScalarTypeConfig<TResolversTyp
 export interface TJsonScalarConfig extends GraphQLScalarTypeConfig<TResolversTypes['JSON'], any> {
   name: 'JSON';
 }
+
+export type TMutationResolvers<ContextType = any, ParentType extends TResolversParentTypes['Mutation'] = TResolversParentTypes['Mutation']> = {
+  update_blog_text_batch: Resolver<Array<TResolversTypes['blog_text']>, ParentType, ContextType, TMutationUpdateBlogTextBatchArgs>;
+  update_blog_text_item: Resolver<Maybe<TResolversTypes['blog_text']>, ParentType, ContextType, RequireFields<TMutationUpdateBlogTextItemArgs, 'data' | 'id'>>;
+  update_blog_text_items: Resolver<Array<TResolversTypes['blog_text']>, ParentType, ContextType, RequireFields<TMutationUpdateBlogTextItemsArgs, 'data' | 'ids'>>;
+};
 
 export type TQueryResolvers<ContextType = any, ParentType extends TResolversParentTypes['Query'] = TResolversParentTypes['Query']> = {
   accommodation: Resolver<Array<TResolversTypes['accommodation']>, ParentType, ContextType, TQueryAccommodationArgs>;
@@ -7979,11 +8027,9 @@ export type TBlogElementsMutatedResolvers<ContextType = any, ParentType extends 
 
 export type TBlogImageResolvers<ContextType = any, ParentType extends TResolversParentTypes['blog_image'] = TResolversParentTypes['blog_image']> = {
   caption: Resolver<Maybe<TResolversTypes['String']>, ParentType, ContextType>;
-  contain: Resolver<Maybe<TResolversTypes['Boolean']>, ParentType, ContextType>;
   id: Resolver<TResolversTypes['ID'], ParentType, ContextType>;
   image: Resolver<Maybe<TResolversTypes['directus_files']>, ParentType, ContextType, TBlogImageImageArgs>;
   invert: Resolver<Maybe<TResolversTypes['Boolean']>, ParentType, ContextType>;
-  invert_by_default: Resolver<Maybe<TResolversTypes['Boolean']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -8003,11 +8049,9 @@ export type TBlogImageAggregatedResolvers<ContextType = any, ParentType extends 
 
 export type TBlogImageAggregatedCountResolvers<ContextType = any, ParentType extends TResolversParentTypes['blog_image_aggregated_count'] = TResolversParentTypes['blog_image_aggregated_count']> = {
   caption: Resolver<Maybe<TResolversTypes['Int']>, ParentType, ContextType>;
-  contain: Resolver<Maybe<TResolversTypes['Int']>, ParentType, ContextType>;
   id: Resolver<Maybe<TResolversTypes['Int']>, ParentType, ContextType>;
   image: Resolver<Maybe<TResolversTypes['Int']>, ParentType, ContextType>;
   invert: Resolver<Maybe<TResolversTypes['Int']>, ParentType, ContextType>;
-  invert_by_default: Resolver<Maybe<TResolversTypes['Int']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -8156,6 +8200,7 @@ export type TBlogTechnologyMutatedResolvers<ContextType = any, ParentType extend
 export type TBlogTextResolvers<ContextType = any, ParentType extends TResolversParentTypes['blog_text'] = TResolversParentTypes['blog_text']> = {
   id: Resolver<TResolversTypes['ID'], ParentType, ContextType>;
   text: Resolver<Maybe<TResolversTypes['String']>, ParentType, ContextType>;
+  word_count: Resolver<Maybe<TResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -8176,6 +8221,7 @@ export type TBlogTextAggregatedResolvers<ContextType = any, ParentType extends T
 export type TBlogTextAggregatedCountResolvers<ContextType = any, ParentType extends TResolversParentTypes['blog_text_aggregated_count'] = TResolversParentTypes['blog_text_aggregated_count']> = {
   id: Resolver<Maybe<TResolversTypes['Int']>, ParentType, ContextType>;
   text: Resolver<Maybe<TResolversTypes['Int']>, ParentType, ContextType>;
+  word_count: Resolver<Maybe<TResolversTypes['Int']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -9988,11 +10034,9 @@ export type TVersionBlogElementsResolvers<ContextType = any, ParentType extends 
 
 export type TVersionBlogImageResolvers<ContextType = any, ParentType extends TResolversParentTypes['version_blog_image'] = TResolversParentTypes['version_blog_image']> = {
   caption: Resolver<Maybe<TResolversTypes['String']>, ParentType, ContextType>;
-  contain: Resolver<Maybe<TResolversTypes['Boolean']>, ParentType, ContextType>;
   id: Resolver<TResolversTypes['ID'], ParentType, ContextType>;
   image: Resolver<Maybe<TResolversTypes['JSON']>, ParentType, ContextType>;
   invert: Resolver<Maybe<TResolversTypes['Boolean']>, ParentType, ContextType>;
-  invert_by_default: Resolver<Maybe<TResolversTypes['Boolean']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -10018,8 +10062,9 @@ export type TVersionBlogTechnologyResolvers<ContextType = any, ParentType extend
 };
 
 export type TVersionBlogTextResolvers<ContextType = any, ParentType extends TResolversParentTypes['version_blog_text'] = TResolversParentTypes['version_blog_text']> = {
-  id: Resolver<TResolversTypes['ID'], ParentType, ContextType>;
+  id: Resolver<Maybe<TResolversTypes['ID']>, ParentType, ContextType>;
   text: Resolver<Maybe<TResolversTypes['String']>, ParentType, ContextType>;
+  word_count: Resolver<Maybe<TResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -10579,6 +10624,7 @@ export type TResolvers<ContextType = any> = {
   GraphQLStringOrFloat: GraphQLScalarType;
   Hash: GraphQLScalarType;
   JSON: GraphQLScalarType;
+  Mutation: TMutationResolvers<ContextType>;
   Query: TQueryResolvers<ContextType>;
   Subscription: TSubscriptionResolvers<ContextType>;
   accommodation: TAccommodationResolvers<ContextType>;
@@ -10975,7 +11021,7 @@ export type TQDevArticle = (
         & Pick<TBlogQuote, 'id' | 'text' | 'author' | 'url'>
       ) | (
         { __typename?: 'blog_text' }
-        & Pick<TBlogText, 'text' | 'id'>
+        & Pick<TBlogText, 'word_count' | 'text' | 'id'>
       ) | (
         { __typename?: 'blog_title' }
         & Pick<TBlogTitle, 'title' | 'level' | 'tag' | 'id'>
@@ -11026,9 +11072,25 @@ export type TQDevArticles = (
       & Pick<TBlogElements, 'collection'>
       & { item: Maybe<{ __typename?: 'blog_image' } | { __typename?: 'blog_map' } | { __typename?: 'blog_quote' } | (
         { __typename?: 'blog_text' }
-        & Pick<TBlogText, 'text' | 'id'>
+        & Pick<TBlogText, 'word_count' | 'id'>
       ) | { __typename?: 'blog_title' } | { __typename?: 'blog_video' }> }
     )>>> }
+  )> }
+);
+
+export type TQDevPrevNextArticlesVariables = Exact<{
+  date: Scalars['String']['input'];
+}>;
+
+
+export type TQDevPrevNextArticles = (
+  { __typename?: 'Query' }
+  & { previous: Array<(
+    { __typename?: 'blog' }
+    & Pick<TBlog, 'id' | 'title' | 'slug'>
+  )>, next: Array<(
+    { __typename?: 'blog' }
+    & Pick<TBlog, 'id' | 'title' | 'slug'>
   )> }
 );
 
@@ -11427,7 +11489,7 @@ export type TQTravelArticle = (
   { __typename?: 'Query' }
   & { secret_blog: Array<(
     { __typename?: 'secret_blog' }
-    & Pick<TSecretBlog, 'id' | 'status' | 'title' | 'date_created' | 'slug'>
+    & Pick<TSecretBlog, 'id' | 'title' | 'date_created' | 'slug'>
     & { image: Maybe<(
       { __typename?: 'directus_files' }
       & Pick<TDirectusFiles, 'id' | 'filename_disk'>
@@ -11475,7 +11537,7 @@ export type TQTravelArticle = (
         & Pick<TBlogQuote, 'id' | 'text' | 'author' | 'url'>
       ) | (
         { __typename?: 'blog_text' }
-        & Pick<TBlogText, 'text' | 'id'>
+        & Pick<TBlogText, 'word_count' | 'text' | 'id'>
       ) | (
         { __typename?: 'blog_title' }
         & Pick<TBlogTitle, 'title' | 'level' | 'tag' | 'id'>
@@ -11522,9 +11584,33 @@ export type TQTravelArticles = (
       & Pick<TSecretBlogElements, 'collection'>
       & { item: Maybe<{ __typename?: 'blog_image' } | { __typename?: 'blog_map' } | { __typename?: 'blog_quote' } | (
         { __typename?: 'blog_text' }
-        & Pick<TBlogText, 'text' | 'id'>
+        & Pick<TBlogText, 'word_count' | 'id'>
       ) | { __typename?: 'blog_title' } | { __typename?: 'blog_video' }> }
     )>>> }
+  )> }
+);
+
+export type TQTravelPrevNextArticlesVariables = Exact<{
+  date: Scalars['String']['input'];
+}>;
+
+
+export type TQTravelPrevNextArticles = (
+  { __typename?: 'Query' }
+  & { previous: Array<(
+    { __typename?: 'secret_blog' }
+    & Pick<TSecretBlog, 'id' | 'title' | 'slug'>
+    & { image: Maybe<(
+      { __typename?: 'directus_files' }
+      & Pick<TDirectusFiles, 'id' | 'filename_disk'>
+    )> }
+  )>, next: Array<(
+    { __typename?: 'secret_blog' }
+    & Pick<TSecretBlog, 'id' | 'title' | 'slug'>
+    & { image: Maybe<(
+      { __typename?: 'directus_files' }
+      & Pick<TDirectusFiles, 'id' | 'filename_disk'>
+    )> }
   )> }
 );
 
@@ -11602,6 +11688,7 @@ export const QDevArticleDocument = gql`
           }
         }
         ... on blog_text {
+          word_count
           text
           id
         }
@@ -11648,7 +11735,7 @@ export const QDevArticlesDocument = gql`
     elements(filter: {collection: {_eq: "blog_text"}}) {
       item {
         ... on blog_text {
-          text
+          word_count
           id
         }
       }
@@ -11657,6 +11744,28 @@ export const QDevArticlesDocument = gql`
   }
 }
     ${FTechnology}`;
+export const QDevPrevNextArticlesDocument = gql`
+    query QDevPrevNextArticles($date: String!) {
+  previous: blog(
+    filter: {_and: [{date_created: {_lt: $date}}, {status: {_eq: "published"}}]}
+    sort: ["date_created"]
+    limit: 1
+  ) {
+    id
+    title
+    slug
+  }
+  next: blog(
+    filter: {_and: [{date_created: {_gt: $date}}, {status: {_eq: "published"}}]}
+    sort: ["date_created"]
+    limit: 1
+  ) {
+    id
+    title
+    slug
+  }
+}
+    `;
 export const QMapDocument = gql`
     query QMap {
   place(limit: -1) {
@@ -11980,7 +12089,6 @@ export const QTravelArticleDocument = gql`
     query QTravelArticle($slug: String!) {
   secret_blog(filter: {slug: {_eq: $slug}}) {
     id
-    status
     title
     date_created
     slug
@@ -12026,6 +12134,7 @@ export const QTravelArticleDocument = gql`
           }
         }
         ... on blog_text {
+          word_count
           text
           id
         }
@@ -12086,11 +12195,41 @@ export const QTravelArticlesDocument = gql`
     elements(filter: {collection: {_eq: "blog_text"}}) {
       item {
         ... on blog_text {
-          text
+          word_count
           id
         }
       }
       collection
+    }
+  }
+}
+    `;
+export const QTravelPrevNextArticlesDocument = gql`
+    query QTravelPrevNextArticles($date: String!) {
+  previous: secret_blog(
+    filter: {_and: [{date_created: {_lt: $date}}, {status: {_eq: "published"}}]}
+    sort: ["date_created"]
+    limit: 1
+  ) {
+    id
+    title
+    slug
+    image {
+      id
+      filename_disk
+    }
+  }
+  next: secret_blog(
+    filter: {_and: [{date_created: {_gt: $date}}, {status: {_eq: "published"}}]}
+    sort: ["date_created"]
+    limit: 1
+  ) {
+    id
+    title
+    slug
+    image {
+      id
+      filename_disk
     }
   }
 }

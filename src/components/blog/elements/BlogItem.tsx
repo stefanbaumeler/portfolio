@@ -17,9 +17,14 @@ export const BlogItem = async ({
 
     if (element?.collection === 'blog_image') {
         const e = element.item as TBlogImage
-        if (e.image.type === 'image/svg+xml') {
-            const res = await getAspectRatioOfSVG(`${process.env.NEXT_PUBLIC_ASSETS}/${e.image?.filename_disk}`)
-            aspect = res?.aspectRatio
+        try {
+            if (e.image?.type === 'image/svg+xml') {
+                const res = await getAspectRatioOfSVG(`${process.env.NEXT_PUBLIC_ASSETS}/${e.image?.filename_disk}`)
+                aspect = res?.aspectRatio
+            }
+        }
+        catch {
+            console.log(e)
         }
     }
 

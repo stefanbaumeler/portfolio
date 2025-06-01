@@ -20,6 +20,7 @@ query QDevArticle($slug: String!) {
                     }
                 }
                 ... on blog_text {
+                    word_count
                     text
                     id
                 }
