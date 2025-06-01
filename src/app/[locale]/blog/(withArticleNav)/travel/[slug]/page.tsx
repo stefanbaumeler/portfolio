@@ -1,6 +1,9 @@
 import { Article } from '@/components/blog/Article'
 import { getClient } from '@/gql/urql'
-import { QTravelArticleDocument, QTravelArticlesDocument, TQTravelArticle, TQTravelArticles } from '~/schema'
+import { QTravelArticleDocument,
+    QTravelArticlesDocument, QTravelPrevNextArticlesDocument,
+    TQTravelArticle,
+    TQTravelArticles, TQTravelPrevNextArticles } from '~/schema'
 
 export const revalidate = 60
 
@@ -23,21 +26,17 @@ const TravelBlogPage = async ({ params }: { params: Promise<{ slug: string }> })
         slug
     })
 
-    const allRes = await getClient().query<TQTravelArticles>(QTravelArticlesDocument, {})
-
     const article = singleRes.data?.secret_blog[0]
-    const articles = allRes.data?.secret_blog
 
-    const index = allRes.data?.secret_blog.findIndex((other) => other.slug === article?.slug) ?? 0
-
-    const prev = articles?.[index + 1]
-    const next = articles?.[index - 1]
+    const prevNext = await getClient().query<TQTravelPrevNextArticles>(QTravelPrevNextArticlesDocument, {
+        date: singleRes.data?.secret_blog[0]?.date_created
+    })
 
     if (article) {
         return <Article
             article={article}
-            prev={prev}
-            next={next}
+            prev={prevNext.data?.previous[0]}
+            next={prevNext.data?.next[0]}
         />
     }
 

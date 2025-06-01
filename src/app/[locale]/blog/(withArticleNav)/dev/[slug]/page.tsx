@@ -37,8 +37,8 @@ const DevBlogPage = async ({ params }: { params: Promise<{ slug: string }> }) =>
     if (article) {
         return <Article
             article={article}
-            prev={prevNext.data?.previous}
-            next={prevNext.data?.next}
+            prev={prevNext.data?.previous[0]}
+            next={prevNext.data?.next[0]}
         />
     }
 

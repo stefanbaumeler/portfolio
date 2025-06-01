@@ -30,42 +30,6 @@ export enum TEventEnum {
   Update = 'update'
 }
 
-export type TMutation = {
-  __typename?: 'Mutation';
-  update_blog_text_batch: Array<TBlogText>;
-  update_blog_text_item: Maybe<TBlogText>;
-  update_blog_text_items: Array<TBlogText>;
-};
-
-
-export type TMutationUpdateBlogTextBatchArgs = {
-  data: InputMaybe<Array<TUpdateBlogTextInput>>;
-  filter: InputMaybe<TBlogTextFilter>;
-  limit: InputMaybe<Scalars['Int']['input']>;
-  offset: InputMaybe<Scalars['Int']['input']>;
-  page: InputMaybe<Scalars['Int']['input']>;
-  search: InputMaybe<Scalars['String']['input']>;
-  sort: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
-
-export type TMutationUpdateBlogTextItemArgs = {
-  data: TUpdateBlogTextInput;
-  id: Scalars['ID']['input'];
-};
-
-
-export type TMutationUpdateBlogTextItemsArgs = {
-  data: TUpdateBlogTextInput;
-  filter: InputMaybe<TBlogTextFilter>;
-  ids: Array<InputMaybe<Scalars['ID']['input']>>;
-  limit: InputMaybe<Scalars['Int']['input']>;
-  offset: InputMaybe<Scalars['Int']['input']>;
-  page: InputMaybe<Scalars['Int']['input']>;
-  search: InputMaybe<Scalars['String']['input']>;
-  sort: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
 export type TQuery = {
   __typename?: 'Query';
   accommodation: Array<TAccommodation>;
@@ -5938,12 +5902,6 @@ export type TTravelMutated = {
   key: Scalars['ID']['output'];
 };
 
-export type TUpdateBlogTextInput = {
-  id: InputMaybe<Scalars['ID']['input']>;
-  text: InputMaybe<Scalars['String']['input']>;
-  word_count: InputMaybe<Scalars['String']['input']>;
-};
-
 export type TVersionAccommodation = {
   __typename?: 'version_accommodation';
   bookings: Maybe<Scalars['JSON']['output']>;
@@ -6023,7 +5981,7 @@ export type TVersionBlogTechnology = {
 
 export type TVersionBlogText = {
   __typename?: 'version_blog_text';
-  id: Maybe<Scalars['ID']['output']>;
+  id: Scalars['ID']['output'];
   text: Maybe<Scalars['String']['output']>;
   word_count: Maybe<Scalars['String']['output']>;
 };
@@ -6792,7 +6750,6 @@ export type TResolversTypes = {
   ID: ResolverTypeWrapper<Scalars['ID']['output']>;
   Int: ResolverTypeWrapper<Scalars['Int']['output']>;
   JSON: ResolverTypeWrapper<Scalars['JSON']['output']>;
-  Mutation: ResolverTypeWrapper<{}>;
   Query: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars['String']['output']>;
   Subscription: ResolverTypeWrapper<{}>;
@@ -7080,7 +7037,6 @@ export type TResolversTypes = {
   transportation_mutated: ResolverTypeWrapper<Omit<TTransportationMutated, 'data'> & { data: Maybe<TResolversTypes['transportation']> }>;
   travel: ResolverTypeWrapper<TTravel>;
   travel_mutated: ResolverTypeWrapper<TTravelMutated>;
-  update_blog_text_input: TUpdateBlogTextInput;
   version_accommodation: ResolverTypeWrapper<Omit<TVersionAccommodation, 'bookings_func'> & { bookings_func: Maybe<TResolversTypes['count_functions']> }>;
   version_author: ResolverTypeWrapper<Omit<TVersionAuthor, 'books_func'> & { books_func: Maybe<TResolversTypes['count_functions']> }>;
   version_author_book: ResolverTypeWrapper<TVersionAuthorBook>;
@@ -7165,7 +7121,6 @@ export type TResolversParentTypes = {
   ID: Scalars['ID']['output'];
   Int: Scalars['Int']['output'];
   JSON: Scalars['JSON']['output'];
-  Mutation: {};
   Query: {};
   String: Scalars['String']['output'];
   Subscription: {};
@@ -7453,7 +7408,6 @@ export type TResolversParentTypes = {
   transportation_mutated: Omit<TTransportationMutated, 'data'> & { data: Maybe<TResolversParentTypes['transportation']> };
   travel: TTravel;
   travel_mutated: TTravelMutated;
-  update_blog_text_input: TUpdateBlogTextInput;
   version_accommodation: Omit<TVersionAccommodation, 'bookings_func'> & { bookings_func: Maybe<TResolversParentTypes['count_functions']> };
   version_author: Omit<TVersionAuthor, 'books_func'> & { books_func: Maybe<TResolversParentTypes['count_functions']> };
   version_author_book: TVersionAuthorBook;
@@ -7549,12 +7503,6 @@ export interface THashScalarConfig extends GraphQLScalarTypeConfig<TResolversTyp
 export interface TJsonScalarConfig extends GraphQLScalarTypeConfig<TResolversTypes['JSON'], any> {
   name: 'JSON';
 }
-
-export type TMutationResolvers<ContextType = any, ParentType extends TResolversParentTypes['Mutation'] = TResolversParentTypes['Mutation']> = {
-  update_blog_text_batch: Resolver<Array<TResolversTypes['blog_text']>, ParentType, ContextType, TMutationUpdateBlogTextBatchArgs>;
-  update_blog_text_item: Resolver<Maybe<TResolversTypes['blog_text']>, ParentType, ContextType, RequireFields<TMutationUpdateBlogTextItemArgs, 'data' | 'id'>>;
-  update_blog_text_items: Resolver<Array<TResolversTypes['blog_text']>, ParentType, ContextType, RequireFields<TMutationUpdateBlogTextItemsArgs, 'data' | 'ids'>>;
-};
 
 export type TQueryResolvers<ContextType = any, ParentType extends TResolversParentTypes['Query'] = TResolversParentTypes['Query']> = {
   accommodation: Resolver<Array<TResolversTypes['accommodation']>, ParentType, ContextType, TQueryAccommodationArgs>;
@@ -10062,7 +10010,7 @@ export type TVersionBlogTechnologyResolvers<ContextType = any, ParentType extend
 };
 
 export type TVersionBlogTextResolvers<ContextType = any, ParentType extends TResolversParentTypes['version_blog_text'] = TResolversParentTypes['version_blog_text']> = {
-  id: Resolver<Maybe<TResolversTypes['ID']>, ParentType, ContextType>;
+  id: Resolver<TResolversTypes['ID'], ParentType, ContextType>;
   text: Resolver<Maybe<TResolversTypes['String']>, ParentType, ContextType>;
   word_count: Resolver<Maybe<TResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -10624,7 +10572,6 @@ export type TResolvers<ContextType = any> = {
   GraphQLStringOrFloat: GraphQLScalarType;
   Hash: GraphQLScalarType;
   JSON: GraphQLScalarType;
-  Mutation: TMutationResolvers<ContextType>;
   Query: TQueryResolvers<ContextType>;
   Subscription: TSubscriptionResolvers<ContextType>;
   accommodation: TAccommodationResolvers<ContextType>;
@@ -11748,7 +11695,7 @@ export const QDevPrevNextArticlesDocument = gql`
     query QDevPrevNextArticles($date: String!) {
   previous: blog(
     filter: {_and: [{date_created: {_lt: $date}}, {status: {_eq: "published"}}]}
-    sort: ["date_created"]
+    sort: ["-date_created"]
     limit: 1
   ) {
     id
@@ -12208,7 +12155,7 @@ export const QTravelPrevNextArticlesDocument = gql`
     query QTravelPrevNextArticles($date: String!) {
   previous: secret_blog(
     filter: {_and: [{date_created: {_lt: $date}}, {status: {_eq: "published"}}]}
-    sort: ["date_created"]
+    sort: ["-date_created"]
     limit: 1
   ) {
     id
