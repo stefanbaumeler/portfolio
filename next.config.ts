@@ -7,8 +7,7 @@ const withNextIntl = createNextIntlPlugin()
 const nextConfig: NextConfig = {
     reactStrictMode: true,
     experimental: {
-        reactCompiler: true,
-        ppr: 'incremental'
+        reactCompiler: true
     },
     sassOptions: {
         additionalData: '@use \'~/src/styles/global.scss\' as *;',

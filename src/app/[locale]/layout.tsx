@@ -56,9 +56,6 @@ export const viewport: Viewport = {
     initialScale: 1
 }
 
-export const ppr = true
-export const experimental_ppr = true
-
 export const metadata: Metadata = {
     title: 'Stefan Baumeler — Web Developer — Official Portfolio',
     description: 'The official portfolio of Stefan Baumeler, a location independent senior web developer based in Switzerland developing high quality web applications for Swiss companies.',

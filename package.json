@@ -30,7 +30,7 @@
         "mapbox-gl": "^3.12.0",
         "marked-highlight": "^2.2.1",
         "marked-react": "^3.0.0",
-        "next": "^15.4.0-canary.60",
+        "next": "^15.3.3",
         "next-intl": "^4.1.0",
         "postcss": "^8.4.49",
         "postcss-flexbugs-fixes": "^5.0.2",
