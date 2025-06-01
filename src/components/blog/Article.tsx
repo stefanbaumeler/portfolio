@@ -29,6 +29,7 @@ export const Article = async ({
 
     return <SliderProvider>
         <div className="article">
+            <div className="article__progress"></div>
             <h1
                 className="article__title article__title--level-1"
                 dangerouslySetInnerHTML={{

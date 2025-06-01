@@ -39,7 +39,7 @@
         transition: none;
     }
 
-    @at-root .project--active & {
+    @at-root .slider--active & {
         @include breakpoint(md) {
             opacity: 1;
             pointer-events: all;

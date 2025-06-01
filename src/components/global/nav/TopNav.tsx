@@ -8,8 +8,9 @@ import { useTopNavContext } from '@/context/top-nav'
 import { useLocale, useTranslations } from 'next-intl'
 import { usePathname } from '@/i18n/routing'
 import { Link } from '@/components/global/Link'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Placement } from '@floating-ui/react'
+import { useOnResize } from '@/helpers/resize'
 
 export const TopNav = () => {
     const dark = useDarkContext()
@@ -19,16 +20,9 @@ export const TopNav = () => {
     const locale = useLocale()
     const [tooltipPlacement, setTooltipPlacement] = useState<Placement>('bottom')
 
-    useEffect(() => {
-        const callback = () => {
-            setTooltipPlacement(window.innerWidth < 768 ? 'top' : 'bottom')
-        }
-        window.addEventListener('resize', callback)
-
-        callback()
-
-        return () => window.removeEventListener('resize', callback)
-    }, [])
+    useOnResize(() => {
+        setTooltipPlacement(window.innerWidth < 768 ? 'top' : 'bottom')
+    })
 
     return <div className="top-nav">
         {topNavContext.title ? <h1 className="top-nav__title">
@@ -81,7 +75,7 @@ export const TopNav = () => {
                     className="top-nav__item"
                 >
                     <Link
-                        prefetch={!pathname.endsWith('/stats')}
+                        prefetch={!pathname.endsWith('/stats') && !pathname.endsWith('/map')}
                         aria-label={t('Language')}
                         skipLanguage
                         className="top-nav__button"

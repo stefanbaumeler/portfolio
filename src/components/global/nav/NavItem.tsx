@@ -7,6 +7,7 @@ import { usePathname } from 'next/navigation'
 import { useNavContext } from '@/context/nav'
 import { useEffect, useState } from 'react'
 import { Placement } from '@floating-ui/react'
+import { useOnResize } from '@/helpers/resize'
 
 type Props = {
 	item: {
@@ -24,16 +25,9 @@ export const NavItem = ({ item }: Props) => {
 
     const isHome = item.url === '/'
 
-    useEffect(() => {
-        const callback = () => {
-            setTooltipPlacement(window.innerWidth < 768 ? 'bottom' : 'right')
-        }
-        window.addEventListener('resize', callback)
-
-        callback()
-
-        return () => window.removeEventListener('resize', callback)
-    }, [])
+    useOnResize(() => {
+        setTooltipPlacement(window.innerWidth < 768 ? 'bottom' : 'right')
+    })
 
     return <Tooltip
         content={item.label}

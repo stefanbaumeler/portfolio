@@ -1,3 +1,10 @@
+@keyframes progress {
+    to {
+        background-color: $color-main-dark;
+        width: calc(100% - 80px);
+    }
+}
+
 @mixin article-root {
     @include container;
 
@@ -10,6 +17,30 @@
     @include breakpoint(md) {
         max-width: 1300px;
     }
+
+    @at-root .top-nav + & {
+        padding-top: 25px;
+
+        @include breakpoint(xs) {
+            padding: 100px;
+        }
+
+        @include breakpoint(md) {
+            padding: 120px;
+        }
+    }
+}
+
+@mixin article-progress {
+    position: fixed;
+    top: 0;
+    left: 80px;
+    width: 0;
+    height: 3px;
+    background-color: $color-main-light;
+    animation: progress 1s linear;
+    animation-timeline: scroll();
+    z-index: 1;
 }
 
 @mixin article-title {
@@ -66,7 +97,11 @@
     }
 
     &:has(+ .article__content-container) {
-        padding-bottom: 50px;
+        padding-bottom: 0;
+
+        @include breakpoint(md) {
+            padding-bottom: 50px;
+        }
     }
 }
 
@@ -187,6 +222,10 @@
 @mixin article {
     .article {
         @include article-root;
+
+        &__progress {
+            @include article-progress;
+        }
 
         &__title {
             @include article-title;

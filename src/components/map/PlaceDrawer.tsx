@@ -8,6 +8,7 @@ import { mdiClose } from '@mdi/js'
 import { recursivelyCleanDaytrips } from '@/helpers/clean-daytrips'
 import { useBodyContext } from '@/context/body'
 import { ArticleMeta } from '@/components/blog/ArticleMeta'
+import { useOnResize } from '@/helpers/resize'
 
 type Props = {
     transportation: TQMap['transportation']
@@ -79,16 +80,9 @@ export const PlaceDrawer = ({
         setDrawerActiveHeight(height)
     }, [activePlace])
 
-    useEffect(() => {
-        const callback = () => {
-            setIsMobile(window.innerWidth < 768)
-        }
-        window.addEventListener('resize', callback)
-
-        callback()
-
-        return () => window.removeEventListener('resize', callback)
-    }, [])
+    useOnResize(() => {
+        setIsMobile(window.innerWidth < 768)
+    })
 
     const close = () => {
         setActive(false)
@@ -192,7 +186,7 @@ export const PlaceDrawer = ({
                         }
                     </span>
                     <span>
-                –
+                        –
                     </span>
                     <span className="drawer__visit-date">
                         {

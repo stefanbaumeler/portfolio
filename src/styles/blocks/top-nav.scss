@@ -24,7 +24,7 @@
         justify-content: space-between;
 
         @include breakpoint(xs) {
-            background-color: $color-gray-darkest;
+            background-color: var(--c-gray-lightest);
             border-left: 1px solid color-mix(in srgb, $color-gray 25%, transparent);
         }
     }
@@ -43,6 +43,11 @@
     font-size: 24px;
     display: none;
     pointer-events: all;
+    white-space: nowrap;
+
+    &:before {
+        content: '/ ';
+    }
 
     @include breakpoint(xs) {
         display: block;
@@ -95,6 +100,7 @@
     transition: color .25s;
     cursor: pointer;
     color: $color-gray;
+    z-index: 1;
 
     @at-root {
         .top-nav:has(+ .home) &,

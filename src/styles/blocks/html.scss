@@ -1,5 +1,4 @@
 @mixin html-root {
-    scrollbar-gutter: stable;
     background-color: $color-gray-darker;
 
     --c-white: #{$color-white};
@@ -31,6 +30,10 @@
 
     &:has(.body--fixed) {
         overflow: hidden;
+    }
+
+    &:has(.article) {
+        scrollbar-gutter: stable;
     }
 }
 

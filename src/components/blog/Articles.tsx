@@ -14,18 +14,18 @@ export const Articles = async ({ articles = [] }: Props) => {
     const ChildTag = type === 'dev' ? 'div' : 'li'
     const locale = await getLocale()
     const t = await getTranslations()
-    const breakpointCols = {
+    const masonryProps = {
         breakpointCols: {
             default: 3,
             1679: 2,
             1023: 1
-        }
+        },
+        columnClassName: 'articles__column'
     }
 
     return <Tag
         className={`articles articles--${type}`}
-        {...(type === 'dev' ? breakpointCols : {})}
-        columnClassName="articles__column"
+        {...(type === 'dev' ? masonryProps : {})}
     >
         {articles.map((article, key) => <ChildTag
             className="articles__item"

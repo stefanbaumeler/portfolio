@@ -25,8 +25,8 @@ export const Skills = ({ categories = [] }: Props) => {
                     1023: 2,
                     767: 1
                 }}
-                className={'skills__skills'}
-                columnClassName={'skills__column'}
+                className="skills__skills"
+                columnClassName="skills__column"
             >
                 {categories.map((category, k) => <SkillCategory
                     key={k}
