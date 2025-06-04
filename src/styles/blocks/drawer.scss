@@ -12,6 +12,7 @@
     scrollbar-width: none;
     border-radius: 20px 20px 0 0;
     overflow: hidden;
+    opacity: 0;
 
     @include breakpoint(xs) {
         transition: translate .25s;
@@ -23,8 +24,20 @@
         border-radius: 0;
     }
 
+    &--transportation {
+        max-height: none;
+
+        @include breakpoint(xs) {
+            width: 600px;
+        }
+    }
+
     &--animated {
         transition: translate .25s;
+    }
+
+    &--visible {
+        opacity: 1;
     }
 
     &--active {
@@ -83,7 +96,7 @@
     padding-right: 80px;
 }
 
-@mixin drawer-country {
+@mixin drawer-subtitle {
     @include text;
 
     opacity: .65;
@@ -93,35 +106,8 @@
     padding: 20px 30px 40px;
 }
 
-@mixin drawer-subtitle {
-    @include h4;
-
-    color: var(--c-black);
-    padding-bottom: 10px;
-}
-
-@mixin drawer-visits {
-    padding-bottom: 40px;
-
-    &:last-child {
-        padding-bottom: 0;
-    }
-}
-
-@mixin drawer-visit {
-    @include text;
-
-    display: flex;
-    justify-content: space-between;
-}
-
-@mixin drawer-visit-date {
-    display: block;
-    width: 50%;
-
-    &:last-child {
-        text-align: right;
-    }
+@mixin drawer-tagline {
+    @include tagline;
 }
 
 @mixin drawer-stories {
@@ -131,6 +117,23 @@
     padding: 0 10px;
 }
 
+@mixin drawer-footer {
+    display: flex;
+    gap: 40px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+}
+
+@mixin drawer-fact {
+    display: flex;
+    flex-direction: column;
+}
+
+@mixin drawer-text {
+    @include text;
+
+    white-space: nowrap;
+}
 
 @mixin drawer {
     .drawer {
@@ -148,32 +151,32 @@
             @include drawer-title;
         }
 
-        &__country {
-            @include drawer-country;
+        &__subtitle {
+            @include drawer-subtitle;
         }
 
         &__content {
             @include drawer-content;
         }
 
-        &__subtitle {
-            @include drawer-subtitle;
-        }
-
-        &__visits {
-            @include drawer-visits;
-        }
-
-        &__visit {
-            @include drawer-visit;
-        }
-
-        &__visit-date {
-            @include drawer-visit-date;
+        &__tagline {
+            @include drawer-tagline;
         }
 
         &__stories {
             @include drawer-stories;
+        }
+
+        &__footer {
+            @include drawer-footer;
+        }
+
+        &__fact {
+            @include drawer-fact;
+        }
+
+        &__text {
+            @include drawer-text;
         }
     }
 }

@@ -15,7 +15,7 @@
     "bicycle": "Fahrrad",
     "bus": "Bus",
     "car": "Auto",
-    "flight": "Flugzeug",
+    "flight": "Flug",
     "foot": "Zu Fuss",
     "motorcycle": "Motorrad",
     "ship": "Schiff",
@@ -72,5 +72,9 @@
     "Contact me for more infos": "Kontaktiere mich für mehr Infos",
     "Visits": "Besuche",
     "Stories": "Geschichten",
-    "Open Navigation": "Navigation öffnen"
+    "Open Navigation": "Navigation öffnen",
+    "From": "Von",
+    "To": "Nach",
+    "Passenger": "Passagier",
+    "Vessel": "Gefährt"
 }

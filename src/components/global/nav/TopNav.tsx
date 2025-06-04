@@ -8,9 +8,7 @@ import { useTopNavContext } from '@/context/top-nav'
 import { useLocale, useTranslations } from 'next-intl'
 import { usePathname } from '@/i18n/routing'
 import { Link } from '@/components/global/Link'
-import { useState } from 'react'
-import { Placement } from '@floating-ui/react'
-import { useOnResize } from '@/helpers/resize'
+import { useBodyContext } from '@/context/body'
 
 export const TopNav = () => {
     const dark = useDarkContext()
@@ -18,11 +16,7 @@ export const TopNav = () => {
     const t = useTranslations()
     const pathname = usePathname()
     const locale = useLocale()
-    const [tooltipPlacement, setTooltipPlacement] = useState<Placement>('bottom')
-
-    useOnResize(() => {
-        setTooltipPlacement(window.innerWidth < 768 ? 'top' : 'bottom')
-    })
+    const { isMobile } = useBodyContext()
 
     return <div className="top-nav">
         {topNavContext.title ? <h1 className="top-nav__title">
@@ -53,7 +47,7 @@ export const TopNav = () => {
             <div className="top-nav__section">
                 <Tooltip
                     content={t('Dark mode')}
-                    placement={tooltipPlacement}
+                    placement={isMobile ? 'top' : 'bottom'}
                     tooltipClass="top-nav__tooltip"
                     className="top-nav__item"
                 >
@@ -70,7 +64,7 @@ export const TopNav = () => {
                 </Tooltip>
                 <Tooltip
                     content={t('Language')}
-                    placement={tooltipPlacement}
+                    placement={isMobile ? 'top' : 'bottom'}
                     tooltipClass="top-nav__tooltip"
                     className="top-nav__item"
                 >

@@ -11077,6 +11077,10 @@ export type TQMap = (
       & { translations: Maybe<Array<Maybe<(
         { __typename?: 'place_translations' }
         & Pick<TPlaceTranslations, 'id' | 'name'>
+        & { languages_code: Maybe<(
+          { __typename?: 'languages' }
+          & Pick<TLanguages, 'abbreviation'>
+        )> }
       )>>> }
     )>, to: Maybe<(
       { __typename?: 'place' }
@@ -11084,6 +11088,10 @@ export type TQMap = (
       & { translations: Maybe<Array<Maybe<(
         { __typename?: 'place_translations' }
         & Pick<TPlaceTranslations, 'id' | 'name'>
+        & { languages_code: Maybe<(
+          { __typename?: 'languages' }
+          & Pick<TLanguages, 'abbreviation'>
+        )> }
       )>>> }
     )> }
   )> }
@@ -11757,6 +11765,9 @@ export const QMapDocument = gql`
       translations {
         id
         name
+        languages_code {
+          abbreviation
+        }
       }
     }
     to {
@@ -11765,6 +11776,9 @@ export const QMapDocument = gql`
       translations {
         id
         name
+        languages_code {
+          abbreviation
+        }
       }
     }
   }

@@ -63,6 +63,22 @@
     }
 }
 
+@mixin tagline {
+    font-size: 14px;
+    line-height: 18px;
+
+    font-weight: 200;
+    letter-spacing: .1em;
+    opacity: .8;
+    text-transform: uppercase;
+    color: var(--c-black);
+    padding-bottom: 10px;
+
+    @at-root .drawer__footer & {
+        padding-bottom: 0;
+    }
+}
+
 @mixin text {
     color: var(--c-gray-darkest);
     font-size: 16px;

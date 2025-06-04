@@ -1,0 +1,47 @@
+@mixin visits-root {
+    padding-bottom: 40px;
+
+    &:last-child {
+        padding-bottom: 0;
+    }
+}
+
+@mixin visits-title {
+    @include tagline;
+}
+
+@mixin visits-item {
+    @include text;
+
+    display: flex;
+    justify-content: space-between;
+}
+
+@mixin visits-date {
+    display: block;
+    width: 50%;
+
+    &:last-child {
+        text-align: right;
+    }
+}
+
+@mixin visits {
+    .visits {
+        @include visits-root;
+
+        &__title {
+            @include visits-title;
+        }
+
+        &__item {
+            @include visits-item;
+        }
+
+        &__date {
+            @include visits-date;
+        }
+    }
+}
+
+@include visits;

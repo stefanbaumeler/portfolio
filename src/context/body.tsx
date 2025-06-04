@@ -2,6 +2,7 @@
 
 import { createContext, Dispatch, ReactNode, SetStateAction, useContext, useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation'
+import { useOnResize } from '@/helpers/resize'
 
 type Props = {
     children?: ReactNode
@@ -10,6 +11,7 @@ type Props = {
 interface BodyContext {
     fixed: boolean
     setFixed: Dispatch<SetStateAction<boolean>>
+    isMobile: boolean
 }
 
 const BodyContext = createContext<BodyContext | null>(null)
@@ -17,6 +19,11 @@ const BodyContext = createContext<BodyContext | null>(null)
 const BodyProvider = ({ children }: Props) => {
     const pathname = usePathname()
     const [fixed, setFixed] = useState(false)
+    const [isMobile, setIsMobile] = useState(false)
+
+    useOnResize(() => {
+        setIsMobile(window.innerWidth < 768)
+    }, true)
 
     useEffect(() => {
         setFixed(false)
@@ -24,7 +31,8 @@ const BodyProvider = ({ children }: Props) => {
 
     return <BodyContext.Provider value={{
         fixed,
-        setFixed
+        setFixed,
+        isMobile
     }}
     >
         {children}

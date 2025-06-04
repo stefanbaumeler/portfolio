@@ -2,10 +2,11 @@ import { Tooltip } from '@/components/global/Tooltip'
 import { dt } from '@/helpers/translate'
 import { useLocale } from 'next-intl'
 import { TQMap } from '~/schema'
+import { MouseEvent } from 'react'
 
 type Props = {
     place: TQMap['place'][number]
-    onClick: () => void
+    onClick: (event: MouseEvent) => void
     activePlaceId?: string
 }
 export const Marker = ({

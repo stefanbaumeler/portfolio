@@ -41,6 +41,9 @@ query QMap {
             translations {
                 id
                 name
+                languages_code {
+                    abbreviation
+                }
             }
         }
         to {
@@ -49,6 +52,9 @@ query QMap {
             translations {
                 id
                 name
+                languages_code {
+                    abbreviation
+                }
             }
         }
     }

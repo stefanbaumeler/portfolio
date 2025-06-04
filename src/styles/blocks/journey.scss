@@ -1,0 +1,32 @@
+@mixin journey-root {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    position: relative;
+    overflow: hidden;
+}
+
+@mixin journey-icon {
+    width: 64px;
+    aspect-ratio: 1;
+    align-self: center;
+    background: var(--c-gray-lightest);
+    position: relative;
+    display: none;
+
+    @media screen and (min-width: 500px) {
+        display: block;
+    }
+}
+
+@mixin journey {
+    .journey {
+        @include journey-root;
+
+        &__icon {
+            @include journey-icon;
+        }
+    }
+}
+
+@include journey;

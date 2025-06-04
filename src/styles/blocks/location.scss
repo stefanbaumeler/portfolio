@@ -1,0 +1,118 @@
+@mixin location-root {
+    background-color: var(--c-gray-lightest);
+    padding-right: 20px;
+    container: location;
+    container-type: normal;
+    max-width: 40%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+
+    @include breakpoint(xs) {
+        padding-right: 40px;
+    }
+
+    &:before,
+    &:after {
+        display: none;
+
+        @media screen and (min-width: 500px) {
+            display: block;
+        }
+    }
+
+    @at-root .journey &:last-child {
+        position: relative;
+        padding-right: 0;
+        padding-left: 20px;
+
+        @include breakpoint(xs) {
+            padding-left: 40px;
+        }
+
+        &:before {
+            content: '';
+            position: absolute;
+            width: 100vw;
+            height: 1px;
+            background-color: var(--c-black);
+            right: calc(100% + 5px);
+            top: 50%;
+            z-index: -1;
+        }
+
+        &:after {
+            content: '';
+            position: absolute;
+            border-top: 5px solid transparent;
+            border-bottom: 5px solid transparent;
+            border-left: 10px solid var(--c-black);
+            top: 50%;
+            right: 100%;
+            translate: 0 -50%;
+        }
+    }
+}
+
+@mixin location-title {
+    @include tagline;
+}
+
+@mixin location-code {
+    font-size: 60px;
+    font-weight: 900;
+    color: var(--c-main);
+    letter-spacing: .05em;
+}
+
+@mixin location-name {
+    @include h4;
+
+    font-weight: bold;
+    padding-bottom: 20px;
+    text-transform: uppercase;
+
+    @at-root .location__code + & {
+        @include text;
+
+        letter-spacing: .05em;
+    }
+}
+
+@mixin location-date {
+    @include text;
+
+    margin-top: auto;
+}
+
+@mixin location-time {
+    @include text;
+}
+
+@mixin location {
+    .location {
+        @include location-root;
+
+        &__title {
+            @include location-title;
+        }
+
+        &__name {
+            @include location-name;
+        }
+
+        &__code {
+            @include location-code;
+        }
+
+        &__date {
+            @include location-date;
+        }
+
+        &__time {
+            @include location-time;
+        }
+    }
+}
+
+@include location;
