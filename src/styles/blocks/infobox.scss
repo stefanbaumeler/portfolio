@@ -25,7 +25,9 @@
 }
 
 @mixin infobox-content {
-    pointer-events: all;
+    @at-root .infobox--active & {
+        pointer-events: all;
+    }
 }
 
 @mixin infobox-years {
