@@ -1,0 +1,150 @@
+@mixin infobox-root {
+    position: fixed;
+    bottom: 5px;
+    left: 10px;
+    overflow: hidden;
+    z-index: 4;
+
+    @include breakpoint(xs) {
+        bottom: 10px;
+        left: 90px;
+    }
+}
+
+@mixin infobox-container {
+    padding: 30px 30px 60px;
+    width: 250px;
+    position: relative;
+    pointer-events: none;
+    opacity: 0;
+
+    @at-root .infobox--active & {
+        opacity: 1;
+        transition: opacity .25s .25s;
+    }
+}
+
+@mixin infobox-content {
+    pointer-events: all;
+}
+
+@mixin infobox-years {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    grid-auto-flow: column;
+}
+
+@mixin infobox-year {
+    @include text;
+
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    &:nth-child(odd) {
+        grid-column: 1;
+    }
+
+    &:nth-child(even) {
+        grid-column: 2;
+    }
+}
+
+@mixin infobox-color {
+    width: 8px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    display: block;
+}
+
+@mixin infobox-fact {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 40px;
+
+    &:last-child {
+        padding-bottom: 0;
+    }
+}
+
+@mixin infobox-tagline {
+    @include tagline;
+
+    display: block;
+}
+
+@mixin infobox-text {
+    @include text;
+}
+
+@mixin infobox-toggle {
+    width: 32px;
+    height: 32px;
+    color: var(--c-black);
+    border-radius: 50%;
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+
+    &:before {
+        pointer-events: none;
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: var(--c-gray-lightest);
+        border-radius: 50%;
+        z-index: -1;
+        transition: scale .25s;
+
+        @at-root .infobox--active & {
+            scale: 50;
+            transition: scale .5s;
+        }
+    }
+}
+
+@mixin infobox {
+    .infobox {
+        @include infobox-root;
+
+        &__container {
+            @include infobox-container;
+        }
+
+        &__content {
+            @include infobox-content;
+        }
+
+        &__years {
+            @include infobox-years;
+        }
+
+        &__year {
+            @include infobox-year;
+        }
+
+        &__color {
+            @include infobox-color;
+        }
+
+        &__fact {
+            @include infobox-fact;
+        }
+
+        &__tagline {
+            @include infobox-tagline;
+        }
+
+        &__text {
+            @include infobox-text;
+        }
+
+        &__toggle {
+            @include infobox-toggle;
+        }
+    }
+}
+
+@include infobox;

@@ -1,3 +1,13 @@
+@keyframes pulse-opacity {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: .25;
+    }
+}
+
 @mixin map-root {
     width: 100%;
     margin-top: -80px;
@@ -27,14 +37,17 @@
         width: 8px;
         height: 8px;
         border-radius: 50%;
-        background-color: $color-main;
+        background-color: var(--c-marker);
         box-shadow: inset 0 0 0 1px $color-white;
         transition: scale .25s;
 
         @at-root .body--dark & {
-            background-color: $color-main-dark;
             box-shadow: inset 0 0 0 1px $color-gray-light;
         }
+    }
+
+    &--active-year {
+        animation: pulse-opacity 1s ease-in-out infinite;
     }
 
     &--active:before {

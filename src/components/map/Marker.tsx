@@ -2,17 +2,32 @@ import { Tooltip } from '@/components/global/Tooltip'
 import { dt } from '@/helpers/translate'
 import { useLocale } from 'next-intl'
 import { TQMap } from '~/schema'
-import { MouseEvent } from 'react'
+import { CSSProperties, MouseEvent, useEffect, useState } from 'react'
+import { yearColors } from '@/helpers/year-colors'
 
 type Props = {
+    transportation: TQMap['transportation']
     place: TQMap['place'][number]
     onClick: (event: MouseEvent) => void
     activePlaceId?: string
+    activeYear?: string
 }
 export const Marker = ({
-    place, onClick, activePlaceId
+    place, onClick, activePlaceId, transportation, activeYear
 }: Props) => {
     const locale = useLocale()
+    const [isActiveYear, setIsActiveYear] = useState(false)
+
+    const firstArrival = transportation.filter((transport) => {
+        return transport.to.id === place.id
+    }).sort((a, b) => +new Date(a.arrival) - +new Date(b.arrival))[0]
+
+    const year = new Date(firstArrival?.arrival).getFullYear()
+
+    useEffect(() => {
+        console.log(activeYear)
+        setIsActiveYear(activeYear === new Date(firstArrival?.arrival).getFullYear().toString())
+    }, [activeYear])
 
     return <Tooltip
         content={dt(place, 'name', locale)}
@@ -22,7 +37,10 @@ export const Marker = ({
         forceOpen={activePlaceId === place.id}
     >
         <div
-            className={`map__marker${activePlaceId === place.id ? ' map__marker--active' : ''}`}
+            style={{
+                '--c-marker': yearColors[year]
+            } as CSSProperties}
+            className={`map__marker${activePlaceId === place.id ? ' map__marker--active' : ''}${isActiveYear ? ' map__marker--active-year' : ''}`}
             onClick={onClick}
         />
     </Tooltip>

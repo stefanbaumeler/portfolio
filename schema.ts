@@ -11058,7 +11058,7 @@ export type TQMap = (
       )> }
     )>>>, country: Maybe<(
       { __typename?: 'country' }
-      & Pick<TCountry, 'id' | 'currency_code' | 'alpha3'>
+      & Pick<TCountry, 'id'>
       & { translations: Maybe<Array<Maybe<(
         { __typename?: 'country_translations' }
         & Pick<TCountryTranslations, 'id' | 'name' | 'currency'>
@@ -11070,11 +11070,22 @@ export type TQMap = (
     )> }
   )>, transportation: Array<(
     { __typename?: 'transportation' }
-    & Pick<TTransportation, 'id' | 'type' | 'company' | 'number' | 'vessel' | 'departure_airport_code' | 'arrival_airport_code' | 'departure' | 'arrival' | 'crosspacific' | 'show_time'>
+    & Pick<TTransportation, 'id' | 'type' | 'company' | 'number' | 'vessel' | 'departure_airport_code' | 'arrival_airport_code' | 'departure' | 'arrival' | 'show_time'>
     & { from: Maybe<(
       { __typename?: 'place' }
       & Pick<TPlace, 'id' | 'location'>
-      & { translations: Maybe<Array<Maybe<(
+      & { country: Maybe<(
+        { __typename?: 'country' }
+        & Pick<TCountry, 'id'>
+        & { translations: Maybe<Array<Maybe<(
+          { __typename?: 'country_translations' }
+          & Pick<TCountryTranslations, 'id' | 'name'>
+          & { languages_code: Maybe<(
+            { __typename?: 'languages' }
+            & Pick<TLanguages, 'abbreviation'>
+          )> }
+        )>>> }
+      )>, translations: Maybe<Array<Maybe<(
         { __typename?: 'place_translations' }
         & Pick<TPlaceTranslations, 'id' | 'name'>
         & { languages_code: Maybe<(
@@ -11085,7 +11096,18 @@ export type TQMap = (
     )>, to: Maybe<(
       { __typename?: 'place' }
       & Pick<TPlace, 'id' | 'location'>
-      & { translations: Maybe<Array<Maybe<(
+      & { country: Maybe<(
+        { __typename?: 'country' }
+        & Pick<TCountry, 'id'>
+        & { translations: Maybe<Array<Maybe<(
+          { __typename?: 'country_translations' }
+          & Pick<TCountryTranslations, 'id' | 'name'>
+          & { languages_code: Maybe<(
+            { __typename?: 'languages' }
+            & Pick<TLanguages, 'abbreviation'>
+          )> }
+        )>>> }
+      )>, translations: Maybe<Array<Maybe<(
         { __typename?: 'place_translations' }
         & Pick<TPlaceTranslations, 'id' | 'name'>
         & { languages_code: Maybe<(
@@ -11735,8 +11757,6 @@ export const QMapDocument = gql`
     }
     country {
       id
-      currency_code
-      alpha3
       translations {
         id
         name
@@ -11757,11 +11777,20 @@ export const QMapDocument = gql`
     arrival_airport_code
     departure
     arrival
-    crosspacific
     show_time
     from {
       id
       location
+      country {
+        id
+        translations {
+          id
+          name
+          languages_code {
+            abbreviation
+          }
+        }
+      }
       translations {
         id
         name
@@ -11773,6 +11802,16 @@ export const QMapDocument = gql`
     to {
       id
       location
+      country {
+        id
+        translations {
+          id
+          name
+          languages_code {
+            abbreviation
+          }
+        }
+      }
       translations {
         id
         name

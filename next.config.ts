@@ -20,6 +20,9 @@ const nextConfig: NextConfig = {
         }
         return config
     },
+    devIndicators: {
+        position: 'bottom-right'
+    },
     images: {
         dangerouslyAllowSVG: true,
         minimumCacheTTL: 31536000,

@@ -77,6 +77,10 @@
     @at-root .drawer__footer & {
         padding-bottom: 0;
     }
+
+    @at-root .infobox__fact & {
+        padding-bottom: 0;
+    }
 }
 
 @mixin text {

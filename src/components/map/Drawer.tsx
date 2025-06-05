@@ -60,7 +60,7 @@ export const Drawer = ({
     }, [active, activeObject])
 
     useEffect(() => {
-        setTranslate(`${isMobile ? `0 calc(100svh - ${active ? drawerActiveHeight : 0}px + ${big ? -50 : 0}svh + ${big ? 100 : 0}px + ${!big || offset > 0 ? offset : 0}px)` : ''}`)
+        setTranslate(`${isMobile ? `0 calc(100svh - ${active ? drawerActiveHeight : 0}px + ${big ? -50 : 0}svh + ${big ? 100 : 0}px + ${!big || offset > 0 ? offset : 0}px)` : `${active ? '-10px' : ''}`}`)
     }, [isMobile, active, drawerActiveHeight, big, offset])
 
     useEffect(() => {

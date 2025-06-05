@@ -13,6 +13,7 @@ import { useBodyContext } from '@/context/body'
 import { TransportationDrawer } from '@/components/map/TransportationDrawer'
 import { MapRef } from 'react-map-gl/mapbox-legacy'
 import { MapMouseEvent } from 'mapbox-gl'
+import { Infobox } from '@/components/map/Infobox'
 
 type Props = {
     places: TQMap['place']
@@ -26,6 +27,7 @@ export const Map = ({
     const topNavContext = useTopNavContext()
     const [activePlace, setActivePlace] = useState<TQMap['place'][number]>()
     const [activeTransport, setActiveTransport] = useState<TQMap['transportation'][number]>()
+    const [activeYear, setActiveYear] = useState<string | undefined>(undefined)
     const { state } = useDarkContext()
     const { isMobile } = useBodyContext()
     const mapEl = useRef<MapRef>(null)
@@ -145,6 +147,8 @@ export const Map = ({
                 longitude={place.location.coordinates[0]}
             >
                 <Marker
+                    activeYear={activeYear}
+                    transportation={transportation}
                     activePlaceId={activePlace?.id}
                     place={place}
                     onClick={(event) => {
@@ -217,6 +221,13 @@ export const Map = ({
         <TransportationDrawer
             activeTransport={activeTransport}
             onClose={() => setActiveTransport(undefined)}
+        />
+        <Infobox
+            transportation={transportation}
+            activePlace={activePlace}
+            activeTransport={activeTransport}
+            onMouseEnterYear={(year) => setActiveYear(year)}
+            onMouseLeaveYear={() => setActiveYear(undefined)}
         />
     </div>
 }

@@ -11,8 +11,6 @@ query QMap {
         }
         country {
             id
-            currency_code
-            alpha3
             translations {
                 id
                 name
@@ -33,11 +31,20 @@ query QMap {
         arrival_airport_code
         departure
         arrival
-        crosspacific
         show_time
         from {
             id
             location
+            country {
+                id
+                translations {
+                    id
+                    name
+                    languages_code {
+                        abbreviation
+                    }
+                }
+            }
             translations {
                 id
                 name
@@ -49,6 +56,16 @@ query QMap {
         to {
             id
             location
+            country {
+                id
+                translations {
+                    id
+                    name
+                    languages_code {
+                        abbreviation
+                    }
+                }
+            }
             translations {
                 id
                 name

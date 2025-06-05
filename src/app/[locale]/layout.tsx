@@ -37,6 +37,7 @@ import '@/styles/blocks/popup.scss'
 import '@/styles/blocks/location.scss'
 import '@/styles/blocks/visits.scss'
 import '@/styles/blocks/journey.scss'
+import '@/styles/blocks/infobox.scss'
 
 import { ReactNode } from 'react'
 import { Metadata, Viewport } from 'next'

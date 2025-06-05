@@ -3,13 +3,19 @@
     padding-right: 20px;
     container: location;
     container-type: normal;
-    max-width: 40%;
+    max-width: 50%;
     height: auto;
     display: flex;
     flex-direction: column;
+    box-sizing: border-box;
+
+    @media screen and (min-width: 500px) {
+        max-width: 35%;
+    }
 
     @include breakpoint(xs) {
         padding-right: 40px;
+        max-width: 45%;
     }
 
     &:before,
@@ -59,10 +65,14 @@
 }
 
 @mixin location-code {
-    font-size: 60px;
+    font-size: 45px;
     font-weight: 900;
     color: var(--c-main);
     letter-spacing: .05em;
+
+    @include breakpoint(xs) {
+        font-size: 60px;
+    }
 }
 
 @mixin location-name {
@@ -71,6 +81,7 @@
     font-weight: bold;
     padding-bottom: 20px;
     text-transform: uppercase;
+    text-wrap: balance;
 
     @at-root .location__code + & {
         @include text;

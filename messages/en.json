@@ -76,5 +76,7 @@
     "From": "From",
     "To": "To",
     "Passenger": "Passenger",
-    "Vessel": "Vessel"
+    "Vessel": "Vessel",
+    "Current location": "Current location",
+    "Years active": "Years active"
 }
