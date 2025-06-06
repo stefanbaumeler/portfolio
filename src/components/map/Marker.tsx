@@ -25,7 +25,6 @@ export const Marker = ({
     const year = new Date(firstArrival?.arrival).getFullYear()
 
     useEffect(() => {
-        console.log(activeYear)
         setIsActiveYear(activeYear === new Date(firstArrival?.arrival).getFullYear().toString())
     }, [activeYear])
 

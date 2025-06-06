@@ -4,6 +4,11 @@
     left: 10px;
     overflow: hidden;
     z-index: 4;
+    pointer-events: none;
+
+    &--active {
+        pointer-events: all;
+    }
 
     @include breakpoint(xs) {
         bottom: 10px;
@@ -89,6 +94,7 @@
     bottom: 10px;
     left: 10px;
     cursor: pointer;
+    pointer-events: all;
 
     &:before {
         pointer-events: none;

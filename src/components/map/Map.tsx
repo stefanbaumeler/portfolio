@@ -16,7 +16,7 @@ import { MapMouseEvent } from 'mapbox-gl'
 import { Infobox } from '@/components/map/Infobox'
 
 type Props = {
-    places: TQMap['place']
+    places: (TQMap['place'][number] & { visits: Date[][]})[]
     transportation: TQMap['transportation']
     articles: TQTravelArticles['secret_blog']
 }
@@ -25,7 +25,7 @@ export const Map = ({
     places, transportation, articles
 }: Props) => {
     const topNavContext = useTopNavContext()
-    const [activePlace, setActivePlace] = useState<TQMap['place'][number]>()
+    const [activePlace, setActivePlace] = useState<TQMap['place'][number] & { visits: Date[][]}>()
     const [activeTransport, setActiveTransport] = useState<TQMap['transportation'][number]>()
     const [activeYear, setActiveYear] = useState<string | undefined>(undefined)
     const { state } = useDarkContext()
@@ -214,7 +214,6 @@ export const Map = ({
         </Mapbox>
         <PlaceDrawer
             activePlace={activePlace}
-            transportation={transportation}
             articles={articles}
             onClose={() => setActivePlace(undefined)}
         />
