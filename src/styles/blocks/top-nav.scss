@@ -7,7 +7,7 @@
     box-sizing: border-box;
     padding-right: 10px;
     position: absolute;
-    z-index: 4;
+    z-index: 5;
     pointer-events: none;
 
     @include breakpoint(xs) {

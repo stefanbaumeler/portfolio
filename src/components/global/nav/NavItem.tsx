@@ -43,7 +43,7 @@ export const NavItem = ({ item }: Props) => {
             className={`nav__link${item.url === path ? ' nav__link--active' : ''}`}
             title={item.title ?? item.label}
             aria-label={item.label}
-            onClick={() => setActive(false)}
+            onAfterRouteChange={() => setActive(false)}
         >
             {item.icon ? <Icon
                 path={item.icon}

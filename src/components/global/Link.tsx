@@ -2,7 +2,7 @@
 
 import NextLink from 'next/link'
 import { Link as LanguagePrefixedLink, getPathname } from '@/i18n/routing'
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { ComponentProps, MouseEvent, useEffect, useRef } from 'react'
 import { useLocale } from 'next-intl'
 
@@ -40,19 +40,25 @@ const imageCache = new Map<string, PrefetchImage[]>()
 
 type Props = ComponentProps<typeof NextLink> & {
 	skipLanguage?: boolean
+    onAfterRouteChange?: () => void
 }
 
 export const Link = ({
-    skipLanguage, children, ...props
+    skipLanguage, onAfterRouteChange, children, ...props
 }: Props) => {
     const linkRef = useRef<HTMLAnchorElement>(null)
     const router = useRouter()
+    const pathname = usePathname()
     const locale = useLocale()
 
     const languagePrefixedHref = (skipLanguage ? props.href : getPathname({
         locale,
         href: `${props.href}`
     })).toString()
+
+    useEffect(() => {
+        onAfterRouteChange?.()
+    }, [pathname])
 
     useEffect(() => {
         let prefetchTimeout: NodeJS.Timeout | null = null
