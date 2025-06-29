@@ -24,6 +24,7 @@ const nextConfig: NextConfig = {
         position: 'bottom-right'
     },
     images: {
+        unoptimized: true,
         dangerouslyAllowSVG: true,
         minimumCacheTTL: 31536000,
         remotePatterns: [new URL('http://157.180.93.120:8061/assets/**')]
