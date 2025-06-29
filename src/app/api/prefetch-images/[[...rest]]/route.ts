@@ -25,12 +25,16 @@ export const GET = async (
 
     const url = `${host}/${href}`
     const response = await fetch(url)
+    const body = await response.text()
+
     if (!response.ok) {
-        return new Response('Failed to fetch', {
+        return new Response(JSON.stringify(body), {
             status: response.status
         })
+        // return new Response('Failed to fetch', {
+        //     status: response.status
+        // })
     }
-    const body = await response.text()
     const { document } = parseHTML(body)
     const images = Array.from(document.querySelectorAll('main img'))
         .filter((img) => img.getAttribute('loading') !== 'lazy')
