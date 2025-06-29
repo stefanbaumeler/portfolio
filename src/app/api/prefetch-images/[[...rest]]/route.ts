@@ -8,7 +8,7 @@ const getHostname = () => {
         return 'http://localhost:3000'
     }
 
-    return 'http://localhost:3061'
+    return process.env.NEXT_PUBLIC_PROD_URL
 }
 
 export const GET = async (
@@ -23,7 +23,7 @@ export const GET = async (
     }
     const href = (await params).rest?.join('/') ?? ''
 
-    const url = `${host}/${href}`
+    const url = `/${href}`
     const response = await fetch(url)
     const body = await response.text()
 
