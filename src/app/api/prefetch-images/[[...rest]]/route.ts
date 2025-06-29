@@ -4,11 +4,11 @@ import { parseHTML } from 'linkedom'
 export const dynamic = 'force-static'
 
 const getHostname = () => {
-    if (process.env.NODE_ENV === 'development') {
-        return 'http://localhost:3000'
-    }
+    // if (process.env.NODE_ENV === 'development') {
+    return 'http://localhost:3000'
+    // }
 
-    return process.env.NEXT_PUBLIC_PROD_URL
+    // return process.env.NEXT_PUBLIC_PROD_URL
 }
 
 export const GET = async (
@@ -23,7 +23,8 @@ export const GET = async (
     }
     const href = (await params).rest?.join('/') ?? ''
 
-    const url = `/${href}`
+    const url = `${host}/${href}`
+    console.log('the url', url)
     const response = await fetch(url)
     const body = await response.text()
 
