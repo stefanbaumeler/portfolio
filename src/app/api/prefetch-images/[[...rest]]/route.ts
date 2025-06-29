@@ -28,7 +28,7 @@ export const GET = async (
     const body = await response.text()
 
     if (!response.ok) {
-        return new Response(JSON.stringify(body), {
+        return new Response(`${JSON.stringify(body)}, ${url}`, {
             status: response.status
         })
         // return new Response('Failed to fetch', {
