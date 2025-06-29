@@ -4,7 +4,7 @@ import type { CodegenConfig } from '@graphql-codegen/cli'
 const config: CodegenConfig = {
     overwrite: true,
     watch: true,
-    schema: 'http://159.65.125.156:8061/graphql',
+    schema: 'http://157.180.93.120:8061/graphql',
     documents: ['**/*.gql'],
     generates: {
         './schema.ts': {

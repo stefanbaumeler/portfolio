@@ -39,5 +39,5 @@ export const BlogItem = async ({
         />
     }
 
-    return <></>
+    return null
 }
