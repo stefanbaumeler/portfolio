@@ -8,7 +8,7 @@ const getHostname = () => {
         return 'http://localhost:3000'
     }
 
-    return process.env.NEXT_PUBLIC_PROD_URL
+    return 'http://localhost:3061'
 }
 
 export const GET = async (
