@@ -49,7 +49,6 @@ jobs:
                 key: ${{ secrets.SSH_KEY }}
                 script: |
                     cd ~
-                    echo "${{ secrets.GHCP_PAT }}" | docker login ghcr.io -u stefanbaumeler --password-stdin
                     docker compose pull portfolio-frontend
                     docker compose down portfolio-frontend
                     docker compose up -d portfolio-frontend
