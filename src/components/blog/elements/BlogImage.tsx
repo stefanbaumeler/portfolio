@@ -21,7 +21,7 @@ export const BlogImage = async ({
         <BlogImageImage item={item}>
             <Image
                 aspect={aspect ?? item.image?.width / item.image?.height ?? 1.5}
-                invert={item.invert && theme === DarkMode.Dark}
+                invert={item.invert && theme === 'dark'}
                 className="article__content-image"
                 src={`${process.env.NEXT_PUBLIC_ASSETS}/${item.image?.filename_disk}`}
                 alt={item.caption ?? ''}
