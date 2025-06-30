@@ -1,6 +1,5 @@
 import { Image } from '@/components/global/Image'
 import { TBlogImage } from '~/schema'
-import { DarkMode } from '@/context/dark'
 import { BlogImagePopup } from '@/components/blog/elements/BlogImagePopup'
 import { BlogImageImage } from '@/components/blog/elements/BlogImageImage'
 import { headers } from 'next/headers'
