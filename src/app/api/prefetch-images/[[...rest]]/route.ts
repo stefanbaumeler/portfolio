@@ -14,12 +14,9 @@ export const GET = async (
     const body = await response.text()
 
     if (!response.ok) {
-        return new Response(`${JSON.stringify(body)}, ${url}`, {
+        return new Response('Failed to fetch', {
             status: response.status
         })
-        // return new Response('Failed to fetch', {
-        //     status: response.status
-        // })
     }
     const { document } = parseHTML(body)
     const images = Array.from(document.querySelectorAll('main img'))
