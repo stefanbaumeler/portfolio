@@ -10,7 +10,7 @@ type Props = {
 } & ComponentProps<typeof NextImage>
 
 export const Image = async ({
-    className, invert, aspect, blur, ...props
+    className, invert, aspect, blur = true, ...props
 }: Props) => {
     const blurDataURL = blur ? await getBlurDataURL(`${props.src}?width=10`) : undefined
 
