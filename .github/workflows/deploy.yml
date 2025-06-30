@@ -52,3 +52,4 @@ jobs:
                     docker compose pull portfolio-frontend
                     docker compose down portfolio-frontend
                     docker compose up -d portfolio-frontend
+                    docker images portfolio-frontend --format '{{.ID}} {{.CreatedAt}}' | sort -k2 -r | tail -n +2 | awk '{print $1}' | xargs -r docker rmi

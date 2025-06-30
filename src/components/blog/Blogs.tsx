@@ -1,8 +1,8 @@
 import { Link } from '../global/Link'
 import { TQRoot } from '~/schema'
-import Image from 'next/image'
 import { getTranslations } from 'next-intl/server'
 import { BlogMeta } from '@/components/blog/BlogMeta'
+import { Image } from '@/components/global/Image'
 
 type Props = {
     data?: TQRoot
@@ -24,7 +24,6 @@ export const Blogs = async ({ data }: Props) => {
                 alt=""
                 loading="eager"
                 priority
-                quality={75}
             />
             <div className="blogs__content">
                 <h1 className="blogs__title">
@@ -52,7 +51,6 @@ export const Blogs = async ({ data }: Props) => {
                 alt=""
                 loading="eager"
                 priority
-                quality={75}
             />
             <div className="blogs__content">
                 <h1 className="blogs__title">

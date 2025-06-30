@@ -24,6 +24,7 @@
     transition: scale .5s, filter .5s;
     filter: saturate(1) brightness(.75);
     scale: 1.1;
+    height: 100%;
 
     @at-root .blogs__blog:hover & {
         scale: 1;

@@ -19,6 +19,10 @@
     @at-root .popup__image & {
         object-fit: contain;
     }
+
+    @at-root .home__image & {
+        object-position: 50% 15%;
+    }
 }
 
 @mixin image {

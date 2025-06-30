@@ -1,12 +1,9 @@
-import sharp from 'sharp'
-
 export const getBlurDataURL = async (imageUrl: string) => {
-    console.log(imageUrl)
-    const response = await fetch(imageUrl)
-    const buffer = await response.arrayBuffer()
-
-    const sharpBuffer = await sharp(buffer).toBuffer()
-    const base64 = sharpBuffer.toString('base64')
+    const imageResponse = await fetch(imageUrl)
+    const imageBuffer = await imageResponse.arrayBuffer()
+    const bytes = new Uint8Array(imageBuffer)
+    const binary = bytes.reduce((acc, byte) => acc + String.fromCharCode(byte), '')
+    const base64 = Buffer.from(binary, 'binary').toString('base64')
 
     return `data:image/webp;base64,${base64}`
 }

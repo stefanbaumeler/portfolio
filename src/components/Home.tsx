@@ -1,7 +1,7 @@
 import { TQRoot } from '~/schema'
 import { dt } from '@/helpers/translate'
 import { getLocale } from 'next-intl/server'
-import Image from 'next/image'
+import { Image } from '@/components/global/Image'
 
 type Props = {
     website?: TQRoot['website']
@@ -28,7 +28,7 @@ export const Home = async ({ website }: Props) => {
                 alt="Stefan Baumeler"
                 loading="eager"
                 priority
-                quality={75}
+                quality={100}
             />
         </div>
     </section>

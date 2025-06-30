@@ -1,18 +1,18 @@
 import NextImage from 'next/image'
 import { ComponentProps } from 'react'
 import { imageLoader } from '@/helpers/image-loader'
-import { getHostname } from '@/helpers/hostname'
+import { getBlurDataURL } from '@/helpers/blur-data-url'
 
 type Props = {
     invert?: boolean
     aspect?: number
+    blur?: boolean
 } & ComponentProps<typeof NextImage>
 
 export const Image = async ({
-    className, invert, aspect, ...props
+    className, invert, aspect, blur, ...props
 }: Props) => {
-    const res = await fetch(`${getHostname()}/api/blur?url=${encodeURIComponent(`${props.src}?width=10`)}`)
-    const { blurDataURL } = await res.json()
+    const blurDataURL = blur ? await getBlurDataURL(`${props.src}?width=10`) : undefined
 
     return <div
         style={{
@@ -25,7 +25,7 @@ export const Image = async ({
                 loader={imageLoader}
                 className="image__image"
                 quality={75}
-                placeholder="blur"
+                placeholder={blur ? 'blur' : 'empty'}
                 blurDataURL={blurDataURL}
                 {...props}
             />

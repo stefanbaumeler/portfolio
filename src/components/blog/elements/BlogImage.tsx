@@ -35,6 +35,7 @@ export const BlogImage = async ({
             index={index}
         >
             <Image
+                blur={false}
                 invert={item.invert}
                 className="popup__image"
                 src={`${process.env.NEXT_PUBLIC_ASSETS}/${item.image?.filename_disk}`}

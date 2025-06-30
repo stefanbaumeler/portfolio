@@ -31,8 +31,7 @@
 }
 
 @mixin home-image {
-    object-fit: cover;
-    object-position: 50% 15%;
+    height: 100%;
 }
 
 @mixin home-content {
