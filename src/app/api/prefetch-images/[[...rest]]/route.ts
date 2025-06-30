@@ -3,28 +3,13 @@ import { parseHTML } from 'linkedom'
 
 export const dynamic = 'force-static'
 
-const getHostname = () => {
-    // if (process.env.NODE_ENV === 'development') {
-    return 'http://localhost:3000'
-    // }
-
-    // return process.env.NEXT_PUBLIC_PROD_URL
-}
-
 export const GET = async (
     _: NextRequest,
     { params }: { params: Promise<{ rest: string[] }> }
 ) => {
-    const host = getHostname()
-    if (!host) {
-        return new Response('Failed to get hostname from env', {
-            status: 500
-        })
-    }
     const href = (await params).rest?.join('/') ?? ''
 
-    const url = `${host}/${href}`
-    console.log('the url', url)
+    const url = `http://localhost:3000/${href}`
     const response = await fetch(url)
     const body = await response.text()
 

@@ -22,7 +22,7 @@ export const Image = async ({
     >
         <div className={`image${invert ? ' image--invert' : ''}`}>
             <NextImage
-                // loader={imageLoader}
+                loader={imageLoader}
                 className="image__image"
                 quality={75}
                 placeholder="blur"

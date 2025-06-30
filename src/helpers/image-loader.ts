@@ -7,5 +7,5 @@ export const imageLoader = ({
 }: { src: string, width: number, quality?: number }) => {
     const host = getHostname()
 
-    return `${host}/_next/image?url=${encodeURIComponent(`${src}?width=${width}&quality=${quality ?? 75}`)}`
+    return `${host}/_next/image?url=${encodeURIComponent(`${src}?width=${width}&quality=${quality || 75}`)}&w=${width}&q=${quality || 75}`
 }
