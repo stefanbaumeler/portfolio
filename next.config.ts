@@ -13,7 +13,15 @@ const nextConfig: NextConfig = {
         additionalData: '@use \'~/src/styles/global.scss\' as *;',
         api: 'modern-compiler'
     },
-    webpack: (config: webpack.Configuration) => {
+    webpack: (config: webpack.Configuration, { isServer }) => {
+        if (!isServer) {
+            config.resolve.fallback = {
+                ...config.resolve.fallback,
+                fs: false,
+                child_process: false
+            }
+        }
+
         config.resolve.alias = {
             ...config.resolve.alias,
             'canvas$': false

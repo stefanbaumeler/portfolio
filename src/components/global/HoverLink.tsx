@@ -1,5 +1,3 @@
-'use client'
-
 import { Link } from '@/components/global/Link'
 import { Tooltip } from '@/components/global/Tooltip'
 import { Image } from '@/components/global/Image'
@@ -19,11 +17,8 @@ type Props = {
 export const HoverLink = ({
     image, href, title, label, icon, iconPosition = 'before', className = ''
 }: Props) => {
-    const [imageLoaded, setImageLoaded] = useState(false)
-
     return <div
-        className={`${className} hover-link${imageLoaded ? ' hover-link--active' : ''}`}
-        onMouseLeave={() => setImageLoaded(false)}
+        className={`${className} hover-link`}
     >
         <Tooltip
             content={<div className="hover-link__content">
@@ -34,7 +29,6 @@ export const HoverLink = ({
                     fill
                     src={`${process.env.NEXT_PUBLIC_ASSETS}/${image}`}
                     quality={75}
-                    onLoad={() => setImageLoaded(true)}
                 /> : null}
                 <span
                     className="hover-link__title"

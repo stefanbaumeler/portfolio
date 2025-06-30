@@ -1,9 +1,9 @@
 import { BlogText } from '@/components/blog/elements/BlogText'
-import { BlogImage } from '@/components/blog/elements/BlogImage'
 import { BlogTitle } from '@/components/blog/elements/BlogTitle'
 import { TBlogImage, TBlogQuote, TBlogText, TBlogTitle, TSecretBlogElements } from '~/schema'
 import { BlogQuote } from '@/components/blog/elements/BlogQuote'
 import { getAspectRatioOfSVG } from '@/helpers/svg'
+import { BlogImage } from '@/components/blog/elements/BlogImage'
 
 type Props = {
     element?: TSecretBlogElements
@@ -24,6 +24,8 @@ export const BlogItem = async ({
         }
     }
 
+    const imageItem = element?.item as TBlogImage
+
     switch (element?.collection) {
     case 'blog_title':
         return <BlogTitle item={element.item as TBlogTitle} />
@@ -34,7 +36,7 @@ export const BlogItem = async ({
     case 'blog_image':
         return <BlogImage
             aspect={aspect}
-            item={element.item as TBlogImage}
+            item={imageItem}
             index={index}
         />
     }

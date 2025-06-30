@@ -13,7 +13,7 @@
     overflow: hidden;
     z-index: 1;
 
-    @at-root .hover-link--active & {
+    @at-root .hover-link:hover & {
         opacity: 1;
         translate: 0 -12px;
     }
