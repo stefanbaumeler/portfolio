@@ -1,19 +1,12 @@
 import NextImage from 'next/image'
 import { ComponentProps } from 'react'
 import { imageLoader } from '@/helpers/image-loader'
+import { getHostname } from '@/helpers/hostname'
 
 type Props = {
     invert?: boolean
     aspect?: number
 } & ComponentProps<typeof NextImage>
-
-const getHostname = () => {
-    if (process.env.NODE_ENV === 'development') {
-        return 'http://localhost:3000'
-    }
-
-    return process.env.NEXT_PUBLIC_PROD_URL
-}
 
 export const Image = async ({
     className, invert, aspect, ...props
@@ -29,7 +22,7 @@ export const Image = async ({
     >
         <div className={`image${invert ? ' image--invert' : ''}`}>
             <NextImage
-                loader={imageLoader}
+                // loader={imageLoader}
                 className="image__image"
                 quality={75}
                 placeholder="blur"
