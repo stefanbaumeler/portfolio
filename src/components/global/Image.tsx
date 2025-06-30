@@ -1,5 +1,7 @@
+'use client'
+
 import NextImage from 'next/image'
-import { ComponentProps } from 'react'
+import { ComponentProps, useEffect, useState } from 'react'
 import { imageLoader } from '@/helpers/image-loader'
 import { getBlurDataURL } from '@/helpers/blur-data-url'
 
@@ -9,10 +11,21 @@ type Props = {
     blur?: boolean
 } & ComponentProps<typeof NextImage>
 
-export const Image = async ({
+export const Image = ({
     className, invert, aspect, blur = true, ...props
 }: Props) => {
-    const blurDataURL = blur ? await getBlurDataURL(`${props.src}?width=10`) : undefined
+    const [blurDataURL, setBlurDataURL] = useState('')
+
+    useEffect(() => {
+        async function fetchBlur () {
+            const res = await getBlurDataURL(`${props.src}?width=10`)
+            setBlurDataURL(res)
+        }
+
+        if (blur) {
+            fetchBlur()
+        }
+    }, [])
 
     return <div
         style={{
@@ -25,7 +38,7 @@ export const Image = async ({
                 loader={imageLoader}
                 className="image__image"
                 quality={75}
-                placeholder={blur ? 'blur' : 'empty'}
+                placeholder={blurDataURL ? 'blur' : 'empty'}
                 blurDataURL={blurDataURL}
                 {...props}
             />
