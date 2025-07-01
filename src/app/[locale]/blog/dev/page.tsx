@@ -12,7 +12,7 @@ const DevBlogPage = async () => {
 
     return <div className="blog">
         <h1 className="blog__title">
-			Dev blog
+            Dev Blog
         </h1>
         <div className="blog__meta">
             <BlogMeta

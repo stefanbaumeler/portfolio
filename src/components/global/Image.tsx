@@ -16,16 +16,16 @@ export const Image = ({
 }: Props) => {
     const [blurDataURL, setBlurDataURL] = useState('')
 
-    // useEffect(() => {
-    //     async function fetchBlur () {
-    //         const res = await getBlurDataURL(`${props.src}?width=10`)
-    //         setBlurDataURL(res)
-    //     }
-    //
-    //     if (blur) {
-    //         fetchBlur()
-    //     }
-    // }, [])
+    useEffect(() => {
+        async function fetchBlur () {
+            const res = await getBlurDataURL(`${props.src}?width=10`)
+            setBlurDataURL(res)
+        }
+
+        if (blur) {
+            fetchBlur()
+        }
+    }, [])
 
     return <div
         style={{

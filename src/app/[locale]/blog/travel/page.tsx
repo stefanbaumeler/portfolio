@@ -2,14 +2,16 @@ import { Articles } from '@/components/blog/Articles'
 import { QTravelArticlesDocument, TQTravelArticles } from '~/schema'
 import { getClient } from '@/gql/urql'
 import { BlogMeta } from '@/components/blog/BlogMeta'
+import { getTranslations } from 'next-intl/server'
 
 export const revalidate = 60
 const TravelBlogPage = async () => {
     const { data } = await getClient().query<TQTravelArticles>(QTravelArticlesDocument, {})
+    const t = await getTranslations()
 
     return <div className="blog">
         <h1 className="blog__title">
-			Travel blog
+            {t('Travel Blog')}
         </h1>
         <div className="blog__meta">
             <BlogMeta
