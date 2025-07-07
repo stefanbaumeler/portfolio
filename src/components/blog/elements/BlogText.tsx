@@ -9,7 +9,7 @@ type Props = {
 
 const highlighter = await createHighlighter({
     themes: ['github-light', 'github-dark'],
-    langs: ['javascript', 'scss', 'json', 'typescript', 'tsx', 'html']
+    langs: ['javascript', 'scss', 'json', 'typescript', 'tsx', 'html', 'yml', 'yaml', 'bash', 'dockerfile', 'nginx']
 })
 
 const marked = new Marked(

@@ -49,6 +49,7 @@
     max-width: 850px;
     margin: 0 auto;
     position: relative;
+    hyphens: auto;
 
     @include breakpoint(md) {
         max-width: 1300px;
@@ -61,6 +62,7 @@
 
         @include breakpoint(xs) {
             text-align: center;
+            text-wrap: balance;
         }
     }
 

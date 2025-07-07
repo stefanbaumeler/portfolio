@@ -73,6 +73,7 @@
 @mixin teaser-title {
     font-size: 20px;
     line-height: 1.3;
+    hyphens: auto;
 
     @container teaser-container (min-width: #{map.get($breakpoints, xs)}) {
         font-size: 26px;
@@ -112,6 +113,7 @@
 
     color: var(--c-black);
     padding-bottom: 25px;
+    hyphens: auto;
 
     &:empty {
         display: none;

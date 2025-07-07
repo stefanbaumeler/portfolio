@@ -209,6 +209,7 @@
     font-size: 16px;
     line-height: 27px;
     font-weight: 300;
+    hyphens: auto;
 
     @include breakpoint(lg) {
         font-size: 18px;

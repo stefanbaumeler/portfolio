@@ -1,3 +1,9 @@
+.shiki {
+    display: inline-block;
+    width: 100%;
+    box-sizing: border-box;
+}
+
 .body--dark .shiki,
 .body--dark .shiki span {
     color: var(--shiki-dark) !important;
