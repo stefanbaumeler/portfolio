@@ -8,12 +8,12 @@ import { TQMap, TQTravelArticles } from '~/schema'
 import { greatCircle } from '@turf/great-circle'
 import { Marker } from '@/components/map/Marker'
 import { PlaceDrawer } from '@/components/map/PlaceDrawer'
-import { DarkMode, useDarkContext } from '@/context/dark'
 import { useBodyContext } from '@/context/body'
 import { TransportationDrawer } from '@/components/map/TransportationDrawer'
 import { MapRef } from 'react-map-gl/mapbox-legacy'
 import { MapMouseEvent } from 'mapbox-gl'
 import { Infobox } from '@/components/map/Infobox'
+import { useTheme } from 'next-themes'
 
 type Props = {
     places: (TQMap['place'][number] & { visits: Date[][]})[]
@@ -28,7 +28,7 @@ export const Map = ({
     const [activePlace, setActivePlace] = useState<TQMap['place'][number] & { visits: Date[][]}>()
     const [activeTransport, setActiveTransport] = useState<TQMap['transportation'][number]>()
     const [activeYear, setActiveYear] = useState<string | undefined>(undefined)
-    const { state } = useDarkContext()
+    const theme = useTheme()
     const { isMobile } = useBodyContext()
     const mapEl = useRef<MapRef>(null)
 
@@ -122,7 +122,7 @@ export const Map = ({
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}
             projection="mercator"
-            mapStyle={`mapbox://styles/mapbox/${state === DarkMode.Dark ? 'dark-v11' : 'streets-v12'}`}
+            mapStyle={`mapbox://styles/mapbox/${theme.resolvedTheme === 'dark' ? 'dark-v11' : 'streets-v12'}`}
             mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_KEY}
             attributionControl={false}
             logoPosition={isMobile ? 'bottom-right' : 'top-right'}

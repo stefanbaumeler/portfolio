@@ -21,7 +21,7 @@ export const BlogTitle = ({ item }: Props) => {
 
     const onScroll = () => {
         if (rootEl.current) {
-            const offset = rootEl.current.offsetTop + rootEl.current.clientHeight / 2 - window.innerHeight / 2 - window.scrollY
+            const offset = rootEl.current.offsetTop + rootEl.current.clientHeight / 2 - 50 - window.scrollY
             scrollContext.updateBid({
                 id: item.id,
                 offset: Math.abs(offset),
@@ -37,14 +37,14 @@ export const BlogTitle = ({ item }: Props) => {
 
     return <div ref={rootEl}>
         <Tag
-            className={`article__title article__title--level-${item.level}`}
+            className={`content__title content__title--level-${item.level}`}
             id={slug}
         >
             {item.title}
             <a
                 href={`#${slug}`}
                 aria-label={`Link for ${item.title}`}
-                className="article__hash"
+                className="content__hash"
             >
                 <Icon path={Icons.mdiPound} />
             </a>

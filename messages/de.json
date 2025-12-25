@@ -69,7 +69,8 @@
     "Not all those who wander are lost, but you certainly are": "Ganz gleich wonach du suchst, \nhier wirst du es bestimmt nicht finden.",
     "Go home": "Zurück zur Startseite",
     "View Project": "Projekt ansehen",
-    "Contact me for more infos": "Kontaktiere mich für mehr Infos",
+    "Contact me": "Kontaktiere mich",
+    "for more infos": "für mehr infos",
     "Visits": "Besuche",
     "Stories": "Geschichten",
     "Open Navigation": "Navigation öffnen",
@@ -78,5 +79,10 @@
     "Passenger": "Passagier",
     "Vessel": "Gefährt",
     "Current location": "Momentaner Standort",
-    "Years active": "Jahre aktiv"
+    "Years active": "Jahre aktiv",
+    "Work": "Arbeit",
+    "Work text": "Ausgewählte Projekte an welchen ich im Auftrag verschiedener Arbeitgeber mitgearbeitet habe.",
+    "Side Projects": "Side Projects",
+    "Side Projects text": "In meiner Freizeit umgesetzte Projekte.",
+    "My contribution": "Mein Beitrag"
 }

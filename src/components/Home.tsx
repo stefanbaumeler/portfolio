@@ -2,6 +2,7 @@ import { TQRoot } from '~/schema'
 import { dt } from '@/helpers/translate'
 import { getLocale } from 'next-intl/server'
 import { Image } from '@/components/global/Image'
+import { TopNav } from '@/components/global/nav/TopNav'
 
 type Props = {
     website?: TQRoot['website']
@@ -12,11 +13,19 @@ export const Home = async ({ website }: Props) => {
 
     return <section className="home">
         <div className="home__content">
-            <h1 className="home__title">
-                {dt(website, 'home_title', locale)}
-            </h1>
-            <div className="home__text">
-                {dt(website, 'home_text', locale)}
+            <div>
+                <h1
+                    className="home__title"
+                    dangerouslySetInnerHTML={{
+                        __html: dt(website, 'home_title', locale).split(', ').join(',<br />')
+                    }}
+                />
+                <TopNav />
+            </div>
+            <div className="home__text-container">
+                <div className="home__text">
+                    {dt(website, 'home_text', locale)}
+                </div>
             </div>
         </div>
         <div className="home__image-container">

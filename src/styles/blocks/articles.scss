@@ -1,33 +1,40 @@
+@use 'sass:math';
+
 @mixin articles-root {
-    display: flex;
-    gap: 25px;
-    flex-direction: column;
-    flex-wrap: nowrap;
+    @include title-offset;
+
+    display: grid;
+    grid-gap: 25px;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+
+    @include breakpoint(sm) {
+        grid-gap: 50px;
+    }
 
     @include breakpoint(md) {
-        gap: 50px;
+        grid-gap: 100px 50px;
     }
 
     @include breakpoint(lg) {
-        gap: 100px;
+        grid-gap: 100px 50px;
     }
 
     &--dev {
-        flex-direction: row;
-
-        @include breakpoint(lg) {
-            gap: 50px;
+        @include breakpoint(sm) {
+            grid-gap: 50px;
         }
     }
 }
 
-@mixin articles-column {
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
+@mixin articles-item {
+    grid-area: auto / span 2;
 
-    @include breakpoint(md) {
-        gap: 50px;
+    @include breakpoint(lg) {
+        grid-area: auto / span 1;
+    }
+
+    @at-root .articles--dev & {
+        grid-area: auto / span 2;
     }
 }
 
@@ -35,8 +42,8 @@
     .articles {
         @include articles-root;
 
-        &__column {
-            @include articles-column;
+        &__item {
+            @include articles-item;
         }
     }
 }

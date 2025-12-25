@@ -11,14 +11,12 @@ export const SkillCategory = async ({ category }: Prop) => {
     const locale = await getLocale()
     const allChildIds = category.technologies.flatMap((technology) => technology.children.map((child) => child.id))
 
-    return <div className="skills__skill">
+    return <div className="skills__category">
         <>
-            <h3 className="skills__label-container">
-                <span className="skills__label">
-                    {dt(category, 'title', locale)}
-                </span>
+            <h3 className="skills__category-title">
+                {dt(category, 'title', locale)}
             </h3>
-            <ul className="skills__children">
+            <ul className="skills__skills">
                 {category.technologies.filter((technology) => !allChildIds.includes(technology.id) && technology.list).map((technology, key) => {
                     return <Skill
                         key={key}

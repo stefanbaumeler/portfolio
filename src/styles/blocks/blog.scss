@@ -2,30 +2,37 @@
     @include container;
 }
 
-@mixin blog-title {
-    @include h1;
+@mixin blog-header {
+    @include header;
 
-    padding-bottom: 25px;
-    padding-left: 25px;
-
-    @include breakpoint(xs) {
-        padding-left: 0;
+    @include breakpoint(sm) {
+        height: calc(100vh - var(--spacing) * 2);
     }
 }
 
+@mixin blog-title {
+    @include h1;
+}
+
 @mixin blog-meta {
+    @include line;
+
     display: flex;
-    gap: 16px;
-    padding-bottom: 50px;
-    color: var(--c-gray);
-    padding-left: 25px;
+    justify-content: center;
+    padding-top: 25px;
+    border-width: 0;
 
-    @include breakpoint(xs) {
-        padding-left: 0;
+    @include breakpoint(sm) {
+        border-bottom-width: 1px;
     }
+}
 
-    @include breakpoint(md) {
-        padding-bottom: 100px;
+@mixin blog-content {
+    grid-area: auto / span 2;
+    padding-bottom: 50px;
+
+    @include breakpoint(lg) {
+        grid-area: auto / span 3;
     }
 }
 
@@ -33,12 +40,20 @@
     .blog {
         @include blog-root;
 
+        &__header {
+            @include blog-header;
+        }
+
         &__title {
             @include blog-title;
         }
 
         &__meta {
             @include blog-meta;
+        }
+
+        &__content {
+            @include blog-content;
         }
     }
 }

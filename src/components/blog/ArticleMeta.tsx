@@ -23,7 +23,6 @@ export const ArticleMeta = ({
     }, 0) ?? 0
 
     const readingTime = Math.ceil(wordCount / wordsPerMinute)
-    const countries = isTravelArticle(article) ? [...new Set(article.place?.map((place) => place?.place_id?.country?.translations?.find((translation) => translation?.languages_code?.abbreviation === 'de')?.name))] : []
     const date = new Date(article.date_created).toLocaleString(locale, {
         year: 'numeric',
         month: 'long',
@@ -32,6 +31,17 @@ export const ArticleMeta = ({
 
     return <div className={className}>
         <div className="meta">
+            <span className="meta__item">
+                <Icon
+                    path={Icons.mdiCalendarOutline}
+                    className="meta__icon"
+                />
+                {date}
+            </span>
+            <span
+                className="meta__separator"
+                role="none"
+            />
             <span className="meta__item">
                 <Icon
                     path={Icons.mdiClockOutline}
@@ -49,32 +59,6 @@ export const ArticleMeta = ({
                     className="meta__icon"
                 />
                 {`${wordCount.toLocaleString(locale === 'en' ? 'en-US' : 'de-CH')} ${t('words')}`}
-            </span>
-            {countries.length ? <>
-                <span
-                    className="meta__separator"
-                    role="none"
-                />
-                <span className="meta__item">
-                    <Icon
-                        path={Icons.mdiMapMarker}
-                        className="meta__icon"
-                    />
-                    {countries.map((country, key) => <span key={key}>
-                        {`${country}${key === countries.length - 1 ? '' : ', '}`}
-                    </span>)}
-                </span>
-            </> : null}
-            <span
-                className="meta__separator"
-                role="none"
-            />
-            <span className="meta__item">
-                <Icon
-                    path={Icons.mdiCalendarOutline}
-                    className="meta__icon"
-                />
-                {date}
             </span>
         </div>
     </div>

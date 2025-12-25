@@ -39,7 +39,8 @@ const nextConfig: NextConfig = {
             hostname: '157.180.93.120',
             port: '8061',
             pathname: '/assets/**'
-        }]
+        }],
+        qualities: [75, 100]
     },
     headers: async () => {
         return [

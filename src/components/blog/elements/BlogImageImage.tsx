@@ -13,9 +13,11 @@ export const BlogImageImage = ({
     item, children
 }: Props) => {
     const { setActive } = useSliderContext()
-    return <figure onClick={() => setActive(item.id)}>
+    return <figure
+        onClick={() => setActive(item.id)}
+    >
         {children}
-        <figcaption className="article__caption">
+        <figcaption className="content__caption">
             {item.caption}
         </figcaption>
     </figure>

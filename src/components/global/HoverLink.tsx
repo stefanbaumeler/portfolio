@@ -1,7 +1,6 @@
 import { Link } from '@/components/global/Link'
 import { Tooltip } from '@/components/global/Tooltip'
 import { Image } from '@/components/global/Image'
-import { useState } from 'react'
 import Icon from '@mdi/react'
 
 type Props = {

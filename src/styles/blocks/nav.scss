@@ -1,13 +1,14 @@
 @mixin nav-root {
     position: fixed;
     height: 100%;
-    z-index: 5;
+    z-index: 6;
     width: 100%;
     pointer-events: none;
+    border-right: 1px solid var(--c-gray-darkest);
 
     @include breakpoint(xs) {
         pointer-events: all;
-        width: 80px;
+        width: $nav-width;
     }
 }
 
@@ -15,7 +16,6 @@
     position: absolute;
     width: 40px;
     height: 40px;
-    border-radius: 4px;
     background: var(--c-black);
     bottom: 10px;
     left: 50%;
@@ -38,19 +38,66 @@
     }
 }
 
+@mixin nav-toggle-icon {
+    display: block;
+    background-color: var(--c-gray-lightest);
+    height: 2px;
+    width: calc(100% - 10px);
+    margin-left: 5px;
+    transition: background-color .25s;
+
+    &:after,
+    &:before {
+        content: '';
+        position: absolute;
+        left: 5px;
+        right: 5px;
+        height: 2px;
+        background-color: var(--c-gray-lightest);
+        width: calc(100% - 10px);
+        transition: rotate .25s, top .25s;
+    }
+
+    &:before {
+        top: 9px;
+    }
+
+    &:after {
+        top: calc(100% - 11px);
+    }
+
+    @at-root .nav--active & {
+        background-color: transparent;
+
+        &:before,
+        &:after {
+            transform-origin: center;
+            top: calc(50% - 2px);
+        }
+
+        &:after {
+            rotate: -45deg;
+        }
+
+        &:before {
+            rotate: 45deg;
+        }
+    }
+}
+
 @mixin nav-container {
     flex-direction: column;
-    background-color: var(--c-nav);
     width: 100%;
-    height: 100%;
+    height: 100lvh;
     display: none;
     padding-bottom: 70px;
     box-sizing: border-box;
     pointer-events: all;
+    background-color: var(--c-gray-lightest);
     transition: background-color .25s;
 
-    @include breakpoint(xs) {
-        background-color: $color-nav;
+    @at-root .body:has(.top-nav__button--dark:hover) & {
+        background-color: var(--c-gray-lighter);
     }
 
     @at-root .nav--active & {
@@ -60,30 +107,39 @@
     @include breakpoint(xs) {
         display: flex;
         height: 100svh;
-        width: 80px;
+        width: 100%;
         padding-bottom: 0;
     }
 }
 
 @mixin nav-logo {
-    color: var(--c-black);
-    font-size: 30px;
+    color: var(--c-gray-darkest);
+    font-size: 20px;
     font-weight: bold;
     letter-spacing: 2px;
-    height: 100%;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     transition: background-color .25s;
+    height: 70px;
     border-bottom: 1px solid color-mix(in srgb, $color-gray 25%, transparent);
 
     @include breakpoint(xs) {
-        color: $color-white;
+        border-bottom-width: 0;
+    }
+
+    @at-root .body--dark & {
+        filter: invert(1);
+    }
+
+    @at-root .body:not(.body--dark) & {
+        transition: background-color .25s, color .25s;
     }
 
     &:hover {
         background-color: var(--c-main);
+        color: $color-white;
     }
 }
 
@@ -114,20 +170,16 @@
         flex-direction: row;
         order: 1;
         border-bottom: 1px solid color-mix(in srgb, $color-gray 25%, transparent);
-        background-color: var(--c-black);
-        margin-bottom: 10px;
 
         @include breakpoint(xs) {
             flex-direction: column;
             border-width: 0;
         }
-        background-color: transparent;
     }
 }
 
 @mixin nav-item {
     width: 100%;
-    height: 60px;
     position: relative;
     z-index: 1;
 
@@ -138,106 +190,119 @@
     &:not(:first-of-type) {
         order: 2;
     }
-
-    @include breakpoint(xs) {
-        height: 70px;
-    }
-
-    @at-root .nav__list--socials & {
-        height: 70px;
-    }
-
-    &--line {
-        border-bottom: 1px solid color-mix(in srgb, $color-gray 25%, transparent);
-        padding-bottom: 10px;
-        margin-bottom: 10px;
-
-        @include breakpoint(xs) {
-            margin-bottom: 0;
-            padding-bottom: 0;
-        }
-    }
-
-    &:has(.nav__logo) {
-        height: 70px;
-
-        @include breakpoint(xs) {
-            height: 80px;
-        }
-    }
 }
 
 @mixin nav-link {
-    color: var(--c-gray);
+    color: var(--c-gray-darkest);
     display: flex;
     justify-content: flex-start;
     align-content: center;
-    height: 100%;
-    position: relative;
-    transition: color .25s;
     align-items: center;
     gap: 20px;
-    padding: 0 25px;
+    width: 100%;
+    font-weight: 300;
+    position: relative;
+    overflow: hidden;
+    padding: 20px 25px;
+    border-bottom: 1px solid color-mix(in srgb, $color-gray 25%, transparent);
 
     @include breakpoint(xs) {
-        color: $color-gray;
-        padding: 0;
-        justify-content: center;
+        padding: 0 25px;
+        border-bottom-width: 0;
     }
 
     &:before {
         content: '';
         position: absolute;
-        inset: 8px;
-        background: $color-gray-dark;
+        inset: 5px;
+        background: color-mix(in srgb, var(--c-black) 5%, transparent);
         z-index: -1;
         border-radius: 4px;
         opacity: 0;
         transition: opacity .25s;
-    }
+        display: none;
 
-    &:hover {
-        color: $color-white;
-
-        &:before {
-            opacity: 1;
+        @include breakpoint(xs) {
+            display: block;
         }
     }
 
-    &--active {
-        color: $color-white;
+    @include breakpoint(xs) {
+        writing-mode: sideways-lr;
+        padding: 15px 0;
+        justify-content: center;
+    }
 
-        &:before {
-            opacity: 1;
-        }
+    @media screen and (min-height: 870px) and (min-width: 768px) {
+        padding: 25px 0;
     }
 
     @at-root .nav__list--socials & {
+        padding: 20px 0;
+        border-bottom-width: 0;
         justify-content: center;
-        padding: 0;
+    }
+
+    @at-root .nav__list--socials &:hover:before {
+        opacity: 1;
+    }
+}
+
+@mixin nav-label-container {
+    overflow: hidden;
+}
+
+@mixin nav-label {
+    position: relative;
+    font-size: 18px;
+    transition: translate .25s;
+
+    @include breakpoint(xs) {
+        translate: -100% 0;
+        font-weight: bold;
+        font-size: 16px;
+    }
+
+    @at-root .nav__link:hover & {
+        @include breakpoint(xs) {
+            translate: -200% 0;
+        }
+    }
+
+    &:before,
+    &:after {
+        content: attr(data-text);
+        font-weight: 300;
+        position: absolute;
+        inset: 0 100%;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        display: none;
+
+        @include breakpoint(xs) {
+            display: block;
+        }
+    }
+
+    &:after {
+        inset: 0 0 0 200%;
+    }
+
+    @at-root {
+        .nav__link--active &,
+        .nav__link--active &:before,
+        .nav__link--active &:after {
+            font-weight: bold;
+        }
     }
 }
 
 @mixin nav-icon {
-    width: 28px;
-}
-
-@mixin nav-label {
-    font-size: 20px;
-    font-weight: 300;
-
-    @at-root .nav__list--socials & {
-        display: none;
-    }
-
-    @include breakpoint(xs) {
-        display: none;
-    }
+    width: 24px;
 }
 
 @mixin nav-tooltip {
-    @include tooltip;
-
     margin-left: 8px;
     display: none;
 
@@ -256,6 +321,10 @@
 
         &__toggle {
             @include nav-toggle;
+        }
+
+        &__toggle-icon {
+            @include nav-toggle-icon;
         }
 
         &__logo {
@@ -282,12 +351,16 @@
             @include nav-link;
         }
 
-        &__icon {
-            @include nav-icon;
+        &__label-container {
+            @include nav-label-container;
         }
 
         &__label {
             @include nav-label;
+        }
+
+        &__icon {
+            @include nav-icon;
         }
 
         &__tooltip {

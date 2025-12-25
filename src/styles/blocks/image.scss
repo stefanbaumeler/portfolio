@@ -4,7 +4,9 @@
     height: 100%;
 
     &--invert {
-        filter: invert(1);
+        @at-root .html--dark & {
+            filter: invert(1);
+        }
     }
 }
 

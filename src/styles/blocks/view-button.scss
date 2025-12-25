@@ -1,0 +1,133 @@
+@mixin view-button-root {
+    @include lead;
+
+    position: relative;
+    color: var(--c-gray-darkest);
+    display: flex;
+    align-items: center;
+}
+
+@mixin view-button-plus {
+    width: 50px;
+    aspect-ratio: 1;
+    border: 1px solid var(--c-gray);
+    display: block;
+    position: relative;
+    transition: rotate .25s $transition, background-color .25s $transition, border-color .25s $transition;
+
+    @include breakpoint(lg) {
+        width: 75px;
+    }
+
+    &:before,
+    &:after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        translate: -50% -50%;
+        left: 50%;
+        background-color: var(--c-gray-darkest);
+        height: 4px;
+        width: 24px;
+
+        @include breakpoint(lg) {
+            height: 6px;
+            width: 35px;
+        }
+    }
+
+    &:after {
+        rotate: 90deg;
+    }
+
+    @at-root .view-button:hover & {
+        rotate: 90deg;
+        background-color: var(--c-project, var(--c-main));
+        border-color: var(--c-project, var(--c-main));
+    }
+}
+
+@mixin view-button-back {
+    width: 50px;
+    aspect-ratio: 1;
+    border: 1px solid var(--c-gray);
+    display: block;
+    position: relative;
+    transition: rotate .25s $transition, background-color .25s $transition, border-color .25s $transition;
+
+    @include breakpoint(lg) {
+        width: 75px;
+    }
+
+    @at-root .view-button:hover & {
+        background-color: var(--c-project, var(--c-main));
+        border-color: var(--c-project, var(--c-main));
+    }
+}
+
+@mixin view-button-icon {
+    position: absolute;
+    width: 30px;
+    inset: 50%;
+    translate: -50% -50%;
+
+    @include breakpoint(lg) {
+        width: 50px;
+    }
+}
+
+@mixin view-button-text {
+    translate: -6px;
+    z-index: 1;
+    transition: translate .25s $transition;
+    position: relative;
+
+    @include breakpoint(lg) {
+        translate: -10px;
+    }
+
+    &:after {
+        content: '';
+        position: absolute;
+        bottom: 1px;
+        left: 0;
+        width: 0;
+        height: 3px;
+        z-index: -1;
+        background-color: var(--c-project, var(--c-main));
+        transition: width .25s $transition;
+
+        @at-root .view-button:hover & {
+            width: 100%;
+            transition: width .5s $transition;
+        }
+    }
+
+    @at-root .view-button:hover & {
+        translate: 12px;
+    }
+}
+
+@mixin view-button {
+    .view-button {
+        @include view-button-root;
+
+        &__plus {
+            @include view-button-plus;
+        }
+
+        &__back {
+            @include view-button-back;
+        }
+
+        &__icon {
+            @include view-button-icon;
+        }
+
+        &__text {
+            @include view-button-text;
+        }
+    }
+}
+
+@include view-button;

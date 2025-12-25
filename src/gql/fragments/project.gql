@@ -3,9 +3,11 @@ fragment FProject on project {
     url
     color
     title
+    type
     translations {
         id
         description
+        contributions
         languages_code {
             abbreviation
         }

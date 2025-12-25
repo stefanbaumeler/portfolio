@@ -11,33 +11,14 @@
 
     @include breakpoint(md) {
         aspect-ratio: unset;
-        width: calc(50% + 6.25vw);
-        margin-right: -6.25vw;
         pointer-events: all;
         height: 100%;
         cursor: pointer;
         overflow: hidden;
     }
 
-    @include breakpoint(lg) {
-        width: calc(50% + clamp(0px, 12.5vw, map.get($breakpoints, lg) * .125));
-        margin-right: map.get($breakpoints, lg) * .01 * -12.5;
-    }
-
-    @at-root .project:nth-child(2n) & {
-        @include breakpoint(md) {
-            margin-left: -6.25vw;
-            margin-right: 0;
-        }
-
-        @include breakpoint(lg) {
-            margin-left: map.get($breakpoints, lg) * .01 * -12.5;
-        }
-    }
-
     &--active {
         @include breakpoint(md) {
-            width: 100%;
             cursor: default;
         }
     }
@@ -154,7 +135,7 @@
     left: 50%;
     translate: -50%;
 
-    @at-root .body--dark & {
+    @at-root .html--dark & {
         background-color: $color-black;
     }
 

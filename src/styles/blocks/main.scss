@@ -1,7 +1,6 @@
 @use 'sass:map';
 
 @mixin main-root {
-    background-color: var(--c-gray-lighter);
     position: relative;
     width: 100%;
     margin: 0 auto;
@@ -9,7 +8,7 @@
     box-sizing: border-box;
 
     @include breakpoint(xs) {
-        padding-left: 80px;
+        padding-left: $nav-width;
     }
 }
 

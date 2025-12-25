@@ -3,63 +3,132 @@
     flex-direction: column-reverse;
     min-height: 100svh;
     justify-content: flex-end;
+    max-width: 768px;
+
+    @include breakpoint(xs) {
+        width: 100%;
+    }
 
     @include breakpoint(md) {
+        max-width: 2558px;
+        width: auto;
         flex-direction: row;
         justify-content: flex-start;
+        margin-left: auto;
     }
 }
 
 @mixin home-image-container {
     width: 100%;
-    max-width: 600px;
     margin: 0 auto 50px;
     position: relative;
-    aspect-ratio: 4 / 3;
+    box-sizing: border-box;
 
-    @media screen and (min-width: 600px) {
-        margin: 80px auto 50px;
+    @media screen and (min-width: 620px) {
+        margin-bottom: -30px;
     }
 
+    @include breakpoint(xs) {
+        padding: var(--spacing) var(--spacing) 50px;
+        margin: 0;
+    }
 
     @include breakpoint(md) {
-        margin: 0;
-        width: 50%;
         height: 100svh;
         max-width: none;
+        width: calc(100% - 600px);
+        padding: 0;
+    }
+
+    @include breakpoint(lg) {
+        width: calc(100% - 1037.5px);
     }
 }
 
 @mixin home-image {
     height: 100%;
+    aspect-ratio: 4 / 3;
+    margin-left: auto;
+
+    @media screen and (min-width: 620px) {
+        width: 65vw;
+    }
+
+    @include breakpoint(xs) {
+        width: auto;
+    }
+
+    @include breakpoint(md) {
+        aspect-ratio: unset;
+    }
 }
 
 @mixin home-content {
     position: relative;
-    z-index: 2;
     margin: 0 auto;
     box-sizing: border-box;
     width: 100%;
+    padding: 0 var(--spacing) 100px;
+    z-index: 2;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    padding: 0 25px 100px;
-    max-width: 650px;
+    justify-content: space-between;
+    align-items: stretch;
 
     @include breakpoint(md) {
-        width: 50%;
-        max-width: 560px;
+        padding: var(--spacing);
+        width: 600px;
+        min-height: 100vh;
+    }
+
+    @include breakpoint(lg) {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    @include breakpoint(lg) {
+        width: 1037.5px;
     }
 }
 
 @mixin home-title {
-    @include h2;
+    @include h1;
+    @include line(below);
 
-    margin-bottom: 25px;
+    padding-bottom: 25px;
+
+    @include breakpoint(xs) {
+        padding-bottom: 50px;
+    }
+}
+
+@mixin home-text-container {
+    width: 100%;
+    padding-top: 50px;
+    max-width: 500px;
+
+    @include breakpoint(md) {
+        border-top: 1px solid var(--c-gray-darkest);
+        max-width: none;
+    }
 }
 
 @mixin home-text {
-    @include text;
+    @include lead;
+
+    color: var(--c-gray-darkest);
+    display: flex;
+    align-items: flex-end;
+    max-width: 725px;
+    hyphens: auto;
+
+    @include breakpoint(md) {
+        width: auto;
+    }
+
+    @include breakpoint(xl) {
+        margin-left: 362.5px;
+        width: auto;
+    }
 }
 
 @mixin home {
@@ -80,6 +149,10 @@
 
         &__title {
             @include home-title;
+        }
+
+        &__text-container {
+            @include home-text-container;
         }
 
         &__text {

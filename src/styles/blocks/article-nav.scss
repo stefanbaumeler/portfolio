@@ -1,11 +1,14 @@
 @mixin article-nav-root {
-    padding-left: 25px;
+    padding-left: 50px;
 }
 
 @mixin article-nav-title {
-    padding-bottom: 8px;
+    font-size: 16px;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    padding-bottom: 25px;
+    color: var(--c-black);
     display: block;
-    font-weight: bold;
 }
 
 @mixin article-nav-list {
@@ -26,7 +29,7 @@
     &:hover {
         color: var(--c-main-dark);
 
-        @at-root .body--dark & {
+        @at-root .html--dark & {
             color: var(--c-main);
         }
     }
@@ -51,10 +54,10 @@
 }
 
 @mixin article-nav-toplink-container {
-    border-top: 1px solid var(--c-gray-light);
+    border-top: 1px solid var(--c-gray-darkest);
     transition: opacity .25s;
-    margin-top: 8px;
-    padding-top: 8px;
+    margin-top: 25px;
+    padding-top: 25px;
 
     &:first-child {
         margin-top: -8px;

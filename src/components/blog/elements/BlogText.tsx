@@ -14,7 +14,7 @@ const highlighter = await createHighlighter({
 
 const marked = new Marked(
     markedHighlight({
-        langPrefix: 'article__code article__code--',
+        langPrefix: 'content__code content__code--',
         highlight: (code, lang) => {
             return highlighter.codeToHtml(code, {
                 lang,
@@ -29,7 +29,7 @@ const marked = new Marked(
 
 export const BlogText = ({ item }: Props) => {
     return <div
-        className="article__text"
+        className="content__text"
         dangerouslySetInnerHTML={{
             __html: marked.parse(item.text)
         }}

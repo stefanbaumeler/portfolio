@@ -1,20 +1,31 @@
 import { Project } from './Project'
-import { useTranslations } from 'next-intl'
 import { TQProjects } from '~/schema'
+import { TopNav } from '@/components/global/nav/TopNav'
 
 type Props = {
 	projects: TQProjects['work'][number]['projects']
+    title: string
+    text: string
+    type: string
 }
 
-export const Projects = ({ projects }: Props) => {
-    const t = useTranslations()
-
+export const Projects = async ({
+    projects, title, text, type
+}: Props) => {
     return <section
-        className="projects"
+        className={`projects projects--${type}`}
     >
-        <h1 className="projects__title">
-            {t('Projects')}
-        </h1>
+        <div className="projects__header">
+            <h1 className="projects__title">
+                {title}
+            </h1>
+            <div className="projects__text">
+                {text}
+            </div>
+            <div className="projects__customize">
+                <TopNav />
+            </div>
+        </div>
         <ul className="projects__list">
             {projects.map((project, key) => <Project
                 key={key}

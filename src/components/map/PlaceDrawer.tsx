@@ -50,7 +50,7 @@ export const PlaceDrawer = ({
                         </span>
                         <span className="visits__date">
                             {
-                                departure?.toString() === 'Invalid Date' ? t('present') : departure?.toLocaleString(locale, {
+                                departure?.toString() === 'Invalid Date' || !departure ? t('present') : departure?.toLocaleString(locale, {
                                     year: 'numeric',
                                     month: 'short',
                                     day: '2-digit'

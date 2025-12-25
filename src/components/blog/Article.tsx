@@ -8,10 +8,10 @@ import { TBlogTitle,
     TQDevArticle,
     TSecretBlogElements,
     TQTravelPrevNextArticles, TQDevPrevNextArticles } from '~/schema'
-import { ArticleMeta } from '@/components/blog/ArticleMeta'
 import { getLocale, getTranslations } from 'next-intl/server'
 import { isTravelArticle } from '@/helpers/article-type'
 import { SliderProvider } from '@/context/slider'
+import { TopNav } from '@/components/global/nav/TopNav'
 
 type Props = {
 	article: TQTravelArticle['secret_blog'][number] | TQDevArticle['blog'][number]
@@ -26,33 +26,51 @@ export const Article = async ({
     const type = isTravelArticle(article) ? 'travel' : 'dev'
     const t = await getTranslations()
     const locale = await getLocale()
+    const tags = isTravelArticle(article)
+        ? [...new Set(article.place?.map((place) => place?.place_id?.country?.translations?.find((translation) => translation?.languages_code?.abbreviation === 'de')?.name))]
+        : article.technology.map((technology) => technology.technology_id.label)
+
+    const date = new Date(article.date_created).toLocaleString(locale, {
+        year: 'numeric',
+        month: 'long',
+        day: '2-digit'
+    })
 
     return <SliderProvider>
-        <div className="article">
-            <div className="article__progress"></div>
-            <h1
-                className="article__title article__title--level-1"
-                dangerouslySetInnerHTML={{
-                    __html: article.title
-                }}
-            />
-            <ArticleMeta
-                className="article__meta"
-                article={article}
-                locale={locale}
-                t={t}
-            />
-            {isTravelArticle(article) ? <Image
-                className="article__image"
-                fill
-                decoding="sync"
-                alt=""
-                sizes="(max-width: 767px) calc(100vw - 20px), (max-width: 1023px) calc(100vw - 130px), (max-width: 1679px) calc(100vw - 180px), 1500px"
-                src={`${process.env.NEXT_PUBLIC_ASSETS}/${article.image?.filename_disk}`}
-                loading="eager"
-                priority
-                quality={75}
-            /> : null}
+        <div className={`article article--${type}`}>
+            <div className="article__customize">
+                <TopNav />
+            </div>
+            <div className="article__header">
+                <div className="article__tags">
+                    {tags.map((tag, key) => <span
+                        key={key}
+                        className="article__tag"
+                    >
+                        {`#${tag}`}
+                    </span>)}
+                </div>
+                <h1
+                    className="article__title"
+                    dangerouslySetInnerHTML={{
+                        __html: article.title
+                    }}
+                />
+                <div className="article__date">
+                    {date}
+                </div>
+                {isTravelArticle(article) ? <Image
+                    className="article__image"
+                    fill
+                    decoding="sync"
+                    alt=""
+                    sizes="(max-width: 767px) calc(100vw - 20px), (max-width: 1023px) calc(100vw - 130px), (max-width: 1679px) calc(100vw - 180px), 1500px"
+                    src={`${process.env.NEXT_PUBLIC_ASSETS}/${article.image?.filename_disk}`}
+                    loading="eager"
+                    priority
+                    quality={75}
+                /> : null}
+            </div>
             <div className="article__content-container">
                 <div className="article__content">
                     {article.elements?.map((element, key) => <div

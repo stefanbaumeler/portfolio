@@ -14,8 +14,7 @@ export const NavLists = async () => {
         icon: item?.icon ? I[item.icon] : '',
         url: item?.url ?? '',
         label: dt(item, 'label', locale),
-        title: dt(item, 'title', locale),
-        line: item?.line ?? false
+        title: dt(item, 'title', locale)
     })
 
     const navItems = data?.navigation?.main_navigation_items.map(getItems) ?? []
@@ -29,6 +28,7 @@ export const NavLists = async () => {
             {group.map((item, key) => <NavItem
                 item={item}
                 key={key}
+                type={k === 1 ? 'socials' : 'main'}
             />)}
         </ul>)}
     </div>

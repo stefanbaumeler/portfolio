@@ -4,6 +4,12 @@ query QDevArticle($slug: String!) {
         status
         title
         date_created
+        technology {
+            id
+            technology_id {
+                ...FTechnology
+            }
+        }
         slug
         elements {
             item {

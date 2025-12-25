@@ -24,11 +24,22 @@
             flex-direction: row;
         }
     }
+
+    @at-root {
+        .article__meta &,
+        .blog__meta & {
+            width: 100%;
+
+            @include breakpoint(sm) {
+                flex-direction: column;
+            }
+        }
+    }
 }
 
 @mixin meta-item {
     display: flex;
-    gap: 4px;
+    gap: 10px;
     align-items: center;
     white-space: nowrap;
 }
@@ -36,6 +47,8 @@
 @mixin meta-icon {
     width: 16px;
     height: 16px;
+    margin-top: -2px;
+    flex-shrink: 0;
 
     @container meta-container (min-width: #{map.get($breakpoints, sm)}) {
         display: none;
@@ -54,8 +67,21 @@
     }
 
     &:before {
-        content: '|';
-        opacity: .25;
+        content: '';
+        width: 1px;
+        height: 18px;
+        margin-top: 3.5px;
+        display: block;
+        background-color: var(--c-gray-darkest);
+    }
+
+    @at-root {
+        .article__meta &,
+        .blog__meta & {
+            @include breakpoint(sm) {
+                display: none;
+            }
+        }
     }
 }
 

@@ -1,15 +1,13 @@
 $transition: cubic-bezier(.65, 0, .35, 1);
 
 $color-white: #FFFFFF;
-$color-nav-light: #FAFAFA;
 $color-gray-lightest: #FAFAFA;
-$color-gray-lighter: #F3F3F3;
+$color-gray-lighter: #F0F0F0;
 $color-gray-light: #D2D2D2;
 $color-gray: #9A9A9A;
 $color-gray-dark: #2D2D2D;
 $color-gray-darker: #1F1F1F;
 $color-gray-darkest: #111111;
-$color-nav: #0F0F0F;
 $color-black: #000000;
 
 $color-main: #0099FF;
@@ -22,6 +20,11 @@ $breakpoints: (
     sm: 1024px,
     md: 1200px,
     lg: 1680px,
-    xl: 1800px,
+    xl: 1905px,
     uw: 2560px
 );
+
+$nav-width: 80px;
+$top-nav-height: 50px;
+
+$transition: cubic-bezier(.7, 0, .2, 1);

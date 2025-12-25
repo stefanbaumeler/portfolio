@@ -26,18 +26,25 @@ export const Project = async ({ project }: Props) => {
             '--c-project-lighter': `hsl(${projectHSL.h}deg, ${projectHSL.s}%, ${projectHSL.l === 0 ? 100 : projectHSL.l + (100 - projectHSL.l) / 5}%)`
         } as CSSProperties}
     >
-        <Slider
-            gallery={project.gallery}
-        />
-        <div className="project__content">
+        <div className="project__header">
             <h2 className="project__title">
-                <Markdown value={project.title.split('/').join('/\n\n')} />
+                <Markdown value={project.title} />
             </h2>
             <div className="project__description">
                 <Markdown
                     value={dt(project, 'description', locale)}
                 />
             </div>
+            <h3 className="project__subtitle">
+                {`${t('My contribution')}:`}
+            </h3>
+            <div className="project__contributions">
+                <Markdown
+                    value={dt(project, 'contributions', locale)}
+                />
+            </div>
+        </div>
+        <div className="project__content">
             <ul className="project__technologies">
                 {project.technologies?.map((technology, key) => <Technology
                     technology={technology.technology_id}
@@ -46,22 +53,32 @@ export const Project = async ({ project }: Props) => {
                     key={key}
                 />)}
             </ul>
-            <div className="project__button-container">
-                <a
-                    target="_blank"
-                    href={project.url ?? 'mailto:stefan.baumeler@hotmail.com'}
-                    className="project__button"
-                    rel="noreferrer"
-                >
-                    {project.url ? <>
-                        <Icon path={Icons.mdiOpenInNew} />
-                        {t('View Project')}
-                    </> : <>
-                        <Icon path={Icons.mdiInformationOutline} />
-                        {t('Contact me for more infos')}
-                    </>}
-                </a>
-            </div>
+            {project.url ? <a
+                target="_blank"
+                href={project.url ?? 'mailto:stefan.baumeler@hotmail.com'}
+                className="view-button"
+                rel="noreferrer"
+            >
+                <span className="view-button__plus"></span>
+                <span className="view-button__text">
+                    {t('View Project')}
+                </span>
+            </a> : <a
+                className="contact-button"
+                href="mailto:stefan.baumeler@hotmail.com"
+            >
+                <Icon
+                    className="contact-button__icon"
+                    path={Icons.mdiInformationOutline}
+                />
+                <span className="contact-button__link">
+                    {t('Contact me')}
+                </span>
+                <span className="contact-button__text">
+                    &nbsp;
+                    {t('for more infos')}
+                </span>
+            </a>}
         </div>
     </li>
 }

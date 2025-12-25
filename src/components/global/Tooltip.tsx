@@ -1,7 +1,14 @@
 'use client'
 
-import { Placement, shift, useFloating, useHover, useInteractions } from '@floating-ui/react'
-import { ReactNode, useState } from 'react'
+import { arrow,
+    FloatingArrow,
+    Placement,
+    shift,
+    useFloating,
+    useHover,
+    useInteractions,
+    useTransitionStyles } from '@floating-ui/react'
+import { ReactNode, useRef, useState } from 'react'
 
 type Props = {
 	children: ReactNode
@@ -16,6 +23,7 @@ export const Tooltip = ({
     children, content, placement, className, tagName = 'div', tooltipClass = 'tooltip', forceOpen = false
 }: Props) => {
     const [isOpen, setIsOpen] = useState(false)
+    const arrowRef = useRef(null)
 
     const {
         refs, floatingStyles, context
@@ -25,7 +33,42 @@ export const Tooltip = ({
         onOpenChange: setIsOpen,
         middleware: [shift({
             padding: 18
+        }), arrow({
+            element: arrowRef
         })]
+    })
+
+    const { styles: transitionStyles } = useTransitionStyles(context, {
+        duration: 250,
+        initial: ({ placement }) => {
+            const dir = placement.split('-')[0]
+
+            const base = {
+                opacity: 0
+            }
+
+            let translate = ''
+
+            switch (dir) {
+            case 'top':
+                translate = '0 8px'
+                break
+            case 'bottom':
+                translate = '0 -8px'
+                break
+            case 'left':
+                translate = '8px 0'
+                break
+            case 'right':
+                translate = '-8px 0'
+                break
+            }
+
+            return {
+                translate,
+                ...base
+            }
+        }
     })
 
     const hover = useHover(context)
@@ -45,12 +88,22 @@ export const Tooltip = ({
     >
         {children}
         {(isOpen || forceOpen) && <div
-            className={tooltipClass}
             ref={refs.setFloating}
             style={floatingStyles}
             {...getFloatingProps()}
+            className={`tooltip tooltip--${placement} ${tooltipClass}`}
         >
-            {content}
+            <div
+                className="tooltip__content"
+                style={transitionStyles}
+            >
+                <FloatingArrow
+                    className="tooltip__arrow"
+                    ref={arrowRef}
+                    context={context}
+                />
+                {content}
+            </div>
         </div>}
     </CustomTag>
 }

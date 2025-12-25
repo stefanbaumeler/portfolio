@@ -10,12 +10,10 @@
 
 @mixin map-root {
     width: 100%;
-    margin-top: -80px;
     position: relative;
     height: 100svh;
 
     @include breakpoint(xs) {
-        height: calc(100svh - 80px);
         margin-top: 0;
     }
 }
@@ -41,7 +39,7 @@
         box-shadow: inset 0 0 0 1px $color-white;
         transition: scale .25s;
 
-        @at-root .body--dark & {
+        @at-root .html--dark & {
             box-shadow: inset 0 0 0 1px $color-gray-light;
         }
     }
@@ -54,15 +52,13 @@
         background-color: #FF0000;
         scale: 2.5;
 
-        @at-root .body--dark & {
+        @at-root .html--dark & {
             background-color: #FF0000;
         }
     }
 }
 
 @mixin map-tooltip {
-    @include tooltip;
-
     pointer-events: none;
     margin-top: -5px;
 

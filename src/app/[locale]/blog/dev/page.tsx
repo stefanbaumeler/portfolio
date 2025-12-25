@@ -3,6 +3,7 @@ import { getClient } from '@/gql/urql'
 import { Articles } from '@/components/blog/Articles'
 import { getTranslations } from 'next-intl/server'
 import { BlogMeta } from '@/components/blog/BlogMeta'
+import { TopNav } from '@/components/global/nav/TopNav'
 
 export const revalidate = 60
 
@@ -11,17 +12,24 @@ const DevBlogPage = async () => {
     const t = await getTranslations()
 
     return <div className="blog">
-        <h1 className="blog__title">
-            Dev Blog
-        </h1>
-        <div className="blog__meta">
-            <BlogMeta
-                years={`2025 - ${t('present')}`}
-                posts={data?.blog.length}
-                language="English"
-            />
+        <div className="blog__header">
+            <div>
+                <h1 className="blog__title">
+                    Blog
+                </h1>
+                <TopNav />
+            </div>
+            <div className="blog__meta">
+                <BlogMeta
+                    years={`2025 - ${t('present')}`}
+                    posts={data?.blog.length}
+                    language="English"
+                />
+            </div>
         </div>
-        <Articles articles={data?.blog} />
+        <div className="blog__content">
+            <Articles articles={data?.blog} />
+        </div>
     </div>
 }
 

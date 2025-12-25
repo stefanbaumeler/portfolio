@@ -1,0 +1,56 @@
+@mixin tooltip-root {
+    @media screen and (pointer: coarse) {
+        display: none;
+    }
+
+    @at-root .hover-link & > div {
+        padding: 0;
+    }
+}
+
+@mixin tooltip-content {
+    color: var(--c-white);
+    background-color: var(--c-gray-darkest);
+    padding: 6px 12px;
+    font-size: 14px;
+    border-radius: 4px;
+    text-wrap: nowrap;
+    transition: opacity .25s;
+    position: relative;
+}
+
+@mixin tooltip-arrow {
+    fill: var(--c-black);
+
+    @at-root .tooltip--top & {
+        translate: 0 -1px;
+    }
+
+    @at-root .tooltip--bottom & {
+        translate: 0 1px;
+    }
+
+    @at-root .tooltip--left & {
+        translate: -1px 0;
+    }
+
+    @at-root .tooltip--right & {
+        translate: 1px 0;
+    }
+}
+
+@mixin tooltip {
+    .tooltip {
+        @include tooltip-root;
+
+        &__content {
+            @include tooltip-content;
+        }
+
+        &__arrow {
+            @include tooltip-arrow;
+        }
+    }
+}
+
+@include tooltip;

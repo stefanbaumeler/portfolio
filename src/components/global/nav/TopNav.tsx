@@ -3,20 +3,26 @@
 import * as Icons from '@mdi/js'
 import Icon from '@mdi/react'
 import { Tooltip } from '../Tooltip'
-import { DarkMode, useDarkContext } from '@/context/dark'
 import { useTopNavContext } from '@/context/top-nav'
 import { useLocale, useTranslations } from 'next-intl'
 import { usePathname } from '@/i18n/routing'
 import { Link } from '@/components/global/Link'
 import { useBodyContext } from '@/context/body'
+import { useTheme } from 'next-themes'
+import { useEffect, useState } from 'react'
 
 export const TopNav = () => {
-    const dark = useDarkContext()
+    const theme = useTheme()
     const topNavContext = useTopNavContext()
     const t = useTranslations()
     const pathname = usePathname()
     const locale = useLocale()
     const { isMobile } = useBodyContext()
+    const [darkModeIcon, setDarkModeIcon] = useState<string>(Icons.mdiDotsHorizontal)
+
+    useEffect(() => {
+        setDarkModeIcon(theme.resolvedTheme === 'dark' ? Icons.mdiWeatherNight : Icons.mdiWeatherSunny)
+    }, [theme.resolvedTheme])
 
     return <div className="top-nav">
         {topNavContext.title ? <h1 className="top-nav__title">
@@ -37,10 +43,16 @@ export const TopNav = () => {
                         className="top-nav__button top-nav__button--back"
                         aria-label={t('Back')}
                     >
-                        <Icon
-                            path={Icons.mdiArrowLeft}
-                            className="top-nav__icon"
-                        />
+                        <div className="top-nav__icon-container">
+                            <Icon
+                                path={Icons.mdiArrowLeft}
+                                className="top-nav__icon"
+                            />
+                            <Icon
+                                path={Icons.mdiArrowLeft}
+                                className="top-nav__icon top-nav__icon--hover"
+                            />
+                        </div>
                     </Link>
                 </Tooltip>
             </div> : null}
@@ -52,12 +64,12 @@ export const TopNav = () => {
                     className="top-nav__item"
                 >
                     <button
-                        className="top-nav__button"
+                        className="top-nav__button top-nav__button--dark"
                         aria-label={t('Dark mode')}
-                        onClick={() => dark.setState(dark.state === DarkMode.Dark ? DarkMode.Light : DarkMode.Dark)}
+                        onClick={() => theme.setTheme(theme.resolvedTheme === 'dark' ? 'light' : 'dark')}
                     >
                         <Icon
-                            path={dark.state ? Icons.mdiWhiteBalanceSunny : Icons.mdiMoonWaningCrescent}
+                            path={darkModeIcon}
                             className="top-nav__icon"
                         />
                     </button>
@@ -72,7 +84,7 @@ export const TopNav = () => {
                         prefetch={!pathname.endsWith('/stats') && !pathname.endsWith('/map')}
                         aria-label={t('Language')}
                         skipLanguage
-                        className="top-nav__button"
+                        className="top-nav__button top-nav__button--language"
                         href={`/${locale === 'de' ? 'en' : 'de'}${pathname}`}
                     >
                         <Icon

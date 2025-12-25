@@ -2,22 +2,46 @@
 
 @mixin projects-root {
     @include container;
+}
 
-    overflow: hidden;
+@mixin projects-header {
+    @include header;
 }
 
 @mixin projects-title {
     @include h1;
 
-    color: var(--c-black);
-    padding-bottom: 50px;
+    grid-column: 1;
+}
 
-    @include breakpoint(md) {
-        padding-bottom: 100px;
+@mixin projects-text {
+    @include lead;
+
+    padding: 25px 0;
+}
+
+@mixin projects-customize {
+    @include line(above);
+
+    padding-top: 0;
+    border-width: 0;
+
+    @include breakpoint(sm) {
+        border-top-width: 1px;
+    }
+
+    @at-root .projects--private & {
+        display: none;
+
+        @include breakpoint(sm) {
+            display: block;
+        }
     }
 }
 
 @mixin projects-list {
+    @include title-offset;
+
     margin: 0;
     list-style: none;
     display: flex;
@@ -25,32 +49,51 @@
     box-sizing: border-box;
     width: 100%;
     max-width: map.get($breakpoints, uw);
-    gap: 50px;
+    gap: 75px;
+    grid-area: auto / span 2;
+    padding-bottom: 50px;
 
     @include breakpoint(md) {
         gap: 100px;
     }
-}
 
-@mixin projects-letter {
-    transform: translateX(-100px);
-    display: inline-block;
+    @include breakpoint(lg) {
+        grid-area: auto / span 3;
+    }
+
+    @at-root .projects--private & {
+        @include breakpoint(sm) {
+            padding-top: 192px;
+        }
+
+        @include breakpoint(lg) {
+            padding-top: 219px;
+        }
+    }
 }
 
 @mixin projects {
     .projects {
         @include projects-root;
 
+        &__header {
+            @include projects-header;
+        }
+
         &__title {
             @include projects-title;
         }
 
-        &__list {
-            @include projects-list;
+        &__text {
+            @include projects-text;
         }
 
-        &__letter {
-            @include projects-letter;
+        &__customize {
+            @include projects-customize;
+        }
+
+        &__list {
+            @include projects-list;
         }
     }
 }

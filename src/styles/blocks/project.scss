@@ -1,260 +1,110 @@
-@use 'sass:map';
+@mixin project-root {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
 
-@keyframes pulse {
-    0% {
-        transform: none;
-    }
-
-    10% {
-        transform: scale(1.1);
-    }
-
-    100% {
-        transform: scale(1.25);
-        opacity: 0;
+    @include breakpoint(lg) {
+        display: grid;
+        grid-gap: 50px;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 }
 
-@mixin project-root {
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    box-sizing: border-box;
-    overflow: hidden;
-    background-color: var(--c-gray-lightest);
-    box-shadow: 0 20px 48px 0 rgba($color-black, .1);
+@mixin project-images {
+    display: none;
+}
 
-    @include breakpoint(md) {
-        aspect-ratio: 4 / 3;
-        flex-direction: row;
-        flex-wrap: nowrap;
+@mixin project-header {
+    grid-area: auto / span 2;
+}
+
+@mixin project-title {
+    @include h2(above);
+
+    padding-bottom: 25px;
+
+    p {
+        margin: 0;
     }
 
-    @media screen and (min-width: 1400px) {
-        aspect-ratio: 16 / 9;
-    }
+    @at-root .project:first-child & {
+        padding-top: 75px;
 
-    &:nth-child(2n) {
-        @include breakpoint(md) {
-            flex-direction: row-reverse;
+        @include breakpoint(sm) {
+            padding-top: 25px;
         }
     }
 }
 
 @mixin project-content {
-    padding: 50px 25px;
+    grid-area: auto / span 1;
+    height: 100%;
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    position: relative;
-    flex-shrink: 0;
+    justify-content: space-between;
+    align-items: flex-start;
     box-sizing: border-box;
-    width: 100%;
-    max-width: 620px;
-    margin: 0 auto;
-    transition: transform .25s;
-    justify-content: center;
-
-    @include breakpoint(sm) {
-        padding: 50px;
-    }
-
-    @include breakpoint(md) {
-        padding: 0 50px 0 0;
-        margin-left: 6.25vw;
-        gap: 20px;
-        width: calc(50% - 6.25vw);
-        max-width: none;
-    }
 
     @include breakpoint(lg) {
-        gap: 25px;
-        padding: 0 100px 0 0;
-        margin-left: clamp(0px, 12.5vw, map.get($breakpoints, lg) * .125);
-        width: calc(50% - clamp(0px, 12.5vw, map.get($breakpoints, lg) * .125));
-    }
-
-    @at-root .project:nth-child(2n) & {
-        @include breakpoint(md) {
-            padding: 0 0 0 50px;
-            margin-left: 0;
-            margin-right: 6.25vw;
-        }
-
-        @include breakpoint(lg) {
-            margin-right: clamp(0px, 12.5vw, map.get($breakpoints, lg) * .125);
-        }
-
-        @include breakpoint(xl) {
-            padding: 0 0 0 100px;
-        }
-    }
-
-    @at-root .project:has(.slider--active):nth-child(2n-1) & {
-        transform: translateX(60px);
-    }
-
-    &:before {
-        content: '';
-        position: absolute;
-        top: -1px;
-        right: calc(100% - 1px);
-        background-color: var(--c-gray-lightest);
-        transition: border-width .25s, left .25s, right .25s;
-        height: calc(100% + 1px);
-        border-width: 0 12.5vw 0 0;
-        border-color: var(--c-gray-lightest);
-        border-style: solid;
-        clip-path: polygon(evenodd, 0 0, 100% 0, 100% 100%, 0 0);
-        display: none;
-
-        @include breakpoint(md) {
-            display: block;
-        }
-
-        @include breakpoint(lg) {
-            border-right-width: clamp(0px, 25vw, map.get($breakpoints, lg) * .25);
-        }
-
-        @at-root .project:nth-child(4n-2) & {
-            clip-path: polygon(evenodd, 0 0, 100% 0, 0 100%, 0 0);
-            right: auto;
-            border-right-width: 0;
-            border-left-width: 12.5vw;
-            left: calc(100% - 1px);
-
-            @include breakpoint(lg) {
-                border-left-width: clamp(0px, 25vw, map.get($breakpoints, lg) * .25);
-            }
-        }
-
-        @at-root .project:nth-child(4n-1) & {
-            left: -12.5vw;
-
-            @include breakpoint(lg) {
-                left: clamp(calc(-25vw + 1px), map.get($breakpoints, lg) * -.25, 0px);
-            }
-        }
-
-        @at-root .project:nth-child(4n) & {
-            clip-path: polygon(evenodd, 0 0, 100% 0, 0 100%, 0 0);
-            right: calc(-12.5vw + 1px);
-            border-right-width: 0;
-            border-left-width: 12.5vw;
-
-            @include breakpoint(lg) {
-                right: clamp(calc(-25vw + 1px), map.get($breakpoints, lg) * -.25, 0px);
-                border-left-width: clamp(0px, 25vw, map.get($breakpoints, lg) * .25);
-            }
-        }
-
-        @at-root .project:has(.slider--active):nth-child(4n-1) & {
-            left: 12.5vw;
-
-            @include breakpoint(lg) {
-                left: clamp(0px, 25vw, map.get($breakpoints, lg) * .25 + 1px);
-            }
-        }
-
-        @at-root .project:has(.slider--active):nth-child(4n) & {
-            right: 12.5vw;
-
-            @include breakpoint(lg) {
-                right: clamp(0px, 25vw, map.get($breakpoints, lg) * .25 + 1px);
-            }
-        }
-
-        @at-root .project:has(.slider--active):nth-child(1n) & {
-            border-width: 0;
-        }
-    }
-
-}
-
-@mixin project-title {
-    font-size: 24px;
-    color: var(--c-black);
-    position: relative;
-    z-index: 1;
-
-    @include breakpoint(xs) {
-        font-size: 32px;
-    }
-
-    @include breakpoint(lg) {
-        font-size: 48px;
-    }
-
-    @at-root .project:nth-child(2n-1) & {
-        @include breakpoint(md) {
-            margin-left: -30px;
-        }
-
-        @include breakpoint(lg) {
-            margin-left: 0;
-        }
-    }
-
-    p {
-        margin-bottom: 0;
+        @include line(above);
     }
 }
 
 @mixin project-description {
     @include wysiwyg;
+    @include lead;
 
-    color: var(--c-gray);
+    color: var(--c-gray-darkest);
     position: relative;
     z-index: 1;
-    font-size: 16px;
-    line-height: 27px;
-    font-weight: 300;
     hyphens: auto;
+    padding-bottom: 50px;
+}
 
-    @include breakpoint(lg) {
-        font-size: 18px;
-        line-height: 30px;
-    }
+@mixin project-subtitle {
+    font-size: 16px;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    padding-bottom: 12.5px;
+    color: var(--c-gray);
+}
 
-    @at-root .project:nth-child(2n-1) & {
-        @include breakpoint(md) {
-            margin-left: -30px;
-        }
+@mixin project-contributions {
+    @include wysiwyg;
+    @include lead;
 
-        @include breakpoint(lg) {
-            margin-left: 0;
-        }
-    }
+    color: var(--c-gray-darkest);
 }
 
 @mixin project-technologies {
     display: flex;
-    gap: 8px;
+    gap: 5px;
     list-style: none;
     flex-wrap: wrap;
     width: 100%;
     max-width: 620px;
     position: relative;
     z-index: 1;
+    padding-bottom: 50px;
 }
 
 @mixin project-technology {
     font-size: 14px;
     padding: 4px 12px;
-    border-radius: 20px;
     border: 1px solid var(--c-project);
     background-color: color-mix(in srgb, var(--c-project) 12.5%, transparent);
     color: var(--c-project);
     cursor: help;
 
-    @at-root .body--dark & {
+    @at-root .html--dark & {
         color: var(--c-project-lighter);
         border-color: var(--c-project-lighter);
     }
 
     @include breakpoint(lg) {
         font-size: 16px;
-        padding: 4px 16px;
+        padding: 6.25px 12.5px;
     }
 
     &--secondary {
@@ -262,18 +112,7 @@
     }
 }
 
-@mixin project-button-container {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-}
-
-@mixin project-button {
-    @include button($color: var(--c-project), $color-hover: var(--c-project-light)); }
-
 @mixin project-tooltip {
-    @include tooltip;
-
     margin-top: -10px;
 }
 
@@ -281,16 +120,32 @@
     .project {
         @include project-root;
 
-        &__content {
-            @include project-content;
+        &__images {
+            @include project-images;
+        }
+
+        &__header {
+            @include project-header;
         }
 
         &__title {
             @include project-title;
         }
 
+        &__content {
+            @include project-content;
+        }
+
         &__description {
             @include project-description;
+        }
+
+        &__subtitle {
+            @include project-subtitle;
+        }
+
+        &__contributions {
+            @include project-contributions;
         }
 
         &__technologies {
@@ -299,14 +154,6 @@
 
         &__technology {
             @include project-technology;
-        }
-
-        &__button-container {
-            @include project-button-container;
-        }
-
-        &__button {
-            @include project-button;
         }
 
         &__tooltip {

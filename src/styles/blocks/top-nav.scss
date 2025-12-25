@@ -1,22 +1,27 @@
+
 @mixin top-nav-root {
-    height: 80px;
+    height: $top-nav-height;
     display: flex;
-    width: 100%;
-    justify-content: flex-end;
     align-items: center;
     box-sizing: border-box;
-    padding-right: 10px;
-    position: absolute;
     z-index: 5;
     pointer-events: none;
+    padding-top: 5px;
+
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: auto;
 
     @include breakpoint(xs) {
-        position: static;
-        z-index: 3;
+        padding-top: 20px;
     }
 
-    &:has(+ .article) {
+    @include breakpoint(sm) {
+        padding-top: 25px;
+        width: 100%;
         position: static;
+        padding-right: 10px;
     }
 
     &:has(.top-nav__title) {
@@ -29,10 +34,13 @@
         }
     }
 
-    &:has(+ .home),
-    &:has(+ .blogs) {
-        position: absolute;
-        right: 0;
+    @at-root {
+        .article__customize &,
+        .home & {
+            padding-top: 25px;
+            width: 100%;
+            position: static;
+        }
     }
 }
 
@@ -56,34 +64,13 @@
 
 @mixin top-nav-nav {
     display: flex;
-    justify-content: space-between;
-    width: 100%;
+    gap: 16px;
 }
 
 @mixin top-nav-section {
     display: flex;
     pointer-events: all;
-
-    &:only-child {
-        margin-left: auto;
-    }
-
-    &:last-child {
-        position: fixed;
-        bottom: -5px;
-        right: 10px;
-        display: none;
-        z-index: 10;
-
-        @include breakpoint(xs) {
-            position: static;
-            display: flex;
-        }
-
-        @at-root .nav--active + .main & {
-            display: flex;
-        }
-    }
+    gap: 16px;
 }
 
 @mixin top-nav-item {
@@ -91,16 +78,17 @@
 }
 
 @mixin top-nav-button {
-    aspect-ratio: 1;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 70px;
+    height: #{$top-nav-height - 10};
+    width: 40px;
     position: relative;
     transition: color .25s;
     cursor: pointer;
-    color: $color-gray;
+    color: var(--c-gray-darkest);
     z-index: 1;
+    overflow: hidden;
 
     @at-root {
         .top-nav:has(+ .home) &,
@@ -118,8 +106,8 @@
     &:before {
         content: '';
         position: absolute;
-        inset: 18px 8px;
-        background: color-mix(in srgb, var(--c-black) 12.5%, transparent);
+        inset: 0;
+        background: color-mix(in srgb, var(--c-black) 5%, transparent);
         z-index: -1;
         border-radius: 4px;
         opacity: 0;
@@ -129,36 +117,53 @@
     &:hover {
         color: var(--c-black);
 
+        &:before {
+            opacity: 1;
+        }
+
         @at-root {
             .top-nav:has(+ .home) &,
             .top-nav:has(+ .blogs) & {
                 color: $color-white;
             }
         }
-
-        &:before {
-            opacity: 1;
-        }
     }
+}
+
+@mixin top-nav-icon-container {
+    overflow: hidden;
+    width: 24px;
+    aspect-ratio: 1;
+    position: relative;
 }
 
 @mixin top-nav-icon {
     width: 24px;
+    transition: scale .25s, translate .25s;
+    flex-shrink: 0;
+
+    @at-root .top-nav__button:hover & {
+        scale: 1.1;
+    }
+
+    @at-root .top-nav__button--back:hover & {
+        scale: 1;
+        translate: -100%;
+    }
+
+    @at-root .top-nav__button--back:hover &--hover {
+        translate: 0;
+    }
+
+    &--hover {
+        position: absolute;
+        left: 0;
+        translate: 100%;
+    }
 }
 
 @mixin top-nav-tooltip {
-    @include tooltip;
-
-    margin-bottom: -10px;
-
-    @include breakpoint(xs) {
-        margin-top: -10px;
-    }
-
-    @at-root .top-nav__button--back + & {
-        margin-top: -10px;
-        margin-bottom: 0;
-    }
+    margin-top: 10px;
 }
 
 @mixin top-nav {
@@ -185,10 +190,13 @@
             @include top-nav-button;
         }
 
+        &__icon-container {
+            @include top-nav-icon-container;
+        }
+
         &__icon {
             @include top-nav-icon;
         }
-
 
         &__tooltip {
             @include top-nav-tooltip;

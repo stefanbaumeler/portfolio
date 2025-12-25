@@ -3,7 +3,7 @@
 
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     flex-direction: column;
     height: 100svh;
     gap: 25px;
@@ -15,6 +15,10 @@
         padding-bottom: 0;
     }
 
+    @include breakpoint(sm) {
+        display: flex;
+    }
+
     @include breakpoint(md) {
         padding-top: 0;
         padding-bottom: 0;
@@ -24,21 +28,31 @@
 @mixin not-found-title {
     @include h1;
 
-    line-height: 1;
+    border-width: 0;
+    padding-bottom: 0;
+
+    @include breakpoint(xs) {
+        padding-bottom: 0;
+    }
 }
 
 @mixin not-found-subtitle {
     @include h2;
 
-    text-align: center;
     white-space: pre-line;
+    border-width: 0;
+    text-wrap: balance;
+    padding-bottom: 0;
+
+    @include breakpoint(xs) {
+        padding-bottom: 0;
+    }
 }
 
 @mixin not-found-button {
     background-color: $color-main;
     padding: 16px 32px;
     color: $color-white;
-    margin-top: 25px;
     transition: box-shadow .25s, background-color .25s;
     border-radius: 4px;
     font-weight: 700;

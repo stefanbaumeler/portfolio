@@ -30,7 +30,7 @@ export const Nav = ({ children }: Props) => {
             aria-label={t('Open Navigation')}
             onClick={() => setActive(!active)}
         >
-            <Icon path={mdiMenu} />
+            <span className="nav__toggle-icon"></span>
         </button>
         <div className="nav__container">
             {children}

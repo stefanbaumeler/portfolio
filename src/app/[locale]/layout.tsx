@@ -11,9 +11,8 @@ import '@/styles/blocks/article.scss'
 import '@/styles/blocks/article-nav.scss'
 import '@/styles/blocks/articles.scss'
 import '@/styles/blocks/blog.scss'
-import '@/styles/blocks/blogs.scss'
 import '@/styles/blocks/brand.scss'
-import '@/styles/blocks/contact.scss'
+import '@/styles/blocks/content.scss'
 import '@/styles/blocks/hover-link.scss'
 import '@/styles/blocks/image.scss'
 import '@/styles/blocks/main.scss'
@@ -38,6 +37,9 @@ import '@/styles/blocks/location.scss'
 import '@/styles/blocks/visits.scss'
 import '@/styles/blocks/journey.scss'
 import '@/styles/blocks/infobox.scss'
+import '@/styles/blocks/contact-button.scss'
+import '@/styles/blocks/view-button.scss'
+import '@/styles/blocks/tooltip.scss'
 
 import { ReactNode } from 'react'
 import { Metadata, Viewport } from 'next'
@@ -46,14 +48,13 @@ import { NextIntlClientProvider } from 'next-intl'
 import { routing } from '@/i18n/routing'
 import { NavLists } from '@/components/global/nav/NavLists'
 import { NavProvider } from '@/context/nav'
-import { DarkMode, DarkProvider } from '@/context/dark'
 import { UAProvider } from '@/context/ua'
-import { TopNav } from '@/components/global/nav/TopNav'
 import { TopNavProvider } from '@/context/top-nav'
-import { headers } from 'next/headers'
 import { Body } from '@/components/Body'
 import { Nav } from '@/components/global/nav/Nav'
 import { BodyProvider } from '@/context/body'
+import { ThemeProvider } from 'next-themes'
+import { ThemeColor } from '@/components/global/ThemeColor'
 
 export const viewport: Viewport = {
     width: 'device-width',
@@ -95,59 +96,65 @@ const RootLayout = async ({
     setRequestLocale(locale)
 
     const messages = await getMessages()
-    const headersList = await headers()
-
-    const theme = headersList.get('Sec-CH-Prefers-Color-Scheme')
 
     return <html
         lang={locale}
         className="html"
+        suppressHydrationWarning
     >
         <TopNavProvider>
-            <DarkProvider initialTheme={theme as DarkMode}>
-                <UAProvider>
-                    <BodyProvider>
-                        <NavProvider>
-                            <NextIntlClientProvider messages={messages}>
-                                <Body>
-                                    <meta
-                                        name="googlebot"
-                                        content="notranslate"
-                                    />
-                                    <link
-                                        rel="shortcut icon"
-                                        href="/images/favicon.ico"
-                                    />
-                                    <link
-                                        rel="apple-touch-icon"
-                                        sizes="180x180"
-                                        href="/images/favicon.png"
-                                    />
-                                    <link
-                                        rel="icon"
-                                        type="image/png"
-                                        sizes="32x32"
-                                        href="/images/favicon.png"
-                                    />
-                                    <link
-                                        rel="icon"
-                                        type="image/png"
-                                        sizes="16x16"
-                                        href="/images/favicon.png"
-                                    />
-                                    <Nav>
-                                        <NavLists />
-                                    </Nav>
+            <UAProvider>
+                <BodyProvider>
+                    <NavProvider>
+                        <NextIntlClientProvider messages={messages}>
+                            <Body>
+                                <meta
+                                    name="googlebot"
+                                    content="notranslate"
+                                />
+                                <link
+                                    rel="shortcut icon"
+                                    href="/images/favicon.ico"
+                                />
+                                <link
+                                    rel="apple-touch-icon"
+                                    sizes="180x180"
+                                    href="/images/favicon.png"
+                                />
+                                <link
+                                    rel="icon"
+                                    type="image/png"
+                                    sizes="32x32"
+                                    href="/images/favicon.png"
+                                />
+                                <link
+                                    rel="icon"
+                                    type="image/png"
+                                    sizes="16x16"
+                                    href="/images/favicon.png"
+                                />
+                                <Nav>
+                                    <NavLists />
+                                </Nav>
+                                <ThemeProvider
+                                    attribute="class"
+                                    defaultTheme="system"
+                                    enableSystem
+                                    value={{
+                                        light: 'html--light',
+                                        dark: 'html--dark'
+                                    }}
+                                >
+                                    <ThemeColor />
                                     <main className="main">
-                                        <TopNav />
                                         {children}
                                     </main>
-                                </Body>
-                            </NextIntlClientProvider>
-                        </NavProvider>
-                    </BodyProvider>
-                </UAProvider>
-            </DarkProvider>
+                                </ThemeProvider>
+                            </Body>
+                        </NextIntlClientProvider>
+                    </NavProvider>
+                </BodyProvider>
+            </UAProvider>
         </TopNavProvider>
     </html>
 }

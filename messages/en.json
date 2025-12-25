@@ -64,12 +64,13 @@
     "Scroll to top": "Scroll to top",
     "Posts": "Posts",
     "words": "words",
-    "Travel Blog": "Travel Blog",
+    "Travel Blog": "Travel",
     "present": "present",
     "Not all those who wander are lost, but you certainly are": "Not all those who wander are lost, \nbut you certainly are.",
     "Go home": "Go Home",
     "View Project": "View Project",
-    "Contact me for more infos": "Contact me for more infos",
+    "Contact me": "Contact me",
+    "for more infos": "for more infos",
     "Visits": "Visits",
     "Stories": "Stories",
     "Open Navigation": "Open Navigation",
@@ -78,5 +79,10 @@
     "Passenger": "Passenger",
     "Vessel": "Vessel",
     "Current location": "Current location",
-    "Years active": "Years active"
+    "Years active": "Years active",
+    "Work": "Work",
+    "Work text": "Select projects I have worked on on behalf of various employers.",
+    "Side Projects": "Side Projects",
+    "Side Projects text": "Projects I built in my spare time.",
+    "My contribution": "My contribution"
 }

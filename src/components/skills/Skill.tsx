@@ -21,11 +21,6 @@ export const Skill = async ({
 
     return <li className="skills__skill">
         <h4 className="skills__label-container">
-            {skill?.preferred ? <Icon
-                path={Icons.mdiHeart}
-                className="skills__dot skills__dot--preferred"
-            /> : <span className="skills__dot" />}
-            <span className="skills__line" />
             <span className="skills__label">
                 {skill?.label}
             </span>

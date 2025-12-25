@@ -4,7 +4,7 @@
     box-sizing: border-box;
     container: teaser-container / inline-size;
     z-index: 5;
-    max-height: calc(100svh - 100px);
+    max-height: calc(100svh - 20px);
     width: 100%;
     top: 0;
     left: 0;
@@ -18,7 +18,7 @@
         transition: translate .25s;
         overflow: auto;
         z-index: 2;
-        inset: 90px 0 auto auto;
+        inset: 10px 0 auto auto;
         width: 450px;
         translate: 100%;
         border-radius: 0;
@@ -94,12 +94,15 @@
 
     color: var(--c-black);
     padding-right: 80px;
+    padding-bottom: 4px;
 }
 
 @mixin drawer-subtitle {
-    @include text;
-
-    opacity: .65;
+    font-size: 16px;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    padding-bottom: 12.5px;
+    color: var(--c-gray);
 }
 
 @mixin drawer-content {
@@ -114,7 +117,6 @@
     display: flex;
     flex-direction: column;
     gap: 40px;
-    padding: 0 10px;
 }
 
 @mixin drawer-footer {

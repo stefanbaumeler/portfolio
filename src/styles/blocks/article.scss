@@ -1,135 +1,254 @@
-@keyframes progress {
-    to {
-        background-color: $color-main-dark;
-        width: calc(100% - 80px);
+@use 'sass:math';
+
+@mixin article-root {
+    display: flex;
+    flex-direction: column;
+
+    @include breakpoint(md) {
+        display: block;
     }
 }
 
-@mixin article-root {
-    @include container;
+@mixin article-customize {
 
-    max-width: 638px;
-
-    @include breakpoint(xs) {
-        max-width: 900px;
-    }
+    padding-left: var(--spacing);
+    z-index: 1;
+    padding-bottom: 25px;
 
     @include breakpoint(md) {
-        max-width: 1300px;
+        position: absolute;
+        top: var(--spacing);
+        padding-bottom: 0;
     }
 
-    @at-root .top-nav + & {
-        padding-top: 25px;
+    @include breakpoint(xl) {
+        padding-left: 493.75px;
+    }
+
+    @at-root .article:has(.article__image) & {
+        top: calc(62.5vw + var(--spacing) * 2);
 
         @include breakpoint(xs) {
-            padding: 100px;
+            top: calc(50vh + var(--spacing) * 2);
         }
 
         @include breakpoint(md) {
-            padding: 120px;
+            translate: 0 -100%;
+            top: max(425px, calc(30vw - 87.5px));
+        }
+
+        @include breakpoint(xl) {
+            padding-left: 50px;
         }
     }
 }
 
-@mixin article-progress {
-    position: fixed;
-    top: 0;
-    left: 80px;
-    width: 0;
-    height: 3px;
-    background-color: $color-main-light;
-    animation: progress 1s linear;
-    animation-timeline: scroll();
-    z-index: 1;
+@mixin article-header {
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 125px var(--spacing) 0;
+    position: relative;
+    display: contents;
+
+    @include breakpoint(md) {
+        display: flex;
+    }
+
+    @at-root .article:has(.article__image) & {
+        padding-top: calc(62.5vw + 50px + var(--spacing) * 3);
+
+        @include breakpoint(xs) {
+            padding-top: calc(50vh + 50px + var(--spacing) * 3);
+        }
+
+        @include breakpoint(md) {
+            padding-top: max(450px, calc(30vw - 62.5px));
+        }
+    }
+}
+
+@mixin article-tags {
+    display: flex;
+    gap: 6.25px 12.5px;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    position: relative;
+    max-width: 812.5px;
+    padding-top: 25px;
+    padding-left: var(--spacing);
+
+    @include breakpoint(md) {
+        padding-left: 0;
+        padding-top: 37.5px;
+    }
+
+    @include breakpoint(xl) {
+        padding-left: 443.75px;
+        width: 1280.25px;
+    }
+
+    &:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        height: 1px;
+        background-color: var(--c-gray-darkest);
+        width: calc(100% - var(--spacing) * 2);
+
+        @include breakpoint(xs) {
+            max-width: 768px;
+            width: calc(100% - var(--spacing) * 2);
+        }
+
+        @include breakpoint(md) {
+            width: calc(50vw - 112.5px);
+        }
+
+        @include breakpoint(xl) {
+            width: calc(50vw - 75px);
+        }
+    }
+
+    @at-root .article:has(.article__image) & {
+        @include breakpoint(xl) {
+            padding-left: 0;
+        }
+    }
+}
+
+@mixin article-tag {
+    @include text;
+
+    color: var(--c-main);
 }
 
 @mixin article-title {
+    @include h1;
+
     scroll-margin-top: 50px;
     color: var(--c-black);
-    max-width: 850px;
-    margin: 0 auto;
+    border-bottom-width: 0;
     position: relative;
-    hyphens: auto;
+    padding: 12.5px var(--spacing) 12.5px;
+    width: 100%;
+    text-wrap: balance;
+    box-sizing: border-box;
+
+    @include breakpoint(xs) {
+        font-size: 50px;
+        line-height: 1.25;
+        max-width: calc(100vw - 100px);
+    }
+
+    @include breakpoint(sm) {
+        font-size: 62px;
+        line-height: 71px;
+    }
 
     @include breakpoint(md) {
-        max-width: 1300px;
+        padding: 12.5px 0;
+        box-sizing: content-box;
     }
 
-    &--level-1 {
-        @include h1;
+    @include breakpoint(lg) {
+        font-size: 73px;
+        line-height: 84px;
+    }
 
-        padding-bottom: 25px;
+    @include breakpoint(xl) {
+        padding-left: 443.75px;
+        width: 1280.25px;
+    }
 
-        @include breakpoint(xs) {
-            text-align: center;
-            text-wrap: balance;
+    @at-root .article:has(.article__image) & {
+        @include breakpoint(xl) {
+            padding-left: 0;
         }
     }
+}
 
-    &--level-2 {
-        @include h2;
+@mixin article-date {
+    @include text;
 
-        margin-top: 25px;
-        margin-bottom: -25px;
+    color: $color-gray;
+    font-style: italic;
+    padding: 0 0 var(--spacing) var(--spacing);
+
+    @include breakpoint(md) {
+        padding-left: 0;
     }
 
-    &--level-3 {
-        @include h3;
-
-        margin-bottom: -30px;
+    @include breakpoint(xl) {
+        padding-left: 443.75px;
+        width: 1280.25px;
     }
 
-    &--level-4 {
-        font-size: 20px;
-
-        @include breakpoint(lg) {
-            font-size: 24px;
+    @at-root .article:has(.article__image) & {
+        @include breakpoint(xl) {
+            padding-left: 0;
         }
     }
 }
 
 @mixin article-meta {
-    padding-bottom: 50px;
     display: flex;
     justify-content: center;
-    color: var(--c-gray);
-
-    @include breakpoint(md) {
-        padding-bottom: 100px;
-    }
+    padding-bottom: 50px;
+    border-bottom: 1px solid var(--c-black);
 
     &:has(+ .article__content-container) {
         padding-bottom: 0;
-
-        @include breakpoint(md) {
-            padding-bottom: 50px;
-        }
     }
 }
 
 @mixin article-image {
-    width: 100%;
-    aspect-ratio: 2 / 1;
-    position: relative;
+    height: 62.5vw;
+    margin-left: var(--spacing);
+    width: calc(100% - var(--spacing) * 2);
+    order: -1;
+    padding-top: var(--spacing);
+    top: 0;
+    right: 0;
+
+    @include breakpoint(xs) {
+        height: 56.25vw;
+    }
+
+    @include breakpoint(md) {
+        position: absolute;
+        height: 30vw;
+        min-height: 500px;
+        max-height: 100%;
+        min-width: calc(50vw - 62.5px);
+        width: calc(100vw - 1037.5px);
+        padding-top: 0;
+    }
+
+    @include breakpoint(xl) {
+        min-width: calc(50vw - 125px);
+    }
 }
 
 @mixin article-content-container {
-    display: flex;
-    gap: 50px;
-    padding-top: 50px;
-    flex-direction: column-reverse;
+    @include container;
 
-    @include breakpoint(md) {
-        flex-direction: row;
+    position: static;
+
+    &:before {
+        @include breakpoint(xl) {
+            content: '';
+            display: block;
+        }
     }
 }
 
 @mixin article-sidebar {
-    width: 300px;
     flex-shrink: 0;
     position: relative;
     display: none;
-    border-left: 1px solid var(--c-gray-light);
+    border-left: 1px solid var(--c-gray-darkest);
+    grid-area: auto / span 1;
+    height: 100%;
 
     @include breakpoint(md) {
         display: block;
@@ -138,63 +257,43 @@
 
 @mixin article-sidebar-content {
     position: sticky;
-    padding-top: 25px;
-    top: 0;
+    top: 50px;
 }
 
 @mixin article-content {
     display: flex;
     flex-direction: column;
-    gap: 50px;
+    gap: 25px;
     width: 100%;
-    margin: 0 auto;
+    grid-area: auto / span 4;
+    max-width: 768px;
+
+    @include breakpoint(sm) {
+        grid-area: auto / span 3;
+        gap: 50px;
+    }
 
     @include breakpoint(md) {
-        width: calc(100% - 350px);
-        padding-top: 25px;
+        max-width: none;
+        grid-area: auto / span 2;
         padding-bottom: 50px;
     }
 }
 
-@mixin article-text {
-    @include text;
-    @include wysiwyg;
-}
-
-@mixin article-code {
-    @include code;
-}
-
-@mixin article-content-image {
-    cursor: pointer;
-    transition: scale .25s;
-
-    &--contain {
-        aspect-ratio: unset;
-    }
-
-    &:hover {
-        scale: 1.01;
-    }
-}
-
-@mixin article-caption {
-    font-size: 14px;
-    line-height: 22.4px;
-    color: var(--c-gray);
-    text-align: center;
-    padding-top: 8px;
-}
-
 @mixin article-footer {
+    @include line(above);
+
     display: flex;
     justify-content: space-between;
     width: 100%;
-    padding-top: 50px;
-    border-top: 1px solid var(--c-gray-light);
+    padding-bottom: 50px;
 
     @include breakpoint(xs) {
         margin-top: 50px;
+    }
+
+    @include breakpoint(md) {
+        padding-bottom: 0;
     }
 
     &:has(> .article__footer-link--next:only-child) {
@@ -202,35 +301,32 @@
     }
 }
 
-@mixin article-hash {
-    width: 20px;
-    position: absolute;
-    right: 100%;
-    top: 50%;
-    translate: 0 -50%;
-    padding-right: 10px;
-    color: var(--c-gray);
-    transition: opacity .25s;
-    height: 100%;
-    opacity: 0;
-    display: flex;
-    align-items: center;
-
-    @at-root .article__title:hover & {
-        opacity: 1;
-    }
-}
-
 @mixin article {
     .article {
         @include article-root;
 
-        &__progress {
-            @include article-progress;
+        &__customize {
+            @include article-customize;
+        }
+
+        &__header {
+            @include article-header;
+        }
+
+        &__tags {
+            @include article-tags;
+        }
+
+        &__tag {
+            @include article-tag;
         }
 
         &__title {
             @include article-title;
+        }
+
+        &__date {
+            @include article-date;
         }
 
         &__meta {
@@ -257,28 +353,8 @@
             @include article-content;
         }
 
-        &__text {
-            @include article-text;
-        }
-
-        &__code {
-            @include article-code;
-        }
-
-        &__content-image {
-            @include article-content-image;
-        }
-
-        &__caption {
-            @include article-caption;
-        }
-
         &__footer {
             @include article-footer;
-        }
-
-        &__hash {
-            @include article-hash;
         }
     }
 }

@@ -3,14 +3,11 @@
 }
 
 @mixin hover-link-tooltip {
-    @include tooltip;
-
     border-radius: 8px;
     padding: 0;
     opacity: 0;
     pointer-events: none;
     transition: translate .125s;
-    overflow: hidden;
     z-index: 1;
 
     @at-root .hover-link:hover & {
@@ -49,7 +46,7 @@
         content: '';
         position: absolute;
         inset: -8px;
-        background: color-mix(in srgb, var(--c-black) 12.5%, transparent);
+        background: color-mix(in srgb, var(--c-black) 5%, transparent);
         z-index: -1;
         border-radius: 4px;
         opacity: 0;

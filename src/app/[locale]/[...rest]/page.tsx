@@ -1,5 +1,7 @@
 import { getTranslations } from 'next-intl/server'
 import { Link } from '@/components/global/Link'
+import * as Icons from '@mdi/js'
+import Icon from '@mdi/react'
 
 const NotFound = async () => {
     const t = await getTranslations()
@@ -12,9 +14,17 @@ const NotFound = async () => {
         </h2>
         <Link
             href="/"
-            className="not-found__button"
+            className="view-button"
         >
-            {t('Go home')}
+            <span className="view-button__back">
+                <Icon
+                    className="view-button__icon"
+                    path={Icons.mdiArrowLeft}
+                />
+            </span>
+            <span className="view-button__text">
+                {t('Go home')}
+            </span>
         </Link>
     </div>
 }

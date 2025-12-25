@@ -2110,7 +2110,7 @@ export type TAccommodationAggregatedFields = {
 export type TAccommodationFilter = {
   _and: InputMaybe<Array<InputMaybe<TAccommodationFilter>>>;
   _or: InputMaybe<Array<InputMaybe<TAccommodationFilter>>>;
-  bookings: InputMaybe<TBookingFilter>;
+  bookings: InputMaybe<TBookingQuantifierFilter>;
   bookings_func: InputMaybe<TCountFunctionFilterOperators>;
   id: InputMaybe<TNumberFilterOperators>;
   name: InputMaybe<TStringFilterOperators>;
@@ -2122,6 +2122,18 @@ export type TAccommodationMutated = {
   data: Maybe<TAccommodation>;
   event: Maybe<TEventEnum>;
   key: Scalars['ID']['output'];
+};
+
+export type TAccommodationQuantifierFilter = {
+  _and: InputMaybe<Array<InputMaybe<TAccommodationFilter>>>;
+  _none: InputMaybe<TAccommodationFilter>;
+  _or: InputMaybe<Array<InputMaybe<TAccommodationFilter>>>;
+  _some: InputMaybe<TAccommodationFilter>;
+  bookings: InputMaybe<TBookingQuantifierFilter>;
+  bookings_func: InputMaybe<TCountFunctionFilterOperators>;
+  id: InputMaybe<TNumberFilterOperators>;
+  name: InputMaybe<TStringFilterOperators>;
+  place: InputMaybe<TPlaceFilter>;
 };
 
 export type TAuthor = {
@@ -2238,10 +2250,20 @@ export type TAuthorBookMutated = {
   key: Scalars['ID']['output'];
 };
 
+export type TAuthorBookQuantifierFilter = {
+  _and: InputMaybe<Array<InputMaybe<TAuthorBookFilter>>>;
+  _none: InputMaybe<TAuthorBookFilter>;
+  _or: InputMaybe<Array<InputMaybe<TAuthorBookFilter>>>;
+  _some: InputMaybe<TAuthorBookFilter>;
+  author_id: InputMaybe<TAuthorFilter>;
+  book_id: InputMaybe<TBookFilter>;
+  id: InputMaybe<TNumberFilterOperators>;
+};
+
 export type TAuthorFilter = {
   _and: InputMaybe<Array<InputMaybe<TAuthorFilter>>>;
   _or: InputMaybe<Array<InputMaybe<TAuthorFilter>>>;
-  books: InputMaybe<TAuthorBookFilter>;
+  books: InputMaybe<TAuthorBookQuantifierFilter>;
   books_func: InputMaybe<TCountFunctionFilterOperators>;
   id: InputMaybe<TNumberFilterOperators>;
   name: InputMaybe<TStringFilterOperators>;
@@ -2408,18 +2430,35 @@ export type TBlogElementsMutated = {
   key: Scalars['ID']['output'];
 };
 
+export type TBlogElementsQuantifierFilter = {
+  _and: InputMaybe<Array<InputMaybe<TBlogElementsFilter>>>;
+  _none: InputMaybe<TBlogElementsFilter>;
+  _or: InputMaybe<Array<InputMaybe<TBlogElementsFilter>>>;
+  _some: InputMaybe<TBlogElementsFilter>;
+  blog_id: InputMaybe<TBlogFilter>;
+  collection: InputMaybe<TStringFilterOperators>;
+  id: InputMaybe<TNumberFilterOperators>;
+  item__blog_image: InputMaybe<TBlogImageFilter>;
+  item__blog_map: InputMaybe<TBlogMapFilter>;
+  item__blog_quote: InputMaybe<TBlogQuoteFilter>;
+  item__blog_text: InputMaybe<TBlogTextFilter>;
+  item__blog_title: InputMaybe<TBlogTitleFilter>;
+  item__blog_video: InputMaybe<TBlogVideoFilter>;
+  sort: InputMaybe<TNumberFilterOperators>;
+};
+
 export type TBlogFilter = {
   _and: InputMaybe<Array<InputMaybe<TBlogFilter>>>;
   _or: InputMaybe<Array<InputMaybe<TBlogFilter>>>;
   date_created: InputMaybe<TDateFilterOperators>;
   date_created_func: InputMaybe<TDateFunctionFilterOperators>;
-  elements: InputMaybe<TBlogElementsFilter>;
+  elements: InputMaybe<TBlogElementsQuantifierFilter>;
   elements_func: InputMaybe<TCountFunctionFilterOperators>;
   id: InputMaybe<TNumberFilterOperators>;
   slug: InputMaybe<TStringFilterOperators>;
   status: InputMaybe<TStringFilterOperators>;
   teaser_text: InputMaybe<TStringFilterOperators>;
-  technology: InputMaybe<TBlogTechnologyFilter>;
+  technology: InputMaybe<TBlogTechnologyQuantifierFilter>;
   technology_func: InputMaybe<TCountFunctionFilterOperators>;
   title: InputMaybe<TStringFilterOperators>;
 };
@@ -2657,6 +2696,17 @@ export type TBlogTechnologyMutated = {
   data: Maybe<TBlogTechnology>;
   event: Maybe<TEventEnum>;
   key: Scalars['ID']['output'];
+};
+
+export type TBlogTechnologyQuantifierFilter = {
+  _and: InputMaybe<Array<InputMaybe<TBlogTechnologyFilter>>>;
+  _none: InputMaybe<TBlogTechnologyFilter>;
+  _or: InputMaybe<Array<InputMaybe<TBlogTechnologyFilter>>>;
+  _some: InputMaybe<TBlogTechnologyFilter>;
+  blog_id: InputMaybe<TBlogFilter>;
+  id: InputMaybe<TNumberFilterOperators>;
+  sort: InputMaybe<TNumberFilterOperators>;
+  technology_id: InputMaybe<TTechnologyFilter>;
 };
 
 export type TBlogText = {
@@ -2910,7 +2960,7 @@ export type TBookAggregatedFields = {
 export type TBookFilter = {
   _and: InputMaybe<Array<InputMaybe<TBookFilter>>>;
   _or: InputMaybe<Array<InputMaybe<TBookFilter>>>;
-  authors: InputMaybe<TAuthorBookFilter>;
+  authors: InputMaybe<TAuthorBookQuantifierFilter>;
   authors_func: InputMaybe<TCountFunctionFilterOperators>;
   book_series: InputMaybe<TBookSeriesFilter>;
   category: InputMaybe<TStringFilterOperators>;
@@ -2921,7 +2971,7 @@ export type TBookFilter = {
   number_in_year: InputMaybe<TNumberFilterOperators>;
   pages: InputMaybe<TNumberFilterOperators>;
   positions: InputMaybe<TNumberFilterOperators>;
-  translations: InputMaybe<TBookTranslationsFilter>;
+  translations: InputMaybe<TBookTranslationsQuantifierFilter>;
   translations_func: InputMaybe<TCountFunctionFilterOperators>;
   words: InputMaybe<TNumberFilterOperators>;
   year: InputMaybe<TBookYearFilter>;
@@ -2933,6 +2983,29 @@ export type TBookMutated = {
   data: Maybe<TBook>;
   event: Maybe<TEventEnum>;
   key: Scalars['ID']['output'];
+};
+
+export type TBookQuantifierFilter = {
+  _and: InputMaybe<Array<InputMaybe<TBookFilter>>>;
+  _none: InputMaybe<TBookFilter>;
+  _or: InputMaybe<Array<InputMaybe<TBookFilter>>>;
+  _some: InputMaybe<TBookFilter>;
+  authors: InputMaybe<TAuthorBookQuantifierFilter>;
+  authors_func: InputMaybe<TCountFunctionFilterOperators>;
+  book_series: InputMaybe<TBookSeriesFilter>;
+  category: InputMaybe<TStringFilterOperators>;
+  id: InputMaybe<TNumberFilterOperators>;
+  internal: InputMaybe<TStringFilterOperators>;
+  language: InputMaybe<TStringFilterOperators>;
+  number_in_series: InputMaybe<TNumberFilterOperators>;
+  number_in_year: InputMaybe<TNumberFilterOperators>;
+  pages: InputMaybe<TNumberFilterOperators>;
+  positions: InputMaybe<TNumberFilterOperators>;
+  translations: InputMaybe<TBookTranslationsQuantifierFilter>;
+  translations_func: InputMaybe<TCountFunctionFilterOperators>;
+  words: InputMaybe<TNumberFilterOperators>;
+  year: InputMaybe<TBookYearFilter>;
+  year_published: InputMaybe<TStringFilterOperators>;
 };
 
 export type TBookSeries = {
@@ -2995,11 +3068,11 @@ export type TBookSeriesAggregatedFields = {
 export type TBookSeriesFilter = {
   _and: InputMaybe<Array<InputMaybe<TBookSeriesFilter>>>;
   _or: InputMaybe<Array<InputMaybe<TBookSeriesFilter>>>;
-  books: InputMaybe<TBookFilter>;
+  books: InputMaybe<TBookQuantifierFilter>;
   books_func: InputMaybe<TCountFunctionFilterOperators>;
   id: InputMaybe<TNumberFilterOperators>;
   internal: InputMaybe<TStringFilterOperators>;
-  translations: InputMaybe<TBookSeriesTranslationsFilter>;
+  translations: InputMaybe<TBookSeriesTranslationsQuantifierFilter>;
   translations_func: InputMaybe<TCountFunctionFilterOperators>;
 };
 
@@ -3082,6 +3155,17 @@ export type TBookSeriesTranslationsMutated = {
   key: Scalars['ID']['output'];
 };
 
+export type TBookSeriesTranslationsQuantifierFilter = {
+  _and: InputMaybe<Array<InputMaybe<TBookSeriesTranslationsFilter>>>;
+  _none: InputMaybe<TBookSeriesTranslationsFilter>;
+  _or: InputMaybe<Array<InputMaybe<TBookSeriesTranslationsFilter>>>;
+  _some: InputMaybe<TBookSeriesTranslationsFilter>;
+  book_series_id: InputMaybe<TBookSeriesFilter>;
+  id: InputMaybe<TNumberFilterOperators>;
+  languages_code: InputMaybe<TLanguagesFilter>;
+  title: InputMaybe<TStringFilterOperators>;
+};
+
 export type TBookTranslations = {
   __typename?: 'book_translations';
   book_id: Maybe<TBook>;
@@ -3154,6 +3238,17 @@ export type TBookTranslationsMutated = {
   key: Scalars['ID']['output'];
 };
 
+export type TBookTranslationsQuantifierFilter = {
+  _and: InputMaybe<Array<InputMaybe<TBookTranslationsFilter>>>;
+  _none: InputMaybe<TBookTranslationsFilter>;
+  _or: InputMaybe<Array<InputMaybe<TBookTranslationsFilter>>>;
+  _some: InputMaybe<TBookTranslationsFilter>;
+  book_id: InputMaybe<TBookFilter>;
+  id: InputMaybe<TNumberFilterOperators>;
+  languages_code: InputMaybe<TLanguagesFilter>;
+  title: InputMaybe<TStringFilterOperators>;
+};
+
 export type TBookYear = {
   __typename?: 'book_year';
   books: Maybe<Array<Maybe<TBook>>>;
@@ -3214,11 +3309,11 @@ export type TBookYearAggregatedFields = {
 export type TBookYearFilter = {
   _and: InputMaybe<Array<InputMaybe<TBookYearFilter>>>;
   _or: InputMaybe<Array<InputMaybe<TBookYearFilter>>>;
-  books: InputMaybe<TBookFilter>;
+  books: InputMaybe<TBookQuantifierFilter>;
   books_func: InputMaybe<TCountFunctionFilterOperators>;
   id: InputMaybe<TNumberFilterOperators>;
   internal: InputMaybe<TStringFilterOperators>;
-  translations: InputMaybe<TBookYearTranslationsFilter>;
+  translations: InputMaybe<TBookYearTranslationsQuantifierFilter>;
   translations_func: InputMaybe<TCountFunctionFilterOperators>;
 };
 
@@ -3301,6 +3396,17 @@ export type TBookYearTranslationsMutated = {
   key: Scalars['ID']['output'];
 };
 
+export type TBookYearTranslationsQuantifierFilter = {
+  _and: InputMaybe<Array<InputMaybe<TBookYearTranslationsFilter>>>;
+  _none: InputMaybe<TBookYearTranslationsFilter>;
+  _or: InputMaybe<Array<InputMaybe<TBookYearTranslationsFilter>>>;
+  _some: InputMaybe<TBookYearTranslationsFilter>;
+  book_year_id: InputMaybe<TBookYearFilter>;
+  id: InputMaybe<TNumberFilterOperators>;
+  languages_code: InputMaybe<TLanguagesFilter>;
+  name: InputMaybe<TStringFilterOperators>;
+};
+
 export type TBooking = {
   __typename?: 'booking';
   accommodation: Maybe<TAccommodation>;
@@ -3375,6 +3481,22 @@ export type TBookingMutated = {
   data: Maybe<TBooking>;
   event: Maybe<TEventEnum>;
   key: Scalars['ID']['output'];
+};
+
+export type TBookingQuantifierFilter = {
+  _and: InputMaybe<Array<InputMaybe<TBookingFilter>>>;
+  _none: InputMaybe<TBookingFilter>;
+  _or: InputMaybe<Array<InputMaybe<TBookingFilter>>>;
+  _some: InputMaybe<TBookingFilter>;
+  accommodation: InputMaybe<TAccommodationFilter>;
+  arrival: InputMaybe<TDateFilterOperators>;
+  arrival_func: InputMaybe<TDatetimeFunctionFilterOperators>;
+  booking: InputMaybe<TStringFilterOperators>;
+  departure: InputMaybe<TDateFilterOperators>;
+  departure_func: InputMaybe<TDatetimeFunctionFilterOperators>;
+  id: InputMaybe<TNumberFilterOperators>;
+  price_per_night: InputMaybe<TNumberFilterOperators>;
+  type: InputMaybe<TStringFilterOperators>;
 };
 
 export type TBooleanFilterOperators = {
@@ -3461,9 +3583,9 @@ export type TCountryFilter = {
   currency_code: InputMaybe<TStringFilterOperators>;
   id: InputMaybe<TNumberFilterOperators>;
   internal: InputMaybe<TStringFilterOperators>;
-  place: InputMaybe<TPlaceFilter>;
+  place: InputMaybe<TPlaceQuantifierFilter>;
   place_func: InputMaybe<TCountFunctionFilterOperators>;
-  translations: InputMaybe<TCountryTranslationsFilter>;
+  translations: InputMaybe<TCountryTranslationsQuantifierFilter>;
   translations_func: InputMaybe<TCountFunctionFilterOperators>;
 };
 
@@ -3550,6 +3672,19 @@ export type TCountryTranslationsMutated = {
   data: Maybe<TCountryTranslations>;
   event: Maybe<TEventEnum>;
   key: Scalars['ID']['output'];
+};
+
+export type TCountryTranslationsQuantifierFilter = {
+  _and: InputMaybe<Array<InputMaybe<TCountryTranslationsFilter>>>;
+  _none: InputMaybe<TCountryTranslationsFilter>;
+  _or: InputMaybe<Array<InputMaybe<TCountryTranslationsFilter>>>;
+  _some: InputMaybe<TCountryTranslationsFilter>;
+  capital: InputMaybe<TStringFilterOperators>;
+  country_id: InputMaybe<TCountryFilter>;
+  currency: InputMaybe<TStringFilterOperators>;
+  id: InputMaybe<TNumberFilterOperators>;
+  languages_code: InputMaybe<TLanguagesFilter>;
+  name: InputMaybe<TStringFilterOperators>;
 };
 
 export type TDateFilterOperators = {
@@ -3689,7 +3824,7 @@ export type TDirectusFilesFilter = {
   focal_point_y: InputMaybe<TNumberFilterOperators>;
   folder: InputMaybe<TDirectusFoldersFilter>;
   height: InputMaybe<TNumberFilterOperators>;
-  id: InputMaybe<TStringFilterOperators>;
+  id: InputMaybe<TIdFilterOperators>;
   location: InputMaybe<TStringFilterOperators>;
   metadata: InputMaybe<TStringFilterOperators>;
   metadata_func: InputMaybe<TCountFunctionFilterOperators>;
@@ -3737,7 +3872,7 @@ export type TDirectusFoldersParentArgs = {
 export type TDirectusFoldersFilter = {
   _and: InputMaybe<Array<InputMaybe<TDirectusFoldersFilter>>>;
   _or: InputMaybe<Array<InputMaybe<TDirectusFoldersFilter>>>;
-  id: InputMaybe<TStringFilterOperators>;
+  id: InputMaybe<TIdFilterOperators>;
   name: InputMaybe<TStringFilterOperators>;
   parent: InputMaybe<TDirectusFoldersFilter>;
 };
@@ -3797,16 +3932,16 @@ export type TDirectusRolesUsersArgs = {
 export type TDirectusRolesFilter = {
   _and: InputMaybe<Array<InputMaybe<TDirectusRolesFilter>>>;
   _or: InputMaybe<Array<InputMaybe<TDirectusRolesFilter>>>;
-  children: InputMaybe<TDirectusRolesFilter>;
+  children: InputMaybe<TDirectusRolesQuantifierFilter>;
   children_func: InputMaybe<TCountFunctionFilterOperators>;
   description: InputMaybe<TStringFilterOperators>;
   icon: InputMaybe<TStringFilterOperators>;
-  id: InputMaybe<TStringFilterOperators>;
+  id: InputMaybe<TIdFilterOperators>;
   name: InputMaybe<TStringFilterOperators>;
   parent: InputMaybe<TDirectusRolesFilter>;
   policies: InputMaybe<TStringFilterOperators>;
   policies_func: InputMaybe<TCountFunctionFilterOperators>;
-  users: InputMaybe<TDirectusUsersFilter>;
+  users: InputMaybe<TDirectusUsersQuantifierFilter>;
   users_func: InputMaybe<TCountFunctionFilterOperators>;
 };
 
@@ -3817,8 +3952,27 @@ export type TDirectusRolesMutated = {
   key: Scalars['ID']['output'];
 };
 
+export type TDirectusRolesQuantifierFilter = {
+  _and: InputMaybe<Array<InputMaybe<TDirectusRolesFilter>>>;
+  _none: InputMaybe<TDirectusRolesFilter>;
+  _or: InputMaybe<Array<InputMaybe<TDirectusRolesFilter>>>;
+  _some: InputMaybe<TDirectusRolesFilter>;
+  children: InputMaybe<TDirectusRolesQuantifierFilter>;
+  children_func: InputMaybe<TCountFunctionFilterOperators>;
+  description: InputMaybe<TStringFilterOperators>;
+  icon: InputMaybe<TStringFilterOperators>;
+  id: InputMaybe<TIdFilterOperators>;
+  name: InputMaybe<TStringFilterOperators>;
+  parent: InputMaybe<TDirectusRolesFilter>;
+  policies: InputMaybe<TStringFilterOperators>;
+  policies_func: InputMaybe<TCountFunctionFilterOperators>;
+  users: InputMaybe<TDirectusUsersQuantifierFilter>;
+  users_func: InputMaybe<TCountFunctionFilterOperators>;
+};
+
 export type TDirectusSettings = {
   __typename?: 'directus_settings';
+  accepted_terms: Maybe<Scalars['Boolean']['output']>;
   auth_login_attempts: Maybe<Scalars['Int']['output']>;
   auth_password_policy: Maybe<Scalars['String']['output']>;
   basemaps: Maybe<Scalars['JSON']['output']>;
@@ -3837,6 +3991,7 @@ export type TDirectusSettings = {
   /** $t:field_options.directus_settings.project_color_note */
   project_color: Maybe<Scalars['String']['output']>;
   project_descriptor: Maybe<Scalars['String']['output']>;
+  project_id: Maybe<Scalars['ID']['output']>;
   project_logo: Maybe<TDirectusFiles>;
   project_name: Maybe<Scalars['String']['output']>;
   project_url: Maybe<Scalars['String']['output']>;
@@ -3863,6 +4018,8 @@ export type TDirectusSettings = {
   theme_dark_overrides_func: Maybe<TCountFunctions>;
   theme_light_overrides: Maybe<Scalars['JSON']['output']>;
   theme_light_overrides_func: Maybe<TCountFunctions>;
+  visual_editor_urls: Maybe<Scalars['JSON']['output']>;
+  visual_editor_urls_func: Maybe<TCountFunctions>;
 };
 
 
@@ -4001,7 +4158,7 @@ export type TDirectusUsersFilter = {
   email_notifications: InputMaybe<TBooleanFilterOperators>;
   external_identifier: InputMaybe<TStringFilterOperators>;
   first_name: InputMaybe<TStringFilterOperators>;
-  id: InputMaybe<TStringFilterOperators>;
+  id: InputMaybe<TIdFilterOperators>;
   language: InputMaybe<TStringFilterOperators>;
   last_access: InputMaybe<TDateFilterOperators>;
   last_access_func: InputMaybe<TDatetimeFunctionFilterOperators>;
@@ -4034,6 +4191,46 @@ export type TDirectusUsersMutated = {
   key: Scalars['ID']['output'];
 };
 
+export type TDirectusUsersQuantifierFilter = {
+  _and: InputMaybe<Array<InputMaybe<TDirectusUsersFilter>>>;
+  _none: InputMaybe<TDirectusUsersFilter>;
+  _or: InputMaybe<Array<InputMaybe<TDirectusUsersFilter>>>;
+  _some: InputMaybe<TDirectusUsersFilter>;
+  appearance: InputMaybe<TStringFilterOperators>;
+  auth_data: InputMaybe<TStringFilterOperators>;
+  auth_data_func: InputMaybe<TCountFunctionFilterOperators>;
+  avatar: InputMaybe<TDirectusFilesFilter>;
+  description: InputMaybe<TStringFilterOperators>;
+  email: InputMaybe<TStringFilterOperators>;
+  email_notifications: InputMaybe<TBooleanFilterOperators>;
+  external_identifier: InputMaybe<TStringFilterOperators>;
+  first_name: InputMaybe<TStringFilterOperators>;
+  id: InputMaybe<TIdFilterOperators>;
+  language: InputMaybe<TStringFilterOperators>;
+  last_access: InputMaybe<TDateFilterOperators>;
+  last_access_func: InputMaybe<TDatetimeFunctionFilterOperators>;
+  last_name: InputMaybe<TStringFilterOperators>;
+  last_page: InputMaybe<TStringFilterOperators>;
+  location: InputMaybe<TStringFilterOperators>;
+  password: InputMaybe<THashFilterOperators>;
+  policies: InputMaybe<TStringFilterOperators>;
+  policies_func: InputMaybe<TCountFunctionFilterOperators>;
+  provider: InputMaybe<TStringFilterOperators>;
+  role: InputMaybe<TDirectusRolesFilter>;
+  status: InputMaybe<TStringFilterOperators>;
+  tags: InputMaybe<TStringFilterOperators>;
+  tags_func: InputMaybe<TCountFunctionFilterOperators>;
+  tfa_secret: InputMaybe<THashFilterOperators>;
+  theme_dark: InputMaybe<TStringFilterOperators>;
+  theme_dark_overrides: InputMaybe<TStringFilterOperators>;
+  theme_dark_overrides_func: InputMaybe<TCountFunctionFilterOperators>;
+  theme_light: InputMaybe<TStringFilterOperators>;
+  theme_light_overrides: InputMaybe<TStringFilterOperators>;
+  theme_light_overrides_func: InputMaybe<TCountFunctionFilterOperators>;
+  title: InputMaybe<TStringFilterOperators>;
+  token: InputMaybe<THashFilterOperators>;
+};
+
 export type TGeometryFilterOperators = {
   _eq: InputMaybe<Scalars['GraphQLGeoJSON']['input']>;
   _intersects: InputMaybe<Scalars['GraphQLGeoJSON']['input']>;
@@ -4050,6 +4247,28 @@ export type THashFilterOperators = {
   _nempty: InputMaybe<Scalars['Boolean']['input']>;
   _nnull: InputMaybe<Scalars['Boolean']['input']>;
   _null: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type TIdFilterOperators = {
+  _contains: InputMaybe<Scalars['ID']['input']>;
+  _empty: InputMaybe<Scalars['Boolean']['input']>;
+  _ends_with: InputMaybe<Scalars['ID']['input']>;
+  _eq: InputMaybe<Scalars['ID']['input']>;
+  _icontains: InputMaybe<Scalars['ID']['input']>;
+  _iends_with: InputMaybe<Scalars['ID']['input']>;
+  _in: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  _istarts_with: InputMaybe<Scalars['ID']['input']>;
+  _ncontains: InputMaybe<Scalars['ID']['input']>;
+  _nempty: InputMaybe<Scalars['Boolean']['input']>;
+  _nends_with: InputMaybe<Scalars['ID']['input']>;
+  _neq: InputMaybe<Scalars['ID']['input']>;
+  _niends_with: InputMaybe<Scalars['ID']['input']>;
+  _nin: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  _nistarts_with: InputMaybe<Scalars['ID']['input']>;
+  _nnull: InputMaybe<Scalars['Boolean']['input']>;
+  _nstarts_with: InputMaybe<Scalars['ID']['input']>;
+  _null: InputMaybe<Scalars['Boolean']['input']>;
+  _starts_with: InputMaybe<Scalars['ID']['input']>;
 };
 
 export type TLanguages = {
@@ -4146,11 +4365,11 @@ export type TNavigationFilter = {
   _or: InputMaybe<Array<InputMaybe<TNavigationFilter>>>;
   id: InputMaybe<TNumberFilterOperators>;
   image: InputMaybe<TDirectusFilesFilter>;
-  main_navigation_items: InputMaybe<TNavigationItemFilter>;
+  main_navigation_items: InputMaybe<TNavigationItemQuantifierFilter>;
   main_navigation_items_func: InputMaybe<TCountFunctionFilterOperators>;
-  misc_navigation_items: InputMaybe<TNavigationItemFilter>;
+  misc_navigation_items: InputMaybe<TNavigationItemQuantifierFilter>;
   misc_navigation_items_func: InputMaybe<TCountFunctionFilterOperators>;
-  translations: InputMaybe<TNavigationTranslationsFilter>;
+  translations: InputMaybe<TNavigationTranslationsQuantifierFilter>;
   translations_func: InputMaybe<TCountFunctionFilterOperators>;
 };
 
@@ -4243,7 +4462,7 @@ export type TNavigationItemFilter = {
   main_navigation: InputMaybe<TNavigationFilter>;
   misc_navigation: InputMaybe<TNavigationFilter>;
   sort: InputMaybe<TNumberFilterOperators>;
-  translations: InputMaybe<TNavigationItemTranslationsFilter>;
+  translations: InputMaybe<TNavigationItemTranslationsQuantifierFilter>;
   translations_func: InputMaybe<TCountFunctionFilterOperators>;
   url: InputMaybe<TStringFilterOperators>;
 };
@@ -4253,6 +4472,23 @@ export type TNavigationItemMutated = {
   data: Maybe<TNavigationItem>;
   event: Maybe<TEventEnum>;
   key: Scalars['ID']['output'];
+};
+
+export type TNavigationItemQuantifierFilter = {
+  _and: InputMaybe<Array<InputMaybe<TNavigationItemFilter>>>;
+  _none: InputMaybe<TNavigationItemFilter>;
+  _or: InputMaybe<Array<InputMaybe<TNavigationItemFilter>>>;
+  _some: InputMaybe<TNavigationItemFilter>;
+  active: InputMaybe<TBooleanFilterOperators>;
+  icon: InputMaybe<TStringFilterOperators>;
+  id: InputMaybe<TNumberFilterOperators>;
+  line: InputMaybe<TBooleanFilterOperators>;
+  main_navigation: InputMaybe<TNavigationFilter>;
+  misc_navigation: InputMaybe<TNavigationFilter>;
+  sort: InputMaybe<TNumberFilterOperators>;
+  translations: InputMaybe<TNavigationItemTranslationsQuantifierFilter>;
+  translations_func: InputMaybe<TCountFunctionFilterOperators>;
+  url: InputMaybe<TStringFilterOperators>;
 };
 
 export type TNavigationItemTranslations = {
@@ -4328,6 +4564,18 @@ export type TNavigationItemTranslationsMutated = {
   data: Maybe<TNavigationItemTranslations>;
   event: Maybe<TEventEnum>;
   key: Scalars['ID']['output'];
+};
+
+export type TNavigationItemTranslationsQuantifierFilter = {
+  _and: InputMaybe<Array<InputMaybe<TNavigationItemTranslationsFilter>>>;
+  _none: InputMaybe<TNavigationItemTranslationsFilter>;
+  _or: InputMaybe<Array<InputMaybe<TNavigationItemTranslationsFilter>>>;
+  _some: InputMaybe<TNavigationItemTranslationsFilter>;
+  id: InputMaybe<TNumberFilterOperators>;
+  label: InputMaybe<TStringFilterOperators>;
+  languages_code: InputMaybe<TLanguagesFilter>;
+  navigation_item_id: InputMaybe<TNavigationItemFilter>;
+  title: InputMaybe<TStringFilterOperators>;
 };
 
 export type TNavigationMutated = {
@@ -4421,6 +4669,21 @@ export type TNavigationTranslationsMutated = {
   key: Scalars['ID']['output'];
 };
 
+export type TNavigationTranslationsQuantifierFilter = {
+  _and: InputMaybe<Array<InputMaybe<TNavigationTranslationsFilter>>>;
+  _none: InputMaybe<TNavigationTranslationsFilter>;
+  _or: InputMaybe<Array<InputMaybe<TNavigationTranslationsFilter>>>;
+  _some: InputMaybe<TNavigationTranslationsFilter>;
+  contact: InputMaybe<TStringFilterOperators>;
+  cv: InputMaybe<TStringFilterOperators>;
+  dark: InputMaybe<TStringFilterOperators>;
+  id: InputMaybe<TNumberFilterOperators>;
+  language: InputMaybe<TStringFilterOperators>;
+  languages_code: InputMaybe<TLanguagesFilter>;
+  navigation_id: InputMaybe<TNavigationFilter>;
+  search: InputMaybe<TStringFilterOperators>;
+};
+
 export type TNotFound = {
   __typename?: 'not_found';
   id: Scalars['ID']['output'];
@@ -4442,7 +4705,7 @@ export type TNotFoundFilter = {
   _and: InputMaybe<Array<InputMaybe<TNotFoundFilter>>>;
   _or: InputMaybe<Array<InputMaybe<TNotFoundFilter>>>;
   id: InputMaybe<TNumberFilterOperators>;
-  translations: InputMaybe<TNotFoundTranslationsFilter>;
+  translations: InputMaybe<TNotFoundTranslationsQuantifierFilter>;
   translations_func: InputMaybe<TCountFunctionFilterOperators>;
 };
 
@@ -4529,6 +4792,19 @@ export type TNotFoundTranslationsMutated = {
   data: Maybe<TNotFoundTranslations>;
   event: Maybe<TEventEnum>;
   key: Scalars['ID']['output'];
+};
+
+export type TNotFoundTranslationsQuantifierFilter = {
+  _and: InputMaybe<Array<InputMaybe<TNotFoundTranslationsFilter>>>;
+  _none: InputMaybe<TNotFoundTranslationsFilter>;
+  _or: InputMaybe<Array<InputMaybe<TNotFoundTranslationsFilter>>>;
+  _some: InputMaybe<TNotFoundTranslationsFilter>;
+  button: InputMaybe<TStringFilterOperators>;
+  id: InputMaybe<TNumberFilterOperators>;
+  languages_code: InputMaybe<TLanguagesFilter>;
+  navigation: InputMaybe<TStringFilterOperators>;
+  not_found_id: InputMaybe<TNotFoundFilter>;
+  title: InputMaybe<TStringFilterOperators>;
 };
 
 export type TNumberFilterOperators = {
@@ -4647,18 +4923,18 @@ export type TPlaceAggregatedFields = {
 export type TPlaceFilter = {
   _and: InputMaybe<Array<InputMaybe<TPlaceFilter>>>;
   _or: InputMaybe<Array<InputMaybe<TPlaceFilter>>>;
-  accommodation: InputMaybe<TAccommodationFilter>;
+  accommodation: InputMaybe<TAccommodationQuantifierFilter>;
   accommodation_func: InputMaybe<TCountFunctionFilterOperators>;
   album: InputMaybe<TStringFilterOperators>;
   country: InputMaybe<TCountryFilter>;
   id: InputMaybe<TNumberFilterOperators>;
   internal: InputMaybe<TStringFilterOperators>;
   location: InputMaybe<TGeometryFilterOperators>;
-  secret_blog: InputMaybe<TSecretBlogPlaceFilter>;
+  secret_blog: InputMaybe<TSecretBlogPlaceQuantifierFilter>;
   secret_blog_func: InputMaybe<TCountFunctionFilterOperators>;
-  translations: InputMaybe<TPlaceTranslationsFilter>;
+  translations: InputMaybe<TPlaceTranslationsQuantifierFilter>;
   translations_func: InputMaybe<TCountFunctionFilterOperators>;
-  transportation: InputMaybe<TTransportationFilter>;
+  transportation: InputMaybe<TTransportationQuantifierFilter>;
 };
 
 export type TPlaceMutated = {
@@ -4666,6 +4942,25 @@ export type TPlaceMutated = {
   data: Maybe<TPlace>;
   event: Maybe<TEventEnum>;
   key: Scalars['ID']['output'];
+};
+
+export type TPlaceQuantifierFilter = {
+  _and: InputMaybe<Array<InputMaybe<TPlaceFilter>>>;
+  _none: InputMaybe<TPlaceFilter>;
+  _or: InputMaybe<Array<InputMaybe<TPlaceFilter>>>;
+  _some: InputMaybe<TPlaceFilter>;
+  accommodation: InputMaybe<TAccommodationQuantifierFilter>;
+  accommodation_func: InputMaybe<TCountFunctionFilterOperators>;
+  album: InputMaybe<TStringFilterOperators>;
+  country: InputMaybe<TCountryFilter>;
+  id: InputMaybe<TNumberFilterOperators>;
+  internal: InputMaybe<TStringFilterOperators>;
+  location: InputMaybe<TGeometryFilterOperators>;
+  secret_blog: InputMaybe<TSecretBlogPlaceQuantifierFilter>;
+  secret_blog_func: InputMaybe<TCountFunctionFilterOperators>;
+  translations: InputMaybe<TPlaceTranslationsQuantifierFilter>;
+  translations_func: InputMaybe<TCountFunctionFilterOperators>;
+  transportation: InputMaybe<TTransportationQuantifierFilter>;
 };
 
 export type TPlaceTranslations = {
@@ -4740,6 +5035,17 @@ export type TPlaceTranslationsMutated = {
   key: Scalars['ID']['output'];
 };
 
+export type TPlaceTranslationsQuantifierFilter = {
+  _and: InputMaybe<Array<InputMaybe<TPlaceTranslationsFilter>>>;
+  _none: InputMaybe<TPlaceTranslationsFilter>;
+  _or: InputMaybe<Array<InputMaybe<TPlaceTranslationsFilter>>>;
+  _some: InputMaybe<TPlaceTranslationsFilter>;
+  id: InputMaybe<TNumberFilterOperators>;
+  languages_code: InputMaybe<TLanguagesFilter>;
+  name: InputMaybe<TStringFilterOperators>;
+  place_id: InputMaybe<TPlaceFilter>;
+};
+
 export type TProject = {
   __typename?: 'project';
   color: Maybe<Scalars['String']['output']>;
@@ -4753,6 +5059,7 @@ export type TProject = {
   title: Maybe<Scalars['String']['output']>;
   translations: Maybe<Array<Maybe<TProjectTranslations>>>;
   translations_func: Maybe<TCountFunctions>;
+  type: Maybe<Scalars['String']['output']>;
   url: Maybe<Scalars['String']['output']>;
   work: Maybe<Array<Maybe<TWorkProject>>>;
   work_func: Maybe<TCountFunctions>;
@@ -4822,6 +5129,7 @@ export type TProjectAggregatedCount = {
   technologies: Maybe<Scalars['Int']['output']>;
   title: Maybe<Scalars['Int']['output']>;
   translations: Maybe<Scalars['Int']['output']>;
+  type: Maybe<Scalars['Int']['output']>;
   url: Maybe<Scalars['Int']['output']>;
   work: Maybe<Scalars['Int']['output']>;
 };
@@ -4905,22 +5213,34 @@ export type TProjectDirectusFilesMutated = {
   key: Scalars['ID']['output'];
 };
 
+export type TProjectDirectusFilesQuantifierFilter = {
+  _and: InputMaybe<Array<InputMaybe<TProjectDirectusFilesFilter>>>;
+  _none: InputMaybe<TProjectDirectusFilesFilter>;
+  _or: InputMaybe<Array<InputMaybe<TProjectDirectusFilesFilter>>>;
+  _some: InputMaybe<TProjectDirectusFilesFilter>;
+  directus_files_id: InputMaybe<TDirectusFilesFilter>;
+  id: InputMaybe<TNumberFilterOperators>;
+  project_id: InputMaybe<TProjectFilter>;
+  sort: InputMaybe<TNumberFilterOperators>;
+};
+
 export type TProjectFilter = {
   _and: InputMaybe<Array<InputMaybe<TProjectFilter>>>;
   _or: InputMaybe<Array<InputMaybe<TProjectFilter>>>;
   color: InputMaybe<TStringFilterOperators>;
-  gallery: InputMaybe<TProjectDirectusFilesFilter>;
+  gallery: InputMaybe<TProjectDirectusFilesQuantifierFilter>;
   gallery_func: InputMaybe<TCountFunctionFilterOperators>;
   id: InputMaybe<TNumberFilterOperators>;
   slug: InputMaybe<TStringFilterOperators>;
   sort: InputMaybe<TNumberFilterOperators>;
-  technologies: InputMaybe<TProjectTechnologyFilter>;
+  technologies: InputMaybe<TProjectTechnologyQuantifierFilter>;
   technologies_func: InputMaybe<TCountFunctionFilterOperators>;
   title: InputMaybe<TStringFilterOperators>;
-  translations: InputMaybe<TProjectTranslationsFilter>;
+  translations: InputMaybe<TProjectTranslationsQuantifierFilter>;
   translations_func: InputMaybe<TCountFunctionFilterOperators>;
+  type: InputMaybe<TStringFilterOperators>;
   url: InputMaybe<TStringFilterOperators>;
-  work: InputMaybe<TWorkProjectFilter>;
+  work: InputMaybe<TWorkProjectQuantifierFilter>;
   work_func: InputMaybe<TCountFunctionFilterOperators>;
 };
 
@@ -5008,8 +5328,21 @@ export type TProjectTechnologyMutated = {
   key: Scalars['ID']['output'];
 };
 
+export type TProjectTechnologyQuantifierFilter = {
+  _and: InputMaybe<Array<InputMaybe<TProjectTechnologyFilter>>>;
+  _none: InputMaybe<TProjectTechnologyFilter>;
+  _or: InputMaybe<Array<InputMaybe<TProjectTechnologyFilter>>>;
+  _some: InputMaybe<TProjectTechnologyFilter>;
+  id: InputMaybe<TNumberFilterOperators>;
+  project_id: InputMaybe<TProjectFilter>;
+  secondary: InputMaybe<TBooleanFilterOperators>;
+  sort: InputMaybe<TNumberFilterOperators>;
+  technology_id: InputMaybe<TTechnologyFilter>;
+};
+
 export type TProjectTranslations = {
   __typename?: 'project_translations';
+  contributions: Maybe<Scalars['String']['output']>;
   description: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
   languages_code: Maybe<TLanguages>;
@@ -5052,6 +5385,7 @@ export type TProjectTranslationsAggregated = {
 
 export type TProjectTranslationsAggregatedCount = {
   __typename?: 'project_translations_aggregated_count';
+  contributions: Maybe<Scalars['Int']['output']>;
   description: Maybe<Scalars['Int']['output']>;
   id: Maybe<Scalars['Int']['output']>;
   languages_code: Maybe<Scalars['Int']['output']>;
@@ -5067,6 +5401,7 @@ export type TProjectTranslationsAggregatedFields = {
 export type TProjectTranslationsFilter = {
   _and: InputMaybe<Array<InputMaybe<TProjectTranslationsFilter>>>;
   _or: InputMaybe<Array<InputMaybe<TProjectTranslationsFilter>>>;
+  contributions: InputMaybe<TStringFilterOperators>;
   description: InputMaybe<TStringFilterOperators>;
   id: InputMaybe<TNumberFilterOperators>;
   languages_code: InputMaybe<TLanguagesFilter>;
@@ -5078,6 +5413,18 @@ export type TProjectTranslationsMutated = {
   data: Maybe<TProjectTranslations>;
   event: Maybe<TEventEnum>;
   key: Scalars['ID']['output'];
+};
+
+export type TProjectTranslationsQuantifierFilter = {
+  _and: InputMaybe<Array<InputMaybe<TProjectTranslationsFilter>>>;
+  _none: InputMaybe<TProjectTranslationsFilter>;
+  _or: InputMaybe<Array<InputMaybe<TProjectTranslationsFilter>>>;
+  _some: InputMaybe<TProjectTranslationsFilter>;
+  contributions: InputMaybe<TStringFilterOperators>;
+  description: InputMaybe<TStringFilterOperators>;
+  id: InputMaybe<TNumberFilterOperators>;
+  languages_code: InputMaybe<TLanguagesFilter>;
+  project_id: InputMaybe<TProjectFilter>;
 };
 
 export type TReading = {
@@ -5241,16 +5588,33 @@ export type TSecretBlogElementsMutated = {
   key: Scalars['ID']['output'];
 };
 
+export type TSecretBlogElementsQuantifierFilter = {
+  _and: InputMaybe<Array<InputMaybe<TSecretBlogElementsFilter>>>;
+  _none: InputMaybe<TSecretBlogElementsFilter>;
+  _or: InputMaybe<Array<InputMaybe<TSecretBlogElementsFilter>>>;
+  _some: InputMaybe<TSecretBlogElementsFilter>;
+  collection: InputMaybe<TStringFilterOperators>;
+  id: InputMaybe<TNumberFilterOperators>;
+  item__blog_image: InputMaybe<TBlogImageFilter>;
+  item__blog_map: InputMaybe<TBlogMapFilter>;
+  item__blog_quote: InputMaybe<TBlogQuoteFilter>;
+  item__blog_text: InputMaybe<TBlogTextFilter>;
+  item__blog_title: InputMaybe<TBlogTitleFilter>;
+  item__blog_video: InputMaybe<TBlogVideoFilter>;
+  secret_blog_id: InputMaybe<TSecretBlogFilter>;
+  sort: InputMaybe<TNumberFilterOperators>;
+};
+
 export type TSecretBlogFilter = {
   _and: InputMaybe<Array<InputMaybe<TSecretBlogFilter>>>;
   _or: InputMaybe<Array<InputMaybe<TSecretBlogFilter>>>;
   date_created: InputMaybe<TDateFilterOperators>;
   date_created_func: InputMaybe<TDateFunctionFilterOperators>;
-  elements: InputMaybe<TSecretBlogElementsFilter>;
+  elements: InputMaybe<TSecretBlogElementsQuantifierFilter>;
   elements_func: InputMaybe<TCountFunctionFilterOperators>;
   id: InputMaybe<TNumberFilterOperators>;
   image: InputMaybe<TDirectusFilesFilter>;
-  place: InputMaybe<TSecretBlogPlaceFilter>;
+  place: InputMaybe<TSecretBlogPlaceQuantifierFilter>;
   place_func: InputMaybe<TCountFunctionFilterOperators>;
   slug: InputMaybe<TStringFilterOperators>;
   status: InputMaybe<TStringFilterOperators>;
@@ -5332,6 +5696,16 @@ export type TSecretBlogPlaceMutated = {
   data: Maybe<TSecretBlogPlace>;
   event: Maybe<TEventEnum>;
   key: Scalars['ID']['output'];
+};
+
+export type TSecretBlogPlaceQuantifierFilter = {
+  _and: InputMaybe<Array<InputMaybe<TSecretBlogPlaceFilter>>>;
+  _none: InputMaybe<TSecretBlogPlaceFilter>;
+  _or: InputMaybe<Array<InputMaybe<TSecretBlogPlaceFilter>>>;
+  _some: InputMaybe<TSecretBlogPlaceFilter>;
+  id: InputMaybe<TNumberFilterOperators>;
+  place_id: InputMaybe<TPlaceFilter>;
+  secret_blog_id: InputMaybe<TSecretBlogFilter>;
 };
 
 export type TStringFilterOperators = {
@@ -5597,9 +5971,9 @@ export type TTechnologyCategoryFilter = {
   id: InputMaybe<TNumberFilterOperators>;
   label: InputMaybe<TStringFilterOperators>;
   sort: InputMaybe<TNumberFilterOperators>;
-  technologies: InputMaybe<TTechnologyFilter>;
+  technologies: InputMaybe<TTechnologyQuantifierFilter>;
   technologies_func: InputMaybe<TCountFunctionFilterOperators>;
-  translations: InputMaybe<TTechnologyCategoryTranslationsFilter>;
+  translations: InputMaybe<TTechnologyCategoryTranslationsQuantifierFilter>;
   translations_func: InputMaybe<TCountFunctionFilterOperators>;
 };
 
@@ -5682,13 +6056,24 @@ export type TTechnologyCategoryTranslationsMutated = {
   key: Scalars['ID']['output'];
 };
 
+export type TTechnologyCategoryTranslationsQuantifierFilter = {
+  _and: InputMaybe<Array<InputMaybe<TTechnologyCategoryTranslationsFilter>>>;
+  _none: InputMaybe<TTechnologyCategoryTranslationsFilter>;
+  _or: InputMaybe<Array<InputMaybe<TTechnologyCategoryTranslationsFilter>>>;
+  _some: InputMaybe<TTechnologyCategoryTranslationsFilter>;
+  id: InputMaybe<TNumberFilterOperators>;
+  languages_code: InputMaybe<TLanguagesFilter>;
+  technology_category_id: InputMaybe<TTechnologyCategoryFilter>;
+  title: InputMaybe<TStringFilterOperators>;
+};
+
 export type TTechnologyFilter = {
   _and: InputMaybe<Array<InputMaybe<TTechnologyFilter>>>;
   _or: InputMaybe<Array<InputMaybe<TTechnologyFilter>>>;
-  blog: InputMaybe<TBlogTechnologyFilter>;
+  blog: InputMaybe<TBlogTechnologyQuantifierFilter>;
   blog_func: InputMaybe<TCountFunctionFilterOperators>;
   category: InputMaybe<TTechnologyCategoryFilter>;
-  children: InputMaybe<TTechnologyFilter>;
+  children: InputMaybe<TTechnologyQuantifierFilter>;
   children_func: InputMaybe<TCountFunctionFilterOperators>;
   children_sort: InputMaybe<TNumberFilterOperators>;
   id: InputMaybe<TNumberFilterOperators>;
@@ -5696,10 +6081,10 @@ export type TTechnologyFilter = {
   label: InputMaybe<TStringFilterOperators>;
   list: InputMaybe<TBooleanFilterOperators>;
   preferred: InputMaybe<TBooleanFilterOperators>;
-  projects: InputMaybe<TProjectTechnologyFilter>;
+  projects: InputMaybe<TProjectTechnologyQuantifierFilter>;
   projects_func: InputMaybe<TCountFunctionFilterOperators>;
   sort: InputMaybe<TNumberFilterOperators>;
-  translations: InputMaybe<TTechnologyTranslationsFilter>;
+  translations: InputMaybe<TTechnologyTranslationsQuantifierFilter>;
   translations_func: InputMaybe<TCountFunctionFilterOperators>;
 };
 
@@ -5708,6 +6093,29 @@ export type TTechnologyMutated = {
   data: Maybe<TTechnology>;
   event: Maybe<TEventEnum>;
   key: Scalars['ID']['output'];
+};
+
+export type TTechnologyQuantifierFilter = {
+  _and: InputMaybe<Array<InputMaybe<TTechnologyFilter>>>;
+  _none: InputMaybe<TTechnologyFilter>;
+  _or: InputMaybe<Array<InputMaybe<TTechnologyFilter>>>;
+  _some: InputMaybe<TTechnologyFilter>;
+  blog: InputMaybe<TBlogTechnologyQuantifierFilter>;
+  blog_func: InputMaybe<TCountFunctionFilterOperators>;
+  category: InputMaybe<TTechnologyCategoryFilter>;
+  children: InputMaybe<TTechnologyQuantifierFilter>;
+  children_func: InputMaybe<TCountFunctionFilterOperators>;
+  children_sort: InputMaybe<TNumberFilterOperators>;
+  id: InputMaybe<TNumberFilterOperators>;
+  id_parent: InputMaybe<TTechnologyFilter>;
+  label: InputMaybe<TStringFilterOperators>;
+  list: InputMaybe<TBooleanFilterOperators>;
+  preferred: InputMaybe<TBooleanFilterOperators>;
+  projects: InputMaybe<TProjectTechnologyQuantifierFilter>;
+  projects_func: InputMaybe<TCountFunctionFilterOperators>;
+  sort: InputMaybe<TNumberFilterOperators>;
+  translations: InputMaybe<TTechnologyTranslationsQuantifierFilter>;
+  translations_func: InputMaybe<TCountFunctionFilterOperators>;
 };
 
 export type TTechnologyTranslations = {
@@ -5780,6 +6188,17 @@ export type TTechnologyTranslationsMutated = {
   data: Maybe<TTechnologyTranslations>;
   event: Maybe<TEventEnum>;
   key: Scalars['ID']['output'];
+};
+
+export type TTechnologyTranslationsQuantifierFilter = {
+  _and: InputMaybe<Array<InputMaybe<TTechnologyTranslationsFilter>>>;
+  _none: InputMaybe<TTechnologyTranslationsFilter>;
+  _or: InputMaybe<Array<InputMaybe<TTechnologyTranslationsFilter>>>;
+  _some: InputMaybe<TTechnologyTranslationsFilter>;
+  description: InputMaybe<TStringFilterOperators>;
+  id: InputMaybe<TNumberFilterOperators>;
+  languages_code: InputMaybe<TLanguagesFilter>;
+  technology_id: InputMaybe<TTechnologyFilter>;
 };
 
 export type TTransportation = {
@@ -5888,6 +6307,29 @@ export type TTransportationMutated = {
   data: Maybe<TTransportation>;
   event: Maybe<TEventEnum>;
   key: Scalars['ID']['output'];
+};
+
+export type TTransportationQuantifierFilter = {
+  _and: InputMaybe<Array<InputMaybe<TTransportationFilter>>>;
+  _none: InputMaybe<TTransportationFilter>;
+  _or: InputMaybe<Array<InputMaybe<TTransportationFilter>>>;
+  _some: InputMaybe<TTransportationFilter>;
+  arrival: InputMaybe<TDateFilterOperators>;
+  arrival_airport_code: InputMaybe<TStringFilterOperators>;
+  arrival_func: InputMaybe<TDatetimeFunctionFilterOperators>;
+  company: InputMaybe<TStringFilterOperators>;
+  crosspacific: InputMaybe<TBooleanFilterOperators>;
+  departure: InputMaybe<TDateFilterOperators>;
+  departure_airport_code: InputMaybe<TStringFilterOperators>;
+  departure_func: InputMaybe<TDatetimeFunctionFilterOperators>;
+  from: InputMaybe<TPlaceFilter>;
+  id: InputMaybe<TNumberFilterOperators>;
+  number: InputMaybe<TStringFilterOperators>;
+  price: InputMaybe<TNumberFilterOperators>;
+  show_time: InputMaybe<TBooleanFilterOperators>;
+  to: InputMaybe<TPlaceFilter>;
+  type: InputMaybe<TStringFilterOperators>;
+  vessel: InputMaybe<TStringFilterOperators>;
 };
 
 export type TTravel = {
@@ -6207,6 +6649,7 @@ export type TVersionProject = {
   title: Maybe<Scalars['String']['output']>;
   translations: Maybe<Scalars['JSON']['output']>;
   translations_func: Maybe<TCountFunctions>;
+  type: Maybe<Scalars['String']['output']>;
   url: Maybe<Scalars['String']['output']>;
   work: Maybe<Scalars['JSON']['output']>;
   work_func: Maybe<TCountFunctions>;
@@ -6231,6 +6674,7 @@ export type TVersionProjectTechnology = {
 
 export type TVersionProjectTranslations = {
   __typename?: 'version_project_translations';
+  contributions: Maybe<Scalars['String']['output']>;
   description: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
   languages_code: Maybe<Scalars['JSON']['output']>;
@@ -6445,7 +6889,7 @@ export type TWebsiteFilter = {
   dev_blog_image: InputMaybe<TDirectusFilesFilter>;
   home_image: InputMaybe<TDirectusFilesFilter>;
   id: InputMaybe<TNumberFilterOperators>;
-  translations: InputMaybe<TWebsiteTranslationsFilter>;
+  translations: InputMaybe<TWebsiteTranslationsQuantifierFilter>;
   translations_func: InputMaybe<TCountFunctionFilterOperators>;
   travel_blog_image: InputMaybe<TDirectusFilesFilter>;
 };
@@ -6532,6 +6976,18 @@ export type TWebsiteTranslationsMutated = {
   key: Scalars['ID']['output'];
 };
 
+export type TWebsiteTranslationsQuantifierFilter = {
+  _and: InputMaybe<Array<InputMaybe<TWebsiteTranslationsFilter>>>;
+  _none: InputMaybe<TWebsiteTranslationsFilter>;
+  _or: InputMaybe<Array<InputMaybe<TWebsiteTranslationsFilter>>>;
+  _some: InputMaybe<TWebsiteTranslationsFilter>;
+  home_text: InputMaybe<TStringFilterOperators>;
+  home_title: InputMaybe<TStringFilterOperators>;
+  id: InputMaybe<TNumberFilterOperators>;
+  languages_code: InputMaybe<TLanguagesFilter>;
+  website_id: InputMaybe<TWebsiteFilter>;
+};
+
 export type TWork = {
   __typename?: 'work';
   id: Scalars['ID']['output'];
@@ -6578,7 +7034,7 @@ export type TWorkFilter = {
   _and: InputMaybe<Array<InputMaybe<TWorkFilter>>>;
   _or: InputMaybe<Array<InputMaybe<TWorkFilter>>>;
   id: InputMaybe<TNumberFilterOperators>;
-  projects: InputMaybe<TWorkProjectFilter>;
+  projects: InputMaybe<TWorkProjectQuantifierFilter>;
   projects_func: InputMaybe<TCountFunctionFilterOperators>;
 };
 
@@ -6661,6 +7117,17 @@ export type TWorkProjectMutated = {
   data: Maybe<TWorkProject>;
   event: Maybe<TEventEnum>;
   key: Scalars['ID']['output'];
+};
+
+export type TWorkProjectQuantifierFilter = {
+  _and: InputMaybe<Array<InputMaybe<TWorkProjectFilter>>>;
+  _none: InputMaybe<TWorkProjectFilter>;
+  _or: InputMaybe<Array<InputMaybe<TWorkProjectFilter>>>;
+  _some: InputMaybe<TWorkProjectFilter>;
+  id: InputMaybe<TNumberFilterOperators>;
+  project_id: InputMaybe<TProjectFilter>;
+  sort: InputMaybe<TNumberFilterOperators>;
+  work_id: InputMaybe<TWorkFilter>;
 };
 
 
@@ -6759,6 +7226,7 @@ export type TResolversTypes = {
   accommodation_aggregated_fields: ResolverTypeWrapper<TAccommodationAggregatedFields>;
   accommodation_filter: TAccommodationFilter;
   accommodation_mutated: ResolverTypeWrapper<Omit<TAccommodationMutated, 'data'> & { data: Maybe<TResolversTypes['accommodation']> }>;
+  accommodation_quantifier_filter: TAccommodationQuantifierFilter;
   author: ResolverTypeWrapper<Omit<TAuthor, 'books' | 'books_func'> & { books: Maybe<Array<Maybe<TResolversTypes['author_book']>>>, books_func: Maybe<TResolversTypes['count_functions']> }>;
   author_aggregated: ResolverTypeWrapper<TAuthorAggregated>;
   author_aggregated_count: ResolverTypeWrapper<TAuthorAggregatedCount>;
@@ -6769,6 +7237,7 @@ export type TResolversTypes = {
   author_book_aggregated_fields: ResolverTypeWrapper<TAuthorBookAggregatedFields>;
   author_book_filter: TAuthorBookFilter;
   author_book_mutated: ResolverTypeWrapper<Omit<TAuthorBookMutated, 'data'> & { data: Maybe<TResolversTypes['author_book']> }>;
+  author_book_quantifier_filter: TAuthorBookQuantifierFilter;
   author_filter: TAuthorFilter;
   author_mutated: ResolverTypeWrapper<Omit<TAuthorMutated, 'data'> & { data: Maybe<TResolversTypes['author']> }>;
   big_int_filter_operators: TBigIntFilterOperators;
@@ -6783,6 +7252,7 @@ export type TResolversTypes = {
   blog_elements_filter: TBlogElementsFilter;
   blog_elements_item_union: ResolverTypeWrapper<TResolversUnionTypes<TResolversTypes>['blog_elements_item_union']>;
   blog_elements_mutated: ResolverTypeWrapper<Omit<TBlogElementsMutated, 'data'> & { data: Maybe<TResolversTypes['blog_elements']> }>;
+  blog_elements_quantifier_filter: TBlogElementsQuantifierFilter;
   blog_filter: TBlogFilter;
   blog_image: ResolverTypeWrapper<TBlogImage>;
   blog_image_aggregated: ResolverTypeWrapper<TBlogImageAggregated>;
@@ -6809,6 +7279,7 @@ export type TResolversTypes = {
   blog_technology_aggregated_fields: ResolverTypeWrapper<TBlogTechnologyAggregatedFields>;
   blog_technology_filter: TBlogTechnologyFilter;
   blog_technology_mutated: ResolverTypeWrapper<Omit<TBlogTechnologyMutated, 'data'> & { data: Maybe<TResolversTypes['blog_technology']> }>;
+  blog_technology_quantifier_filter: TBlogTechnologyQuantifierFilter;
   blog_text: ResolverTypeWrapper<TBlogText>;
   blog_text_aggregated: ResolverTypeWrapper<TBlogTextAggregated>;
   blog_text_aggregated_count: ResolverTypeWrapper<TBlogTextAggregatedCount>;
@@ -6833,6 +7304,7 @@ export type TResolversTypes = {
   book_aggregated_fields: ResolverTypeWrapper<TBookAggregatedFields>;
   book_filter: TBookFilter;
   book_mutated: ResolverTypeWrapper<Omit<TBookMutated, 'data'> & { data: Maybe<TResolversTypes['book']> }>;
+  book_quantifier_filter: TBookQuantifierFilter;
   book_series: ResolverTypeWrapper<Omit<TBookSeries, 'books' | 'books_func' | 'translations' | 'translations_func'> & { books: Maybe<Array<Maybe<TResolversTypes['book']>>>, books_func: Maybe<TResolversTypes['count_functions']>, translations: Maybe<Array<Maybe<TResolversTypes['book_series_translations']>>>, translations_func: Maybe<TResolversTypes['count_functions']> }>;
   book_series_aggregated: ResolverTypeWrapper<TBookSeriesAggregated>;
   book_series_aggregated_count: ResolverTypeWrapper<TBookSeriesAggregatedCount>;
@@ -6845,12 +7317,14 @@ export type TResolversTypes = {
   book_series_translations_aggregated_fields: ResolverTypeWrapper<TBookSeriesTranslationsAggregatedFields>;
   book_series_translations_filter: TBookSeriesTranslationsFilter;
   book_series_translations_mutated: ResolverTypeWrapper<Omit<TBookSeriesTranslationsMutated, 'data'> & { data: Maybe<TResolversTypes['book_series_translations']> }>;
+  book_series_translations_quantifier_filter: TBookSeriesTranslationsQuantifierFilter;
   book_translations: ResolverTypeWrapper<Omit<TBookTranslations, 'book_id'> & { book_id: Maybe<TResolversTypes['book']> }>;
   book_translations_aggregated: ResolverTypeWrapper<TBookTranslationsAggregated>;
   book_translations_aggregated_count: ResolverTypeWrapper<TBookTranslationsAggregatedCount>;
   book_translations_aggregated_fields: ResolverTypeWrapper<TBookTranslationsAggregatedFields>;
   book_translations_filter: TBookTranslationsFilter;
   book_translations_mutated: ResolverTypeWrapper<Omit<TBookTranslationsMutated, 'data'> & { data: Maybe<TResolversTypes['book_translations']> }>;
+  book_translations_quantifier_filter: TBookTranslationsQuantifierFilter;
   book_year: ResolverTypeWrapper<Omit<TBookYear, 'books' | 'books_func' | 'translations' | 'translations_func'> & { books: Maybe<Array<Maybe<TResolversTypes['book']>>>, books_func: Maybe<TResolversTypes['count_functions']>, translations: Maybe<Array<Maybe<TResolversTypes['book_year_translations']>>>, translations_func: Maybe<TResolversTypes['count_functions']> }>;
   book_year_aggregated: ResolverTypeWrapper<TBookYearAggregated>;
   book_year_aggregated_count: ResolverTypeWrapper<TBookYearAggregatedCount>;
@@ -6863,12 +7337,14 @@ export type TResolversTypes = {
   book_year_translations_aggregated_fields: ResolverTypeWrapper<TBookYearTranslationsAggregatedFields>;
   book_year_translations_filter: TBookYearTranslationsFilter;
   book_year_translations_mutated: ResolverTypeWrapper<Omit<TBookYearTranslationsMutated, 'data'> & { data: Maybe<TResolversTypes['book_year_translations']> }>;
+  book_year_translations_quantifier_filter: TBookYearTranslationsQuantifierFilter;
   booking: ResolverTypeWrapper<Omit<TBooking, 'accommodation'> & { accommodation: Maybe<TResolversTypes['accommodation']> }>;
   booking_aggregated: ResolverTypeWrapper<TBookingAggregated>;
   booking_aggregated_count: ResolverTypeWrapper<TBookingAggregatedCount>;
   booking_aggregated_fields: ResolverTypeWrapper<TBookingAggregatedFields>;
   booking_filter: TBookingFilter;
   booking_mutated: ResolverTypeWrapper<Omit<TBookingMutated, 'data'> & { data: Maybe<TResolversTypes['booking']> }>;
+  booking_quantifier_filter: TBookingQuantifierFilter;
   boolean_filter_operators: TBooleanFilterOperators;
   count_function_filter_operators: TCountFunctionFilterOperators;
   count_functions: ResolverTypeWrapper<TCountFunctions>;
@@ -6884,6 +7360,7 @@ export type TResolversTypes = {
   country_translations_aggregated_fields: ResolverTypeWrapper<TCountryTranslationsAggregatedFields>;
   country_translations_filter: TCountryTranslationsFilter;
   country_translations_mutated: ResolverTypeWrapper<TCountryTranslationsMutated>;
+  country_translations_quantifier_filter: TCountryTranslationsQuantifierFilter;
   date_filter_operators: TDateFilterOperators;
   date_function_filter_operators: TDateFunctionFilterOperators;
   date_functions: ResolverTypeWrapper<TDateFunctions>;
@@ -6898,13 +7375,16 @@ export type TResolversTypes = {
   directus_roles: ResolverTypeWrapper<Omit<TDirectusRoles, 'children_func' | 'policies_func' | 'users_func'> & { children_func: Maybe<TResolversTypes['count_functions']>, policies_func: Maybe<TResolversTypes['count_functions']>, users_func: Maybe<TResolversTypes['count_functions']> }>;
   directus_roles_filter: TDirectusRolesFilter;
   directus_roles_mutated: ResolverTypeWrapper<TDirectusRolesMutated>;
-  directus_settings: ResolverTypeWrapper<Omit<TDirectusSettings, 'basemaps_func' | 'custom_aspect_ratios_func' | 'module_bar_func' | 'public_registration_email_filter_func' | 'storage_asset_presets_func' | 'theme_dark_overrides_func' | 'theme_light_overrides_func'> & { basemaps_func: Maybe<TResolversTypes['count_functions']>, custom_aspect_ratios_func: Maybe<TResolversTypes['count_functions']>, module_bar_func: Maybe<TResolversTypes['count_functions']>, public_registration_email_filter_func: Maybe<TResolversTypes['count_functions']>, storage_asset_presets_func: Maybe<TResolversTypes['count_functions']>, theme_dark_overrides_func: Maybe<TResolversTypes['count_functions']>, theme_light_overrides_func: Maybe<TResolversTypes['count_functions']> }>;
+  directus_roles_quantifier_filter: TDirectusRolesQuantifierFilter;
+  directus_settings: ResolverTypeWrapper<Omit<TDirectusSettings, 'basemaps_func' | 'custom_aspect_ratios_func' | 'module_bar_func' | 'public_registration_email_filter_func' | 'storage_asset_presets_func' | 'theme_dark_overrides_func' | 'theme_light_overrides_func' | 'visual_editor_urls_func'> & { basemaps_func: Maybe<TResolversTypes['count_functions']>, custom_aspect_ratios_func: Maybe<TResolversTypes['count_functions']>, module_bar_func: Maybe<TResolversTypes['count_functions']>, public_registration_email_filter_func: Maybe<TResolversTypes['count_functions']>, storage_asset_presets_func: Maybe<TResolversTypes['count_functions']>, theme_dark_overrides_func: Maybe<TResolversTypes['count_functions']>, theme_light_overrides_func: Maybe<TResolversTypes['count_functions']>, visual_editor_urls_func: Maybe<TResolversTypes['count_functions']> }>;
   directus_settings_mutated: ResolverTypeWrapper<Omit<TDirectusSettingsMutated, 'data'> & { data: Maybe<TResolversTypes['directus_settings']> }>;
   directus_users: ResolverTypeWrapper<Omit<TDirectusUsers, 'auth_data_func' | 'policies_func' | 'tags_func' | 'theme_dark_overrides_func' | 'theme_light_overrides_func'> & { auth_data_func: Maybe<TResolversTypes['count_functions']>, policies_func: Maybe<TResolversTypes['count_functions']>, tags_func: Maybe<TResolversTypes['count_functions']>, theme_dark_overrides_func: Maybe<TResolversTypes['count_functions']>, theme_light_overrides_func: Maybe<TResolversTypes['count_functions']> }>;
   directus_users_filter: TDirectusUsersFilter;
   directus_users_mutated: ResolverTypeWrapper<TDirectusUsersMutated>;
+  directus_users_quantifier_filter: TDirectusUsersQuantifierFilter;
   geometry_filter_operators: TGeometryFilterOperators;
   hash_filter_operators: THashFilterOperators;
+  id_filter_operators: TIdFilterOperators;
   languages: ResolverTypeWrapper<TLanguages>;
   languages_aggregated: ResolverTypeWrapper<TLanguagesAggregated>;
   languages_aggregated_count: ResolverTypeWrapper<TLanguagesAggregatedCount>;
@@ -6918,12 +7398,14 @@ export type TResolversTypes = {
   navigation_item_aggregated_fields: ResolverTypeWrapper<TNavigationItemAggregatedFields>;
   navigation_item_filter: TNavigationItemFilter;
   navigation_item_mutated: ResolverTypeWrapper<Omit<TNavigationItemMutated, 'data'> & { data: Maybe<TResolversTypes['navigation_item']> }>;
+  navigation_item_quantifier_filter: TNavigationItemQuantifierFilter;
   navigation_item_translations: ResolverTypeWrapper<Omit<TNavigationItemTranslations, 'navigation_item_id'> & { navigation_item_id: Maybe<TResolversTypes['navigation_item']> }>;
   navigation_item_translations_aggregated: ResolverTypeWrapper<TNavigationItemTranslationsAggregated>;
   navigation_item_translations_aggregated_count: ResolverTypeWrapper<TNavigationItemTranslationsAggregatedCount>;
   navigation_item_translations_aggregated_fields: ResolverTypeWrapper<TNavigationItemTranslationsAggregatedFields>;
   navigation_item_translations_filter: TNavigationItemTranslationsFilter;
   navigation_item_translations_mutated: ResolverTypeWrapper<Omit<TNavigationItemTranslationsMutated, 'data'> & { data: Maybe<TResolversTypes['navigation_item_translations']> }>;
+  navigation_item_translations_quantifier_filter: TNavigationItemTranslationsQuantifierFilter;
   navigation_mutated: ResolverTypeWrapper<Omit<TNavigationMutated, 'data'> & { data: Maybe<TResolversTypes['navigation']> }>;
   navigation_translations: ResolverTypeWrapper<Omit<TNavigationTranslations, 'navigation_id'> & { navigation_id: Maybe<TResolversTypes['navigation']> }>;
   navigation_translations_aggregated: ResolverTypeWrapper<TNavigationTranslationsAggregated>;
@@ -6931,6 +7413,7 @@ export type TResolversTypes = {
   navigation_translations_aggregated_fields: ResolverTypeWrapper<TNavigationTranslationsAggregatedFields>;
   navigation_translations_filter: TNavigationTranslationsFilter;
   navigation_translations_mutated: ResolverTypeWrapper<Omit<TNavigationTranslationsMutated, 'data'> & { data: Maybe<TResolversTypes['navigation_translations']> }>;
+  navigation_translations_quantifier_filter: TNavigationTranslationsQuantifierFilter;
   not_found: ResolverTypeWrapper<Omit<TNotFound, 'translations' | 'translations_func'> & { translations: Maybe<Array<Maybe<TResolversTypes['not_found_translations']>>>, translations_func: Maybe<TResolversTypes['count_functions']> }>;
   not_found_filter: TNotFoundFilter;
   not_found_mutated: ResolverTypeWrapper<Omit<TNotFoundMutated, 'data'> & { data: Maybe<TResolversTypes['not_found']> }>;
@@ -6940,6 +7423,7 @@ export type TResolversTypes = {
   not_found_translations_aggregated_fields: ResolverTypeWrapper<TNotFoundTranslationsAggregatedFields>;
   not_found_translations_filter: TNotFoundTranslationsFilter;
   not_found_translations_mutated: ResolverTypeWrapper<Omit<TNotFoundTranslationsMutated, 'data'> & { data: Maybe<TResolversTypes['not_found_translations']> }>;
+  not_found_translations_quantifier_filter: TNotFoundTranslationsQuantifierFilter;
   number_filter_operators: TNumberFilterOperators;
   place: ResolverTypeWrapper<Omit<TPlace, 'accommodation' | 'accommodation_func' | 'secret_blog' | 'secret_blog_func' | 'translations' | 'translations_func' | 'transportation'> & { accommodation: Maybe<Array<Maybe<TResolversTypes['accommodation']>>>, accommodation_func: Maybe<TResolversTypes['count_functions']>, secret_blog: Maybe<Array<Maybe<TResolversTypes['secret_blog_place']>>>, secret_blog_func: Maybe<TResolversTypes['count_functions']>, translations: Maybe<Array<Maybe<TResolversTypes['place_translations']>>>, translations_func: Maybe<TResolversTypes['count_functions']>, transportation: Maybe<Array<Maybe<TResolversTypes['transportation']>>> }>;
   place_aggregated: ResolverTypeWrapper<TPlaceAggregated>;
@@ -6947,12 +7431,14 @@ export type TResolversTypes = {
   place_aggregated_fields: ResolverTypeWrapper<TPlaceAggregatedFields>;
   place_filter: TPlaceFilter;
   place_mutated: ResolverTypeWrapper<Omit<TPlaceMutated, 'data'> & { data: Maybe<TResolversTypes['place']> }>;
+  place_quantifier_filter: TPlaceQuantifierFilter;
   place_translations: ResolverTypeWrapper<Omit<TPlaceTranslations, 'place_id'> & { place_id: Maybe<TResolversTypes['place']> }>;
   place_translations_aggregated: ResolverTypeWrapper<TPlaceTranslationsAggregated>;
   place_translations_aggregated_count: ResolverTypeWrapper<TPlaceTranslationsAggregatedCount>;
   place_translations_aggregated_fields: ResolverTypeWrapper<TPlaceTranslationsAggregatedFields>;
   place_translations_filter: TPlaceTranslationsFilter;
   place_translations_mutated: ResolverTypeWrapper<Omit<TPlaceTranslationsMutated, 'data'> & { data: Maybe<TResolversTypes['place_translations']> }>;
+  place_translations_quantifier_filter: TPlaceTranslationsQuantifierFilter;
   project: ResolverTypeWrapper<Omit<TProject, 'gallery' | 'gallery_func' | 'technologies' | 'technologies_func' | 'translations' | 'translations_func' | 'work' | 'work_func'> & { gallery: Maybe<Array<Maybe<TResolversTypes['project_directus_files']>>>, gallery_func: Maybe<TResolversTypes['count_functions']>, technologies: Maybe<Array<Maybe<TResolversTypes['project_technology']>>>, technologies_func: Maybe<TResolversTypes['count_functions']>, translations: Maybe<Array<Maybe<TResolversTypes['project_translations']>>>, translations_func: Maybe<TResolversTypes['count_functions']>, work: Maybe<Array<Maybe<TResolversTypes['work_project']>>>, work_func: Maybe<TResolversTypes['count_functions']> }>;
   project_aggregated: ResolverTypeWrapper<TProjectAggregated>;
   project_aggregated_count: ResolverTypeWrapper<TProjectAggregatedCount>;
@@ -6963,6 +7449,7 @@ export type TResolversTypes = {
   project_directus_files_aggregated_fields: ResolverTypeWrapper<TProjectDirectusFilesAggregatedFields>;
   project_directus_files_filter: TProjectDirectusFilesFilter;
   project_directus_files_mutated: ResolverTypeWrapper<Omit<TProjectDirectusFilesMutated, 'data'> & { data: Maybe<TResolversTypes['project_directus_files']> }>;
+  project_directus_files_quantifier_filter: TProjectDirectusFilesQuantifierFilter;
   project_filter: TProjectFilter;
   project_mutated: ResolverTypeWrapper<Omit<TProjectMutated, 'data'> & { data: Maybe<TResolversTypes['project']> }>;
   project_technology: ResolverTypeWrapper<Omit<TProjectTechnology, 'project_id' | 'technology_id'> & { project_id: Maybe<TResolversTypes['project']>, technology_id: Maybe<TResolversTypes['technology']> }>;
@@ -6971,12 +7458,14 @@ export type TResolversTypes = {
   project_technology_aggregated_fields: ResolverTypeWrapper<TProjectTechnologyAggregatedFields>;
   project_technology_filter: TProjectTechnologyFilter;
   project_technology_mutated: ResolverTypeWrapper<Omit<TProjectTechnologyMutated, 'data'> & { data: Maybe<TResolversTypes['project_technology']> }>;
+  project_technology_quantifier_filter: TProjectTechnologyQuantifierFilter;
   project_translations: ResolverTypeWrapper<Omit<TProjectTranslations, 'project_id'> & { project_id: Maybe<TResolversTypes['project']> }>;
   project_translations_aggregated: ResolverTypeWrapper<TProjectTranslationsAggregated>;
   project_translations_aggregated_count: ResolverTypeWrapper<TProjectTranslationsAggregatedCount>;
   project_translations_aggregated_fields: ResolverTypeWrapper<TProjectTranslationsAggregatedFields>;
   project_translations_filter: TProjectTranslationsFilter;
   project_translations_mutated: ResolverTypeWrapper<Omit<TProjectTranslationsMutated, 'data'> & { data: Maybe<TResolversTypes['project_translations']> }>;
+  project_translations_quantifier_filter: TProjectTranslationsQuantifierFilter;
   reading: ResolverTypeWrapper<TReading>;
   reading_mutated: ResolverTypeWrapper<TReadingMutated>;
   secret_blog: ResolverTypeWrapper<Omit<TSecretBlog, 'date_created_func' | 'elements' | 'elements_func' | 'place' | 'place_func'> & { date_created_func: Maybe<TResolversTypes['date_functions']>, elements: Maybe<Array<Maybe<TResolversTypes['secret_blog_elements']>>>, elements_func: Maybe<TResolversTypes['count_functions']>, place: Maybe<Array<Maybe<TResolversTypes['secret_blog_place']>>>, place_func: Maybe<TResolversTypes['count_functions']> }>;
@@ -6990,6 +7479,7 @@ export type TResolversTypes = {
   secret_blog_elements_filter: TSecretBlogElementsFilter;
   secret_blog_elements_item_union: ResolverTypeWrapper<TResolversUnionTypes<TResolversTypes>['secret_blog_elements_item_union']>;
   secret_blog_elements_mutated: ResolverTypeWrapper<Omit<TSecretBlogElementsMutated, 'data'> & { data: Maybe<TResolversTypes['secret_blog_elements']> }>;
+  secret_blog_elements_quantifier_filter: TSecretBlogElementsQuantifierFilter;
   secret_blog_filter: TSecretBlogFilter;
   secret_blog_mutated: ResolverTypeWrapper<Omit<TSecretBlogMutated, 'data'> & { data: Maybe<TResolversTypes['secret_blog']> }>;
   secret_blog_place: ResolverTypeWrapper<Omit<TSecretBlogPlace, 'place_id' | 'secret_blog_id'> & { place_id: Maybe<TResolversTypes['place']>, secret_blog_id: Maybe<TResolversTypes['secret_blog']> }>;
@@ -6998,6 +7488,7 @@ export type TResolversTypes = {
   secret_blog_place_aggregated_fields: ResolverTypeWrapper<TSecretBlogPlaceAggregatedFields>;
   secret_blog_place_filter: TSecretBlogPlaceFilter;
   secret_blog_place_mutated: ResolverTypeWrapper<Omit<TSecretBlogPlaceMutated, 'data'> & { data: Maybe<TResolversTypes['secret_blog_place']> }>;
+  secret_blog_place_quantifier_filter: TSecretBlogPlaceQuantifierFilter;
   string_filter_operators: TStringFilterOperators;
   subscribers: ResolverTypeWrapper<TSubscribers>;
   subscribers_aggregated: ResolverTypeWrapper<TSubscribersAggregated>;
@@ -7021,20 +7512,24 @@ export type TResolversTypes = {
   technology_category_translations_aggregated_fields: ResolverTypeWrapper<TTechnologyCategoryTranslationsAggregatedFields>;
   technology_category_translations_filter: TTechnologyCategoryTranslationsFilter;
   technology_category_translations_mutated: ResolverTypeWrapper<Omit<TTechnologyCategoryTranslationsMutated, 'data'> & { data: Maybe<TResolversTypes['technology_category_translations']> }>;
+  technology_category_translations_quantifier_filter: TTechnologyCategoryTranslationsQuantifierFilter;
   technology_filter: TTechnologyFilter;
   technology_mutated: ResolverTypeWrapper<Omit<TTechnologyMutated, 'data'> & { data: Maybe<TResolversTypes['technology']> }>;
+  technology_quantifier_filter: TTechnologyQuantifierFilter;
   technology_translations: ResolverTypeWrapper<Omit<TTechnologyTranslations, 'technology_id'> & { technology_id: Maybe<TResolversTypes['technology']> }>;
   technology_translations_aggregated: ResolverTypeWrapper<TTechnologyTranslationsAggregated>;
   technology_translations_aggregated_count: ResolverTypeWrapper<TTechnologyTranslationsAggregatedCount>;
   technology_translations_aggregated_fields: ResolverTypeWrapper<TTechnologyTranslationsAggregatedFields>;
   technology_translations_filter: TTechnologyTranslationsFilter;
   technology_translations_mutated: ResolverTypeWrapper<Omit<TTechnologyTranslationsMutated, 'data'> & { data: Maybe<TResolversTypes['technology_translations']> }>;
+  technology_translations_quantifier_filter: TTechnologyTranslationsQuantifierFilter;
   transportation: ResolverTypeWrapper<Omit<TTransportation, 'from' | 'to'> & { from: Maybe<TResolversTypes['place']>, to: Maybe<TResolversTypes['place']> }>;
   transportation_aggregated: ResolverTypeWrapper<TTransportationAggregated>;
   transportation_aggregated_count: ResolverTypeWrapper<TTransportationAggregatedCount>;
   transportation_aggregated_fields: ResolverTypeWrapper<TTransportationAggregatedFields>;
   transportation_filter: TTransportationFilter;
   transportation_mutated: ResolverTypeWrapper<Omit<TTransportationMutated, 'data'> & { data: Maybe<TResolversTypes['transportation']> }>;
+  transportation_quantifier_filter: TTransportationQuantifierFilter;
   travel: ResolverTypeWrapper<TTravel>;
   travel_mutated: ResolverTypeWrapper<TTravelMutated>;
   version_accommodation: ResolverTypeWrapper<Omit<TVersionAccommodation, 'bookings_func'> & { bookings_func: Maybe<TResolversTypes['count_functions']> }>;
@@ -7095,6 +7590,7 @@ export type TResolversTypes = {
   website_translations_aggregated_fields: ResolverTypeWrapper<TWebsiteTranslationsAggregatedFields>;
   website_translations_filter: TWebsiteTranslationsFilter;
   website_translations_mutated: ResolverTypeWrapper<Omit<TWebsiteTranslationsMutated, 'data'> & { data: Maybe<TResolversTypes['website_translations']> }>;
+  website_translations_quantifier_filter: TWebsiteTranslationsQuantifierFilter;
   work: ResolverTypeWrapper<Omit<TWork, 'projects' | 'projects_func'> & { projects: Maybe<Array<Maybe<TResolversTypes['work_project']>>>, projects_func: Maybe<TResolversTypes['count_functions']> }>;
   work_aggregated: ResolverTypeWrapper<TWorkAggregated>;
   work_aggregated_count: ResolverTypeWrapper<TWorkAggregatedCount>;
@@ -7107,6 +7603,7 @@ export type TResolversTypes = {
   work_project_aggregated_fields: ResolverTypeWrapper<TWorkProjectAggregatedFields>;
   work_project_filter: TWorkProjectFilter;
   work_project_mutated: ResolverTypeWrapper<Omit<TWorkProjectMutated, 'data'> & { data: Maybe<TResolversTypes['work_project']> }>;
+  work_project_quantifier_filter: TWorkProjectQuantifierFilter;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
@@ -7130,6 +7627,7 @@ export type TResolversParentTypes = {
   accommodation_aggregated_fields: TAccommodationAggregatedFields;
   accommodation_filter: TAccommodationFilter;
   accommodation_mutated: Omit<TAccommodationMutated, 'data'> & { data: Maybe<TResolversParentTypes['accommodation']> };
+  accommodation_quantifier_filter: TAccommodationQuantifierFilter;
   author: Omit<TAuthor, 'books' | 'books_func'> & { books: Maybe<Array<Maybe<TResolversParentTypes['author_book']>>>, books_func: Maybe<TResolversParentTypes['count_functions']> };
   author_aggregated: TAuthorAggregated;
   author_aggregated_count: TAuthorAggregatedCount;
@@ -7140,6 +7638,7 @@ export type TResolversParentTypes = {
   author_book_aggregated_fields: TAuthorBookAggregatedFields;
   author_book_filter: TAuthorBookFilter;
   author_book_mutated: Omit<TAuthorBookMutated, 'data'> & { data: Maybe<TResolversParentTypes['author_book']> };
+  author_book_quantifier_filter: TAuthorBookQuantifierFilter;
   author_filter: TAuthorFilter;
   author_mutated: Omit<TAuthorMutated, 'data'> & { data: Maybe<TResolversParentTypes['author']> };
   big_int_filter_operators: TBigIntFilterOperators;
@@ -7154,6 +7653,7 @@ export type TResolversParentTypes = {
   blog_elements_filter: TBlogElementsFilter;
   blog_elements_item_union: TResolversUnionTypes<TResolversParentTypes>['blog_elements_item_union'];
   blog_elements_mutated: Omit<TBlogElementsMutated, 'data'> & { data: Maybe<TResolversParentTypes['blog_elements']> };
+  blog_elements_quantifier_filter: TBlogElementsQuantifierFilter;
   blog_filter: TBlogFilter;
   blog_image: TBlogImage;
   blog_image_aggregated: TBlogImageAggregated;
@@ -7180,6 +7680,7 @@ export type TResolversParentTypes = {
   blog_technology_aggregated_fields: TBlogTechnologyAggregatedFields;
   blog_technology_filter: TBlogTechnologyFilter;
   blog_technology_mutated: Omit<TBlogTechnologyMutated, 'data'> & { data: Maybe<TResolversParentTypes['blog_technology']> };
+  blog_technology_quantifier_filter: TBlogTechnologyQuantifierFilter;
   blog_text: TBlogText;
   blog_text_aggregated: TBlogTextAggregated;
   blog_text_aggregated_count: TBlogTextAggregatedCount;
@@ -7204,6 +7705,7 @@ export type TResolversParentTypes = {
   book_aggregated_fields: TBookAggregatedFields;
   book_filter: TBookFilter;
   book_mutated: Omit<TBookMutated, 'data'> & { data: Maybe<TResolversParentTypes['book']> };
+  book_quantifier_filter: TBookQuantifierFilter;
   book_series: Omit<TBookSeries, 'books' | 'books_func' | 'translations' | 'translations_func'> & { books: Maybe<Array<Maybe<TResolversParentTypes['book']>>>, books_func: Maybe<TResolversParentTypes['count_functions']>, translations: Maybe<Array<Maybe<TResolversParentTypes['book_series_translations']>>>, translations_func: Maybe<TResolversParentTypes['count_functions']> };
   book_series_aggregated: TBookSeriesAggregated;
   book_series_aggregated_count: TBookSeriesAggregatedCount;
@@ -7216,12 +7718,14 @@ export type TResolversParentTypes = {
   book_series_translations_aggregated_fields: TBookSeriesTranslationsAggregatedFields;
   book_series_translations_filter: TBookSeriesTranslationsFilter;
   book_series_translations_mutated: Omit<TBookSeriesTranslationsMutated, 'data'> & { data: Maybe<TResolversParentTypes['book_series_translations']> };
+  book_series_translations_quantifier_filter: TBookSeriesTranslationsQuantifierFilter;
   book_translations: Omit<TBookTranslations, 'book_id'> & { book_id: Maybe<TResolversParentTypes['book']> };
   book_translations_aggregated: TBookTranslationsAggregated;
   book_translations_aggregated_count: TBookTranslationsAggregatedCount;
   book_translations_aggregated_fields: TBookTranslationsAggregatedFields;
   book_translations_filter: TBookTranslationsFilter;
   book_translations_mutated: Omit<TBookTranslationsMutated, 'data'> & { data: Maybe<TResolversParentTypes['book_translations']> };
+  book_translations_quantifier_filter: TBookTranslationsQuantifierFilter;
   book_year: Omit<TBookYear, 'books' | 'books_func' | 'translations' | 'translations_func'> & { books: Maybe<Array<Maybe<TResolversParentTypes['book']>>>, books_func: Maybe<TResolversParentTypes['count_functions']>, translations: Maybe<Array<Maybe<TResolversParentTypes['book_year_translations']>>>, translations_func: Maybe<TResolversParentTypes['count_functions']> };
   book_year_aggregated: TBookYearAggregated;
   book_year_aggregated_count: TBookYearAggregatedCount;
@@ -7234,12 +7738,14 @@ export type TResolversParentTypes = {
   book_year_translations_aggregated_fields: TBookYearTranslationsAggregatedFields;
   book_year_translations_filter: TBookYearTranslationsFilter;
   book_year_translations_mutated: Omit<TBookYearTranslationsMutated, 'data'> & { data: Maybe<TResolversParentTypes['book_year_translations']> };
+  book_year_translations_quantifier_filter: TBookYearTranslationsQuantifierFilter;
   booking: Omit<TBooking, 'accommodation'> & { accommodation: Maybe<TResolversParentTypes['accommodation']> };
   booking_aggregated: TBookingAggregated;
   booking_aggregated_count: TBookingAggregatedCount;
   booking_aggregated_fields: TBookingAggregatedFields;
   booking_filter: TBookingFilter;
   booking_mutated: Omit<TBookingMutated, 'data'> & { data: Maybe<TResolversParentTypes['booking']> };
+  booking_quantifier_filter: TBookingQuantifierFilter;
   boolean_filter_operators: TBooleanFilterOperators;
   count_function_filter_operators: TCountFunctionFilterOperators;
   count_functions: TCountFunctions;
@@ -7255,6 +7761,7 @@ export type TResolversParentTypes = {
   country_translations_aggregated_fields: TCountryTranslationsAggregatedFields;
   country_translations_filter: TCountryTranslationsFilter;
   country_translations_mutated: TCountryTranslationsMutated;
+  country_translations_quantifier_filter: TCountryTranslationsQuantifierFilter;
   date_filter_operators: TDateFilterOperators;
   date_function_filter_operators: TDateFunctionFilterOperators;
   date_functions: TDateFunctions;
@@ -7269,13 +7776,16 @@ export type TResolversParentTypes = {
   directus_roles: Omit<TDirectusRoles, 'children_func' | 'policies_func' | 'users_func'> & { children_func: Maybe<TResolversParentTypes['count_functions']>, policies_func: Maybe<TResolversParentTypes['count_functions']>, users_func: Maybe<TResolversParentTypes['count_functions']> };
   directus_roles_filter: TDirectusRolesFilter;
   directus_roles_mutated: TDirectusRolesMutated;
-  directus_settings: Omit<TDirectusSettings, 'basemaps_func' | 'custom_aspect_ratios_func' | 'module_bar_func' | 'public_registration_email_filter_func' | 'storage_asset_presets_func' | 'theme_dark_overrides_func' | 'theme_light_overrides_func'> & { basemaps_func: Maybe<TResolversParentTypes['count_functions']>, custom_aspect_ratios_func: Maybe<TResolversParentTypes['count_functions']>, module_bar_func: Maybe<TResolversParentTypes['count_functions']>, public_registration_email_filter_func: Maybe<TResolversParentTypes['count_functions']>, storage_asset_presets_func: Maybe<TResolversParentTypes['count_functions']>, theme_dark_overrides_func: Maybe<TResolversParentTypes['count_functions']>, theme_light_overrides_func: Maybe<TResolversParentTypes['count_functions']> };
+  directus_roles_quantifier_filter: TDirectusRolesQuantifierFilter;
+  directus_settings: Omit<TDirectusSettings, 'basemaps_func' | 'custom_aspect_ratios_func' | 'module_bar_func' | 'public_registration_email_filter_func' | 'storage_asset_presets_func' | 'theme_dark_overrides_func' | 'theme_light_overrides_func' | 'visual_editor_urls_func'> & { basemaps_func: Maybe<TResolversParentTypes['count_functions']>, custom_aspect_ratios_func: Maybe<TResolversParentTypes['count_functions']>, module_bar_func: Maybe<TResolversParentTypes['count_functions']>, public_registration_email_filter_func: Maybe<TResolversParentTypes['count_functions']>, storage_asset_presets_func: Maybe<TResolversParentTypes['count_functions']>, theme_dark_overrides_func: Maybe<TResolversParentTypes['count_functions']>, theme_light_overrides_func: Maybe<TResolversParentTypes['count_functions']>, visual_editor_urls_func: Maybe<TResolversParentTypes['count_functions']> };
   directus_settings_mutated: Omit<TDirectusSettingsMutated, 'data'> & { data: Maybe<TResolversParentTypes['directus_settings']> };
   directus_users: Omit<TDirectusUsers, 'auth_data_func' | 'policies_func' | 'tags_func' | 'theme_dark_overrides_func' | 'theme_light_overrides_func'> & { auth_data_func: Maybe<TResolversParentTypes['count_functions']>, policies_func: Maybe<TResolversParentTypes['count_functions']>, tags_func: Maybe<TResolversParentTypes['count_functions']>, theme_dark_overrides_func: Maybe<TResolversParentTypes['count_functions']>, theme_light_overrides_func: Maybe<TResolversParentTypes['count_functions']> };
   directus_users_filter: TDirectusUsersFilter;
   directus_users_mutated: TDirectusUsersMutated;
+  directus_users_quantifier_filter: TDirectusUsersQuantifierFilter;
   geometry_filter_operators: TGeometryFilterOperators;
   hash_filter_operators: THashFilterOperators;
+  id_filter_operators: TIdFilterOperators;
   languages: TLanguages;
   languages_aggregated: TLanguagesAggregated;
   languages_aggregated_count: TLanguagesAggregatedCount;
@@ -7289,12 +7799,14 @@ export type TResolversParentTypes = {
   navigation_item_aggregated_fields: TNavigationItemAggregatedFields;
   navigation_item_filter: TNavigationItemFilter;
   navigation_item_mutated: Omit<TNavigationItemMutated, 'data'> & { data: Maybe<TResolversParentTypes['navigation_item']> };
+  navigation_item_quantifier_filter: TNavigationItemQuantifierFilter;
   navigation_item_translations: Omit<TNavigationItemTranslations, 'navigation_item_id'> & { navigation_item_id: Maybe<TResolversParentTypes['navigation_item']> };
   navigation_item_translations_aggregated: TNavigationItemTranslationsAggregated;
   navigation_item_translations_aggregated_count: TNavigationItemTranslationsAggregatedCount;
   navigation_item_translations_aggregated_fields: TNavigationItemTranslationsAggregatedFields;
   navigation_item_translations_filter: TNavigationItemTranslationsFilter;
   navigation_item_translations_mutated: Omit<TNavigationItemTranslationsMutated, 'data'> & { data: Maybe<TResolversParentTypes['navigation_item_translations']> };
+  navigation_item_translations_quantifier_filter: TNavigationItemTranslationsQuantifierFilter;
   navigation_mutated: Omit<TNavigationMutated, 'data'> & { data: Maybe<TResolversParentTypes['navigation']> };
   navigation_translations: Omit<TNavigationTranslations, 'navigation_id'> & { navigation_id: Maybe<TResolversParentTypes['navigation']> };
   navigation_translations_aggregated: TNavigationTranslationsAggregated;
@@ -7302,6 +7814,7 @@ export type TResolversParentTypes = {
   navigation_translations_aggregated_fields: TNavigationTranslationsAggregatedFields;
   navigation_translations_filter: TNavigationTranslationsFilter;
   navigation_translations_mutated: Omit<TNavigationTranslationsMutated, 'data'> & { data: Maybe<TResolversParentTypes['navigation_translations']> };
+  navigation_translations_quantifier_filter: TNavigationTranslationsQuantifierFilter;
   not_found: Omit<TNotFound, 'translations' | 'translations_func'> & { translations: Maybe<Array<Maybe<TResolversParentTypes['not_found_translations']>>>, translations_func: Maybe<TResolversParentTypes['count_functions']> };
   not_found_filter: TNotFoundFilter;
   not_found_mutated: Omit<TNotFoundMutated, 'data'> & { data: Maybe<TResolversParentTypes['not_found']> };
@@ -7311,6 +7824,7 @@ export type TResolversParentTypes = {
   not_found_translations_aggregated_fields: TNotFoundTranslationsAggregatedFields;
   not_found_translations_filter: TNotFoundTranslationsFilter;
   not_found_translations_mutated: Omit<TNotFoundTranslationsMutated, 'data'> & { data: Maybe<TResolversParentTypes['not_found_translations']> };
+  not_found_translations_quantifier_filter: TNotFoundTranslationsQuantifierFilter;
   number_filter_operators: TNumberFilterOperators;
   place: Omit<TPlace, 'accommodation' | 'accommodation_func' | 'secret_blog' | 'secret_blog_func' | 'translations' | 'translations_func' | 'transportation'> & { accommodation: Maybe<Array<Maybe<TResolversParentTypes['accommodation']>>>, accommodation_func: Maybe<TResolversParentTypes['count_functions']>, secret_blog: Maybe<Array<Maybe<TResolversParentTypes['secret_blog_place']>>>, secret_blog_func: Maybe<TResolversParentTypes['count_functions']>, translations: Maybe<Array<Maybe<TResolversParentTypes['place_translations']>>>, translations_func: Maybe<TResolversParentTypes['count_functions']>, transportation: Maybe<Array<Maybe<TResolversParentTypes['transportation']>>> };
   place_aggregated: TPlaceAggregated;
@@ -7318,12 +7832,14 @@ export type TResolversParentTypes = {
   place_aggregated_fields: TPlaceAggregatedFields;
   place_filter: TPlaceFilter;
   place_mutated: Omit<TPlaceMutated, 'data'> & { data: Maybe<TResolversParentTypes['place']> };
+  place_quantifier_filter: TPlaceQuantifierFilter;
   place_translations: Omit<TPlaceTranslations, 'place_id'> & { place_id: Maybe<TResolversParentTypes['place']> };
   place_translations_aggregated: TPlaceTranslationsAggregated;
   place_translations_aggregated_count: TPlaceTranslationsAggregatedCount;
   place_translations_aggregated_fields: TPlaceTranslationsAggregatedFields;
   place_translations_filter: TPlaceTranslationsFilter;
   place_translations_mutated: Omit<TPlaceTranslationsMutated, 'data'> & { data: Maybe<TResolversParentTypes['place_translations']> };
+  place_translations_quantifier_filter: TPlaceTranslationsQuantifierFilter;
   project: Omit<TProject, 'gallery' | 'gallery_func' | 'technologies' | 'technologies_func' | 'translations' | 'translations_func' | 'work' | 'work_func'> & { gallery: Maybe<Array<Maybe<TResolversParentTypes['project_directus_files']>>>, gallery_func: Maybe<TResolversParentTypes['count_functions']>, technologies: Maybe<Array<Maybe<TResolversParentTypes['project_technology']>>>, technologies_func: Maybe<TResolversParentTypes['count_functions']>, translations: Maybe<Array<Maybe<TResolversParentTypes['project_translations']>>>, translations_func: Maybe<TResolversParentTypes['count_functions']>, work: Maybe<Array<Maybe<TResolversParentTypes['work_project']>>>, work_func: Maybe<TResolversParentTypes['count_functions']> };
   project_aggregated: TProjectAggregated;
   project_aggregated_count: TProjectAggregatedCount;
@@ -7334,6 +7850,7 @@ export type TResolversParentTypes = {
   project_directus_files_aggregated_fields: TProjectDirectusFilesAggregatedFields;
   project_directus_files_filter: TProjectDirectusFilesFilter;
   project_directus_files_mutated: Omit<TProjectDirectusFilesMutated, 'data'> & { data: Maybe<TResolversParentTypes['project_directus_files']> };
+  project_directus_files_quantifier_filter: TProjectDirectusFilesQuantifierFilter;
   project_filter: TProjectFilter;
   project_mutated: Omit<TProjectMutated, 'data'> & { data: Maybe<TResolversParentTypes['project']> };
   project_technology: Omit<TProjectTechnology, 'project_id' | 'technology_id'> & { project_id: Maybe<TResolversParentTypes['project']>, technology_id: Maybe<TResolversParentTypes['technology']> };
@@ -7342,12 +7859,14 @@ export type TResolversParentTypes = {
   project_technology_aggregated_fields: TProjectTechnologyAggregatedFields;
   project_technology_filter: TProjectTechnologyFilter;
   project_technology_mutated: Omit<TProjectTechnologyMutated, 'data'> & { data: Maybe<TResolversParentTypes['project_technology']> };
+  project_technology_quantifier_filter: TProjectTechnologyQuantifierFilter;
   project_translations: Omit<TProjectTranslations, 'project_id'> & { project_id: Maybe<TResolversParentTypes['project']> };
   project_translations_aggregated: TProjectTranslationsAggregated;
   project_translations_aggregated_count: TProjectTranslationsAggregatedCount;
   project_translations_aggregated_fields: TProjectTranslationsAggregatedFields;
   project_translations_filter: TProjectTranslationsFilter;
   project_translations_mutated: Omit<TProjectTranslationsMutated, 'data'> & { data: Maybe<TResolversParentTypes['project_translations']> };
+  project_translations_quantifier_filter: TProjectTranslationsQuantifierFilter;
   reading: TReading;
   reading_mutated: TReadingMutated;
   secret_blog: Omit<TSecretBlog, 'date_created_func' | 'elements' | 'elements_func' | 'place' | 'place_func'> & { date_created_func: Maybe<TResolversParentTypes['date_functions']>, elements: Maybe<Array<Maybe<TResolversParentTypes['secret_blog_elements']>>>, elements_func: Maybe<TResolversParentTypes['count_functions']>, place: Maybe<Array<Maybe<TResolversParentTypes['secret_blog_place']>>>, place_func: Maybe<TResolversParentTypes['count_functions']> };
@@ -7361,6 +7880,7 @@ export type TResolversParentTypes = {
   secret_blog_elements_filter: TSecretBlogElementsFilter;
   secret_blog_elements_item_union: TResolversUnionTypes<TResolversParentTypes>['secret_blog_elements_item_union'];
   secret_blog_elements_mutated: Omit<TSecretBlogElementsMutated, 'data'> & { data: Maybe<TResolversParentTypes['secret_blog_elements']> };
+  secret_blog_elements_quantifier_filter: TSecretBlogElementsQuantifierFilter;
   secret_blog_filter: TSecretBlogFilter;
   secret_blog_mutated: Omit<TSecretBlogMutated, 'data'> & { data: Maybe<TResolversParentTypes['secret_blog']> };
   secret_blog_place: Omit<TSecretBlogPlace, 'place_id' | 'secret_blog_id'> & { place_id: Maybe<TResolversParentTypes['place']>, secret_blog_id: Maybe<TResolversParentTypes['secret_blog']> };
@@ -7369,6 +7889,7 @@ export type TResolversParentTypes = {
   secret_blog_place_aggregated_fields: TSecretBlogPlaceAggregatedFields;
   secret_blog_place_filter: TSecretBlogPlaceFilter;
   secret_blog_place_mutated: Omit<TSecretBlogPlaceMutated, 'data'> & { data: Maybe<TResolversParentTypes['secret_blog_place']> };
+  secret_blog_place_quantifier_filter: TSecretBlogPlaceQuantifierFilter;
   string_filter_operators: TStringFilterOperators;
   subscribers: TSubscribers;
   subscribers_aggregated: TSubscribersAggregated;
@@ -7392,20 +7913,24 @@ export type TResolversParentTypes = {
   technology_category_translations_aggregated_fields: TTechnologyCategoryTranslationsAggregatedFields;
   technology_category_translations_filter: TTechnologyCategoryTranslationsFilter;
   technology_category_translations_mutated: Omit<TTechnologyCategoryTranslationsMutated, 'data'> & { data: Maybe<TResolversParentTypes['technology_category_translations']> };
+  technology_category_translations_quantifier_filter: TTechnologyCategoryTranslationsQuantifierFilter;
   technology_filter: TTechnologyFilter;
   technology_mutated: Omit<TTechnologyMutated, 'data'> & { data: Maybe<TResolversParentTypes['technology']> };
+  technology_quantifier_filter: TTechnologyQuantifierFilter;
   technology_translations: Omit<TTechnologyTranslations, 'technology_id'> & { technology_id: Maybe<TResolversParentTypes['technology']> };
   technology_translations_aggregated: TTechnologyTranslationsAggregated;
   technology_translations_aggregated_count: TTechnologyTranslationsAggregatedCount;
   technology_translations_aggregated_fields: TTechnologyTranslationsAggregatedFields;
   technology_translations_filter: TTechnologyTranslationsFilter;
   technology_translations_mutated: Omit<TTechnologyTranslationsMutated, 'data'> & { data: Maybe<TResolversParentTypes['technology_translations']> };
+  technology_translations_quantifier_filter: TTechnologyTranslationsQuantifierFilter;
   transportation: Omit<TTransportation, 'from' | 'to'> & { from: Maybe<TResolversParentTypes['place']>, to: Maybe<TResolversParentTypes['place']> };
   transportation_aggregated: TTransportationAggregated;
   transportation_aggregated_count: TTransportationAggregatedCount;
   transportation_aggregated_fields: TTransportationAggregatedFields;
   transportation_filter: TTransportationFilter;
   transportation_mutated: Omit<TTransportationMutated, 'data'> & { data: Maybe<TResolversParentTypes['transportation']> };
+  transportation_quantifier_filter: TTransportationQuantifierFilter;
   travel: TTravel;
   travel_mutated: TTravelMutated;
   version_accommodation: Omit<TVersionAccommodation, 'bookings_func'> & { bookings_func: Maybe<TResolversParentTypes['count_functions']> };
@@ -7466,6 +7991,7 @@ export type TResolversParentTypes = {
   website_translations_aggregated_fields: TWebsiteTranslationsAggregatedFields;
   website_translations_filter: TWebsiteTranslationsFilter;
   website_translations_mutated: Omit<TWebsiteTranslationsMutated, 'data'> & { data: Maybe<TResolversParentTypes['website_translations']> };
+  website_translations_quantifier_filter: TWebsiteTranslationsQuantifierFilter;
   work: Omit<TWork, 'projects' | 'projects_func'> & { projects: Maybe<Array<Maybe<TResolversParentTypes['work_project']>>>, projects_func: Maybe<TResolversParentTypes['count_functions']> };
   work_aggregated: TWorkAggregated;
   work_aggregated_count: TWorkAggregatedCount;
@@ -7478,6 +8004,7 @@ export type TResolversParentTypes = {
   work_project_aggregated_fields: TWorkProjectAggregatedFields;
   work_project_filter: TWorkProjectFilter;
   work_project_mutated: Omit<TWorkProjectMutated, 'data'> & { data: Maybe<TResolversParentTypes['work_project']> };
+  work_project_quantifier_filter: TWorkProjectQuantifierFilter;
 };
 
 export interface TDateScalarConfig extends GraphQLScalarTypeConfig<TResolversTypes['Date'], any> {
@@ -8806,6 +9333,7 @@ export type TDirectusRolesMutatedResolvers<ContextType = any, ParentType extends
 };
 
 export type TDirectusSettingsResolvers<ContextType = any, ParentType extends TResolversParentTypes['directus_settings'] = TResolversParentTypes['directus_settings']> = {
+  accepted_terms: Resolver<Maybe<TResolversTypes['Boolean']>, ParentType, ContextType>;
   auth_login_attempts: Resolver<Maybe<TResolversTypes['Int']>, ParentType, ContextType>;
   auth_password_policy: Resolver<Maybe<TResolversTypes['String']>, ParentType, ContextType>;
   basemaps: Resolver<Maybe<TResolversTypes['JSON']>, ParentType, ContextType>;
@@ -8823,6 +9351,7 @@ export type TDirectusSettingsResolvers<ContextType = any, ParentType extends TRe
   module_bar_func: Resolver<Maybe<TResolversTypes['count_functions']>, ParentType, ContextType>;
   project_color: Resolver<Maybe<TResolversTypes['String']>, ParentType, ContextType>;
   project_descriptor: Resolver<Maybe<TResolversTypes['String']>, ParentType, ContextType>;
+  project_id: Resolver<Maybe<TResolversTypes['ID']>, ParentType, ContextType>;
   project_logo: Resolver<Maybe<TResolversTypes['directus_files']>, ParentType, ContextType, TDirectusSettingsProjectLogoArgs>;
   project_name: Resolver<Maybe<TResolversTypes['String']>, ParentType, ContextType>;
   project_url: Resolver<Maybe<TResolversTypes['String']>, ParentType, ContextType>;
@@ -8846,6 +9375,8 @@ export type TDirectusSettingsResolvers<ContextType = any, ParentType extends TRe
   theme_dark_overrides_func: Resolver<Maybe<TResolversTypes['count_functions']>, ParentType, ContextType>;
   theme_light_overrides: Resolver<Maybe<TResolversTypes['JSON']>, ParentType, ContextType>;
   theme_light_overrides_func: Resolver<Maybe<TResolversTypes['count_functions']>, ParentType, ContextType>;
+  visual_editor_urls: Resolver<Maybe<TResolversTypes['JSON']>, ParentType, ContextType>;
+  visual_editor_urls_func: Resolver<Maybe<TResolversTypes['count_functions']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -9271,6 +9802,7 @@ export type TProjectResolvers<ContextType = any, ParentType extends TResolversPa
   title: Resolver<Maybe<TResolversTypes['String']>, ParentType, ContextType>;
   translations: Resolver<Maybe<Array<Maybe<TResolversTypes['project_translations']>>>, ParentType, ContextType, TProjectTranslationsArgs>;
   translations_func: Resolver<Maybe<TResolversTypes['count_functions']>, ParentType, ContextType>;
+  type: Resolver<Maybe<TResolversTypes['String']>, ParentType, ContextType>;
   url: Resolver<Maybe<TResolversTypes['String']>, ParentType, ContextType>;
   work: Resolver<Maybe<Array<Maybe<TResolversTypes['work_project']>>>, ParentType, ContextType, TProjectWorkArgs>;
   work_func: Resolver<Maybe<TResolversTypes['count_functions']>, ParentType, ContextType>;
@@ -9300,6 +9832,7 @@ export type TProjectAggregatedCountResolvers<ContextType = any, ParentType exten
   technologies: Resolver<Maybe<TResolversTypes['Int']>, ParentType, ContextType>;
   title: Resolver<Maybe<TResolversTypes['Int']>, ParentType, ContextType>;
   translations: Resolver<Maybe<TResolversTypes['Int']>, ParentType, ContextType>;
+  type: Resolver<Maybe<TResolversTypes['Int']>, ParentType, ContextType>;
   url: Resolver<Maybe<TResolversTypes['Int']>, ParentType, ContextType>;
   work: Resolver<Maybe<TResolversTypes['Int']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -9410,6 +9943,7 @@ export type TProjectTechnologyMutatedResolvers<ContextType = any, ParentType ext
 };
 
 export type TProjectTranslationsResolvers<ContextType = any, ParentType extends TResolversParentTypes['project_translations'] = TResolversParentTypes['project_translations']> = {
+  contributions: Resolver<Maybe<TResolversTypes['String']>, ParentType, ContextType>;
   description: Resolver<Maybe<TResolversTypes['String']>, ParentType, ContextType>;
   id: Resolver<TResolversTypes['ID'], ParentType, ContextType>;
   languages_code: Resolver<Maybe<TResolversTypes['languages']>, ParentType, ContextType, TProjectTranslationsLanguagesCodeArgs>;
@@ -9432,6 +9966,7 @@ export type TProjectTranslationsAggregatedResolvers<ContextType = any, ParentTyp
 };
 
 export type TProjectTranslationsAggregatedCountResolvers<ContextType = any, ParentType extends TResolversParentTypes['project_translations_aggregated_count'] = TResolversParentTypes['project_translations_aggregated_count']> = {
+  contributions: Resolver<Maybe<TResolversTypes['Int']>, ParentType, ContextType>;
   description: Resolver<Maybe<TResolversTypes['Int']>, ParentType, ContextType>;
   id: Resolver<Maybe<TResolversTypes['Int']>, ParentType, ContextType>;
   languages_code: Resolver<Maybe<TResolversTypes['Int']>, ParentType, ContextType>;
@@ -10236,6 +10771,7 @@ export type TVersionProjectResolvers<ContextType = any, ParentType extends TReso
   title: Resolver<Maybe<TResolversTypes['String']>, ParentType, ContextType>;
   translations: Resolver<Maybe<TResolversTypes['JSON']>, ParentType, ContextType>;
   translations_func: Resolver<Maybe<TResolversTypes['count_functions']>, ParentType, ContextType>;
+  type: Resolver<Maybe<TResolversTypes['String']>, ParentType, ContextType>;
   url: Resolver<Maybe<TResolversTypes['String']>, ParentType, ContextType>;
   work: Resolver<Maybe<TResolversTypes['JSON']>, ParentType, ContextType>;
   work_func: Resolver<Maybe<TResolversTypes['count_functions']>, ParentType, ContextType>;
@@ -10260,6 +10796,7 @@ export type TVersionProjectTechnologyResolvers<ContextType = any, ParentType ext
 };
 
 export type TVersionProjectTranslationsResolvers<ContextType = any, ParentType extends TResolversParentTypes['version_project_translations'] = TResolversParentTypes['version_project_translations']> = {
+  contributions: Resolver<Maybe<TResolversTypes['String']>, ParentType, ContextType>;
   description: Resolver<Maybe<TResolversTypes['String']>, ParentType, ContextType>;
   id: Resolver<TResolversTypes['ID'], ParentType, ContextType>;
   languages_code: Resolver<Maybe<TResolversTypes['JSON']>, ParentType, ContextType>;
@@ -10872,10 +11409,10 @@ export type TResolvers<ContextType = any> = {
 
 export type TFProject = (
   { __typename?: 'project' }
-  & Pick<TProject, 'id' | 'url' | 'color' | 'title'>
+  & Pick<TProject, 'id' | 'url' | 'color' | 'title' | 'type'>
   & { translations: Maybe<Array<Maybe<(
     { __typename?: 'project_translations' }
-    & Pick<TProjectTranslations, 'id' | 'description'>
+    & Pick<TProjectTranslations, 'id' | 'description' | 'contributions'>
     & { languages_code: Maybe<(
       { __typename?: 'languages' }
       & Pick<TLanguages, 'abbreviation'>
@@ -10950,7 +11487,33 @@ export type TQDevArticle = (
   & { blog: Array<(
     { __typename?: 'blog' }
     & Pick<TBlog, 'id' | 'status' | 'title' | 'date_created' | 'slug'>
-    & { elements: Maybe<Array<Maybe<(
+    & { technology: Maybe<Array<Maybe<(
+      { __typename?: 'blog_technology' }
+      & Pick<TBlogTechnology, 'id'>
+      & { technology_id: Maybe<(
+        { __typename?: 'technology' }
+        & Pick<TTechnology, 'label'>
+        & { translations: Maybe<Array<Maybe<(
+          { __typename?: 'technology_translations' }
+          & Pick<TTechnologyTranslations, 'id' | 'description'>
+          & { languages_code: Maybe<(
+            { __typename?: 'languages' }
+            & Pick<TLanguages, 'abbreviation'>
+          )> }
+        )>>>, category: Maybe<(
+          { __typename?: 'technology_category' }
+          & Pick<TTechnologyCategory, 'id'>
+          & { translations: Maybe<Array<Maybe<(
+            { __typename?: 'technology_category_translations' }
+            & Pick<TTechnologyCategoryTranslations, 'id' | 'title'>
+            & { languages_code: Maybe<(
+              { __typename?: 'languages' }
+              & Pick<TLanguages, 'abbreviation'>
+            )> }
+          )>>> }
+        )> }
+      )> }
+    )>>>, elements: Maybe<Array<Maybe<(
       { __typename?: 'blog_elements' }
       & Pick<TBlogElements, 'collection'>
       & { item: Maybe<(
@@ -11166,10 +11729,10 @@ export type TQProjects = (
       & Pick<TWorkProject, 'id'>
       & { project_id: Maybe<(
         { __typename?: 'project' }
-        & Pick<TProject, 'id' | 'url' | 'color' | 'title'>
+        & Pick<TProject, 'id' | 'url' | 'color' | 'title' | 'type'>
         & { translations: Maybe<Array<Maybe<(
           { __typename?: 'project_translations' }
-          & Pick<TProjectTranslations, 'id' | 'description'>
+          & Pick<TProjectTranslations, 'id' | 'description' | 'contributions'>
           & { languages_code: Maybe<(
             { __typename?: 'languages' }
             & Pick<TLanguages, 'abbreviation'>
@@ -11619,9 +12182,11 @@ export const FProject = gql`
   url
   color
   title
+  type
   translations {
     id
     description
+    contributions
     languages_code {
       abbreviation
     }
@@ -11649,6 +12214,12 @@ export const QDevArticleDocument = gql`
     status
     title
     date_created
+    technology {
+      id
+      technology_id {
+        ...FTechnology
+      }
+    }
     slug
     elements {
       item {
@@ -11693,7 +12264,7 @@ export const QDevArticleDocument = gql`
     }
   }
 }
-    `;
+    ${FTechnology}`;
 export const QDevArticlesDocument = gql`
     query QDevArticles {
   blog(sort: "-date_created", filter: {status: {_eq: "published"}}) {

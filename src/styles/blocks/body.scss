@@ -1,10 +1,18 @@
 @use '../util/vars' as *;
 
 @mixin body-root {
-    font-family: 'Mulish', sans-serif;
+    font-family: 'Helvetica', sans-serif;
     color: var(--c-black);
-    background-color: var(--c-gray-lighter);
     container: meta-container teaser-container / inline-size;
+    --spacing: 10px;
+
+    @include breakpoint(xs) {
+        --spacing: 25px;
+    }
+
+    @include breakpoint(md) {
+        --spacing: 50px;
+    }
 
     &--fixed {
         overflow: hidden;

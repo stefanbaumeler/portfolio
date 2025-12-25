@@ -1,326 +1,164 @@
-@use 'sass:map';
-@use 'sass:math';
-
 @mixin skills-root {
     @include container;
-
-    z-index: 2;
-    position: relative;
 }
 
-@mixin skills-deco-lines {
-    position: absolute;
-    width: 100%;
-    left: 0;
-    margin-top: -100px;
-    height: calc(100% + 100px);
-    pointer-events: none;
-
-    @include breakpoint(md) {
-        margin-top: -200px;
-        height: calc(100% + 200px);
-    }
-}
-
-@mixin skills-deco-line {
-    width: 1px;
-    position: absolute;
-    height: 100%;
-    background-color: var(--c-gray-light);
-    z-index: -1;
-
-    &:nth-of-type(1) {
-        left: 50px;
-
-        @include breakpoint(xs) {
-            left: 25px;
-        }
-
-        @include breakpoint(md) {
-            left: 50px;
-        }
-    }
-
-    &:nth-of-type(2) {
-        display: none;
-
-        @include breakpoint(xs) {
-            display: block;
-            left: 50%;
-        }
-
-        @include breakpoint(sm) {
-            left: calc(#{math.div(100%, 3) * 1} + #{math.div(25px, 3)});
-        }
-
-        @include breakpoint(md) {
-            left: calc(#{math.div(100%, 3) * 1} + #{math.div(50px, 3)});
-        }
-
-        @include breakpoint(lg) {
-            left: calc(25% + 24px);
-        }
-    }
-
-    &:nth-of-type(3) {
-        display: none;
-
-        @include breakpoint(sm) {
-            display: block;
-            left: calc(#{math.div(100%, 3) * 2} - #{math.div(25px, 3)});
-        }
-
-        @include breakpoint(md) {
-            left: calc(#{math.div(100%, 3) * 2} - #{math.div(50px, 3)});
-        }
-
-        @include breakpoint(lg) {
-            left: calc(50% - 1px);
-        }
-    }
-
-    &:nth-of-type(4) {
-        display: none;
-
-        @include breakpoint(lg) {
-            display: block;
-            left: calc(75% - 26px);
-        }
-    }
-
-    &:nth-of-type(5) {
-        left: calc(100% - 50px);
-
-        @include breakpoint(xs) {
-            left: calc(100% - 25px);
-        }
-
-        @include breakpoint(md) {
-            left: calc(100% - 50px);
-        }
-    }
+@mixin skills-header {
+    @include header;
 }
 
 @mixin skills-title {
     @include h1;
+}
 
-    padding-bottom: 100px;
-    padding-left: 40px;
+@mixin skills-categories {
+    @include title-offset;
+
+    grid-area: auto / span 2;
+
+    @include breakpoint(lg) {
+        grid-area: auto / span 3;
+    }
+}
+
+@mixin skills-category {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-bottom: 50px;
+
+    @include breakpoint(lg) {
+        display: grid;
+        grid-gap: 50px;
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@mixin skills-category-title {
+    @include h2(above);
+
+    width: 100%;
+    padding-bottom: 25px;
 
     @include breakpoint(xs) {
-        padding-left: 0;
+        padding-bottom: var(--spacing);
+    }
+
+    @include breakpoint(lg) {
+        padding-bottom: 0;
+    }
+
+    @include breakpoint(xl) {
+        grid-area: auto / span 2;
+    }
+
+    @at-root .skills__category:first-child & {
+        border-width: 0;
+        padding-top: 75px;
+
+        @include breakpoint(sm) {
+            padding-top: 25px;
+            border-top-width: 1px;
+        }
     }
 }
 
 @mixin skills-skills {
-    display: flex;
-    width: calc(100% - 70px);
-    max-width: 1845px;
-    gap: 40px 0;
-    box-sizing: border-box;
-    margin-left: 41px;
-
-    @include breakpoint(xs) {
-        margin-left: 1px;
-        width: 100%;
-    }
+    grid-area: auto / span 2;
+    width: 100%;
 
     @include breakpoint(lg) {
-        width: 75%;
-        margin: 0 0 0 25%;
+        @include line(above);
     }
-}
 
-@mixin skills-column {
-    position: relative;
+    @include breakpoint(xl) {
+        grid-area: auto / span 1;
+    }
 }
 
 @mixin skills-skill {
-    padding-left: 25px;
-    box-sizing: border-box;
-    position: relative;
-    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
 
     &:has(.skills__children) {
-        margin-bottom: 30px;
+        padding-top: 25px;
     }
 
-    &:last-of-type {
-        margin-bottom: 0;
-    }
-
-    @at-root .skills__column > & {
-        margin-bottom: 50px;
-        position: relative;
-
-        @include breakpoint(xs) {
-            margin-bottom: 100px;
-        }
-    }
-
-    @at-root .skills__children & {
-        width: 100%;
-    }
-
-    @at-root .skills__children .skills__children & {
-        margin-bottom: 10px;
-
-        &:last-of-type {
-            padding-bottom: 0;
-        }
+    &:first-child {
+        padding-top: 0;
     }
 }
 
 @mixin skills-children {
-    padding-top: 15px;
+    width: 100%;
+    padding-left: 50px;
+    padding-bottom: 25px;
 
-    &:empty {
-        display: none;
-    }
-}
-
-@mixin skills-label-container {
-    font-size: 32px;
-    flex-grow: 1;
-    font-weight: bold;
-    padding-bottom: 10px;
-    box-sizing: border-box;
-    margin-left: -25px;
-    width: auto;
-    display: inline-block;
-
-    @include breakpoint(xs) {
-        margin-left: 0;
-    }
-
-    @at-root .skills__children & {
-        font-size: 16px;
-        line-height: 22px;
-        font-weight: normal;
+    @at-root .skills__skill:has(+ .skills__skill .skills__children) & {
         padding-bottom: 0;
-        position: relative;
-        margin-left: 0;
-
-        @include breakpoint(sm) {
-            font-size: 18px;
-            line-height: 24px;
-        }
-    }
-
-    @at-root .skills__children .skills__children & {
-        font-size: 14px;
-        line-height: 16px;
-        font-weight: normal;
-
-        @include breakpoint(sm) {
-            font-size: 16px;
-            line-height: 18px;
-        }
-    }
-}
-
-@mixin skills-line {
-    position: absolute;
-    transform-origin: top left;
-    opacity: .5;
-    width: 1px;
-    background-color: var(--c-main);
-    height: calc(100% - 50px);
-    left: 0;
-    bottom: 1000px;
-    top: 20px;
-
-    @at-root .skills__children & {
-        display: block;
-        left: -40px;
-        width: 30px;
-        height: 2px;
-        top: .5em;
-        transform: translate(0, -50%);
-        background-color: var(--c-main);
-    }
-
-    @at-root .skills__dot--preferred + & {
-        background-color: #FF7777;
-    }
-
-    @at-root .skills__children .skills__children & {
-        left: -65px;
-        width: 55px;
-        height: 1px;
-    }
-}
-
-@mixin skills-dot {
-    position: absolute;
-    left: 1px;
-    width: 10px;
-    height: 10px;
-    background-color: var(--c-main);
-    border-radius: 50%;
-    top: .5em;
-    border: 4px solid var(--c-gray-lighter);
-    z-index: 1;
-
-    transform: translate(-50%, -50%);
-
-    @at-root .skills__children & {
-        left: -50px;
-    }
-
-    @at-root .skills__children .skills__children & {
-        left: -75px;
-        width: 7px;
-        height: 7px;
-    }
-
-    &--preferred {
-        width: 16px;
-        height: 16px;
-        background-color: transparent;
-        color: #FF7777;
-
-        @at-root .skills__children .skills__children & {
-            width: 10px;
-            height: 10px;
-        }
     }
 }
 
 @mixin skills-label {
-    display: inline-block;
+    color: var(--c-gray-darkest);
+    font-size: 18px;
+    line-height: 32px;
+    font-weight: 300;
+    position: relative;
+    margin-left: 0;
+    border-top-width: 0;
+    padding-top: 0;
+    width: 50%;
+
+    @include breakpoint(xs) {
+        font-size: 20px;
+    }
+
+    @include breakpoint(lg) {
+        font-size: 25px;
+        line-height: 40px;
+    }
 }
 
 @mixin skills-hint {
     font-size: 14px;
     color: color-mix(in srgb, var(--c-black) 50%, transparent);
     font-style: italic;
-    font-weight: normal;
+    font-weight: 300;
     display: block;
+
+    @include breakpoint(xs) {
+        font-size: 16px;
+    }
 }
 
 @mixin skills {
     .skills {
         @include skills-root;
 
-        &__deco-lines {
-            @include skills-deco-lines;
-        }
-
-        &__deco-line {
-            @include skills-deco-line;
+        &__header {
+            @include skills-header;
         }
 
         &__title {
             @include skills-title;
         }
 
-        &__skills {
-            @include skills-skills;
+        &__categories {
+            @include skills-categories;
         }
 
-        &__column {
-            @include skills-column;
+        &__category {
+            @include skills-category;
+        }
+
+        &__category-title {
+            @include skills-category-title;
+        }
+
+        &__skills {
+            @include skills-skills;
         }
 
         &__skill {
@@ -329,18 +167,6 @@
 
         &__children {
             @include skills-children;
-        }
-
-        &__label-container {
-            @include skills-label-container;
-        }
-
-        &__dot {
-            @include skills-dot;
-        }
-
-        &__line {
-            @include skills-line;
         }
 
         &__label {

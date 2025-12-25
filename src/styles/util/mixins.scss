@@ -2,6 +2,7 @@
 @use 'sass:list';
 @use 'sass:string';
 @use 'sass:meta';
+@use 'sass:math';
 
 @use 'vars' as *;
 
@@ -12,21 +13,32 @@
 }
 
 @mixin h1 {
+    @include line;
+
     font-size: 40px;
-    line-height: 1.3;
+    line-height: 1.25;
+    font-weight: 300;
+    width: 100%;
+    padding-bottom: 25px;
 
     @include breakpoint(xs) {
-        font-size: 64px;
+        font-size: 62px;
+        line-height: 71px;
+        padding-bottom: var(--spacing);
     }
 
-    @include breakpoint(md) {
-        font-size: 98px;
+    @include breakpoint(lg) {
+        font-size: 73px;
+        line-height: 84px;
     }
 }
 
-@mixin h2 {
+@mixin h2($line-position: below) {
+    @include line($line-position);
+
     font-size: 24px;
     line-height: 1.3;
+    font-weight: 300;
 
     @include breakpoint(xs) {
         font-size: 32px;
@@ -40,9 +52,10 @@
 @mixin h3 {
     font-size: 20px;
     line-height: 1.3;
+    font-weight: 300;
 
     @include breakpoint(xs) {
-        font-size: 26px;
+        font-size: 25px;
     }
 
     @include breakpoint(md) {
@@ -52,14 +65,11 @@
 
 @mixin h4 {
     font-size: 16px;
+    font-weight: 300;
     line-height: 1.3;
 
-    @include breakpoint(xs) {
-        font-size: 20px;
-    }
-
     @include breakpoint(md) {
-        font-size: 24px;
+        font-size: 20px;
     }
 }
 
@@ -83,6 +93,17 @@
     }
 }
 
+@mixin lead {
+    font-size: 20px;
+    line-height: 28px;
+    font-weight: 300;
+
+    @include breakpoint(lg) {
+        font-size: 25px;
+        line-height: 35px;
+    }
+}
+
 @mixin text {
     color: var(--c-gray-darkest);
     font-size: 16px;
@@ -101,35 +122,42 @@
     font-weight: 300;
 }
 
-@mixin tooltip {
-    color: var(--c-white);
-    background-color: var(--c-gray-darkest);
-    padding: 6px 12px;
-    font-size: 14px;
-    border-radius: 4px;
-    text-wrap: nowrap;
-    transition: opacity .25s;
-
-    @media screen and (pointer:coarse) {
-        display: none;
+@mixin line($position: below) {
+    @if $position == below {
+        padding-bottom: 25px;
+        border-bottom: 1px solid var(--c-gray-darkest);
+    }
+    @else {
+        padding-top: 25px;
+        border-top: 1px solid var(--c-gray-darkest);
     }
 }
 
 @mixin container {
     position: relative;
-    z-index: 2;
-    padding: 50px 10px;
-    max-width: 1600px;
-    margin: 0 auto;
-    box-sizing: border-box;
+    padding: 50px var(--spacing);
     width: 100%;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: flex-start;
+    max-width: calc(100vw - var(--spacing) * 2);
 
     @include breakpoint(xs) {
-        padding: 100px 25px 50px;
+        padding: var(--spacing) var(--spacing) calc(var(--spacing) / 2) var(--spacing);
+        max-width: calc(100vw - #{$nav-width} - var(--spacing) * 2);
+        min-height: 100vh;
     }
 
-    @include breakpoint(md) {
-        padding: 120px 50px 50px;
+    @include breakpoint(sm) {
+        display: grid;
+        grid-gap: var(--spacing);
+    }
+
+    @include breakpoint(lg) {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    @include breakpoint(xl) {
+        max-width: 1725px;
     }
 }
 
@@ -147,16 +175,16 @@
             font-size: 16px;
         }
 
-        @at-root .body--dark & {
+        @at-root .html--dark & {
             background-color: #24292E;
-            color: #F97583;
+            color: var(--c-main-light);
         }
     }
 
     a {
         color: var(--c-main-dark);
 
-        @at-root .body--dark & {
+        @at-root .html--dark & {
             color: var(--c-main);
         }
     }
@@ -178,7 +206,7 @@
         &:before {
             content: '';
             position: absolute;
-            top: 13.5px;
+            top: 17.5px;
             height: 1px;
             width: 20px;
             background-color: var(--c-gray);
@@ -308,29 +336,29 @@
     }
 }
 
-@mixin button($color: $color-main, $color-hover: $color-main-light) {
-    background-color: $color;
-    padding: 16px 32px;
-    color: $color-white;
-    margin-top: 25px;
-    transition: box-shadow .25s, background-color .25s;
-    border-radius: 4px;
-    font-weight: 700;
-    display: inline-flex;
-    gap: 10px;
-
-    &:has(svg) {
-        padding-left: 16px;
-        padding-right: 16px;
+@mixin title-offset {
+    @include breakpoint(sm) {
+        padding-top: 97px;
     }
 
-    > svg {
-        width: 20px;
+    @include breakpoint(md) {
+        padding-top: 121px;
     }
 
+    @include breakpoint(lg) {
+        padding-top: 134px;
+    }
+}
 
-    &:hover {
-        box-shadow: 0 20px 48px 0 rgba($color-black, .1);
-        background-color: $color-hover;
+@mixin header {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    @include breakpoint(sm) {
+        position: sticky;
+        top: var(--spacing);
+        padding-bottom: 100px;
     }
 }
