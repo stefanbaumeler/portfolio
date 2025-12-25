@@ -5,7 +5,6 @@ import { BlogMeta } from '@/components/blog/BlogMeta'
 import { getTranslations } from 'next-intl/server'
 import { TopNav } from '@/components/global/nav/TopNav'
 
-export const revalidate = 60
 const TravelBlogPage = async () => {
     const { data } = await getClient().query<TQTravelArticles>(QTravelArticlesDocument, {})
     const t = await getTranslations()

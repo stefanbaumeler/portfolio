@@ -77,6 +77,8 @@ export const metadata: Metadata = {
     ]
 }
 
+export const revalidate = 60
+
 export const generateStaticParams = () => {
     return routing.locales.map((locale) => ({
         locale

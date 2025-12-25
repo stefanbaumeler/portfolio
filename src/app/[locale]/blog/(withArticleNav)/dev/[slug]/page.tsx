@@ -7,8 +7,6 @@ import { QDevArticleDocument,
     TQDevArticles,
     TQDevPrevNextArticles } from '~/schema'
 
-export const revalidate = 60
-
 export const generateStaticParams = async () => {
     const { data } = await getClient().query<TQDevArticles>(QDevArticlesDocument, {})
 
