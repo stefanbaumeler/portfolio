@@ -5,7 +5,7 @@ export const dynamic = 'force-static'
 
 export const GET = async (
     _: NextRequest,
-    { params }: { params: Promise<{ rest: string[] }> }
+    { params }: { params: Promise<{ rest?: string[] }> }
 ) => {
     const href = (await params).rest?.join('/') ?? ''
 
