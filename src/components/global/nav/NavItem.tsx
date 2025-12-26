@@ -59,6 +59,7 @@ export const NavItem = ({
         <Link
             prefetch={!item.url?.endsWith('/stats')}
             href={item.url ?? '#'}
+            target="_blank"
             className={`nav__link${item.url === path ? ' nav__link--active' : ''}`}
             title={item.title ?? item.label}
             aria-label={item.label}

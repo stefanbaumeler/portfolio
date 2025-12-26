@@ -29,6 +29,10 @@
             width: 100%;
             transition: width .5s $transition;
         }
+
+        @at-root .html--dark & {
+            background-color: var(--c-project-lighter);
+        }
     }
 }
 
