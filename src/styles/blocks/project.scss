@@ -60,6 +60,14 @@
     z-index: 1;
     hyphens: auto;
     padding-bottom: 50px;
+
+    a {
+        color: var(--c-project);
+
+        @at-root .html--dark & {
+            color: var(--c-project-lighter);
+        }
+    }
 }
 
 @mixin project-subtitle {
