@@ -7,6 +7,10 @@
         @at-root .html--dark & {
             filter: invert(1);
         }
+
+        @at-root .popup & {
+            filter: invert(1);
+        }
     }
 }
 
