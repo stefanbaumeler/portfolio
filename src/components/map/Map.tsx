@@ -24,7 +24,6 @@ type Props = {
     initialPlace?: TQMap['place'][number] & { visits: Date[][] }
     transportation: TQMap['transportation']
     initialTransport?: TQMap['transportation'][number]
-    initialViewState: Partial<ViewState>
     articles: TQTravelArticles['secret_blog']
 }
 
