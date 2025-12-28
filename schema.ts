@@ -11611,7 +11611,7 @@ export type TQMap = (
   { __typename?: 'Query' }
   & { place: Array<(
     { __typename?: 'place' }
-    & Pick<TPlace, 'id' | 'location'>
+    & Pick<TPlace, 'id' | 'location' | 'internal'>
     & { translations: Maybe<Array<Maybe<(
       { __typename?: 'place_translations' }
       & Pick<TPlaceTranslations, 'id' | 'name'>
@@ -11636,7 +11636,7 @@ export type TQMap = (
     & Pick<TTransportation, 'id' | 'type' | 'company' | 'number' | 'vessel' | 'departure_airport_code' | 'arrival_airport_code' | 'departure' | 'arrival' | 'show_time'>
     & { from: Maybe<(
       { __typename?: 'place' }
-      & Pick<TPlace, 'id' | 'location'>
+      & Pick<TPlace, 'id' | 'location' | 'internal'>
       & { country: Maybe<(
         { __typename?: 'country' }
         & Pick<TCountry, 'id'>
@@ -11658,7 +11658,7 @@ export type TQMap = (
       )>>> }
     )>, to: Maybe<(
       { __typename?: 'place' }
-      & Pick<TPlace, 'id' | 'location'>
+      & Pick<TPlace, 'id' | 'location' | 'internal'>
       & { country: Maybe<(
         { __typename?: 'country' }
         & Pick<TCountry, 'id'>
@@ -12319,6 +12319,7 @@ export const QMapDocument = gql`
   place(limit: -1) {
     id
     location
+    internal
     translations {
       id
       name
@@ -12352,6 +12353,7 @@ export const QMapDocument = gql`
     from {
       id
       location
+      internal
       country {
         id
         translations {
@@ -12373,6 +12375,7 @@ export const QMapDocument = gql`
     to {
       id
       location
+      internal
       country {
         id
         translations {

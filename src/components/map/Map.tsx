@@ -14,23 +14,44 @@ import { MapRef } from 'react-map-gl/mapbox-legacy'
 import { MapMouseEvent } from 'mapbox-gl'
 import { Infobox } from '@/components/map/Infobox'
 import { useTheme } from 'next-themes'
+import { slugify } from '@/helpers/slug'
+import { useLocale } from 'next-intl'
+import { ViewState } from 'react-map-gl'
+import { getLineBounds, offsetCoordinates, zoomForBounds } from '@/helpers/map'
 
 type Props = {
-    places: (TQMap['place'][number] & { visits: Date[][]})[]
+    places: (TQMap['place'][number] & { visits: Date[][] })[]
+    initialPlace?: TQMap['place'][number] & { visits: Date[][] }
     transportation: TQMap['transportation']
+    initialTransport?: TQMap['transportation'][number]
+    initialViewState: Partial<ViewState>
     articles: TQTravelArticles['secret_blog']
 }
 
 export const Map = ({
-    places, transportation, articles
+    places,
+    initialPlace,
+    transportation,
+    initialTransport,
+    articles
 }: Props) => {
     const topNavContext = useTopNavContext()
-    const [activePlace, setActivePlace] = useState<TQMap['place'][number] & { visits: Date[][]}>()
-    const [activeTransport, setActiveTransport] = useState<TQMap['transportation'][number]>()
+    const locale = useLocale()
+    const [activePlace, setActivePlace] = useState<TQMap['place'][number] & {
+        visits: Date[][]
+    } | undefined>(initialPlace)
+    const [activeTransport, setActiveTransport] = useState<TQMap['transportation'][number] | undefined>(initialTransport)
     const [activeYear, setActiveYear] = useState<string | undefined>(undefined)
+    const [mapLoaded, setMapLoaded] = useState(false)
     const theme = useTheme()
     const { isMobile } = useBodyContext()
+    const containerEl = useRef<HTMLDivElement>(null)
     const mapEl = useRef<MapRef>(null)
+    const [viewState, setViewState] = useState<Partial<ViewState>>({
+        latitude: 20,
+        longitude: 8.30635,
+        zoom: 2
+    })
 
     useEffect(() => {
         topNavContext.setTitle('Map')
@@ -40,17 +61,9 @@ export const Map = ({
         }
     }, [topNavContext])
 
-    const previousTransport = useRef(activeTransport)
+    const previousTransport = useRef<TQMap['transportation'][number] | undefined>(undefined)
 
     useEffect(() => {
-        if (activeTransport?.id) {
-            mapEl?.current?.setFeatureState({
-                source: 'route',
-                id: activeTransport.id
-            }, {
-                selected: true
-            })
-        }
         if (previousTransport?.current?.id) {
             mapEl?.current?.setFeatureState({
                 source: 'route',
@@ -60,13 +73,60 @@ export const Map = ({
             })
         }
 
-        previousTransport.current = activeTransport
-    }, [activeTransport])
+        if (activeTransport?.id) {
+            mapEl?.current?.setFeatureState({
+                source: 'route',
+                id: activeTransport.id
+            }, {
+                selected: true
+            })
+
+            previousTransport.current = activeTransport
+        }
+    }, [activeTransport, mapLoaded])
 
     const onClick = (event: MapMouseEvent) => {
         if (event.features?.length) {
-            setActiveTransport(transportation.find((transport) => transport.id === event.features?.[0]?.properties?.id))
+            const transport = transportation.find((transport) => transport.id === event.features?.[0]?.properties?.id)
+
+            setActiveTransport(transport)
             setActivePlace(undefined)
+
+            if (transport) {
+                window.history.replaceState(null, '', `/${locale}/map/${slugify(transport.from.internal)}/${slugify(transport.to.internal)}`)
+
+                const line = greatCircle(transport.from.location.coordinates, transport.to.location.coordinates)
+                const bounds = getLineBounds(line)
+
+                const mapBounds = mapEl.current?.getBounds()
+
+                if (!mapBounds?.contains(bounds.getNorthEast()) || !mapBounds?.contains(bounds.getSouthEast()) || window.innerWidth < 768) {
+                    mapBounds?.extend(bounds)
+
+                    if (mapBounds && mapEl.current) {
+                        const zoom = Math.min(mapEl.current?.getZoom(), zoomForBounds(bounds, {
+                            x: 350,
+                            y: 100
+                        }))
+
+                        const fixedCoordinates = offsetCoordinates(bounds.getCenter(), {
+                            x: 300,
+                            y: 0
+                        },
+                        {
+                            x: 0,
+                            y: 250
+                        }, zoom)
+
+                        mapEl.current.flyTo({
+                            center: fixedCoordinates,
+                            padding: 100,
+                            zoom,
+                            essential: true
+                        })
+                    }
+                }
+            }
 
             if (event.features[0]?.id) {
                 mapEl?.current?.setFeatureState({
@@ -105,19 +165,58 @@ export const Map = ({
         }
     }
 
-    return <div className="map">
+    useEffect(() => {
+        if (initialPlace) {
+            setViewState({
+                latitude: initialPlace.location.coordinates[1],
+                longitude: initialPlace.location.coordinates[0],
+                zoom: 8
+            })
+            return
+        }
+
+        if (!initialTransport) {
+            return
+        }
+
+        const line = greatCircle(initialTransport.from.location.coordinates, initialTransport.to.location.coordinates)
+        const bounds = getLineBounds(line)
+
+        const zoom = zoomForBounds(bounds, {
+            x: 350,
+            y: 100
+        })
+
+        const fixedBounds = offsetCoordinates(bounds.getCenter(), {
+            x: 300,
+            y: 0
+        },
+        {
+            x: 0,
+            y: 250
+        }, zoom)
+
+        setViewState({
+            latitude: fixedBounds.lat,
+            longitude: fixedBounds.lng,
+            zoom: Math.min(zoom, 8)
+        })
+    }, [])
+
+    return <div
+        className="map"
+        ref={containerEl}
+    >
         <Mapbox
+            {...viewState}
+            onMove={(evt) => setViewState(evt.viewState)}
             ref={mapEl}
+            onLoad={() => setMapLoaded(true)}
             style={{
                 width: '100%',
                 height: '100%'
             }}
             interactiveLayerIds={['clickable-lines', 'markers']}
-            initialViewState={{
-                latitude: 20,
-                longitude: 8.30635,
-                zoom: 2
-            }}
             onClick={onClick}
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}
@@ -154,6 +253,7 @@ export const Map = ({
                     onClick={(event) => {
                         event.stopPropagation()
                         setActivePlace(place)
+                        window.history.replaceState(null, '', `/${locale}/map/${slugify(place.internal)}`)
                         setActiveTransport(undefined)
                     }}
                 />

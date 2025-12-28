@@ -2,6 +2,7 @@ query QMap {
     place(limit: -1) {
         id
         location
+        internal
         translations {
             id
             name
@@ -35,6 +36,7 @@ query QMap {
         from {
             id
             location
+            internal
             country {
                 id
                 translations {
@@ -56,6 +58,7 @@ query QMap {
         to {
             id
             location
+            internal
             country {
                 id
                 translations {
