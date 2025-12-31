@@ -5,8 +5,9 @@ import { getLocale, getTranslations } from 'next-intl/server'
 import { ArticleMeta } from '@/components/blog/ArticleMeta'
 
 type Props = {
-	articles?: TQTravelArticles['secret_blog'] | TQDevArticles['blog']
+    articles?: TQTravelArticles['secret_blog'] | TQDevArticles['blog']
 }
+
 export const Articles = async ({ articles = [] }: Props) => {
     const type = articles[0] && isTravelArticle(articles[0]) ? 'travel' : 'dev'
     const ChildTag = type === 'dev' ? 'div' : 'li'

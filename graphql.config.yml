@@ -1,0 +1,2 @@
+schema: 'http://157.180.93.120:8061/graphql'
+documents: '**/*.gql'

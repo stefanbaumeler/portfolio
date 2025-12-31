@@ -5,7 +5,7 @@ import { Stat } from '@/components/stats/Stat'
 import { getTranslations } from 'next-intl/server'
 
 type Props = {
-	order: number
+    order: number
 }
 
 export const FlightsPerYearStat = async ({ order }: Props) => {
@@ -18,7 +18,7 @@ export const FlightsPerYearStat = async ({ order }: Props) => {
         years.push(y)
     }
 
-    const { data } = await getClient().query<{ [key: string]: { id: string }[]}>(gql`
+    const { data } = await getClient().query<{ [key: string]: { id: string }[] }>(gql`
         query QFlightsPerYear {
             ${years.map((year) => `y${year}: transportation(
         		filter: { departure_func: { year: { _eq: "${year}" } }, type: { _eq: "flight" } }

@@ -9,7 +9,7 @@ import { useScrollContext } from '@/context/scroll'
 import { useOnScroll } from '@/helpers/scroll'
 
 type Props = {
-	item: TBlogTitle
+    item: TBlogTitle
 }
 
 export const BlogTitle = ({ item }: Props) => {
@@ -27,8 +27,7 @@ export const BlogTitle = ({ item }: Props) => {
                 offset: Math.abs(offset),
                 direction: offset > 0 ? 1 : -1
             })
-        }
-        else {
+        } else {
             scrollContext.removeBid(item.id)
         }
     }

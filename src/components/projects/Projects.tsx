@@ -3,7 +3,7 @@ import { TQProjects } from '~/schema'
 import { TopNav } from '@/components/global/nav/TopNav'
 
 type Props = {
-	projects: TQProjects['work'][number]['projects']
+    projects: TQProjects['work'][number]['projects']
     title: string
     text: string
     type: string

@@ -3,20 +3,22 @@ import { ArticleNav } from '@/components/blog/ArticleNav'
 import { HoverLink } from '@/components/global/HoverLink'
 import * as Icons from '@mdi/js'
 import { Image } from '@/components/global/Image'
-import { TBlogTitle,
+import {
+    TBlogTitle,
     TQTravelArticle,
     TQDevArticle,
     TSecretBlogElements,
-    TQTravelPrevNextArticles, TQDevPrevNextArticles } from '~/schema'
+    TQTravelPrevNextArticles, TQDevPrevNextArticles
+} from '~/schema'
 import { getLocale, getTranslations } from 'next-intl/server'
 import { isTravelArticle } from '@/helpers/article-type'
 import { SliderProvider } from '@/context/slider'
 import { TopNav } from '@/components/global/nav/TopNav'
 
 type Props = {
-	article: TQTravelArticle['secret_blog'][number] | TQDevArticle['blog'][number]
-	prev?: TQTravelPrevNextArticles['previous'][number] | TQDevPrevNextArticles['previous'][number]
-	next?: TQTravelPrevNextArticles['next'][number] | TQDevPrevNextArticles['next'][number]
+    article: TQTravelArticle['secret_blog'][number] | TQDevArticle['blog'][number]
+    prev?: TQTravelPrevNextArticles['previous'][number] | TQDevPrevNextArticles['previous'][number]
+    next?: TQTravelPrevNextArticles['next'][number] | TQDevPrevNextArticles['next'][number]
 }
 
 export const Article = async ({

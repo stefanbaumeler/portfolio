@@ -2,6 +2,7 @@ import '@/styles/util/fonts.scss'
 import '@/styles/util/reset.scss'
 
 import '@/styles/lib/shiki.scss'
+
 import '@/styles/lib/map.scss'
 
 import '@/styles/blocks/html.scss'
@@ -86,8 +87,8 @@ export const generateStaticParams = () => {
 }
 
 type Props = {
-	children: ReactNode
-	params: Promise<{ locale: string }>
+    children: ReactNode
+    params: Promise<{ locale: string }>
 }
 
 const RootLayout = async ({

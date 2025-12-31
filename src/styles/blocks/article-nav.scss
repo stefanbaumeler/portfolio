@@ -29,7 +29,7 @@
     &:hover {
         color: var(--c-main-dark);
 
-        @at-root .html--dark & {
+        @scope (.html--dark) {
             color: var(--c-main);
         }
     }
@@ -80,7 +80,7 @@
     transition: color .25s;
     font-weight: 300;
 
-    &:before {
+    &::before {
         content: '';
         width: 4px;
         height: 4px;
@@ -94,7 +94,7 @@
         transition: border-color .25s;
     }
 
-    &:after {
+    &::after {
         content: '';
         width: 15px;
         height: 15px;
@@ -106,8 +106,8 @@
     &:hover {
         color: var(--c-main-dark);
 
-        &:before,
-        &:after {
+        &::before,
+        &::after {
             border-color: var(--c-main-dark);
         }
     }

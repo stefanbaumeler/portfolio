@@ -18,27 +18,34 @@
         max-width: 45%;
     }
 
-    &:before,
-    &:after {
+    &:last-child {
+        @scope (.journey) {
+            position: relative;
+            padding-right: 0;
+            padding-left: 20px;
+
+            @include breakpoint(xs) {
+                padding-left: 40px;
+            }
+        }
+    }
+
+    &::before,
+    &::after {
         display: none;
 
         @media screen and (min-width: 500px) {
             display: block;
         }
-    }
 
-    @at-root .journey &:last-child {
-        position: relative;
-        padding-right: 0;
-        padding-left: 20px;
-
-        @include breakpoint(xs) {
-            padding-left: 40px;
-        }
-
-        &:before {
+        @scope (.journey) {
             content: '';
             position: absolute;
+        }
+    }
+
+    &::before {
+        @scope (.journey) {
             width: 100vw;
             height: 1px;
             background-color: var(--c-black);
@@ -46,13 +53,13 @@
             top: 50%;
             z-index: -1;
         }
+    }
 
-        &:after {
-            content: '';
-            position: absolute;
-            border-top: 5px solid transparent;
-            border-bottom: 5px solid transparent;
-            border-left: 10px solid var(--c-black);
+    &::after {
+        @scope (.journey) {
+            border-width: 5px 0 5px 10px;
+            border-style: solid;
+            border-color: transparent transparent transparent var(--c-black);
             top: 50%;
             right: 100%;
             translate: 0 -50%;
@@ -83,7 +90,7 @@
     text-transform: uppercase;
     text-wrap: balance;
 
-    @at-root .location__code + & {
+    @scope (.location:has(.location__code + .location__name)) {
         @include text;
 
         letter-spacing: .05em;

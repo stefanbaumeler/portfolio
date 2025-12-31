@@ -33,7 +33,7 @@
         grid-area: auto / span 1;
     }
 
-    @at-root .articles--dev & {
+    @scope (.articles--dev) {
         grid-area: auto / span 2;
     }
 }

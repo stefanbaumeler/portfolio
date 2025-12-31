@@ -6,7 +6,7 @@ import { ArticleMeta } from '@/components/blog/ArticleMeta'
 import { Drawer } from '@/components/map/Drawer'
 
 type Props = {
-    activePlace?: TQMap['place'][number] & { visits: Date[][]}
+    activePlace?: TQMap['place'][number] & { visits: Date[][] }
     articles?: TQTravelArticles['secret_blog']
     onClose: () => void
 }
@@ -46,7 +46,7 @@ export const PlaceDrawer = ({
                             }
                         </span>
                         <span>
-                        –
+                            –
                         </span>
                         <span className="visits__date">
                             {

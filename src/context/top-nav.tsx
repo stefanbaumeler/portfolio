@@ -3,17 +3,17 @@
 import { createContext, Dispatch, ReactNode, SetStateAction, useContext, useState } from 'react'
 
 type Props = {
-	children?: ReactNode
+    children?: ReactNode
 }
 
-interface TopNavContext {
-	back: string
-	setBack: Dispatch<SetStateAction<string>>
-	title: string
-	setTitle: Dispatch<SetStateAction<string>>
+interface ITopNavContext {
+    back: string
+    setBack: Dispatch<SetStateAction<string>>
+    title: string
+    setTitle: Dispatch<SetStateAction<string>>
 }
 
-const TopNavContext = createContext<TopNavContext | null>(null)
+const TopNavContext = createContext<ITopNavContext | null>(null)
 
 const TopNavProvider = ({ children }: Props) => {
     const [back, setBack] = useState('')

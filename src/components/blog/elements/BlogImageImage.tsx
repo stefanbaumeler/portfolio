@@ -5,7 +5,7 @@ import { useSliderContext } from '@/context/slider'
 import { ReactNode } from 'react'
 
 type Props = {
-	item: TBlogImage
+    item: TBlogImage
     children?: ReactNode
 }
 
@@ -13,6 +13,7 @@ export const BlogImageImage = ({
     item, children
 }: Props) => {
     const { setActive } = useSliderContext()
+
     return <figure
         onClick={() => setActive(item.id)}
     >

@@ -4,9 +4,9 @@ import { useLocale } from 'next-intl'
 import { Tooltip } from '@/components/global/Tooltip'
 
 type Props = {
-	technology: TFTechnology
-	color: string
-	secondary: boolean
+    technology: TFTechnology
+    color: string
+    secondary: boolean
 }
 
 export const Technology = ({
@@ -19,6 +19,7 @@ export const Technology = ({
     if (secondary) {
         classes.push('project__technology--secondary')
     }
+
     return <Tooltip
         tagName="li"
         className={classes.join(' ')}

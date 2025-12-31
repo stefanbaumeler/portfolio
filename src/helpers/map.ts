@@ -1,14 +1,24 @@
 import { LngLatBounds, LngLatLike, MercatorCoordinate } from 'mapbox-gl'
 import { Feature, LineString, MultiLineString } from 'geojson'
 
-export const offsetCoordinates = (coordinates: LngLatLike, offset: { x: number, y: number }, offsetMobile = offset, zoom: number) => {
-    const actualOffset = window.innerWidth < 768 ? offsetMobile : offset
+export const offsetCoordinates = (coordinates: LngLatLike, zoom: number, offset: {
+    desktop: {
+        x: number
+        y: number
+    }
+    mobile?: {
+        x: number
+        y: number
+    }
+}) => {
+    const actualOffset = window.innerWidth < 768 && offset.mobile ? offset.mobile : offset.desktop
 
     const world = MercatorCoordinate.fromLngLat(coordinates)
     const scale = 512 * Math.pow(2, zoom)
     const worldOffsetX = actualOffset.x / scale
     const worldOffsetY = actualOffset.y / scale
     const newWorld = new MercatorCoordinate(world.x + worldOffsetX, world.y + worldOffsetY)
+
     return newWorld.toLngLat()
 }
 

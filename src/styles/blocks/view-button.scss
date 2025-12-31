@@ -19,8 +19,8 @@
         width: 75px;
     }
 
-    &:before,
-    &:after {
+    &::before,
+    &::after {
         content: '';
         position: absolute;
         top: 50%;
@@ -36,11 +36,11 @@
         }
     }
 
-    &:after {
+    &::after {
         rotate: 90deg;
     }
 
-    @at-root .view-button:hover & {
+    @scope (.view-button:hover) {
         rotate: 90deg;
         background-color: var(--c-project, var(--c-main));
         border-color: var(--c-project, var(--c-main));
@@ -59,7 +59,7 @@
         width: 75px;
     }
 
-    @at-root .view-button:hover & {
+    @scope (.view-button:hover) {
         background-color: var(--c-project, var(--c-main));
         border-color: var(--c-project, var(--c-main));
     }
@@ -86,7 +86,7 @@
         translate: -10px;
     }
 
-    &:after {
+    &::after {
         content: '';
         position: absolute;
         bottom: 1px;
@@ -97,13 +97,13 @@
         background-color: var(--c-project, var(--c-main));
         transition: width .25s $transition;
 
-        @at-root .view-button:hover & {
+        @scope (.view-button:hover) {
             width: 100%;
             transition: width .5s $transition;
         }
     }
 
-    @at-root .view-button:hover & {
+    @scope (.view-button:hover) {
         translate: 12px;
     }
 }

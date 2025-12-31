@@ -5,7 +5,7 @@ import { DonutChart } from '@/components/charts/DonutChart'
 import { Stat } from '@/components/stats/Stat'
 
 type Props = {
-	order: number
+    order: number
 }
 
 export const TransportationTypesStat = async ({ order }: Props) => {

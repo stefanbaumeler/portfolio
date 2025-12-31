@@ -1,13 +1,12 @@
 import { TBlogText, TQDevArticle, TQDevArticles, TQTravelArticle, TQTravelArticles } from '~/schema'
 import Icon from '@mdi/react'
 import * as Icons from '@mdi/js'
-import { isTravelArticle } from '@/helpers/article-type'
 import type { getTranslations } from 'next-intl/server'
 import type { useTranslations } from 'next-intl'
 
 type Props = {
-	article: TQTravelArticles['secret_blog'][number] | TQDevArticles['blog'][number] | TQTravelArticle['secret_blog'][number] | TQDevArticle['blog'][number]
-	className?: string
+    article: TQTravelArticles['secret_blog'][number] | TQDevArticles['blog'][number] | TQTravelArticle['secret_blog'][number] | TQDevArticle['blog'][number]
+    className?: string
     locale: string
     t: Awaited<ReturnType<typeof getTranslations>> | ReturnType<typeof useTranslations>
 }
@@ -19,6 +18,7 @@ export const ArticleMeta = ({
 
     const wordCount = article.elements?.filter((el) => el?.collection === 'blog_text').reduce((acc, el) => {
         const blogText = el?.item as TBlogText
+
         return acc + parseInt(blogText.word_count ?? '0')
     }, 0) ?? 0
 

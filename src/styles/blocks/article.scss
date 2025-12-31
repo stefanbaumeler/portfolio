@@ -10,7 +10,6 @@
 }
 
 @mixin article-customize {
-
     padding-left: var(--spacing);
     z-index: 1;
     padding-bottom: 25px;
@@ -25,7 +24,7 @@
         padding-left: 493.75px;
     }
 
-    @at-root .article:has(.article__image) & {
+    @scope (.article--travel) {
         top: calc(62.5vw + var(--spacing) * 2);
 
         @include breakpoint(xs) {
@@ -54,7 +53,7 @@
         display: flex;
     }
 
-    @at-root .article:has(.article__image) & {
+    @scope (.article--travel) {
         padding-top: calc(62.5vw + 50px + var(--spacing) * 3);
 
         @include breakpoint(xs) {
@@ -87,7 +86,7 @@
         width: 1280.25px;
     }
 
-    &:before {
+    &::before {
         content: '';
         position: absolute;
         top: 0;
@@ -110,7 +109,7 @@
         }
     }
 
-    @at-root .article:has(.article__image) & {
+    @scope (.article--travel) {
         @include breakpoint(xl) {
             padding-left: 0;
         }
@@ -161,7 +160,7 @@
         width: 1280.25px;
     }
 
-    @at-root .article:has(.article__image) & {
+    @scope (.article--travel) {
         @include breakpoint(xl) {
             padding-left: 0;
         }
@@ -184,7 +183,7 @@
         width: 1280.25px;
     }
 
-    @at-root .article:has(.article__image) & {
+    @scope (.article--travel) {
         @include breakpoint(xl) {
             padding-left: 0;
         }
@@ -231,7 +230,7 @@
 
     position: static;
 
-    &:before {
+    &::before {
         @include breakpoint(xl) {
             content: '';
             display: block;

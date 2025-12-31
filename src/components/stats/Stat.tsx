@@ -1,10 +1,10 @@
 import { ReactNode } from 'react'
 
 type Props = {
-	children: ReactNode
-	title: string
-	type: 'count' | 'text' | 'bar' | 'donut'
-	order: number
+    children: ReactNode
+    title: string
+    type: 'count' | 'text' | 'bar' | 'donut'
+    order: number
 }
 
 export const Stat = ({

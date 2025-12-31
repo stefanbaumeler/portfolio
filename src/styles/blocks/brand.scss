@@ -30,11 +30,11 @@
     align-items: center;
 
     &:first-child {
-        transform: translateY(4.5px);
+        translate: 0 4.5px;
     }
 
     &:last-child {
-        transform: translateY(-2.5px);
+        translate: 0 -2.5px;
     }
 }
 

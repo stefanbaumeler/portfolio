@@ -8,7 +8,7 @@ import { Tooltip } from '@/components/global/Tooltip'
 import Icon from '@mdi/react'
 
 type Props = {
-	item: {
+    item: {
         icon?: string
         url?: string
         label?: string
@@ -16,6 +16,7 @@ type Props = {
     }
     type: 'socials' | 'main'
 }
+
 export const NavItem = ({
     item, type
 }: Props) => {
@@ -32,7 +33,7 @@ export const NavItem = ({
             className="nav__logo"
             onClick={() => setActive(false)}
         >
-                SB
+            SB
         </Link> : <Link
             prefetch={!item.url?.endsWith('/stats')}
             href={item.url ?? '#'}

@@ -2,10 +2,6 @@
     @media screen and (pointer: coarse) {
         display: none;
     }
-
-    @at-root .hover-link & > div {
-        padding: 0;
-    }
 }
 
 @mixin tooltip-content {
@@ -17,24 +13,28 @@
     text-wrap: nowrap;
     transition: opacity .25s;
     position: relative;
+
+    @scope (.hover-link) {
+        padding: 0;
+    }
 }
 
 @mixin tooltip-arrow {
     fill: var(--c-black);
 
-    @at-root .tooltip--top & {
+    @scope (.tooltip--top) {
         translate: 0 -1px;
     }
 
-    @at-root .tooltip--bottom & {
+    @scope (.tooltip--bottom) {
         translate: 0 1px;
     }
 
-    @at-root .tooltip--left & {
+    @scope (.tooltip--left) {
         translate: -1px 0;
     }
 
-    @at-root .tooltip--right & {
+    @scope (.tooltip--right) {
         translate: 1px 0;
     }
 }

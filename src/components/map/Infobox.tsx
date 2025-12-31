@@ -77,8 +77,7 @@ export const Infobox = ({
                                 style={{
                                     backgroundColor: color
                                 }}
-                            >
-                            </span>
+                            />
                             {year}
                         </li>
                     })}

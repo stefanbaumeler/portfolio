@@ -5,6 +5,7 @@ import Icon from '@mdi/react'
 
 const NotFound = async () => {
     const t = await getTranslations()
+
     return <div className="not-found">
         <h1 className="not-found__title">
             404

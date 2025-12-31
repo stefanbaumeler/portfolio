@@ -12,13 +12,15 @@ type Props = {
 export const BlogImage = async ({
     item, index, aspect
 }: Props) => {
+    const aspectFallback = item.image?.width / item.image?.height
+
     return <>
         <BlogImageImage
             item={item}
         >
             <div className="content__image-container">
                 <Image
-                    aspect={aspect ?? item.image?.width / item.image?.height ?? 1.5}
+                    aspect={aspect ?? aspectFallback ?? 1.5}
                     invert={item.invert}
                     className="content__image"
                     src={`${process.env.NEXT_PUBLIC_ASSETS}/${item.image?.filename_disk}`}

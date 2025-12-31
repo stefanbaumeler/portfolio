@@ -4,7 +4,7 @@ import { getLocale } from 'next-intl/server'
 import { Skill } from '@/components/skills/Skill'
 
 type Prop = {
-	category: TQSkills['technology_category'][number]
+    category: TQSkills['technology_category'][number]
 }
 
 export const SkillCategory = async ({ category }: Prop) => {

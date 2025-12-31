@@ -6,7 +6,7 @@ type Props = {
     children?: ReactNode
 }
 
-interface SliderContext {
+interface ISliderContext {
     images: string[]
     active: string
     prev: () => void
@@ -15,7 +15,7 @@ interface SliderContext {
     addImage: (image: string) => void
 }
 
-const SliderContext = createContext<SliderContext | null>(null)
+const SliderContext = createContext<ISliderContext | null>(null)
 
 const SliderProvider = ({ children }: Props) => {
     const [images, setImages] = useState<string[]>([])

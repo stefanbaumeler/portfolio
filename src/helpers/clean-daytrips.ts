@@ -5,10 +5,12 @@ export const recursivelyCleanDaytrips = (visitsToClean: [Date, Date][]): [Date, 
     const cleaned = visitsToClean.map((visitToClean, key) => {
         if (removeNext) {
             removeNext = false
+
             return undefined
         }
 
         const next = visitsToClean[key + 1]
+
         if (!next) {
             return visitToClean
         }
@@ -20,8 +22,7 @@ export const recursivelyCleanDaytrips = (visitsToClean: [Date, Date][]): [Date, 
             removeNext = true
 
             return [visitToClean[0], next[1]]
-        }
-        else {
+        } else {
             return visitToClean
         }
     }).filter((visitToClean) => !!visitToClean)

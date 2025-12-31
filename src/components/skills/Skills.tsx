@@ -3,14 +3,14 @@ import { SkillCategory } from '@/components/skills/SkillCategory'
 import { TopNav } from '@/components/global/nav/TopNav'
 
 type Props = {
-	categories?: TQSkills['technology_category']
+    categories?: TQSkills['technology_category']
 }
 
 export const Skills = ({ categories = [] }: Props) => {
     return <div className="skills">
         <div className="skills__header">
             <h1 className="skills__title">
-				Skills
+                Skills
             </h1>
             <TopNav />
         </div>

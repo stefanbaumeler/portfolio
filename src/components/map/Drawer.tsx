@@ -54,6 +54,7 @@ export const Drawer = ({
             if (naturalHeight > maxHeight) {
                 height = maxHeight
             }
+
             setDrawerActiveHeight(height)
             setVisible(true)
         }
@@ -93,6 +94,7 @@ export const Drawer = ({
     const onTouchMove = (event: TouchEvent) => {
         if (isMobile) {
             const newOffset = (event.touches[0]?.clientY ?? 0) - startDrag
+
             if (drawerEl.current?.scrollTop === 0) {
                 if ((drawerEl.current?.getBoundingClientRect().bottom ?? 0) - 100 > window.innerHeight) {
                     setOffset(newOffset)

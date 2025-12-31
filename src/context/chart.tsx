@@ -2,7 +2,7 @@ import { createContext, ReactNode } from 'react'
 import { ArcElement, BarElement, CategoryScale, Chart, LinearScale, Tooltip } from 'chart.js'
 
 type Props = {
-	children?: ReactNode
+    children?: ReactNode
 }
 
 const ChartContext = createContext(null)

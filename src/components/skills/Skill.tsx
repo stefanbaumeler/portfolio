@@ -1,19 +1,12 @@
 import { TQSkills } from '~/schema'
 import { dt } from '@/helpers/translate'
 import { getLocale } from 'next-intl/server'
-import * as Icons from '@mdi/js'
-import Icon from '@mdi/react'
-
-export type TSkill = {
-	name: string
-	hint: string
-	subskills: TSkill[] | undefined
-}
 
 type Props = {
-	skill?: TQSkills['technology_category'][number]['technologies'][number] | TQSkills['technology_category'][number]['technologies'][number]['children'][number]
-	subskills?: TQSkills['technology_category'][number]['technologies'][number]['children']
+    skill?: TQSkills['technology_category'][number]['technologies'][number] | TQSkills['technology_category'][number]['technologies'][number]['children'][number]
+    subskills?: TQSkills['technology_category'][number]['technologies'][number]['children']
 }
+
 export const Skill = async ({
     skill, subskills = []
 }: Props) => {
@@ -33,7 +26,8 @@ export const Skill = async ({
                 return <Skill
                     skill={skill}
                     key={k}
-                />})}
+                />
+            })}
         </ul> : null}
     </li>
 }

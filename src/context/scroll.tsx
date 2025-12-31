@@ -2,22 +2,22 @@ import { createContext, ReactNode, useContext, useEffect, useState } from 'react
 import { usePathname } from 'next/navigation'
 
 type Props = {
-	children?: ReactNode
+    children?: ReactNode
 }
 
 type Bid = {
-	id: string
-	offset: number
-	direction: number
+    id: string
+    offset: number
+    direction: number
 }
 
-interface ScrollContext {
-	bids: Bid[]
-	updateBid: (bid: Bid) => void
-	removeBid: (id: string) => void
+interface IScrollContext {
+    bids: Bid[]
+    updateBid: (bid: Bid) => void
+    removeBid: (id: string) => void
 }
 
-const ScrollContext = createContext<ScrollContext | null>(null)
+const ScrollContext = createContext<IScrollContext | null>(null)
 
 const ScrollProvider = ({ children }: Props) => {
     const [bids, setBids] = useState<Bid[]>([])

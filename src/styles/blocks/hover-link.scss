@@ -10,7 +10,7 @@
     transition: translate .125s;
     z-index: 1;
 
-    @at-root .hover-link:hover & {
+    @scope (.hover-link:hover) {
         opacity: 1;
         translate: 0 -12px;
     }
@@ -42,7 +42,7 @@
     gap: 4px;
     align-items: center;
 
-    &:before {
+    &::before {
         content: '';
         position: absolute;
         inset: -8px;
@@ -53,7 +53,7 @@
         transition: opacity .25s;
     }
 
-    &:hover:before {
+    &:hover::before {
         opacity: 1;
     }
 

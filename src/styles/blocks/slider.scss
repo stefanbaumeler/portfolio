@@ -47,15 +47,15 @@
         display: flex;
     }
 
-    @at-root .slider:hover & {
+    @scope (.slider:hover) {
         opacity: 1;
     }
 
-    @at-root .slider--active:hover & {
+    @scope (.slider--active:hover) {
         opacity: 0;
     }
 
-    @at-root .project:nth-child(2n) & {
+    @scope (.project:nth-child(2n)) {
         left: calc(50% + clamp(0px, 6.25vw, 100px));
     }
 }
@@ -81,7 +81,26 @@
     translate: 50%;
     max-width: clamp(0px, 100vw, map.get($breakpoints, lg));
 
-    &:before {
+    @scope (.project:nth-child(2n)) {
+        right: auto;
+        left: 50%;
+        translate: -50%;
+    }
+
+    @scope (.body:not(.body--safari) .slider:not(.slider--active):hover) {
+        @include breakpoint(md) {
+            scale: 1.025;
+            filter: saturate(1.5);
+        }
+    }
+
+    @scope (.body--safari .slider:not(.slider--active):hover) {
+        @include breakpoint(md) {
+            filter: saturate(1.5);
+        }
+    }
+
+    &::before {
         content: '';
         position: absolute;
         top: 0;
@@ -94,29 +113,10 @@
         transition: opacity .25s;
         z-index: 1;
 
-        @at-root .slider--active & {
+        @scope (.slider--active) {
             @include breakpoint(md) {
                 opacity: 0;
             }
-        }
-    }
-
-    @at-root .project:nth-child(2n) & {
-        right: auto;
-        left: 50%;
-        translate: -50%;
-    }
-
-    @at-root .body:not(.body--safari) .slider:not(.slider--active):hover & {
-        @include breakpoint(md) {
-            scale: 1.025;
-            filter: saturate(1.5);
-        }
-    }
-
-    @at-root .body--safari .slider:not(.slider--active):hover & {
-        @include breakpoint(md) {
-            filter: saturate(1.5);
         }
     }
 }
@@ -135,14 +135,14 @@
     left: 50%;
     translate: -50%;
 
-    @at-root .html--dark & {
-        background-color: $color-black;
-    }
-
-    @at-root .slider--active & {
+    @scope (.slider--active) {
         @include breakpoint(md) {
             max-width: clamp(0px, 100vw, map.get($breakpoints, lg));
         }
+    }
+
+    @scope (.html--dark) {
+        background-color: $color-black;
     }
 
     &--active {

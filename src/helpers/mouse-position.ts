@@ -4,7 +4,8 @@ export const useMousePosition = () => {
     const [
         mousePosition,
         setMousePosition
-    ] = useState<{ x: number, y: number }>({
+    ] = useState<{ x: number
+        y: number }>({
         x: 0,
         y: 0
     })
@@ -23,5 +24,6 @@ export const useMousePosition = () => {
             window.removeEventListener('mousemove', updateMousePosition)
         }
     }, [])
+
     return mousePosition
 }

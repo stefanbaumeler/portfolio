@@ -1,4 +1,3 @@
-
 @mixin top-nav-root {
     height: $top-nav-height;
     display: flex;
@@ -7,7 +6,6 @@
     z-index: 5;
     pointer-events: none;
     padding-top: 5px;
-
     position: absolute;
     top: 0;
     right: 0;
@@ -34,13 +32,10 @@
         }
     }
 
-    @at-root {
-        .article__customize &,
-        .home & {
-            padding-top: 25px;
-            width: 100%;
-            position: static;
-        }
+    @scope (.article__customize, .home) {
+        padding-top: 25px;
+        width: 100%;
+        position: static;
     }
 }
 
@@ -53,12 +48,12 @@
     pointer-events: all;
     white-space: nowrap;
 
-    &:before {
-        content: '/ ';
-    }
-
     @include breakpoint(xs) {
         display: block;
+    }
+
+    &::before {
+        content: '/ ';
     }
 }
 
@@ -90,20 +85,7 @@
     z-index: 1;
     overflow: hidden;
 
-    @at-root {
-        .top-nav:has(+ .home) &,
-        .top-nav:has(+ .blogs) & {
-            @include breakpoint(md) {
-                color: $color-white;
-            }
-
-            @at-root .body:has(.blogs) & {
-                color: $color-white;
-            }
-        }
-    }
-
-    &:before {
+    &::before {
         content: '';
         position: absolute;
         inset: 0;
@@ -117,15 +99,8 @@
     &:hover {
         color: var(--c-black);
 
-        &:before {
+        &::before {
             opacity: 1;
-        }
-
-        @at-root {
-            .top-nav:has(+ .home) &,
-            .top-nav:has(+ .blogs) & {
-                color: $color-white;
-            }
         }
     }
 }
@@ -142,23 +117,23 @@
     transition: scale .25s, translate .25s;
     flex-shrink: 0;
 
-    @at-root .top-nav__button:hover & {
+    @scope (.top-nav__button:hover) {
         scale: 1.1;
     }
 
-    @at-root .top-nav__button--back:hover & {
+    @scope (.top-nav__button--back:hover) {
         scale: 1;
         translate: -100%;
-    }
-
-    @at-root .top-nav__button--back:hover &--hover {
-        translate: 0;
     }
 
     &--hover {
         position: absolute;
         left: 0;
         translate: 100%;
+
+        @scope (.top-nav__button--back:hover) {
+            translate: 0;
+        }
     }
 }
 

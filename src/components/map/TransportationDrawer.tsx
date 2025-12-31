@@ -5,14 +5,16 @@ import { Drawer } from '@/components/map/Drawer'
 import { useEffect, useState } from 'react'
 import { Location } from '@/components/map/Location'
 import Icon from '@mdi/react'
-import { mdiAirplane,
+import {
+    mdiAirplane,
     mdiBicycle,
     mdiBus,
     mdiCar,
     mdiFerry, mdiHiking,
     mdiMotorbike,
     mdiTaxi,
-    mdiTrain } from '@mdi/js'
+    mdiTrain
+} from '@mdi/js'
 
 type Props = {
     activeTransport?: TQMap['transportation'][number]
@@ -29,33 +31,33 @@ export const TransportationDrawer = ({
 
     useEffect(() => {
         switch (activeTransport?.type) {
-        case 'flight':
-            setIcon(mdiAirplane)
-            break
-        case 'bicycle':
-            setIcon(mdiBicycle)
-            break
-        case 'bus':
-            setIcon(mdiBus)
-            break
-        case 'car':
-            setIcon(mdiCar)
-            break
-        case 'foot':
-            setIcon(mdiHiking)
-            break
-        case 'motorcycle':
-            setIcon(mdiMotorbike)
-            break
-        case 'ship':
-            setIcon(mdiFerry)
-            break
-        case 'taxi':
-            setIcon(mdiTaxi)
-            break
-        case 'train':
-            setIcon(mdiTrain)
-            break
+            case 'flight':
+                setIcon(mdiAirplane)
+                break
+            case 'bicycle':
+                setIcon(mdiBicycle)
+                break
+            case 'bus':
+                setIcon(mdiBus)
+                break
+            case 'car':
+                setIcon(mdiCar)
+                break
+            case 'foot':
+                setIcon(mdiHiking)
+                break
+            case 'motorcycle':
+                setIcon(mdiMotorbike)
+                break
+            case 'ship':
+                setIcon(mdiFerry)
+                break
+            case 'taxi':
+                setIcon(mdiTaxi)
+                break
+            case 'train':
+                setIcon(mdiTrain)
+                break
         }
     }, [activeTransport?.type])
 

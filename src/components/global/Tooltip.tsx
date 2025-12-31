@@ -1,24 +1,27 @@
 'use client'
 
-import { arrow,
+import {
+    arrow,
     FloatingArrow,
     Placement,
     shift,
     useFloating,
     useHover,
     useInteractions,
-    useTransitionStyles } from '@floating-ui/react'
+    useTransitionStyles
+} from '@floating-ui/react'
 import { ReactNode, useRef, useState } from 'react'
 
 type Props = {
-	children: ReactNode
-	content: string | ReactNode
-	placement: Placement
-	className?: string
-	tooltipClass?: string
-	tagName?: string
+    children: ReactNode
+    content: string | ReactNode
+    placement: Placement
+    className?: string
+    tooltipClass?: string
+    tagName?: string
     forceOpen?: boolean
 }
+
 export const Tooltip = ({
     children, content, placement, className, tagName = 'div', tooltipClass = 'tooltip', forceOpen = false
 }: Props) => {
@@ -50,18 +53,18 @@ export const Tooltip = ({
             let translate = ''
 
             switch (dir) {
-            case 'top':
-                translate = '0 8px'
-                break
-            case 'bottom':
-                translate = '0 -8px'
-                break
-            case 'left':
-                translate = '8px 0'
-                break
-            case 'right':
-                translate = '-8px 0'
-                break
+                case 'top':
+                    translate = '0 8px'
+                    break
+                case 'bottom':
+                    translate = '0 -8px'
+                    break
+                case 'left':
+                    translate = '8px 0'
+                    break
+                case 'right':
+                    translate = '-8px 0'
+                    break
             }
 
             return {

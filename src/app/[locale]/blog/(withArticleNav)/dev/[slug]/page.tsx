@@ -1,11 +1,13 @@
 import { Article } from '@/components/blog/Article'
 import { getClient } from '@/gql/urql'
-import { QDevArticleDocument,
+import {
+    QDevArticleDocument,
     QDevArticlesDocument,
     QDevPrevNextArticlesDocument,
     TQDevArticle,
     TQDevArticles,
-    TQDevPrevNextArticles } from '~/schema'
+    TQDevPrevNextArticles
+} from '~/schema'
 
 export const generateStaticParams = async () => {
     const { data } = await getClient().query<TQDevArticles>(QDevArticlesDocument, {})

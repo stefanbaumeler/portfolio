@@ -4,13 +4,13 @@ import { Image } from '@/components/global/Image'
 import Icon from '@mdi/react'
 
 type Props = {
-	image?: string
-	href: string
-	title: string
-	label: string
-	icon?: string
+    image?: string
+    href: string
+    title: string
+    label: string
+    icon?: string
     className?: string
-	iconPosition?: 'before' | 'after'
+    iconPosition?: 'before' | 'after'
 }
 
 export const HoverLink = ({

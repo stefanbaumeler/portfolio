@@ -1,12 +1,14 @@
 import { getClient } from '@/gql/urql'
-import { QAccommodationTypeDocument,
-    TQAccommodationType } from '~/schema'
+import {
+    QAccommodationTypeDocument,
+    TQAccommodationType
+} from '~/schema'
 import { getTranslations } from 'next-intl/server'
 import { DonutChart } from '@/components/charts/DonutChart'
 import { Stat } from '@/components/stats/Stat'
 
 type Props = {
-	order: number
+    order: number
 }
 
 export const AccommodationTypesStat = async ({ order }: Props) => {

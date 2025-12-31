@@ -16,16 +16,13 @@
     @include breakpoint(md) {
         opacity: 0;
         pointer-events: none;
-        left: 50%;
-        bottom: 4px;
-        right: auto;
-        top: auto;
+        inset: auto auto 4px 50%;
         translate: -50%;
         background-color: $color-gray-darkest;
         border-radius: 4px;
     }
 
-    @at-root .popup & {
+    @scope (.popup) {
         pointer-events: none;
         bottom: 10px;
         right: auto;
@@ -33,13 +30,13 @@
         transition: none;
     }
 
-    @at-root .popup--active & {
+    @scope (.popup--active) {
         opacity: 1;
         pointer-events: all;
         transition: none;
     }
 
-    @at-root .slider--active & {
+    @scope (.slider--active) {
         @include breakpoint(md) {
             opacity: 1;
             pointer-events: all;
@@ -59,15 +56,6 @@
     justify-content: center;
     align-items: center;
 
-    @at-root .popup & {
-        pointer-events: none;
-    }
-
-    @at-root .popup--active & {
-        opacity: 1;
-        pointer-events: all;
-    }
-
     @include breakpoint(xs) {
         width: 60px;
     }
@@ -76,7 +64,16 @@
         color: $color-gray;
     }
 
-    &:before {
+    @scope (.popup) {
+        pointer-events: none;
+    }
+
+    @scope (.popup--active) {
+        opacity: 1;
+        pointer-events: all;
+    }
+
+    &::before {
         content: '';
         position: absolute;
         inset: 8px 4px;
@@ -90,7 +87,7 @@
     &:hover {
         color: $color-white;
 
-        &:before {
+        &::before {
             @include breakpoint(md) {
                 opacity: 1;
             }
@@ -104,7 +101,7 @@
             display: flex;
         }
 
-        @at-root .popup & {
+        @scope (.popup) {
             display: flex;
         }
     }

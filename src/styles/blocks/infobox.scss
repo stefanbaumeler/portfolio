@@ -6,13 +6,13 @@
     z-index: 4;
     pointer-events: none;
 
-    &--active {
-        pointer-events: all;
-    }
-
     @include breakpoint(xs) {
         bottom: 10px;
         left: 90px;
+    }
+
+    &--active {
+        pointer-events: all;
     }
 }
 
@@ -23,14 +23,14 @@
     pointer-events: none;
     opacity: 0;
 
-    @at-root .infobox--active & {
+    @scope (.infobox--active) {
         opacity: 1;
         transition: opacity .25s .25s;
     }
 }
 
 @mixin infobox-content {
-    @at-root .infobox--active & {
+    @scope (.infobox--active) {
         pointer-events: all;
     }
 }
@@ -96,9 +96,9 @@
     cursor: pointer;
     pointer-events: all;
 
-    &:before {
-        pointer-events: none;
+    &::before {
         content: '';
+        pointer-events: none;
         position: absolute;
         width: 100%;
         height: 100%;
@@ -107,7 +107,7 @@
         z-index: -1;
         transition: scale .25s;
 
-        @at-root .infobox--active & {
+        @scope (.infobox--active) {
             scale: 50;
             transition: scale .5s;
         }

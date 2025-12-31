@@ -3,7 +3,6 @@
 @use 'sass:string';
 @use 'sass:meta';
 @use 'sass:math';
-
 @use 'vars' as *;
 
 @mixin breakpoint($size) {
@@ -84,11 +83,7 @@
     color: var(--c-black);
     padding-bottom: 10px;
 
-    @at-root .drawer__footer & {
-        padding-bottom: 0;
-    }
-
-    @at-root .infobox__fact & {
+    @scope (.drawer__footer, .infobox__fact) {
         padding-bottom: 0;
     }
 }
@@ -162,7 +157,7 @@
 }
 
 @mixin wysiwyg {
-    *:not(.shiki):not(:has(.shiki)) > code {
+    p > code {
         white-space: nowrap;
         padding: 3px 5px;
         background-color: $color-white;
@@ -175,7 +170,7 @@
             font-size: 16px;
         }
 
-        @at-root .html--dark & {
+        @scope (.html--dark) {
             background-color: #24292E;
             color: var(--c-main-light);
         }
@@ -184,7 +179,7 @@
     a {
         color: var(--c-main-dark);
 
-        @at-root .html--dark & {
+        @scope (.html--dark) {
             color: var(--c-main);
         }
     }
@@ -203,7 +198,7 @@
         position: relative;
         padding-left: 30px;
 
-        &:before {
+        &::before {
             content: '';
             position: absolute;
             top: 13px;

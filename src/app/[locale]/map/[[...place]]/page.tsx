@@ -22,7 +22,7 @@ const MapPage = async ({ params }: { params: Promise<{ place: string[] }> }) => 
     }) ?? []
 
     const transportation = data?.transportation.filter((transport) => {
-        return +new Date() - +(new Date(transport.arrival) ?? 0) > 0
+        return +new Date() - +new Date(transport.arrival) > 0
     }) ?? []
 
     let initialPlace
@@ -35,7 +35,7 @@ const MapPage = async ({ params }: { params: Promise<{ place: string[] }> }) => 
             return initialPlaceSlug === slugify(place.internal)
         })
     } else if (resolvedParams.place?.length === 2) {
-        initialTransport =  transportation.find((transport) => {
+        initialTransport = transportation.find((transport) => {
             return slugify(transport.from.internal) === resolvedParams.place?.[0] && slugify(transport.to.internal) === resolvedParams.place?.[1]
         })
     }

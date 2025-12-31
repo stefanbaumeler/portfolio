@@ -62,7 +62,7 @@
     padding: 40px 30px 20px;
     overflow: hidden;
 
-    &:before {
+    &::before {
         content: '';
         position: absolute;
         top: 15px;

@@ -7,7 +7,7 @@ import { BarChart } from '@/components/charts/BarChart'
 import { durationOfStays } from '@/helpers/duration-of-stays'
 
 type Props = {
-	order: number
+    order: number
 }
 
 export const DaysPerCountryStat = async ({ order }: Props) => {

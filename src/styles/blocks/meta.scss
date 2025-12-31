@@ -17,7 +17,7 @@
         gap: 16px;
     }
 
-    @at-root .teaser__meta & {
+    @scope (.teaser__meta) {
         flex-direction: column-reverse;
 
         @container meta-container (min-width: #{map.get($breakpoints, xs)}) {
@@ -25,14 +25,11 @@
         }
     }
 
-    @at-root {
-        .article__meta &,
-        .blog__meta & {
-            width: 100%;
+    @scope (.article__meta, .blog__meta) {
+        width: 100%;
 
-            @include breakpoint(sm) {
-                flex-direction: column;
-            }
+        @include breakpoint(sm) {
+            flex-direction: column;
         }
     }
 }
@@ -66,7 +63,7 @@
         display: block;
     }
 
-    &:before {
+    &::before {
         content: '';
         width: 1px;
         height: 18px;
@@ -75,12 +72,9 @@
         background-color: var(--c-gray-darkest);
     }
 
-    @at-root {
-        .article__meta &,
-        .blog__meta & {
-            @include breakpoint(sm) {
-                display: none;
-            }
+    @scope (.article__meta, .blog__meta) {
+        @include breakpoint(sm) {
+            display: none;
         }
     }
 }

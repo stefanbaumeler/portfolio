@@ -18,6 +18,7 @@ const makeClient = () => {
 
 export const makeFrontendClient = () => {
     const ssr = ssrExchange()
+
     return {
         client: createClient({
             url: `${process.env.NEXT_PUBLIC_API}/graphql`,

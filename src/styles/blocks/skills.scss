@@ -51,7 +51,7 @@
         grid-area: auto / span 2;
     }
 
-    @at-root .skills__category:first-child & {
+    @scope (.skills__category:first-child) {
         border-width: 0;
         padding-top: 75px;
 
@@ -95,7 +95,7 @@
     padding-left: 50px;
     padding-bottom: 25px;
 
-    @at-root .skills__skill:has(+ .skills__skill .skills__children) & {
+    @scope (.skills__skill:has(+ .skills__skill .skills__children)) {
         padding-bottom: 0;
     }
 }

@@ -17,7 +17,7 @@ export const Image = ({
     const [blurDataURL, setBlurDataURL] = useState('')
 
     useEffect(() => {
-        async function fetchBlur () {
+        const fetchBlur = async () => {
             const res = await getBlurDataURL(`${props.src}?width=10`)
             setBlurDataURL(res)
         }

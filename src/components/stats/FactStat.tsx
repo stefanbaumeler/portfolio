@@ -1,12 +1,13 @@
 import { Stat } from '@/components/stats/Stat'
 
 type Props = {
-	title: string
-	value: string | number
-	type: 'count' | 'text'
-	valueSize?: 'small'
-	order: number
+    title: string
+    value: string | number
+    type: 'count' | 'text'
+    valueSize?: 'small'
+    order: number
 }
+
 export const FactStat = ({
     title, value, type, valueSize, order
 }: Props) => {

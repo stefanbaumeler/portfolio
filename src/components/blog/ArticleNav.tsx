@@ -7,7 +7,7 @@ import { useScrollContext } from '@/context/scroll'
 import { useTranslations } from 'next-intl'
 
 type Props = {
-	titles?: TBlogTitle[]
+    titles?: TBlogTitle[]
 }
 
 const scrollToTop = () => {
@@ -94,7 +94,7 @@ export const ArticleNav = ({ titles = [] }: Props) => {
                     translate: `0 ${progressTop}px`,
                     height: progressHeight
                 }}
-            ></span>
+            />
             <ul className="article-nav__list">
                 {titles.map((title, key) => <li
                     key={key}

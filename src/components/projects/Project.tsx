@@ -1,6 +1,5 @@
 import { CSSProperties } from 'react'
 import { TFProject } from '~/schema'
-import { Slider } from '@/components/projects/Slider'
 import { hexToHSL } from '@/helpers/hsl'
 import Markdown from 'marked-react'
 import { dt } from '@/helpers/translate'
@@ -10,7 +9,7 @@ import * as Icons from '@mdi/js'
 import { getLocale, getTranslations } from 'next-intl/server'
 
 type Props = {
-	project: TFProject
+    project: TFProject
 }
 
 export const Project = async ({ project }: Props) => {
@@ -59,7 +58,7 @@ export const Project = async ({ project }: Props) => {
                 className="view-button"
                 rel="noreferrer"
             >
-                <span className="view-button__plus"></span>
+                <span className="view-button__plus" />
                 <span className="view-button__text">
                     {t('View Project')}
                 </span>

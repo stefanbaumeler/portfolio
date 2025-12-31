@@ -3,13 +3,12 @@
 @mixin teaser-root {
     display: flex;
     position: relative;
-    flex-direction: column;
-    flex-wrap: wrap;
+    flex-flow: column wrap;
     padding-top: 50px;
     overflow: hidden;
 
     &--dev {
-        &:after {
+        &::after {
             content: '';
             position: absolute;
             border-left: 1px solid var(--c-gray-darkest);
@@ -20,7 +19,7 @@
             left: 0;
         }
 
-        &:hover:after {
+        &:hover::after {
             @container teaser-container (min-width: #{map.get($breakpoints, xs)}) {
                 height: calc(100% - 50px);
                 transition-delay: .2s;
@@ -28,7 +27,7 @@
         }
     }
 
-    &:before {
+    &::before {
         @include line(above);
 
         content: '';
@@ -38,7 +37,7 @@
         transition: width .5s $transition;
     }
 
-    &:hover:before {
+    &:hover::before {
         @container teaser-container (min-width: #{map.get($breakpoints, xs)}) {
             width: calc(100% - 100px);
         }
@@ -48,7 +47,7 @@
         flex-direction: row;
     }
 
-    @at-root .drawer & {
+    @scope (.drawer) {
         container: meta-container / inline-size;
     }
 }
@@ -59,7 +58,13 @@
     transition: translate .75s $transition;
     width: calc(100% - 100px);
 
-    @at-root .teaser--dev & {
+    @container teaser-container (min-width: #{map.get($breakpoints, xs)}) {
+        margin-top: 0;
+        left: 0;
+        bottom: 0;
+    }
+
+    @scope (.teaser--dev) {
         width: 100%;
         max-width: 600px;
 
@@ -73,17 +78,11 @@
         }
     }
 
-    @at-root .drawer & {
+    @scope (.drawer) {
         padding-bottom: 25px;
     }
 
-    @container teaser-container (min-width: #{map.get($breakpoints, xs)}) {
-        margin-top: 0;
-        left: 0;
-        bottom: 0;
-    }
-
-    @at-root .teaser:has(.teaser__image) & {
+    @scope (.teaser:has(.teaser__image)) {
         padding-top: 25px;
         width: 100%;
 
@@ -92,7 +91,7 @@
         }
     }
 
-    @at-root .teaser--dev:hover & {
+    @scope (.teaser--dev:hover) {
         @container teaser-container (min-width: #{map.get($breakpoints, xs)}) {
             translate: 50px;
         }
@@ -151,7 +150,7 @@
     position: relative;
     width: 100%;
 
-    &:before {
+    &::before {
         content: '';
         position: absolute;
         border-left: 1px solid var(--c-gray-darkest);
@@ -161,7 +160,7 @@
         width: 1px;
         left: 0;
 
-        @at-root .teaser:hover & {
+        @scope (.teaser:hover) {
             @container teaser-container (min-width: #{map.get($breakpoints, xs)}) {
                 height: calc(100% + 50px);
                 transition-delay: .2s;
@@ -181,7 +180,7 @@
         margin-left: 0;
     }
 
-    @at-root .teaser:hover & {
+    @scope (.teaser:hover) {
         @container teaser-container (min-width: #{map.get($breakpoints, xs)}) {
             translate: 50px;
         }

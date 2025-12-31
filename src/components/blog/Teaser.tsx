@@ -7,11 +7,12 @@ import { dt } from '@/helpers/translate'
 import { useLocale } from 'next-intl'
 
 type Props = {
-	article: TQTravelArticles['secret_blog'][number] | TQDevArticles['blog'][number]
-	index: number
+    article: TQTravelArticles['secret_blog'][number] | TQDevArticles['blog'][number]
+    index: number
     children: ReactNode
     sizes?: string
 }
+
 export const Teaser = ({
     article, index, children, sizes = '(max-width: 767px) 100vw, (max-width: 1023px) calc(100vw - 130px), (max-width: 1679px) calc(100vw - 180px), 1500px'
 }: Props) => {
@@ -46,8 +47,7 @@ export const Teaser = ({
                     className="teaser__tag"
                 >
                     {`#${tag}`}
-                </li>
-                )}
+                </li>)}
             </ul>
             <h2
                 className="teaser__title"

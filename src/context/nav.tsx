@@ -4,15 +4,15 @@ import { createContext, ReactNode, useContext, useState } from 'react'
 import { useBodyContext } from '@/context/body'
 
 type Props = {
-	children?: ReactNode
+    children?: ReactNode
 }
 
-interface NavContext {
-	active: boolean
-	setActive: (state: boolean) => void
+interface INavContext {
+    active: boolean
+    setActive: (state: boolean) => void
 }
 
-const NavContext = createContext<NavContext | null>(null)
+const NavContext = createContext<INavContext | null>(null)
 
 const NavProvider = ({ children }: Props) => {
     const [active, setActive] = useState(false)

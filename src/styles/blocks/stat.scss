@@ -91,18 +91,14 @@
             order: unset;
         }
     }
-
 }
 
 @mixin stat-title {
     font-size: 20px;
     color: var(--c-black);
 
-    @at-root {
-        .stat--count &,
-        .stat--text & {
-            text-align: center;
-        }
+    @scope (.stat--count, .stat--text) {
+        text-align: center;
     }
 }
 

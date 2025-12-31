@@ -14,7 +14,7 @@
     color: var(--c-gray-darkest);
     position: relative;
 
-    &:after {
+    &::after {
         content: '';
         position: absolute;
         bottom: 0;
@@ -25,12 +25,12 @@
         background-color: var(--c-project);
         transition: width .25s $transition;
 
-        @at-root .contact-button:hover & {
+        @scope (.contact-button:hover) {
             width: 100%;
             transition: width .5s $transition;
         }
 
-        @at-root .html--dark & {
+        @scope (.html--dark) {
             background-color: var(--c-project-lighter);
         }
     }

@@ -28,7 +28,7 @@
         margin: 0;
     }
 
-    @at-root .project:first-child & {
+    @scope (.project:first-child) {
         padding-top: 75px;
 
         @include breakpoint(sm) {
@@ -64,7 +64,7 @@
     a {
         color: var(--c-project);
 
-        @at-root .html--dark & {
+        @scope (.html--dark) {
             color: var(--c-project-lighter);
         }
     }
@@ -105,7 +105,7 @@
     color: var(--c-project);
     cursor: help;
 
-    @at-root .html--dark & {
+    @scope (.html--dark) {
         color: var(--c-project-lighter);
         border-color: var(--c-project-lighter);
     }

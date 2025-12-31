@@ -57,7 +57,11 @@
         padding-right: 25px;
     }
 
-    @at-root .content__title:hover & {
+    &:hover {
+        color: var(--c-main);
+    }
+
+    @scope (.content__title:hover) {
         opacity: 1;
         translate: 37.5px -50%;
         transition: opacity .15s .35s;
@@ -68,11 +72,7 @@
         }
     }
 
-    &:hover {
-        color: var(--c-main);
-    }
-
-    @at-root .content__title--level-2 & {
+    @scope (.content__title--level-2) {
         padding-top: 25px;
     }
 }

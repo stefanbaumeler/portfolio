@@ -9,6 +9,7 @@ type Props = {
     element?: TSecretBlogElements
     index: number
 }
+
 export const BlogItem = async ({
     element,
     index
@@ -27,18 +28,18 @@ export const BlogItem = async ({
     const imageItem = element?.item as TBlogImage
 
     switch (element?.collection) {
-    case 'blog_title':
-        return <BlogTitle item={element.item as TBlogTitle} />
-    case 'blog_text':
-        return <BlogText item={element.item as TBlogText} />
-    case 'blog_quote':
-        return <BlogQuote item={element.item as TBlogQuote} />
-    case 'blog_image':
-        return <BlogImage
-            aspect={aspect}
-            item={imageItem}
-            index={index}
-        />
+        case 'blog_title':
+            return <BlogTitle item={element.item as TBlogTitle} />
+        case 'blog_text':
+            return <BlogText item={element.item as TBlogText} />
+        case 'blog_quote':
+            return <BlogQuote item={element.item as TBlogQuote} />
+        case 'blog_image':
+            return <BlogImage
+                aspect={aspect}
+                item={imageItem}
+                index={index}
+            />
     }
 
     return null

@@ -1,6 +1,6 @@
 import { NextRequest } from 'next/server'
 
-export async function GET (req: NextRequest) {
+export const GET = async (req: NextRequest) => {
     const imageUrl = req.nextUrl.searchParams.get('url')
 
     if (!imageUrl) {
@@ -27,6 +27,7 @@ export async function GET (req: NextRequest) {
         })
     } catch (err) {
         console.error('Failed to generate blurDataURL:', err)
+
         return new Response('Error generating blur preview', {
             status: 500
         })

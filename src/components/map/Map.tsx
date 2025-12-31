@@ -39,6 +39,7 @@ export const Map = ({
     const [activePlace, setActivePlace] = useState<TQMap['place'][number] & {
         visits: Date[][]
     } | undefined>(initialPlace)
+
     const [activeTransport, setActiveTransport] = useState<TQMap['transportation'][number] | undefined>(initialTransport)
     const [activeYear, setActiveYear] = useState<string | undefined>(undefined)
     const [mapLoaded, setMapLoaded] = useState(false)
@@ -108,14 +109,16 @@ export const Map = ({
                             y: 100
                         }))
 
-                        const fixedCoordinates = offsetCoordinates(bounds.getCenter(), {
-                            x: 300,
-                            y: 0
-                        },
-                        {
-                            x: 0,
-                            y: 250
-                        }, zoom)
+                        const fixedCoordinates = offsetCoordinates(bounds.getCenter(), zoom, {
+                            desktop: {
+                                x: 300,
+                                y: 0
+                            },
+                            mobile: {
+                                x: 0,
+                                y: 250
+                            }
+                        })
 
                         mapEl.current.flyTo({
                             center: fixedCoordinates,
@@ -171,6 +174,7 @@ export const Map = ({
                 longitude: initialPlace.location.coordinates[0],
                 zoom: 8
             })
+
             return
         }
 
@@ -186,14 +190,16 @@ export const Map = ({
             y: 100
         })
 
-        const fixedBounds = offsetCoordinates(bounds.getCenter(), {
-            x: 300,
-            y: 0
-        },
-        {
-            x: 0,
-            y: 250
-        }, zoom)
+        const fixedBounds = offsetCoordinates(bounds.getCenter(), zoom, {
+            desktop: {
+                x: 300,
+                y: 0
+            },
+            mobile: {
+                x: 0,
+                y: 250
+            }
+        })
 
         setViewState({
             latitude: fixedBounds.lat,

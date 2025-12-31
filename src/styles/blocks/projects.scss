@@ -30,7 +30,7 @@
         border-top-width: 1px;
     }
 
-    @at-root .projects--private & {
+    @scope (.projects--private) {
         display: none;
 
         @include breakpoint(sm) {
@@ -61,7 +61,7 @@
         grid-area: auto / span 3;
     }
 
-    @at-root .projects--private & {
+    @scope (.projects--private) {
         @include breakpoint(sm) {
             padding-top: 192px;
         }

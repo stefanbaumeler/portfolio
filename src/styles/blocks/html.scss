@@ -1,6 +1,4 @@
 @mixin html-root {
-    background-color: var(--c-gray-lightest);
-    transition: background-color .25s;
 
     --c-white: #{$color-white};
     --c-gray-lightest: #{$color-gray-lightest};
@@ -15,6 +13,9 @@
     --c-main: #{$color-main};
     --c-main-light: #{$color-main-light};
     --c-main-dark: #{$color-main-dark};
+
+    background-color: var(--c-gray-lightest);
+    transition: background-color .25s;
 
     &--dark {
         --c-white: #{$color-black};

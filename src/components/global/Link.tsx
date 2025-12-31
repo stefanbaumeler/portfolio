@@ -7,11 +7,11 @@ import { ComponentProps, MouseEvent, useEffect, useRef } from 'react'
 import { useLocale } from 'next-intl'
 
 type PrefetchImage = {
-	srcset: string
-	sizes: string
-	src: string
-	alt: string
-	loading: string
+    srcset: string
+    sizes: string
+    src: string
+    alt: string
+    loading: string
 }
 
 const sleep = (ms: number) => {
@@ -27,11 +27,14 @@ const prefetchImages = async (href: string) => {
     const imageResponse = await fetch(`/api/prefetch-images${url.pathname}`, {
         priority: 'low'
     } as RequestInit)
+
     // only throw in dev
     if (!imageResponse.ok && process.env.NODE_ENV === 'development') {
         throw new Error('Failed to prefetch images')
     }
+
     const { images } = await imageResponse.json()
+
     return images as PrefetchImage[]
 }
 
@@ -39,7 +42,7 @@ const seen = new Set<string>()
 const imageCache = new Map<string, PrefetchImage[]>()
 
 type Props = ComponentProps<typeof NextLink> & {
-	skipLanguage?: boolean
+    skipLanguage?: boolean
     onAfterRouteChange?: () => void
 }
 
@@ -102,6 +105,7 @@ export const Link = ({
 
         return () => {
             observer.disconnect()
+
             if (prefetchTimeout) {
                 clearTimeout(prefetchTimeout)
             }
@@ -111,6 +115,7 @@ export const Link = ({
     const onMouseEnter = () => {
         router.prefetch(languagePrefixedHref)
         const images = imageCache.get(languagePrefixedHref) || []
+
         for (const image of images) {
             prefetchImage(image)
         }
@@ -148,9 +153,11 @@ const prefetchImage = (image: PrefetchImage) => {
     if (image.loading === 'lazy' || seen.has(image.srcset)) {
         return
     }
+
     const img = new Image() as HTMLImageElement & {
         fetchPriority: string
     }
+
     img.decoding = 'async'
     img.fetchPriority = 'low'
     img.sizes = image.sizes

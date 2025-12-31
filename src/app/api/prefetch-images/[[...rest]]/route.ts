@@ -3,10 +3,8 @@ import { parseHTML } from 'linkedom'
 
 export const dynamic = 'force-static'
 
-export const GET = async (
-    _: NextRequest,
-    { params }: { params: Promise<{ rest?: string[] }> }
-) => {
+export const GET = async (_: NextRequest,
+    { params }: { params: Promise<{ rest?: string[] }> }) => {
     const href = (await params).rest?.join('/') ?? ''
 
     const url = `http://localhost:3000/${href}`
@@ -18,6 +16,7 @@ export const GET = async (
             status: response.status
         })
     }
+
     const { document } = parseHTML(body)
     const images = Array.from(document.querySelectorAll('main img'))
         .filter((img) => img.getAttribute('loading') !== 'lazy')
@@ -29,14 +28,13 @@ export const GET = async (
             loading: img.getAttribute('loading')
         }))
         .filter((img) => img.src)
-    return NextResponse.json(
-        {
-            images
-        },
-        {
-            headers: {
-                'Cache-Control': 'public, max-age=3600'
-            }
+
+    return NextResponse.json({
+        images
+    },
+    {
+        headers: {
+            'Cache-Control': 'public, max-age=3600'
         }
-    )
+    })
 }

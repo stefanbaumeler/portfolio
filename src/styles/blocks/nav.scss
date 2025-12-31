@@ -29,11 +29,11 @@
         display: none;
     }
 
-    &--hidden {
+    @scope (.nav:has(+ .main .popup--active)) {
         translate: -50% calc(100% + 10px);
     }
 
-    @at-root .nav:has(+ .main .popup--active) & {
+    &--hidden {
         translate: -50% calc(100% + 10px);
     }
 }
@@ -46,8 +46,12 @@
     margin-left: 5px;
     transition: background-color .25s;
 
-    &:after,
-    &:before {
+    @scope (.nav--active) {
+        background-color: transparent;
+    }
+
+    &::after,
+    &::before {
         content: '';
         position: absolute;
         left: 5px;
@@ -56,31 +60,26 @@
         background-color: var(--c-gray-lightest);
         width: calc(100% - 10px);
         transition: rotate .25s, top .25s;
-    }
 
-    &:before {
-        top: 9px;
-    }
-
-    &:after {
-        top: calc(100% - 11px);
-    }
-
-    @at-root .nav--active & {
-        background-color: transparent;
-
-        &:before,
-        &:after {
+        @scope (.nav--active) {
             transform-origin: center;
             top: calc(50% - 2px);
         }
+    }
 
-        &:after {
-            rotate: -45deg;
-        }
+    &::before {
+        top: 9px;
 
-        &:before {
+        @scope (.nav--active) {
             rotate: 45deg;
+        }
+    }
+
+    &::after {
+        top: calc(100% - 11px);
+
+        @scope (.nav--active) {
+            rotate: -45deg;
         }
     }
 }
@@ -96,19 +95,19 @@
     background-color: var(--c-gray-lightest);
     transition: background-color .25s;
 
-    @at-root .body:has(.top-nav__button--dark:hover) & {
-        background-color: var(--c-gray-lighter);
-    }
-
-    @at-root .nav--active & {
-        display: flex;
-    }
-
     @include breakpoint(xs) {
         display: flex;
         height: 100svh;
         width: 100%;
         padding-bottom: 0;
+    }
+
+    @scope (.body:has(.top-nav__button--dark:hover)) {
+        background-color: var(--c-gray-lighter);
+    }
+
+    @scope (.nav--active) {
+        display: flex;
     }
 }
 
@@ -127,14 +126,6 @@
 
     @include breakpoint(xs) {
         border-bottom-width: 0;
-    }
-
-    @at-root .body--dark & {
-        filter: invert(1);
-    }
-
-    @at-root .body:not(.body--dark) & {
-        transition: background-color .25s, color .25s;
     }
 
     &:hover {
@@ -195,8 +186,7 @@
 @mixin nav-link {
     color: var(--c-gray-darkest);
     display: flex;
-    justify-content: flex-start;
-    align-content: center;
+    place-content: center flex-start;
     align-items: center;
     gap: 20px;
     width: 100%;
@@ -211,7 +201,19 @@
         border-bottom-width: 0;
     }
 
-    &:before {
+    @include breakpoint(xs) {
+        writing-mode: sideways-lr;
+        padding: 15px 0;
+        justify-content: center;
+    }
+
+    @scope (.nav__list--socials) {
+        padding: 20px 0;
+        border-bottom-width: 0;
+        justify-content: center;
+    }
+
+    &::before {
         content: '';
         position: absolute;
         inset: 5px;
@@ -227,24 +229,14 @@
         }
     }
 
-    @include breakpoint(xs) {
-        writing-mode: sideways-lr;
-        padding: 15px 0;
-        justify-content: center;
+    &:hover::before {
+        @scope (.nav__list--socials) {
+            opacity: 1;
+        }
     }
 
     @media screen and (min-height: 870px) and (min-width: 768px) {
         padding: 25px 0;
-    }
-
-    @at-root .nav__list--socials & {
-        padding: 20px 0;
-        border-bottom-width: 0;
-        justify-content: center;
-    }
-
-    @at-root .nav__list--socials &:hover:before {
-        opacity: 1;
     }
 }
 
@@ -263,14 +255,18 @@
         font-size: 16px;
     }
 
-    @at-root .nav__link:hover & {
+    @scope (.nav__link--active) {
+        font-weight: bold;
+    }
+
+    @scope (.nav__link:hover) {
         @include breakpoint(xs) {
             translate: -200% 0;
         }
     }
 
-    &:before,
-    &:after {
+    &::before,
+    &::after {
         content: attr(data-text);
         font-weight: 300;
         position: absolute;
@@ -283,18 +279,14 @@
         @include breakpoint(xs) {
             display: block;
         }
-    }
 
-    &:after {
-        inset: 0 0 0 200%;
-    }
-
-    @at-root {
-        .nav__link--active &,
-        .nav__link--active &:before,
-        .nav__link--active &:after {
+        @scope (.nav__link--active) {
             font-weight: bold;
         }
+    }
+
+    &::after {
+        inset: 0 0 0 200%;
     }
 }
 
@@ -310,7 +302,7 @@
         display: block;
     }
 
-    @at-root .nav__list--socials & {
+    @scope (.nav__list--socials) {
         display: block;
     }
 }

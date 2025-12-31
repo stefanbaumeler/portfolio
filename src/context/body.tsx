@@ -8,13 +8,13 @@ type Props = {
     children?: ReactNode
 }
 
-interface BodyContext {
+interface IBodyContext {
     fixed: boolean
     setFixed: Dispatch<SetStateAction<boolean>>
     isMobile: boolean
 }
 
-const BodyContext = createContext<BodyContext | null>(null)
+const BodyContext = createContext<IBodyContext | null>(null)
 
 const BodyProvider = ({ children }: Props) => {
     const pathname = usePathname()

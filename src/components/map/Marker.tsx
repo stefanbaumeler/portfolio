@@ -12,6 +12,7 @@ type Props = {
     activePlaceId?: string
     activeYear?: string
 }
+
 export const Marker = ({
     place, onClick, activePlaceId, transportation, activeYear
 }: Props) => {
