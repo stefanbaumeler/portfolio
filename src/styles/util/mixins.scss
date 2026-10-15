@@ -157,7 +157,8 @@
 }
 
 @mixin wysiwyg {
-    p > code {
+    p > code,
+    li > code {
         white-space: nowrap;
         padding: 3px 5px;
         background-color: $color-white;

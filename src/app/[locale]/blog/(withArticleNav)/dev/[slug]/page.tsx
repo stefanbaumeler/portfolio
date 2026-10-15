@@ -8,6 +8,7 @@ import {
     TQDevArticles,
     TQDevPrevNextArticles
 } from '~/schema'
+import NotFound from '@/app/[locale]/[...rest]/page'
 
 export const generateStaticParams = async () => {
     const { data } = await getClient().query<TQDevArticles>(QDevArticlesDocument, {})
@@ -42,7 +43,7 @@ const DevBlogPage = async ({ params }: { params: Promise<{ slug: string }> }) =>
         />
     }
 
-    return <></>
+    return <NotFound />
 }
 
 export default DevBlogPage

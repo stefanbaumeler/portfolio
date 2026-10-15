@@ -6,6 +6,7 @@
     flex-flow: column wrap;
     padding-top: 50px;
     overflow: hidden;
+    content-visibility: auto;
 
     &--dev {
         &::after {

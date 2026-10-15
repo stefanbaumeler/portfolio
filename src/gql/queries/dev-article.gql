@@ -1,5 +1,5 @@
 query QDevArticle($slug: String!) {
-    blog(filter: { slug: { _eq: $slug } }) {
+    blog(filter: { slug: { _eq: $slug }, status: { _eq: "published" } }) {
         id
         status
         title

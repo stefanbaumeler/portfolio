@@ -5,6 +5,7 @@ import { slugify } from '@/helpers/slug'
 import { TBlogTitle } from '~/schema'
 import { useScrollContext } from '@/context/scroll'
 import { useTranslations } from 'next-intl'
+import { useTheme } from 'next-themes'
 
 type Props = {
     titles?: TBlogTitle[]
