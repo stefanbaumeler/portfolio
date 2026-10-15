@@ -58,5 +58,8 @@
         "sass": "1.97.1",
         "stylelint": "^16.26.1",
         "typescript": "5.9.3"
+    },
+    "optionalDependencies": {
+        "@next/swc-linux-x64-musl": "^16.4.2"
     }
 }

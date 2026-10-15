@@ -1,4 +1,4 @@
-FROM node:24-bookworm-slim AS base
+FROM node:24-alpine AS base
 WORKDIR /app
 RUN apk add --no-cache g++ make py3-pip libc6-compat
 COPY package*.json ./
