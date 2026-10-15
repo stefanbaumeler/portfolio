@@ -60,6 +60,7 @@
         "typescript": "5.9.3"
     },
     "optionalDependencies": {
-        "@next/swc-linux-x64-musl": "^16.4.2"
+        "@next/swc-linux-x64-musl": "^16.4.2",
+        "@swc/core-linux-x64-musl": "1.16.18"
     }
 }
